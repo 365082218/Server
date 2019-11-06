@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="Common/src"/>
+	<classpathentry kind="src" path="DBSvr/src"/>
+	<classpathentry kind="src" path="GameGate/src"/>
+	<classpathentry kind="src" path="GameSvr/src"/>
+	<classpathentry kind="lib" path="Common/libs/commons-codec-1.13.jar"/>
+	<classpathentry kind="lib" path="Common/libs/protobuf-java-3.5.1.jar"/>
+	<classpathentry kind="output" path="Common/bin"/>
+</classpath>

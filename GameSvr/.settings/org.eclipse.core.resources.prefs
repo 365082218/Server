@@ -1,0 +1,10 @@
+eclipse.preferences.version=1
+encoding//src/idevgame/meteor/gameserver/KcpC.java=UTF-8
+encoding//src/idevgame/meteor/gameserver/KcpS.java=UTF-8
+encoding//src/idevgame/meteor/gameserver/jkcp/Kcp.java=UTF-8
+encoding//src/idevgame/meteor/gameserver/jkcp/KcpClient.java=UTF-8
+encoding//src/idevgame/meteor/gameserver/jkcp/KcpListerner.java=UTF-8
+encoding//src/idevgame/meteor/gameserver/jkcp/KcpOnUdp.java=UTF-8
+encoding//src/idevgame/meteor/gameserver/jkcp/KcpServer.java=UTF-8
+encoding//src/idevgame/meteor/gameserver/jkcp/KcpThread.java=UTF-8
+encoding//src/idevgame/meteor/gameserver/jkcp/Output.java=UTF-8
