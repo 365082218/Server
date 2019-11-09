@@ -15,15 +15,10 @@ public class Player {
 	{
 		return GameSvr.Instance.users.get(playerIdx);
 	}
-	//角色所在房间信息
 	Room rom;
-	//udp相关
 	KcpS server;
 	int kcpReceivedBytes;
-//	byte kcpBuffer[DATA_BUFSIZE];
-//	void KcpRelease();
-//	void KcpUpdate();
-//	void InitKcp(KcpServer kcps);
+	//收到KCP消息
 	public void onReceive(ByteBuf in)
 	{
 		int leftBytes = in.readableBytes();
@@ -57,6 +52,7 @@ public class Player {
 			{
 				System.out.println("MeteorMsg.MsgType.SyncCommand_VALUE");
 				GameFrames f = GameFrames.parseFrom(pak.data);
+				this.rom.OnReveiceInput(this, f);
 				System.out.print(f);
 			}
 		}

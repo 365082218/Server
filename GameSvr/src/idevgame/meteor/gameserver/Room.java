@@ -1,8 +1,11 @@
 package idevgame.meteor.gameserver;
 
 import java.util.List;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 
 import idevgame.meteor.net.PackCodec.Pack;
+import idevgame.meteor.proto.MeteorMsgs.GameFrames;
 import idevgame.meteor.proto.MeteorMsgs.MeteorMsg;
 enum RoomState
 {
@@ -68,6 +71,14 @@ public class Room {
 	boolean hasPassword;
 	//等待关闭计时器
 	int waitClose;
+	
+	ConcurrentMap<Integer, GameFrames> cmd = new ConcurrentHashMap<Integer, GameFrames>(); 
+	//收到某个玩家的帧指令-一段时间内的操作收集.
+	public void OnReveiceInput(Player player, GameFrames frame)
+	{
+		
+	}
+	
 	//单轮次时间到-换人和武器时间.
 	void NewTurn()
 	{
