@@ -34,7 +34,6 @@ public final class Netty4UdpSocketHandler extends SimpleChannelInboundHandler<Da
 			
 			ByteBuf in = msg.content();
 			if(in.readableBytes() < 4){
-				System.out.println("收到异常消息:in.readableBytes()=" + in.readableBytes());
 				return;
 			}
 

@@ -21,7 +21,7 @@ public class GameSvrNetHandler implements IHandlerNetty4 {
 	@Override
 	public void onConnect(ChannelHandlerContext ctx) {
 		//被其他客户端链接到.
-		System.out.println("new client connected");
+//		System.out.println("new client connected");
 		GameSvr.Instance.OnPlayerConnect(ctx);
 	}
 
@@ -29,13 +29,16 @@ public class GameSvrNetHandler implements IHandlerNetty4 {
 	public void onReceive(ChannelHandlerContext ctx, Pack req) {
 		Pack rsp = null;
 		try {
+//			System.out.println("GameSvrNetHandler.onReceive");
 			rsp = dispatcher.invoke(ctx, req.cmd, req.data);
 		} 
 		catch (InvocationTargetException e) {
-			logger.error("协议处理出现异常", e);
+			System.out.println("协议处理出现异常" + e);
+//			logger.error("协议处理出现异常", e);
 		}
 		catch (Exception e2) {
-			logger.error("协议处理出现异常", e2);
+//			System.out.println("协议处理出现异常2" + e2);
+//			logger.error("协议处理出现异常", e2);
 		}
 		
 		if (rsp != null) {
@@ -45,7 +48,7 @@ public class GameSvrNetHandler implements IHandlerNetty4 {
 
 	@Override
 	public void onClose(ChannelHandlerContext ctx) {
-		System.out.println("some one disconnected");
+//		System.out.println("some one disconnected");
 		GameSvr.Instance.OnPlayerDisConnect(ctx);
 	}
 

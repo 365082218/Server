@@ -14,11 +14,14 @@ public final class Netty4Decoder extends ByteToMessageDecoder{
 		int leftBytes = in.readableBytes();
 		while (leftBytes >= 4)
 		{
-			int packetLength = in.readInt();
-			System.out.println("packet length:" + packetLength);
+			int packetLength = in.getInt(0);
+//			System.out.println("包长:" + packetLength);
 			if (leftBytes >= packetLength)
 			{
+				int length = in.readInt();
+//				System.out.println("包长:" + length);
 				int message = in.readInt();
+//				System.out.println("消息号:" + message);
 				//已经读取了8字节，剩余身体长度
 				int body = packetLength - 8;
 				byte [] buff = new byte[body];
@@ -29,7 +32,9 @@ public final class Netty4Decoder extends ByteToMessageDecoder{
 				leftBytes -= packetLength;
 			}
 			else
+			{
 				break;
+			}
 		}
 	}
 }

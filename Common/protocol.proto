@@ -6,63 +6,29 @@ option java_outer_classname = "MeteorMsgs";
         required MsgType cmd = 1;
         enum MsgType
         {
-            ProtocolVerify = 10;//协议匹配,服务器，客户端互发，同一个消息ID
-            GetRoomReq = 100;
-            GetRoomRsp = 101;
-            CreateRoomReq = 102;
+            ProtocolVerify = 10;//协议匹配-客户端版本是否可以在此服务器上联机
+			AliveUpdate = 11;//心跳-服务端主动往客户端发，如超过120s未得到应答，视为失效
+            GetRoomReq = 100;//拉去房间列表
+            GetRoomRsp = 101;//返回房间列表
+            CreateRoomReq = 102;//创建房间请求
             CreateRoomRsp = 103;//建立房间其他人必须刷新，不会给其他人发有房间建立的消息.
             JoinRoomReq = 104;//进入房间-未进入房间时，没有必须的信息，无法帧同步
             JoinRoomRsp = 105;//进入房间完成-开始帧同步----
             ChatInRoomReq = 120;//用户在房间内发送信息
             ChatInRoomRsp = 121;//收到某个用户在房间的信息
-            ChatInLobbyReq = 122;//用户在大厅的信息
-            ChatInLobbyRsp = 123;//收到某个用户在大厅的信息
-            EnterQueueReq = 124;//进入组队玩法
-            EnterQueueRsp = 125;//进入组队玩法是否成功
-            ExitQueueReq = 126;//排队中的玩家离开队伍
-            ExitQueueRsp = 127;//离开回复
-            QueueMsgWaitReady = 128;//等待你准备
-            QueueMsgCanceled = 129;//由于玩家未确定导致的这一次匹配失败
-            QueueMsgReadyReq = 130;//玩家确定排队请求，准备进入选角色界面,某个玩家准备好，上发
-            OnBattleBegin = 131;//全部角色都准备好后-进入选角色界面-超时后队伍解散
-            OnBattleCancel = 132;//全部准备好后，某个原因导致游戏解散,要写明粗略原因
-            UserSelectRole = 133;//某个玩家选择某个角色
-            OnUserSelectRole = 134;//其他玩家选择某个角色
-            UserSelectSkill = 135;//选择/切换某个技能
-            OnUserSelectSkill = 136;//其他玩家选择某个技能
-            UserSelectSkin = 137;//选择某个皮肤
-            OnUserSelectSkin = 138;//其他玩家选择某个皮肤
-            UserQuit = 139;//在选择角色面板退出-引发OnBattleCancel事件
-            OnBattleEnterLevel = 140;//全部玩家在超时时间内选择好英雄-技能-皮肤，服务器倒计时完毕，开始进入加载场景界面.
-            OnBattleLoading = 141;//在玩家同步加载界面-玩家的加载进度发生变化-服务器发送往客户端
-            OnBattleStart = 142;//玩家全部从加载界面离开，进入到战场中
-            OnBattleResult = 143;//战斗结束-场景内
-            OnBattleResultDetail = 144;//战斗结束后，下发伤害统计报表.
-            OnPlayerQuit = 146;//玩家退出场景,可能是超时检测，也可能是主动退出
-            OnPlayerReStart = 147;//某玩家断线后重新开启客户端
-            OnPlayerFetchInput = 148;//玩家重连时不断拉取服务器保存的操作序列
-            OnPlayerReConnect = 149;//断线重连开始-服务器下发时期内所有玩家的全部操作
-            AudioChat = 150;//音频包,房间内的.
-            SyncCommand = 888;//服务器下发操作给KCP客户端
+            EnterLevelReq = 146;//玩家进入关卡
+			EnterLevelRsp = 147;
+			LeaveLevelReq = 148;//玩家离开关卡
+			LeaveLevelRsp = 149;
+            AudioChat = 150;//音频包,房间内的.小于10S的
+            SyncCommand = 666;//服务器下发操作给KCP客户端
         }
 
 		enum Command
 		{
-			SyncRandomSeed = 1;//帧同步初始化，下发随机种子之类的
-			KeyDown = 2;//按键按下
-			KeyUp = 3;//按键抬起
-			KeyLast = 4;//按键状态持续
-			SpawnPlayer = 5;//玩家在该帧内生成
-			DestroyPlayer = 6;//玩家在该帧内销毁
-            //房间类帧消息
-            JoyStickMove = 7;//摇杆方向改变
-            MouseMove = 8;//鼠标移动-导致角色旋转
-            //房间内作弊类型-帧消息-这些操作是通过其他UI面板实现的-后期拓展-前期禁用掉作弊面板
-            EquipWeapon = 9;//主手立即装备武器-脱掉原来的武器
-            DropWeapon = 10;//立即在角色位置朝面向扔出一把指定武器
-            //MOBA类型帧消息
-            SellItem = 11;//玩家出售物品
-            BuyItem = 12;//玩家购买物品
+			RandomSeed = 1;//帧同步初始化，下发随机种子之类的
+            Key = 2;//按键
+            Mouse = 8;//鼠标移动-导致角色旋转
 		}
     }
 
@@ -72,8 +38,8 @@ option java_outer_classname = "MeteorMsgs";
 		required uint32 randomSeed = 1;//
 	}
 
-	//SpawnPlayer/DestroyPlayer/负责角色的创建和删除(进场和退场).
-	message PlayerEventData
+	//负责角色的进入和退出(进场和退场).
+	message PlayerEvent
 	{
 		required uint32 playerId = 1;
 		required uint32 camp = 2;
@@ -82,75 +48,10 @@ option java_outer_classname = "MeteorMsgs";
         required string name = 5;
 	}
 
-    message EnterQueueRsp
-    {
-        required uint32 result = 1;//结果.
-        required uint32 playerId = 2;//进入排队玩家分配到的玩家id
-        required uint32 playerInQueue = 3;//当前排队人数.
-    }
-
-    message OnBattleBegin
-    {
-        repeated uint32 TeamMemberAId = 1;//自己队伍的ID
-        repeated uint32 TeamMemberBId = 2;//对方队伍的ID
-        repeated string TeamMemberA = 3;//自己队伍的队友名称-和ID一一对应
-        repeated string TeamMemberB = 4;//
-    }
-
-    message UserSelectRole
-    {
-        required uint32 playerId = 1;
-        required uint32 HeroId = 2;
-    }
-
-    message UserSelectSkill
-    {
-        required uint32 playerId = 1;
-        required uint32 SkillId = 2;
-    }
-    
-    message UserSelectSkin
-    {
-        required uint32 playerId = 1;
-        required uint32 Skin = 2;
-    }
-
-    //本次组队被解散
-    message OnBattleCanceled
-    {
-        required uint32 reason = 1;//解散原因
-    }
-
-    message OnBattleLoading
-    {
-        repeated uint32 playerId = 1;//所有玩家ID
-        repeated uint32 percent = 2;//所有玩家加载进度
-    }
-
-    message OnBattleResult
-    {
-        required uint32 result = 1;//战斗结果 [1：我方胜利] [0：我方失败]
-    }
-
-    //玩家请求售出物品-
-    message PlayerSellItem
-    {
-        required uint32 playerId = 1;
-        required uint32 itemId = 2;
-    }
-
-    //玩家请求购买物品-
-    message PlayerBuyItem
-    {
-        required uint32 playerId = 1;
-        required uint32 itemId = 2;
-    }
-
-    //客户端服务器协议验证-防止网关被随意使用
+    //客户端服务器协议验证-防止不兼容的客户端链接
     message ProtocolVerifyReq
     {
-        required uint32 protocol = 1;//协议版本号
-        required string data = 2;//客户端-玩家名称，用来在大厅发消息标识
+        required uint32 version = 1;//协议版本号
     }
 
     message ProtocolVerifyRsp
@@ -189,8 +90,7 @@ option java_outer_classname = "MeteorMsgs";
         enum RoomPattern
         {
             _Normal = 1;//普通
-            _Record = 2;//录制
-            _Replay = 3;//重播
+            _Replay = 2;//转播
         }
 
 		enum MeteorVersion
@@ -198,22 +98,11 @@ option java_outer_classname = "MeteorMsgs";
 			V107 = 1;
 			V907 = 2;
 		}
-        
-        //错误码
-		enum ErrorCode
-		{
-			RoomNotExist = 1;
-			RoomPlayerFull = 2;
-			RoomNeedPassword = 3;
-			RoomVersionErr = 4;
-			UserInAnotherRoom = 5;
-			RoomFull = 6;
-		}
     }
 
     message GetRoomRsp
     {
-        repeated RoomInfo RoomInLobby = 1;
+        repeated RoomInfo Rooms = 1;
     }
 
     message CreateRoomReq
@@ -244,8 +133,9 @@ option java_outer_classname = "MeteorMsgs";
     message JoinRoomReq
     {
         required uint32 roomId = 1;
-        required RoomInfo.MeteorVersion version = 2;//本地版本
-        optional string password = 3;//密码
+        required RoomInfo.MeteorVersion version = 2;//本地流星版本
+		required string nick = 3;
+        optional string password = 4;//密码
     }
 
     message JoinRoomRsp
@@ -254,18 +144,22 @@ option java_outer_classname = "MeteorMsgs";
         required uint32 reason = 2;//失败为原因编号:1人数达到最大数量 2 没找到 3 在其他房间内 4 版本不匹配 5 需要密码 6资源缺少-
         required uint32 levelIdx = 3;//成功返回房间关卡编号
         required uint32 roomId = 4;//哪个房间.
-        required uint32 playerId = 5;//你的角色在服务器的编号.
-        required uint32 port = 6;//kcp端口号
-        repeated uint32 models = 7;//允许选择的模型
-        repeated uint32 weapons = 8;//允许选择的武器模型
+        required uint32 port = 5;//kcp端口号
     }
     
-    //定点数，JoyStickMove
-    message Vector2_
+    //鼠标移动消息
+    message MouseEvent
     {
         required int32 x = 1;
         required int32 y = 2;
     }
+
+	//按键消息
+	message KeyEvent
+	{
+		required int32 key = 1;//按键编号
+		required int32 state = 2;//按键状态
+	}
 
     //帧事件.
     message FrameCommand
@@ -273,11 +167,17 @@ option java_outer_classname = "MeteorMsgs";
 		required uint32 LogicFrame = 1;//游戏逻辑帧编号.
 		optional uint32 playerId = 2;//指定玩家编号的.
 		required MeteorMsg.Command command = 3;//帧指令ID-指明了协议包怎么解开
-		required bytes data = 4;//协议包数据-用上一个指令对应的结构反序列化
+		optional MouseEvent mouse = 4;//协议包数据-用上一个指令对应的结构反序列化
+		optional KeyEvent key = 5;//按键
     }
 
-	//服务器指令
-	message GameFrames
+	//所有玩家的帧序列.
+	message GameFrames{
+		repeated GameFrame playerCommand = 1;
+	}
+
+	//服务器指令.
+	message GameFrame
     {
         repeated FrameCommand commands = 1;
     }
@@ -290,6 +190,7 @@ option java_outer_classname = "MeteorMsgs";
         required string chatMessage = 3;//max 256
     }
 
+	//音频包
     message AudioChatMsg
     {
         required uint32 playerId = 1;//玩家

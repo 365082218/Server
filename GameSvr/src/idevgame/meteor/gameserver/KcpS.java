@@ -18,7 +18,7 @@ public class KcpS extends KcpServer {
     	int playerId = kcp.getKcp().getConv();
     	Player player = GameSvr.Instance.FindPlayer(playerId);
     	if (player != null)
-    		player.onReceive(bb);
+    		player.onReceive(kcp, bb);
     }
 
     @Override
@@ -27,19 +27,13 @@ public class KcpS extends KcpServer {
     }
 
     @Override
-    public void handleClose(KcpOnUdp kcp) {
-        System.out.println("" + kcp);
-        System.out.println("waitSnd:" + kcp.getKcp().waitSnd());
-        System.out.println("conv:" + kcp.getKcp().getConv());
-    }
-
-    public static void main(String[] args) {
-        KcpS s = new KcpS(2222, 1);
-        s.noDelay(1, 10, 2, 1);
-        s.setMinRto(10);
-        s.wndSize(64, 64);
-        s.setTimeout(10 * 1000);
-        s.setMtu(512);
-        s.start();
+    public void handleClose(KcpOnUdp kcp, int errorCode) {
+//        System.out.println("closed" + kcp);
+//        System.out.println("waitSnd:" + kcp.getKcp().waitSnd());
+//        System.out.println("conv:" + kcp.getKcp().getConv());
+        int playerId = kcp.getKcp().getConv();
+    	Player player = GameSvr.Instance.FindPlayer(playerId);
+    	if (player != null)
+    		player.onKcpClosed(kcp, errorCode);
     }
 }

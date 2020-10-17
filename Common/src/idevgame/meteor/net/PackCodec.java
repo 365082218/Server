@@ -24,7 +24,7 @@ public class PackCodec {
 		return new Pack(cmd, newdata);
 	}
 
-	//包含头部长度的
+	//鍖呭惈澶撮儴闀垮害鐨�
 	public static ByteBuf encodeEx(int cmd, byte[] data)
 	{
 		int l = data == null ? 2 * LEN : data.length + 2 * LEN;

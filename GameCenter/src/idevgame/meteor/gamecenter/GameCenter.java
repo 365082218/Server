@@ -14,6 +14,7 @@ import idevgame.meteor.dispatcher.Dispatcher;
 
 //处理客户端链接
 //主动连接到其他服务器
+//早期版本不打算要中心服，先把游戏服做好，后期扩展规模再实现
 public class GameCenter {
 	//public static 
 	private static final String prop = "center.properties";

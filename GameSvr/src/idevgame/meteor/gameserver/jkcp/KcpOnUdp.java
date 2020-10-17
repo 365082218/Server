@@ -14,19 +14,19 @@ import java.util.concurrent.LinkedBlockingQueue;
  */
 public class KcpOnUdp {
 
-    private final Kcp kcp;//kcp鐨勭姸鎬�
-    private final Queue<ByteBuf> received;//杈撳叆
+    private final Kcp kcp;//kcp閻ㄥ嫮濮搁幀锟�
+    private final Queue<ByteBuf> received;//鏉堟挸鍙�
     private final Queue<ByteBuf> sendList;
-    private long timeout;//瓒呮椂璁惧畾
-    private long lastTime;//涓婃瓒呮椂妫�鏌ユ椂闂�
-    private int errcode;//閿欒浠ｇ爜
+    private long timeout;//鐡掑懏妞傜拋鎯х暰
+    private long lastTime;//娑撳﹥顐肩搾鍛濡拷閺屻儲妞傞梻锟�
+    private int errcode;//闁挎瑨顕ゆ禒锝囩垳
     private final KcpListerner listerner;
     private volatile boolean needUpdate;
     private volatile boolean closed;
     private String sessionId;
     private final Map<Object, Object> session;
-    private final InetSocketAddress remote;//杩滅▼鍦板潃
-    private final InetSocketAddress local;//鏈湴
+    private final InetSocketAddress remote;//鏉╂粎鈻奸崷鏉挎絻
+    private final InetSocketAddress local;//閺堫剙婀�
 
     /**
      * fastest: ikcp_nodelay(kcp, 1, 20, 2, 1) nodelay: 0:disable(default),
@@ -72,7 +72,7 @@ public class KcpOnUdp {
     }
 
     /**
-     * stream妯″紡
+     * stream濡�崇础
      *
      * @param stream
      */
@@ -81,7 +81,7 @@ public class KcpOnUdp {
     }
 
     /**
-     * 娴佹ā寮�
+     * 濞翠焦膩瀵拷
      *
      * @return
      */
@@ -90,7 +90,7 @@ public class KcpOnUdp {
     }
 
     /**
-     * rto璁剧疆
+     * rto鐠佸墽鐤�
      *
      * @param rto
      */
@@ -101,10 +101,10 @@ public class KcpOnUdp {
     /**
      * kcp for udp
      *
-     * @param out       杈撳嚭鎺ュ彛
-     * @param remote    杩滅▼鍦板潃
-     * @param local     鏈湴鍦板潃
-     * @param listerner 鐩戝惉
+     * @param out       鏉堟挸鍤幒銉ュ經
+     * @param remote    鏉╂粎鈻奸崷鏉挎絻
+     * @param local     閺堫剙婀撮崷鏉挎絻
+     * @param listerner 閻╂垵鎯�
      */
     public KcpOnUdp(Output out, InetSocketAddress remote, InetSocketAddress local, KcpListerner listerner) {
         this.listerner = listerner;
@@ -143,8 +143,8 @@ public class KcpOnUdp {
             if (errcode != 0) {
                 this.closed = true;
                 this.release();
-                this.listerner.handleException(new IllegalStateException("input error : " + errcode), this);
-                this.listerner.handleClose(this);
+//                this.listerner.handleException(new IllegalStateException("input error : " + errcode), this);
+                this.listerner.handleClose(this, errcode);
                 return;
             }
         }
@@ -167,7 +167,7 @@ public class KcpOnUdp {
                 this.closed = true;
                 this.release();
                 this.listerner.handleException(new IllegalStateException("send error : " + errcode), this);
-                this.listerner.handleClose(this);
+                this.listerner.handleClose(this, errcode);
                 return;
             }
         }
@@ -185,12 +185,12 @@ public class KcpOnUdp {
         if (this.timeout > 0 && lastTime > 0 && System.currentTimeMillis() - lastTime > this.timeout) {
             this.closed = true;
             this.release();
-            this.listerner.handleClose(this);
+            this.listerner.handleClose(this, 10);
         }
     }
 
     /**
-     * 杈撳叆
+     * 鏉堟挸鍙�
      *
      * @param content
      */
@@ -211,7 +211,7 @@ public class KcpOnUdp {
     public void close() {
         this.closed = true;
         this.release();
-        this.listerner.handleClose(this);
+        this.listerner.handleClose(this, 0);
         return;
     }
 
@@ -301,7 +301,7 @@ public class KcpOnUdp {
     }
 
     /**
-     * 绔嬪嵆鏇存柊锛�
+     * 缁斿宓嗛弴瀛樻煀閿涳拷
      *
      * @return
      */
@@ -310,7 +310,7 @@ public class KcpOnUdp {
     }
 
     /**
-     * 鐩戝惉鍣�
+     * 閻╂垵鎯夐崳锟�
      *
      * @return
      */
@@ -319,7 +319,7 @@ public class KcpOnUdp {
     }
 
     /**
-     * 鏈湴鍦板潃
+     * 閺堫剙婀撮崷鏉挎絻
      *
      * @return
      */
@@ -328,7 +328,7 @@ public class KcpOnUdp {
     }
 
     /**
-     * 杩滅▼鍦板潃
+     * 鏉╂粎鈻奸崷鏉挎絻
      *
      * @return
      */
@@ -337,7 +337,7 @@ public class KcpOnUdp {
     }
 
     /**
-     * 閲婃斁鍐呭瓨
+     * 闁插﹥鏂侀崘鍛摠
      */
     void release() {
         this.kcp.release();

@@ -16,7 +16,6 @@ import idevgame.meteor.gameserver.jkcp.KcpOnUdp;
 import idevgame.meteor.net.PackCodec;
 import idevgame.meteor.net.PackCodec.Pack;
 import idevgame.meteor.proto.MeteorMsgs.FrameCommand;
-import idevgame.meteor.proto.MeteorMsgs.GameFrames;
 import idevgame.meteor.proto.MeteorMsgs.MeteorMsg;
 
 /**
@@ -41,9 +40,9 @@ public class KcpC extends KcpClient {
     }
 
     @Override
-    public void handleClose(KcpOnUdp kcp) {
-        super.handleClose(kcp);
-        System.out.println("鏈嶅姟鍣ㄧ寮�:" + kcp);
+    public void handleClose(KcpOnUdp kcp, int errCode) {
+        super.handleClose(kcp, errCode);
+        System.out.println("閺堝秴濮熼崳銊ь瀲瀵拷:" + kcp);
         System.out.println("waitSnd:" + kcp.getKcp().waitSnd());
     }
 
@@ -66,23 +65,23 @@ public class KcpC extends KcpClient {
         tc.wndSize(32, 32);
         tc.setTimeout(10 * 1000);
         tc.setMtu(512);
-        // tc.setConv(121106);//榛樿conv闅忔満
+        // tc.setConv(121106);
 
-        tc.connect(new InetSocketAddress("localhost", 2222));
-        tc.setConv(1);
-        tc.start();
-        String content = "测试KCP协议";
-        GameFrames.Builder gb = GameFrames.newBuilder();
-        FrameCommand.Builder fb = gb.addCommandsBuilder();
-        fb.setCommand(MeteorMsg.Command.SpawnPlayer);
-        fb.setLogicFrame(1);
-        fb.setPlayerId(1);
-        
-        byte[] bytes = new byte[128];
-        ByteString sss = ByteString.copyFrom(bytes);
-        fb.setData(sss);
-        GameFrames f = gb.build();
-        ByteBuf bb = PackCodec.encodeEx(MeteorMsg.MsgType.SyncCommand_VALUE, f.toByteArray());
-        tc.send(bb);
+//        tc.connect(new InetSocketAddress("localhost", 2222));
+//        tc.setConv(1);
+//        tc.start();
+//        String content = "娴嬭瘯KCP鍗忚";
+//        GameFrames.Builder gb = GameFrames.newBuilder();
+//        FrameCommand.Builder fb = gb.addCommandsBuilder();
+//        fb.setCommand(MeteorMsg.Command.SpawnPlayer);
+//        fb.setLogicFrame(1);
+//        fb.setPlayerId(1);
+//        
+//        byte[] bytes = new byte[128];
+//        ByteString sss = ByteString.copyFrom(bytes);
+//        fb.setData(sss);
+//        GameFrames f = gb.build();
+//        ByteBuf bb = PackCodec.encodeEx(MeteorMsg.MsgType.SyncCommand_VALUE, f.toByteArray());
+//        tc.send(bb);
     }
 }

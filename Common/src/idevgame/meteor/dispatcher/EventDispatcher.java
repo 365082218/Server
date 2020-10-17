@@ -50,14 +50,14 @@ public class EventDispatcher {
 		listeners = newCommanders;
 	}
 	
-	public void invoke(Object source, int cmd) throws Exception {
+	public void invoke(Object source, int cmd, Object param) throws Exception {
 		List<EventListener> commander = listeners.get(cmd);
 		if(commander != null) {
 			for (int i = 0; i < commander.size(); i++)
 			{
 				EventListener l = commander.get(i);
 				if (source.getClass() == l.type)
-					l.method.invoke(source);
+					l.method.invoke(source, param);
 			}
 		}
 	}

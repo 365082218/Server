@@ -23,14 +23,14 @@ public class EventBus {
 			eventObjects.remove(clsInstance);
 	}
 	
-	public void Fire(int id) 
+	public void Fire(int id, Object param) 
 	{
 		try
 		{
 			for (int i = 0; i < eventObjects.size(); i++)
 			{
 				Object source = eventObjects.get(i);
-				eventDispatcher.invoke(source, id);
+				eventDispatcher.invoke(source, id, param);
 			}
 			
 		}

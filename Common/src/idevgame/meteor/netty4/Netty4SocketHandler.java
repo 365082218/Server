@@ -30,18 +30,22 @@ public final class Netty4SocketHandler extends SimpleChannelInboundHandler<Objec
 	@Override
 	protected void channelRead0(ChannelHandlerContext ctx, Object msg)
 			throws Exception {
+//		System.out.println("doRead on channelRead0");
 		doRead(ctx,msg);
 	}
 	
 //	@Override
 	protected void messageReceived(ChannelHandlerContext ctx, Object msg)
 			throws Exception {
+//		System.out.println("doRead on messageReceived");
 		doRead(ctx,msg);
 	}
 	
 	private void doRead(ChannelHandlerContext ctx, Object msg) {
 		try {
+//			System.out.println("handler.onReceive1");
 			handler.onReceive(ctx, (Pack)msg);
+//			System.out.println("handler.onReceive2");
 	    } finally {
 	    }
 	}

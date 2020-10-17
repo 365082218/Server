@@ -76,10 +76,10 @@ public final class Netty4SocketServer {
 				
 				cp.addLast("handler", new Netty4SocketHandler(handler));
 				
-				if (timeout > 0) {
-					cp.addLast("idleTimeoutHandler", new IdleStateHandler(0, 0, timeout, TimeUnit.SECONDS));
-					cp.addLast("heartbeatHandler", new NettyHeartbeat());
-				}
+//				if (timeout > 0) {
+//					cp.addLast("idleTimeoutHandler", new IdleStateHandler(0, 0, timeout, TimeUnit.SECONDS));
+//					cp.addLast("heartbeatHandler", new NettyHeartbeat());
+//				}
 			}
 		});
 		
@@ -128,10 +128,10 @@ public final class Netty4SocketServer {
 
 				cp.addLast("handler",h);
 
-				if (timeout > 0) {
-					cp.addLast("idleTimeoutHandler", new IdleStateHandler(0, 0,timeout, TimeUnit.SECONDS));
-					cp.addLast("heartbeatHandler", new NettyHeartbeat());
-				}
+//				if (timeout > 0) {
+//					cp.addLast("idleTimeoutHandler", new IdleStateHandler(0, 0,timeout, TimeUnit.SECONDS));
+//					cp.addLast("heartbeatHandler", new NettyHeartbeat());
+//				}
 			}
 		});
 		

@@ -19,10 +19,18 @@ public final class MeteorMsgs {
       com.google.protobuf.MessageOrBuilder {
 
     /**
+     * <pre>
+     *TCP消息
+     * </pre>
+     *
      * <code>required .MeteorMsg.MsgType cmd = 1;</code>
      */
     boolean hasCmd();
     /**
+     * <pre>
+     *TCP消息
+     * </pre>
+     *
      * <code>required .MeteorMsg.MsgType cmd = 1;</code>
      */
     idevgame.meteor.proto.MeteorMsgs.MeteorMsg.MsgType getCmd();
@@ -40,7 +48,7 @@ public final class MeteorMsgs {
       super(builder);
     }
     private MeteorMsg() {
-      cmd_ = 3;
+      cmd_ = 10;
     }
 
     @java.lang.Override
@@ -116,67 +124,23 @@ public final class MeteorMsgs {
         implements com.google.protobuf.ProtocolMessageEnum {
       /**
        * <pre>
-       *服务器之间的通信协议
+       *协议匹配-客户端版本是否可以在此服务器上联机
        * </pre>
        *
-       * <code>RegisterSvrReq = 3;</code>
+       * <code>ProtocolVerify = 10;</code>
        */
-      RegisterSvrReq(3),
-      /**
-       * <code>RegisterSvrRsp = 4;</code>
-       */
-      RegisterSvrRsp(4),
+      ProtocolVerify(10),
       /**
        * <pre>
-       *在中心服注销服务-无包体，纯消息号
+       *心跳-服务端主动往客户端发，如超过120s未得到应答，视为失效
        * </pre>
        *
-       * <code>UnRegisterSvr = 5;</code>
+       * <code>AliveUpdate = 11;</code>
        */
-      UnRegisterSvr(5),
+      AliveUpdate(11),
       /**
        * <pre>
-       *更新游戏服务器状态-房间列表
-       * </pre>
-       *
-       * <code>SyncSvrState = 6;</code>
-       */
-      SyncSvrState(6),
-      /**
-       * <pre>
-       *客户端从中心服取得游戏服务器列表
-       * </pre>
-       *
-       * <code>GetSvrReq = 7;</code>
-       */
-      GetSvrReq(7),
-      /**
-       * <pre>
-       *客户端从中心服收到游戏服务器列表
-       * </pre>
-       *
-       * <code>GetSvrRsp = 8;</code>
-       */
-      GetSvrRsp(8),
-      /**
-       * <pre>
-       *客户端与中心服匹配协议版本.
-       * </pre>
-       *
-       * <code>ProtocolVerifyReq = 9;</code>
-       */
-      ProtocolVerifyReq(9),
-      /**
-       * <pre>
-       *协议匹配-版本号是否匹配
-       * </pre>
-       *
-       * <code>ProtocolVerifyRsp = 10;</code>
-       */
-      ProtocolVerifyRsp(10),
-      /**
-       * <pre>
-       *拉取房间列表
+       *拉去房间列表
        * </pre>
        *
        * <code>GetRoomReq = 100;</code>
@@ -224,325 +188,101 @@ public final class MeteorMsgs {
       JoinRoomRsp(105),
       /**
        * <pre>
+       *其他玩家进入了房间
+       * </pre>
+       *
+       * <code>OnPlayerJoinRoom = 106;</code>
+       */
+      OnPlayerJoinRoom(106),
+      /**
+       * <pre>
        *用户在房间内发送信息
        * </pre>
        *
-       * <code>ChatInRoomReq = 120;</code>
+       * <code>ChatInRoomReq = 107;</code>
        */
-      ChatInRoomReq(120),
+      ChatInRoomReq(107),
       /**
        * <pre>
        *收到某个用户在房间的信息
        * </pre>
        *
-       * <code>ChatInRoomRsp = 121;</code>
+       * <code>ChatInRoomRsp = 108;</code>
        */
-      ChatInRoomRsp(121),
+      ChatInRoomRsp(108),
       /**
        * <pre>
-       *用户在大厅的信息
+       *玩家TCP请求进入关卡-没有创建角色
        * </pre>
        *
-       * <code>ChatInLobbyReq = 122;</code>
+       * <code>EnterLevelReq = 109;</code>
        */
-      ChatInLobbyReq(122),
+      EnterLevelReq(109),
       /**
        * <pre>
-       *收到某个用户在大厅的信息
+       *其他玩家进入关卡-没有创建角色
        * </pre>
        *
-       * <code>ChatInLobbyRsp = 123;</code>
+       * <code>OnPlayerEnterLevel = 110;</code>
        */
-      ChatInLobbyRsp(123),
+      OnPlayerEnterLevel(110),
       /**
        * <pre>
-       *进入组队玩法
+       *自己进入关卡，得到其他玩家信息
        * </pre>
        *
-       * <code>EnterQueueReq = 124;</code>
+       * <code>EnterLevelRsp = 111;</code>
        */
-      EnterQueueReq(124),
+      EnterLevelRsp(111),
       /**
        * <pre>
-       *进入组队玩法是否成功
+       *玩家离开关卡
        * </pre>
        *
-       * <code>EnterQueueRsp = 125;</code>
+       * <code>LeaveLevelReq = 112;</code>
        */
-      EnterQueueRsp(125),
+      LeaveLevelReq(112),
+      /**
+       * <code>OnPlayerLeaveLevel = 113;</code>
+       */
+      OnPlayerLeaveLevel(113),
       /**
        * <pre>
-       *排队中的玩家离开队伍
+       *音频包,房间内的.小于10S的
        * </pre>
        *
-       * <code>ExitQueueReq = 126;</code>
+       * <code>AudioChat = 114;</code>
        */
-      ExitQueueReq(126),
+      AudioChat(114),
       /**
        * <pre>
-       *离开回复
+       *同步速度调整
        * </pre>
        *
-       * <code>ExitQueueRsp = 127;</code>
+       * <code>SyncRate = 115;</code>
        */
-      ExitQueueRsp(127),
-      /**
-       * <pre>
-       *等待你准备
-       * </pre>
-       *
-       * <code>QueueMsgWaitReady = 128;</code>
-       */
-      QueueMsgWaitReady(128),
-      /**
-       * <pre>
-       *由于玩家未确定导致的这一次匹配失败
-       * </pre>
-       *
-       * <code>QueueMsgCanceled = 129;</code>
-       */
-      QueueMsgCanceled(129),
-      /**
-       * <pre>
-       *玩家确定排队请求，准备进入选角色界面,某个玩家准备好，上发
-       * </pre>
-       *
-       * <code>QueueMsgReadyReq = 130;</code>
-       */
-      QueueMsgReadyReq(130),
-      /**
-       * <pre>
-       *全部角色都准备好后-进入选角色界面-超时后队伍解散
-       * </pre>
-       *
-       * <code>OnBattleBegin = 131;</code>
-       */
-      OnBattleBegin(131),
-      /**
-       * <pre>
-       *全部准备好后，某个原因导致游戏解散,要写明粗略原因
-       * </pre>
-       *
-       * <code>OnBattleCancel = 132;</code>
-       */
-      OnBattleCancel(132),
-      /**
-       * <pre>
-       *某个玩家选择某个角色
-       * </pre>
-       *
-       * <code>UserSelectRole = 133;</code>
-       */
-      UserSelectRole(133),
-      /**
-       * <pre>
-       *其他玩家选择某个角色
-       * </pre>
-       *
-       * <code>OnUserSelectRole = 134;</code>
-       */
-      OnUserSelectRole(134),
-      /**
-       * <pre>
-       *选择/切换某个技能
-       * </pre>
-       *
-       * <code>UserSelectSkill = 135;</code>
-       */
-      UserSelectSkill(135),
-      /**
-       * <pre>
-       *其他玩家选择某个技能
-       * </pre>
-       *
-       * <code>OnUserSelectSkill = 136;</code>
-       */
-      OnUserSelectSkill(136),
-      /**
-       * <pre>
-       *选择某个皮肤
-       * </pre>
-       *
-       * <code>UserSelectSkin = 137;</code>
-       */
-      UserSelectSkin(137),
-      /**
-       * <pre>
-       *其他玩家选择某个皮肤
-       * </pre>
-       *
-       * <code>OnUserSelectSkin = 138;</code>
-       */
-      OnUserSelectSkin(138),
-      /**
-       * <pre>
-       *在选择角色面板退出-引发OnBattleCancel事件
-       * </pre>
-       *
-       * <code>UserQuit = 139;</code>
-       */
-      UserQuit(139),
-      /**
-       * <pre>
-       *全部玩家在超时时间内选择好英雄-技能-皮肤，服务器倒计时完毕，开始进入加载场景界面.
-       * </pre>
-       *
-       * <code>OnBattleEnterLevel = 140;</code>
-       */
-      OnBattleEnterLevel(140),
-      /**
-       * <pre>
-       *在玩家同步加载界面-玩家的加载进度发生变化-服务器发送往客户端
-       * </pre>
-       *
-       * <code>OnBattleLoading = 141;</code>
-       */
-      OnBattleLoading(141),
-      /**
-       * <pre>
-       *玩家全部从加载界面离开，进入到战场中
-       * </pre>
-       *
-       * <code>OnBattleStart = 142;</code>
-       */
-      OnBattleStart(142),
-      /**
-       * <pre>
-       *战斗结束-场景内
-       * </pre>
-       *
-       * <code>OnBattleResult = 143;</code>
-       */
-      OnBattleResult(143),
-      /**
-       * <pre>
-       *战斗结束后，下发伤害统计报表.
-       * </pre>
-       *
-       * <code>OnBattleResultDetail = 144;</code>
-       */
-      OnBattleResultDetail(144),
-      /**
-       * <pre>
-       *玩家退出场景,可能是超时检测，也可能是主动退出
-       * </pre>
-       *
-       * <code>OnPlayerQuit = 146;</code>
-       */
-      OnPlayerQuit(146),
-      /**
-       * <pre>
-       *某玩家断线后重新开启客户端
-       * </pre>
-       *
-       * <code>OnPlayerReStart = 147;</code>
-       */
-      OnPlayerReStart(147),
-      /**
-       * <pre>
-       *玩家重连时不断拉取服务器保存的操作序列
-       * </pre>
-       *
-       * <code>OnPlayerFetchInput = 148;</code>
-       */
-      OnPlayerFetchInput(148),
-      /**
-       * <pre>
-       *断线重连开始-服务器下发时期内所有玩家的全部操作
-       * </pre>
-       *
-       * <code>OnPlayerReConnect = 149;</code>
-       */
-      OnPlayerReConnect(149),
-      /**
-       * <pre>
-       *音频包,房间内的.
-       * </pre>
-       *
-       * <code>AudioChat = 150;</code>
-       */
-      AudioChat(150),
-      /**
-       * <pre>
-       *系统消息-及时在中心服往所有玩家广播.
-       * </pre>
-       *
-       * <code>SystemMessage = 160;</code>
-       */
-      SystemMessage(160),
-      /**
-       * <pre>
-       *服务器下发操作给KCP客户端
-       * </pre>
-       *
-       * <code>SyncCommand = 888;</code>
-       */
-      SyncCommand(888),
+      SyncRate(115),
       ;
 
       /**
        * <pre>
-       *服务器之间的通信协议
+       *协议匹配-客户端版本是否可以在此服务器上联机
        * </pre>
        *
-       * <code>RegisterSvrReq = 3;</code>
+       * <code>ProtocolVerify = 10;</code>
        */
-      public static final int RegisterSvrReq_VALUE = 3;
-      /**
-       * <code>RegisterSvrRsp = 4;</code>
-       */
-      public static final int RegisterSvrRsp_VALUE = 4;
+      public static final int ProtocolVerify_VALUE = 10;
       /**
        * <pre>
-       *在中心服注销服务-无包体，纯消息号
+       *心跳-服务端主动往客户端发，如超过120s未得到应答，视为失效
        * </pre>
        *
-       * <code>UnRegisterSvr = 5;</code>
+       * <code>AliveUpdate = 11;</code>
        */
-      public static final int UnRegisterSvr_VALUE = 5;
+      public static final int AliveUpdate_VALUE = 11;
       /**
        * <pre>
-       *更新游戏服务器状态-房间列表
-       * </pre>
-       *
-       * <code>SyncSvrState = 6;</code>
-       */
-      public static final int SyncSvrState_VALUE = 6;
-      /**
-       * <pre>
-       *客户端从中心服取得游戏服务器列表
-       * </pre>
-       *
-       * <code>GetSvrReq = 7;</code>
-       */
-      public static final int GetSvrReq_VALUE = 7;
-      /**
-       * <pre>
-       *客户端从中心服收到游戏服务器列表
-       * </pre>
-       *
-       * <code>GetSvrRsp = 8;</code>
-       */
-      public static final int GetSvrRsp_VALUE = 8;
-      /**
-       * <pre>
-       *客户端与中心服匹配协议版本.
-       * </pre>
-       *
-       * <code>ProtocolVerifyReq = 9;</code>
-       */
-      public static final int ProtocolVerifyReq_VALUE = 9;
-      /**
-       * <pre>
-       *协议匹配-版本号是否匹配
-       * </pre>
-       *
-       * <code>ProtocolVerifyRsp = 10;</code>
-       */
-      public static final int ProtocolVerifyRsp_VALUE = 10;
-      /**
-       * <pre>
-       *拉取房间列表
+       *拉去房间列表
        * </pre>
        *
        * <code>GetRoomReq = 100;</code>
@@ -590,260 +330,80 @@ public final class MeteorMsgs {
       public static final int JoinRoomRsp_VALUE = 105;
       /**
        * <pre>
+       *其他玩家进入了房间
+       * </pre>
+       *
+       * <code>OnPlayerJoinRoom = 106;</code>
+       */
+      public static final int OnPlayerJoinRoom_VALUE = 106;
+      /**
+       * <pre>
        *用户在房间内发送信息
        * </pre>
        *
-       * <code>ChatInRoomReq = 120;</code>
+       * <code>ChatInRoomReq = 107;</code>
        */
-      public static final int ChatInRoomReq_VALUE = 120;
+      public static final int ChatInRoomReq_VALUE = 107;
       /**
        * <pre>
        *收到某个用户在房间的信息
        * </pre>
        *
-       * <code>ChatInRoomRsp = 121;</code>
+       * <code>ChatInRoomRsp = 108;</code>
        */
-      public static final int ChatInRoomRsp_VALUE = 121;
+      public static final int ChatInRoomRsp_VALUE = 108;
       /**
        * <pre>
-       *用户在大厅的信息
+       *玩家TCP请求进入关卡-没有创建角色
        * </pre>
        *
-       * <code>ChatInLobbyReq = 122;</code>
+       * <code>EnterLevelReq = 109;</code>
        */
-      public static final int ChatInLobbyReq_VALUE = 122;
+      public static final int EnterLevelReq_VALUE = 109;
       /**
        * <pre>
-       *收到某个用户在大厅的信息
+       *其他玩家进入关卡-没有创建角色
        * </pre>
        *
-       * <code>ChatInLobbyRsp = 123;</code>
+       * <code>OnPlayerEnterLevel = 110;</code>
        */
-      public static final int ChatInLobbyRsp_VALUE = 123;
+      public static final int OnPlayerEnterLevel_VALUE = 110;
       /**
        * <pre>
-       *进入组队玩法
+       *自己进入关卡，得到其他玩家信息
        * </pre>
        *
-       * <code>EnterQueueReq = 124;</code>
+       * <code>EnterLevelRsp = 111;</code>
        */
-      public static final int EnterQueueReq_VALUE = 124;
+      public static final int EnterLevelRsp_VALUE = 111;
       /**
        * <pre>
-       *进入组队玩法是否成功
+       *玩家离开关卡
        * </pre>
        *
-       * <code>EnterQueueRsp = 125;</code>
+       * <code>LeaveLevelReq = 112;</code>
        */
-      public static final int EnterQueueRsp_VALUE = 125;
+      public static final int LeaveLevelReq_VALUE = 112;
+      /**
+       * <code>OnPlayerLeaveLevel = 113;</code>
+       */
+      public static final int OnPlayerLeaveLevel_VALUE = 113;
       /**
        * <pre>
-       *排队中的玩家离开队伍
+       *音频包,房间内的.小于10S的
        * </pre>
        *
-       * <code>ExitQueueReq = 126;</code>
+       * <code>AudioChat = 114;</code>
        */
-      public static final int ExitQueueReq_VALUE = 126;
+      public static final int AudioChat_VALUE = 114;
       /**
        * <pre>
-       *离开回复
+       *同步速度调整
        * </pre>
        *
-       * <code>ExitQueueRsp = 127;</code>
+       * <code>SyncRate = 115;</code>
        */
-      public static final int ExitQueueRsp_VALUE = 127;
-      /**
-       * <pre>
-       *等待你准备
-       * </pre>
-       *
-       * <code>QueueMsgWaitReady = 128;</code>
-       */
-      public static final int QueueMsgWaitReady_VALUE = 128;
-      /**
-       * <pre>
-       *由于玩家未确定导致的这一次匹配失败
-       * </pre>
-       *
-       * <code>QueueMsgCanceled = 129;</code>
-       */
-      public static final int QueueMsgCanceled_VALUE = 129;
-      /**
-       * <pre>
-       *玩家确定排队请求，准备进入选角色界面,某个玩家准备好，上发
-       * </pre>
-       *
-       * <code>QueueMsgReadyReq = 130;</code>
-       */
-      public static final int QueueMsgReadyReq_VALUE = 130;
-      /**
-       * <pre>
-       *全部角色都准备好后-进入选角色界面-超时后队伍解散
-       * </pre>
-       *
-       * <code>OnBattleBegin = 131;</code>
-       */
-      public static final int OnBattleBegin_VALUE = 131;
-      /**
-       * <pre>
-       *全部准备好后，某个原因导致游戏解散,要写明粗略原因
-       * </pre>
-       *
-       * <code>OnBattleCancel = 132;</code>
-       */
-      public static final int OnBattleCancel_VALUE = 132;
-      /**
-       * <pre>
-       *某个玩家选择某个角色
-       * </pre>
-       *
-       * <code>UserSelectRole = 133;</code>
-       */
-      public static final int UserSelectRole_VALUE = 133;
-      /**
-       * <pre>
-       *其他玩家选择某个角色
-       * </pre>
-       *
-       * <code>OnUserSelectRole = 134;</code>
-       */
-      public static final int OnUserSelectRole_VALUE = 134;
-      /**
-       * <pre>
-       *选择/切换某个技能
-       * </pre>
-       *
-       * <code>UserSelectSkill = 135;</code>
-       */
-      public static final int UserSelectSkill_VALUE = 135;
-      /**
-       * <pre>
-       *其他玩家选择某个技能
-       * </pre>
-       *
-       * <code>OnUserSelectSkill = 136;</code>
-       */
-      public static final int OnUserSelectSkill_VALUE = 136;
-      /**
-       * <pre>
-       *选择某个皮肤
-       * </pre>
-       *
-       * <code>UserSelectSkin = 137;</code>
-       */
-      public static final int UserSelectSkin_VALUE = 137;
-      /**
-       * <pre>
-       *其他玩家选择某个皮肤
-       * </pre>
-       *
-       * <code>OnUserSelectSkin = 138;</code>
-       */
-      public static final int OnUserSelectSkin_VALUE = 138;
-      /**
-       * <pre>
-       *在选择角色面板退出-引发OnBattleCancel事件
-       * </pre>
-       *
-       * <code>UserQuit = 139;</code>
-       */
-      public static final int UserQuit_VALUE = 139;
-      /**
-       * <pre>
-       *全部玩家在超时时间内选择好英雄-技能-皮肤，服务器倒计时完毕，开始进入加载场景界面.
-       * </pre>
-       *
-       * <code>OnBattleEnterLevel = 140;</code>
-       */
-      public static final int OnBattleEnterLevel_VALUE = 140;
-      /**
-       * <pre>
-       *在玩家同步加载界面-玩家的加载进度发生变化-服务器发送往客户端
-       * </pre>
-       *
-       * <code>OnBattleLoading = 141;</code>
-       */
-      public static final int OnBattleLoading_VALUE = 141;
-      /**
-       * <pre>
-       *玩家全部从加载界面离开，进入到战场中
-       * </pre>
-       *
-       * <code>OnBattleStart = 142;</code>
-       */
-      public static final int OnBattleStart_VALUE = 142;
-      /**
-       * <pre>
-       *战斗结束-场景内
-       * </pre>
-       *
-       * <code>OnBattleResult = 143;</code>
-       */
-      public static final int OnBattleResult_VALUE = 143;
-      /**
-       * <pre>
-       *战斗结束后，下发伤害统计报表.
-       * </pre>
-       *
-       * <code>OnBattleResultDetail = 144;</code>
-       */
-      public static final int OnBattleResultDetail_VALUE = 144;
-      /**
-       * <pre>
-       *玩家退出场景,可能是超时检测，也可能是主动退出
-       * </pre>
-       *
-       * <code>OnPlayerQuit = 146;</code>
-       */
-      public static final int OnPlayerQuit_VALUE = 146;
-      /**
-       * <pre>
-       *某玩家断线后重新开启客户端
-       * </pre>
-       *
-       * <code>OnPlayerReStart = 147;</code>
-       */
-      public static final int OnPlayerReStart_VALUE = 147;
-      /**
-       * <pre>
-       *玩家重连时不断拉取服务器保存的操作序列
-       * </pre>
-       *
-       * <code>OnPlayerFetchInput = 148;</code>
-       */
-      public static final int OnPlayerFetchInput_VALUE = 148;
-      /**
-       * <pre>
-       *断线重连开始-服务器下发时期内所有玩家的全部操作
-       * </pre>
-       *
-       * <code>OnPlayerReConnect = 149;</code>
-       */
-      public static final int OnPlayerReConnect_VALUE = 149;
-      /**
-       * <pre>
-       *音频包,房间内的.
-       * </pre>
-       *
-       * <code>AudioChat = 150;</code>
-       */
-      public static final int AudioChat_VALUE = 150;
-      /**
-       * <pre>
-       *系统消息-及时在中心服往所有玩家广播.
-       * </pre>
-       *
-       * <code>SystemMessage = 160;</code>
-       */
-      public static final int SystemMessage_VALUE = 160;
-      /**
-       * <pre>
-       *服务器下发操作给KCP客户端
-       * </pre>
-       *
-       * <code>SyncCommand = 888;</code>
-       */
-      public static final int SyncCommand_VALUE = 888;
+      public static final int SyncRate_VALUE = 115;
 
 
       public final int getNumber() {
@@ -860,52 +420,24 @@ public final class MeteorMsgs {
 
       public static MsgType forNumber(int value) {
         switch (value) {
-          case 3: return RegisterSvrReq;
-          case 4: return RegisterSvrRsp;
-          case 5: return UnRegisterSvr;
-          case 6: return SyncSvrState;
-          case 7: return GetSvrReq;
-          case 8: return GetSvrRsp;
-          case 9: return ProtocolVerifyReq;
-          case 10: return ProtocolVerifyRsp;
+          case 10: return ProtocolVerify;
+          case 11: return AliveUpdate;
           case 100: return GetRoomReq;
           case 101: return GetRoomRsp;
           case 102: return CreateRoomReq;
           case 103: return CreateRoomRsp;
           case 104: return JoinRoomReq;
           case 105: return JoinRoomRsp;
-          case 120: return ChatInRoomReq;
-          case 121: return ChatInRoomRsp;
-          case 122: return ChatInLobbyReq;
-          case 123: return ChatInLobbyRsp;
-          case 124: return EnterQueueReq;
-          case 125: return EnterQueueRsp;
-          case 126: return ExitQueueReq;
-          case 127: return ExitQueueRsp;
-          case 128: return QueueMsgWaitReady;
-          case 129: return QueueMsgCanceled;
-          case 130: return QueueMsgReadyReq;
-          case 131: return OnBattleBegin;
-          case 132: return OnBattleCancel;
-          case 133: return UserSelectRole;
-          case 134: return OnUserSelectRole;
-          case 135: return UserSelectSkill;
-          case 136: return OnUserSelectSkill;
-          case 137: return UserSelectSkin;
-          case 138: return OnUserSelectSkin;
-          case 139: return UserQuit;
-          case 140: return OnBattleEnterLevel;
-          case 141: return OnBattleLoading;
-          case 142: return OnBattleStart;
-          case 143: return OnBattleResult;
-          case 144: return OnBattleResultDetail;
-          case 146: return OnPlayerQuit;
-          case 147: return OnPlayerReStart;
-          case 148: return OnPlayerFetchInput;
-          case 149: return OnPlayerReConnect;
-          case 150: return AudioChat;
-          case 160: return SystemMessage;
-          case 888: return SyncCommand;
+          case 106: return OnPlayerJoinRoom;
+          case 107: return ChatInRoomReq;
+          case 108: return ChatInRoomRsp;
+          case 109: return EnterLevelReq;
+          case 110: return OnPlayerEnterLevel;
+          case 111: return EnterLevelRsp;
+          case 112: return LeaveLevelReq;
+          case 113: return OnPlayerLeaveLevel;
+          case 114: return AudioChat;
+          case 115: return SyncRate;
           default: return null;
         }
       }
@@ -956,204 +488,320 @@ public final class MeteorMsgs {
     }
 
     /**
+     * <pre>
+     *UDP消息
+     * </pre>
+     *
      * Protobuf enum {@code MeteorMsg.Command}
      */
     public enum Command
         implements com.google.protobuf.ProtocolMessageEnum {
       /**
        * <pre>
-       *帧同步初始化，下发随机种子之类的
+       *客户端UDP提交自己最新的信息
        * </pre>
        *
-       * <code>SyncRandomSeed = 1;</code>
+       * <code>ClientSync = 1;</code>
        */
-      SyncRandomSeed(1),
+      ClientSync(1),
       /**
        * <pre>
-       *按键按下
+       *服务器UDP下发全体玩家，当前角色最新的信息.
        * </pre>
        *
-       * <code>KeyDown = 2;</code>
+       * <code>ServerSync = 2;</code>
        */
-      KeyDown(2),
+      ServerSync(2),
       /**
        * <pre>
-       *按键抬起
+       *服务器告知玩家，新开始一轮,恢复当前场景为初始状态，删除所有玩家对象，重新进入选择界面
        * </pre>
        *
-       * <code>KeyUp = 3;</code>
+       * <code>NewTurn = 3;</code>
        */
-      KeyUp(3),
+      NewTurn(3),
       /**
        * <pre>
-       *按键状态持续
+       *单机录像用到的
        * </pre>
        *
-       * <code>KeyLast = 4;</code>
+       * <code>Drop = 4;</code>
        */
-      KeyLast(4),
+      Drop(4),
       /**
        * <pre>
-       *玩家在该帧内生成
+       *指令使用道具
        * </pre>
        *
-       * <code>SpawnPlayer = 5;</code>
+       * <code>Use = 5;</code>
        */
-      SpawnPlayer(5),
+      Use(5),
       /**
        * <pre>
-       *玩家在该帧内销毁
+       *指令装备
        * </pre>
        *
-       * <code>DestroyPlayer = 6;</code>
+       * <code>Weapon = 6;</code>
        */
-      DestroyPlayer(6),
+      Weapon(6),
       /**
        * <pre>
-       *房间类帧消息
+       *UI上的按钮装备指定的武器
        * </pre>
        *
-       * <code>JoyStickMove = 7;</code>
+       * <code>UIWeapon = 7;</code>
        */
-      JoyStickMove(7),
+      UIWeapon(7),
       /**
        * <pre>
-       *鼠标移动-导致角色旋转
+       *指令杀死某人 - 需要同步
        * </pre>
        *
-       * <code>MouseMove = 8;</code>
+       * <code>Kill = 8;</code>
        */
-      MouseMove(8),
+      Kill(8),
       /**
        * <pre>
-       *房间内作弊类型-帧消息-这些操作是通过其他UI面板实现的-后期拓展-前期禁用掉作弊面板
+       *指令暂停AI
        * </pre>
        *
-       * <code>EquipWeapon = 9;</code>
+       * <code>Pause = 9;</code>
        */
-      EquipWeapon(9),
+      Pause(9),
       /**
        * <pre>
-       *立即在角色位置朝面向扔出一把指定武器
+       *UI里切换主角模型
        * </pre>
        *
-       * <code>DropWeapon = 10;</code>
+       * <code>UIModel = 10;</code>
        */
-      DropWeapon(10),
+      UIModel(10),
       /**
        * <pre>
-       *MOBA类型帧消息
+       *UI里添加NPC
        * </pre>
        *
-       * <code>SellItem = 11;</code>
+       * <code>UIAddNpc = 11;</code>
        */
-      SellItem(11),
+      UIAddNpc(11),
       /**
        * <pre>
-       *玩家购买物品
+       *指令添加机器人
        * </pre>
        *
-       * <code>BuyItem = 12;</code>
+       * <code>AddNpc = 12;</code>
        */
-      BuyItem(12),
+      AddNpc(12),
+      /**
+       * <pre>
+       *指令开始下雪 - 需要同步
+       * </pre>
+       *
+       * <code>StartSnow = 13;</code>
+       */
+      StartSnow(13),
+      /**
+       * <pre>
+       *指令停止下雪 - 需要同步
+       * </pre>
+       *
+       * <code>StopSnow = 14;</code>
+       */
+      StopSnow(14),
+      /**
+       * <pre>
+       *重置位置
+       * </pre>
+       *
+       * <code>ResetPosition = 15;</code>
+       */
+      ResetPosition(15),
+      /**
+       * <pre>
+       *移动到指定坐标
+       * </pre>
+       *
+       * <code>MoveTo = 16;</code>
+       */
+      MoveTo(16),
+      /**
+       * <pre>
+       *主角触碰到场景上的道具物-谁先碰到发给服务器收到算谁的，2S内发送一次 - 需要同步
+       * </pre>
+       *
+       * <code>GetItem = 17;</code>
+       */
+      GetItem(17),
+      /**
+       * <pre>
+       *踢出房间 - 需要同步
+       * </pre>
+       *
+       * <code>Kick = 18;</code>
+       */
+      Kick(18),
+      /**
+       * <pre>
+       *不允许该角色加入房间 - 需要同步
+       * </pre>
+       *
+       * <code>Skick = 19;</code>
+       */
+      Skick(19),
       ;
 
       /**
        * <pre>
-       *帧同步初始化，下发随机种子之类的
+       *客户端UDP提交自己最新的信息
        * </pre>
        *
-       * <code>SyncRandomSeed = 1;</code>
+       * <code>ClientSync = 1;</code>
        */
-      public static final int SyncRandomSeed_VALUE = 1;
+      public static final int ClientSync_VALUE = 1;
       /**
        * <pre>
-       *按键按下
+       *服务器UDP下发全体玩家，当前角色最新的信息.
        * </pre>
        *
-       * <code>KeyDown = 2;</code>
+       * <code>ServerSync = 2;</code>
        */
-      public static final int KeyDown_VALUE = 2;
+      public static final int ServerSync_VALUE = 2;
       /**
        * <pre>
-       *按键抬起
+       *服务器告知玩家，新开始一轮,恢复当前场景为初始状态，删除所有玩家对象，重新进入选择界面
        * </pre>
        *
-       * <code>KeyUp = 3;</code>
+       * <code>NewTurn = 3;</code>
        */
-      public static final int KeyUp_VALUE = 3;
+      public static final int NewTurn_VALUE = 3;
       /**
        * <pre>
-       *按键状态持续
+       *单机录像用到的
        * </pre>
        *
-       * <code>KeyLast = 4;</code>
+       * <code>Drop = 4;</code>
        */
-      public static final int KeyLast_VALUE = 4;
+      public static final int Drop_VALUE = 4;
       /**
        * <pre>
-       *玩家在该帧内生成
+       *指令使用道具
        * </pre>
        *
-       * <code>SpawnPlayer = 5;</code>
+       * <code>Use = 5;</code>
        */
-      public static final int SpawnPlayer_VALUE = 5;
+      public static final int Use_VALUE = 5;
       /**
        * <pre>
-       *玩家在该帧内销毁
+       *指令装备
        * </pre>
        *
-       * <code>DestroyPlayer = 6;</code>
+       * <code>Weapon = 6;</code>
        */
-      public static final int DestroyPlayer_VALUE = 6;
+      public static final int Weapon_VALUE = 6;
       /**
        * <pre>
-       *房间类帧消息
+       *UI上的按钮装备指定的武器
        * </pre>
        *
-       * <code>JoyStickMove = 7;</code>
+       * <code>UIWeapon = 7;</code>
        */
-      public static final int JoyStickMove_VALUE = 7;
+      public static final int UIWeapon_VALUE = 7;
       /**
        * <pre>
-       *鼠标移动-导致角色旋转
+       *指令杀死某人 - 需要同步
        * </pre>
        *
-       * <code>MouseMove = 8;</code>
+       * <code>Kill = 8;</code>
        */
-      public static final int MouseMove_VALUE = 8;
+      public static final int Kill_VALUE = 8;
       /**
        * <pre>
-       *房间内作弊类型-帧消息-这些操作是通过其他UI面板实现的-后期拓展-前期禁用掉作弊面板
+       *指令暂停AI
        * </pre>
        *
-       * <code>EquipWeapon = 9;</code>
+       * <code>Pause = 9;</code>
        */
-      public static final int EquipWeapon_VALUE = 9;
+      public static final int Pause_VALUE = 9;
       /**
        * <pre>
-       *立即在角色位置朝面向扔出一把指定武器
+       *UI里切换主角模型
        * </pre>
        *
-       * <code>DropWeapon = 10;</code>
+       * <code>UIModel = 10;</code>
        */
-      public static final int DropWeapon_VALUE = 10;
+      public static final int UIModel_VALUE = 10;
       /**
        * <pre>
-       *MOBA类型帧消息
+       *UI里添加NPC
        * </pre>
        *
-       * <code>SellItem = 11;</code>
+       * <code>UIAddNpc = 11;</code>
        */
-      public static final int SellItem_VALUE = 11;
+      public static final int UIAddNpc_VALUE = 11;
       /**
        * <pre>
-       *玩家购买物品
+       *指令添加机器人
        * </pre>
        *
-       * <code>BuyItem = 12;</code>
+       * <code>AddNpc = 12;</code>
        */
-      public static final int BuyItem_VALUE = 12;
+      public static final int AddNpc_VALUE = 12;
+      /**
+       * <pre>
+       *指令开始下雪 - 需要同步
+       * </pre>
+       *
+       * <code>StartSnow = 13;</code>
+       */
+      public static final int StartSnow_VALUE = 13;
+      /**
+       * <pre>
+       *指令停止下雪 - 需要同步
+       * </pre>
+       *
+       * <code>StopSnow = 14;</code>
+       */
+      public static final int StopSnow_VALUE = 14;
+      /**
+       * <pre>
+       *重置位置
+       * </pre>
+       *
+       * <code>ResetPosition = 15;</code>
+       */
+      public static final int ResetPosition_VALUE = 15;
+      /**
+       * <pre>
+       *移动到指定坐标
+       * </pre>
+       *
+       * <code>MoveTo = 16;</code>
+       */
+      public static final int MoveTo_VALUE = 16;
+      /**
+       * <pre>
+       *主角触碰到场景上的道具物-谁先碰到发给服务器收到算谁的，2S内发送一次 - 需要同步
+       * </pre>
+       *
+       * <code>GetItem = 17;</code>
+       */
+      public static final int GetItem_VALUE = 17;
+      /**
+       * <pre>
+       *踢出房间 - 需要同步
+       * </pre>
+       *
+       * <code>Kick = 18;</code>
+       */
+      public static final int Kick_VALUE = 18;
+      /**
+       * <pre>
+       *不允许该角色加入房间 - 需要同步
+       * </pre>
+       *
+       * <code>Skick = 19;</code>
+       */
+      public static final int Skick_VALUE = 19;
 
 
       public final int getNumber() {
@@ -1170,18 +818,25 @@ public final class MeteorMsgs {
 
       public static Command forNumber(int value) {
         switch (value) {
-          case 1: return SyncRandomSeed;
-          case 2: return KeyDown;
-          case 3: return KeyUp;
-          case 4: return KeyLast;
-          case 5: return SpawnPlayer;
-          case 6: return DestroyPlayer;
-          case 7: return JoyStickMove;
-          case 8: return MouseMove;
-          case 9: return EquipWeapon;
-          case 10: return DropWeapon;
-          case 11: return SellItem;
-          case 12: return BuyItem;
+          case 1: return ClientSync;
+          case 2: return ServerSync;
+          case 3: return NewTurn;
+          case 4: return Drop;
+          case 5: return Use;
+          case 6: return Weapon;
+          case 7: return UIWeapon;
+          case 8: return Kill;
+          case 9: return Pause;
+          case 10: return UIModel;
+          case 11: return UIAddNpc;
+          case 12: return AddNpc;
+          case 13: return StartSnow;
+          case 14: return StopSnow;
+          case 15: return ResetPosition;
+          case 16: return MoveTo;
+          case 17: return GetItem;
+          case 18: return Kick;
+          case 19: return Skick;
           default: return null;
         }
       }
@@ -1235,17 +890,25 @@ public final class MeteorMsgs {
     public static final int CMD_FIELD_NUMBER = 1;
     private int cmd_;
     /**
+     * <pre>
+     *TCP消息
+     * </pre>
+     *
      * <code>required .MeteorMsg.MsgType cmd = 1;</code>
      */
     public boolean hasCmd() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
     /**
+     * <pre>
+     *TCP消息
+     * </pre>
+     *
      * <code>required .MeteorMsg.MsgType cmd = 1;</code>
      */
     public idevgame.meteor.proto.MeteorMsgs.MeteorMsg.MsgType getCmd() {
       idevgame.meteor.proto.MeteorMsgs.MeteorMsg.MsgType result = idevgame.meteor.proto.MeteorMsgs.MeteorMsg.MsgType.valueOf(cmd_);
-      return result == null ? idevgame.meteor.proto.MeteorMsgs.MeteorMsg.MsgType.RegisterSvrReq : result;
+      return result == null ? idevgame.meteor.proto.MeteorMsgs.MeteorMsg.MsgType.ProtocolVerify : result;
     }
 
     private byte memoizedIsInitialized = -1;
@@ -1443,7 +1106,7 @@ public final class MeteorMsgs {
       }
       public Builder clear() {
         super.clear();
-        cmd_ = 3;
+        cmd_ = 10;
         bitField0_ = (bitField0_ & ~0x00000001);
         return this;
       }
@@ -1549,21 +1212,33 @@ public final class MeteorMsgs {
       }
       private int bitField0_;
 
-      private int cmd_ = 3;
+      private int cmd_ = 10;
       /**
+       * <pre>
+       *TCP消息
+       * </pre>
+       *
        * <code>required .MeteorMsg.MsgType cmd = 1;</code>
        */
       public boolean hasCmd() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
       /**
+       * <pre>
+       *TCP消息
+       * </pre>
+       *
        * <code>required .MeteorMsg.MsgType cmd = 1;</code>
        */
       public idevgame.meteor.proto.MeteorMsgs.MeteorMsg.MsgType getCmd() {
         idevgame.meteor.proto.MeteorMsgs.MeteorMsg.MsgType result = idevgame.meteor.proto.MeteorMsgs.MeteorMsg.MsgType.valueOf(cmd_);
-        return result == null ? idevgame.meteor.proto.MeteorMsgs.MeteorMsg.MsgType.RegisterSvrReq : result;
+        return result == null ? idevgame.meteor.proto.MeteorMsgs.MeteorMsg.MsgType.ProtocolVerify : result;
       }
       /**
+       * <pre>
+       *TCP消息
+       * </pre>
+       *
        * <code>required .MeteorMsg.MsgType cmd = 1;</code>
        */
       public Builder setCmd(idevgame.meteor.proto.MeteorMsgs.MeteorMsg.MsgType value) {
@@ -1576,11 +1251,15 @@ public final class MeteorMsgs {
         return this;
       }
       /**
+       * <pre>
+       *TCP消息
+       * </pre>
+       *
        * <code>required .MeteorMsg.MsgType cmd = 1;</code>
        */
       public Builder clearCmd() {
         bitField0_ = (bitField0_ & ~0x00000001);
-        cmd_ = 3;
+        cmd_ = 10;
         onChanged();
         return this;
       }
@@ -1633,5670 +1312,8 @@ public final class MeteorMsgs {
 
   }
 
-  public interface RegisterSvrReqOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:RegisterSvrReq)
-      com.google.protobuf.MessageOrBuilder {
-
-    /**
-     * <pre>
-     *服务器名称唯一，如果相同则返回修改后的
-     * </pre>
-     *
-     * <code>required string serverName = 1;</code>
-     */
-    boolean hasServerName();
-    /**
-     * <pre>
-     *服务器名称唯一，如果相同则返回修改后的
-     * </pre>
-     *
-     * <code>required string serverName = 1;</code>
-     */
-    java.lang.String getServerName();
-    /**
-     * <pre>
-     *服务器名称唯一，如果相同则返回修改后的
-     * </pre>
-     *
-     * <code>required string serverName = 1;</code>
-     */
-    com.google.protobuf.ByteString
-        getServerNameBytes();
-
-    /**
-     * <pre>
-     *公网IP
-     * </pre>
-     *
-     * <code>required string ip = 2;</code>
-     */
-    boolean hasIp();
-    /**
-     * <pre>
-     *公网IP
-     * </pre>
-     *
-     * <code>required string ip = 2;</code>
-     */
-    java.lang.String getIp();
-    /**
-     * <pre>
-     *公网IP
-     * </pre>
-     *
-     * <code>required string ip = 2;</code>
-     */
-    com.google.protobuf.ByteString
-        getIpBytes();
-
-    /**
-     * <pre>
-     *公网监听TCP端口
-     * </pre>
-     *
-     * <code>required uint32 port = 3;</code>
-     */
-    boolean hasPort();
-    /**
-     * <pre>
-     *公网监听TCP端口
-     * </pre>
-     *
-     * <code>required uint32 port = 3;</code>
-     */
-    int getPort();
-  }
-  /**
-   * <pre>
-   *游戏服=&gt;在中心服注册
-   * </pre>
-   *
-   * Protobuf type {@code RegisterSvrReq}
-   */
-  public  static final class RegisterSvrReq extends
-      com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:RegisterSvrReq)
-      RegisterSvrReqOrBuilder {
-  private static final long serialVersionUID = 0L;
-    // Use RegisterSvrReq.newBuilder() to construct.
-    private RegisterSvrReq(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
-      super(builder);
-    }
-    private RegisterSvrReq() {
-      serverName_ = "";
-      ip_ = "";
-      port_ = 0;
-    }
-
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
-      return this.unknownFields;
-    }
-    private RegisterSvrReq(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      int mutable_bitField0_ = 0;
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            default: {
-              if (!parseUnknownField(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-            case 10: {
-              com.google.protobuf.ByteString bs = input.readBytes();
-              bitField0_ |= 0x00000001;
-              serverName_ = bs;
-              break;
-            }
-            case 18: {
-              com.google.protobuf.ByteString bs = input.readBytes();
-              bitField0_ |= 0x00000002;
-              ip_ = bs;
-              break;
-            }
-            case 24: {
-              bitField0_ |= 0x00000004;
-              port_ = input.readUInt32();
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return idevgame.meteor.proto.MeteorMsgs.internal_static_RegisterSvrReq_descriptor;
-    }
-
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return idevgame.meteor.proto.MeteorMsgs.internal_static_RegisterSvrReq_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              idevgame.meteor.proto.MeteorMsgs.RegisterSvrReq.class, idevgame.meteor.proto.MeteorMsgs.RegisterSvrReq.Builder.class);
-    }
-
-    private int bitField0_;
-    public static final int SERVERNAME_FIELD_NUMBER = 1;
-    private volatile java.lang.Object serverName_;
-    /**
-     * <pre>
-     *服务器名称唯一，如果相同则返回修改后的
-     * </pre>
-     *
-     * <code>required string serverName = 1;</code>
-     */
-    public boolean hasServerName() {
-      return ((bitField0_ & 0x00000001) == 0x00000001);
-    }
-    /**
-     * <pre>
-     *服务器名称唯一，如果相同则返回修改后的
-     * </pre>
-     *
-     * <code>required string serverName = 1;</code>
-     */
-    public java.lang.String getServerName() {
-      java.lang.Object ref = serverName_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        if (bs.isValidUtf8()) {
-          serverName_ = s;
-        }
-        return s;
-      }
-    }
-    /**
-     * <pre>
-     *服务器名称唯一，如果相同则返回修改后的
-     * </pre>
-     *
-     * <code>required string serverName = 1;</code>
-     */
-    public com.google.protobuf.ByteString
-        getServerNameBytes() {
-      java.lang.Object ref = serverName_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        serverName_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
-    public static final int IP_FIELD_NUMBER = 2;
-    private volatile java.lang.Object ip_;
-    /**
-     * <pre>
-     *公网IP
-     * </pre>
-     *
-     * <code>required string ip = 2;</code>
-     */
-    public boolean hasIp() {
-      return ((bitField0_ & 0x00000002) == 0x00000002);
-    }
-    /**
-     * <pre>
-     *公网IP
-     * </pre>
-     *
-     * <code>required string ip = 2;</code>
-     */
-    public java.lang.String getIp() {
-      java.lang.Object ref = ip_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        if (bs.isValidUtf8()) {
-          ip_ = s;
-        }
-        return s;
-      }
-    }
-    /**
-     * <pre>
-     *公网IP
-     * </pre>
-     *
-     * <code>required string ip = 2;</code>
-     */
-    public com.google.protobuf.ByteString
-        getIpBytes() {
-      java.lang.Object ref = ip_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        ip_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
-    public static final int PORT_FIELD_NUMBER = 3;
-    private int port_;
-    /**
-     * <pre>
-     *公网监听TCP端口
-     * </pre>
-     *
-     * <code>required uint32 port = 3;</code>
-     */
-    public boolean hasPort() {
-      return ((bitField0_ & 0x00000004) == 0x00000004);
-    }
-    /**
-     * <pre>
-     *公网监听TCP端口
-     * </pre>
-     *
-     * <code>required uint32 port = 3;</code>
-     */
-    public int getPort() {
-      return port_;
-    }
-
-    private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
-
-      if (!hasServerName()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
-      if (!hasIp()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
-      if (!hasPort()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
-      memoizedIsInitialized = 1;
-      return true;
-    }
-
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, serverName_);
-      }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, ip_);
-      }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeUInt32(3, port_);
-      }
-      unknownFields.writeTo(output);
-    }
-
-    public int getSerializedSize() {
-      int size = memoizedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, serverName_);
-      }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, ip_);
-      }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeUInt32Size(3, port_);
-      }
-      size += unknownFields.getSerializedSize();
-      memoizedSize = size;
-      return size;
-    }
-
-    @java.lang.Override
-    public boolean equals(final java.lang.Object obj) {
-      if (obj == this) {
-       return true;
-      }
-      if (!(obj instanceof idevgame.meteor.proto.MeteorMsgs.RegisterSvrReq)) {
-        return super.equals(obj);
-      }
-      idevgame.meteor.proto.MeteorMsgs.RegisterSvrReq other = (idevgame.meteor.proto.MeteorMsgs.RegisterSvrReq) obj;
-
-      boolean result = true;
-      result = result && (hasServerName() == other.hasServerName());
-      if (hasServerName()) {
-        result = result && getServerName()
-            .equals(other.getServerName());
-      }
-      result = result && (hasIp() == other.hasIp());
-      if (hasIp()) {
-        result = result && getIp()
-            .equals(other.getIp());
-      }
-      result = result && (hasPort() == other.hasPort());
-      if (hasPort()) {
-        result = result && (getPort()
-            == other.getPort());
-      }
-      result = result && unknownFields.equals(other.unknownFields);
-      return result;
-    }
-
-    @java.lang.Override
-    public int hashCode() {
-      if (memoizedHashCode != 0) {
-        return memoizedHashCode;
-      }
-      int hash = 41;
-      hash = (19 * hash) + getDescriptor().hashCode();
-      if (hasServerName()) {
-        hash = (37 * hash) + SERVERNAME_FIELD_NUMBER;
-        hash = (53 * hash) + getServerName().hashCode();
-      }
-      if (hasIp()) {
-        hash = (37 * hash) + IP_FIELD_NUMBER;
-        hash = (53 * hash) + getIp().hashCode();
-      }
-      if (hasPort()) {
-        hash = (37 * hash) + PORT_FIELD_NUMBER;
-        hash = (53 * hash) + getPort();
-      }
-      hash = (29 * hash) + unknownFields.hashCode();
-      memoizedHashCode = hash;
-      return hash;
-    }
-
-    public static idevgame.meteor.proto.MeteorMsgs.RegisterSvrReq parseFrom(
-        java.nio.ByteBuffer data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.RegisterSvrReq parseFrom(
-        java.nio.ByteBuffer data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.RegisterSvrReq parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.RegisterSvrReq parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.RegisterSvrReq parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.RegisterSvrReq parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.RegisterSvrReq parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.RegisterSvrReq parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.RegisterSvrReq parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.RegisterSvrReq parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.RegisterSvrReq parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.RegisterSvrReq parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder() {
-      return DEFAULT_INSTANCE.toBuilder();
-    }
-    public static Builder newBuilder(idevgame.meteor.proto.MeteorMsgs.RegisterSvrReq prototype) {
-      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
-    }
-    public Builder toBuilder() {
-      return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
-    }
-
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
-    /**
-     * <pre>
-     *游戏服=&gt;在中心服注册
-     * </pre>
-     *
-     * Protobuf type {@code RegisterSvrReq}
-     */
-    public static final class Builder extends
-        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:RegisterSvrReq)
-        idevgame.meteor.proto.MeteorMsgs.RegisterSvrReqOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return idevgame.meteor.proto.MeteorMsgs.internal_static_RegisterSvrReq_descriptor;
-      }
-
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return idevgame.meteor.proto.MeteorMsgs.internal_static_RegisterSvrReq_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                idevgame.meteor.proto.MeteorMsgs.RegisterSvrReq.class, idevgame.meteor.proto.MeteorMsgs.RegisterSvrReq.Builder.class);
-      }
-
-      // Construct using idevgame.meteor.proto.MeteorMsgs.RegisterSvrReq.newBuilder()
-      private Builder() {
-        maybeForceBuilderInitialization();
-      }
-
-      private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-        super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
-      }
-      public Builder clear() {
-        super.clear();
-        serverName_ = "";
-        bitField0_ = (bitField0_ & ~0x00000001);
-        ip_ = "";
-        bitField0_ = (bitField0_ & ~0x00000002);
-        port_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000004);
-        return this;
-      }
-
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return idevgame.meteor.proto.MeteorMsgs.internal_static_RegisterSvrReq_descriptor;
-      }
-
-      public idevgame.meteor.proto.MeteorMsgs.RegisterSvrReq getDefaultInstanceForType() {
-        return idevgame.meteor.proto.MeteorMsgs.RegisterSvrReq.getDefaultInstance();
-      }
-
-      public idevgame.meteor.proto.MeteorMsgs.RegisterSvrReq build() {
-        idevgame.meteor.proto.MeteorMsgs.RegisterSvrReq result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-
-      public idevgame.meteor.proto.MeteorMsgs.RegisterSvrReq buildPartial() {
-        idevgame.meteor.proto.MeteorMsgs.RegisterSvrReq result = new idevgame.meteor.proto.MeteorMsgs.RegisterSvrReq(this);
-        int from_bitField0_ = bitField0_;
-        int to_bitField0_ = 0;
-        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
-          to_bitField0_ |= 0x00000001;
-        }
-        result.serverName_ = serverName_;
-        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
-          to_bitField0_ |= 0x00000002;
-        }
-        result.ip_ = ip_;
-        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
-          to_bitField0_ |= 0x00000004;
-        }
-        result.port_ = port_;
-        result.bitField0_ = to_bitField0_;
-        onBuilt();
-        return result;
-      }
-
-      public Builder clone() {
-        return (Builder) super.clone();
-      }
-      public Builder setField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
-        return (Builder) super.setField(field, value);
-      }
-      public Builder clearField(
-          com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return (Builder) super.clearField(field);
-      }
-      public Builder clearOneof(
-          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return (Builder) super.clearOneof(oneof);
-      }
-      public Builder setRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, java.lang.Object value) {
-        return (Builder) super.setRepeatedField(field, index, value);
-      }
-      public Builder addRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
-        return (Builder) super.addRepeatedField(field, value);
-      }
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof idevgame.meteor.proto.MeteorMsgs.RegisterSvrReq) {
-          return mergeFrom((idevgame.meteor.proto.MeteorMsgs.RegisterSvrReq)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-
-      public Builder mergeFrom(idevgame.meteor.proto.MeteorMsgs.RegisterSvrReq other) {
-        if (other == idevgame.meteor.proto.MeteorMsgs.RegisterSvrReq.getDefaultInstance()) return this;
-        if (other.hasServerName()) {
-          bitField0_ |= 0x00000001;
-          serverName_ = other.serverName_;
-          onChanged();
-        }
-        if (other.hasIp()) {
-          bitField0_ |= 0x00000002;
-          ip_ = other.ip_;
-          onChanged();
-        }
-        if (other.hasPort()) {
-          setPort(other.getPort());
-        }
-        this.mergeUnknownFields(other.unknownFields);
-        onChanged();
-        return this;
-      }
-
-      public final boolean isInitialized() {
-        if (!hasServerName()) {
-          return false;
-        }
-        if (!hasIp()) {
-          return false;
-        }
-        if (!hasPort()) {
-          return false;
-        }
-        return true;
-      }
-
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        idevgame.meteor.proto.MeteorMsgs.RegisterSvrReq parsedMessage = null;
-        try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (idevgame.meteor.proto.MeteorMsgs.RegisterSvrReq) e.getUnfinishedMessage();
-          throw e.unwrapIOException();
-        } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
-        return this;
-      }
-      private int bitField0_;
-
-      private java.lang.Object serverName_ = "";
-      /**
-       * <pre>
-       *服务器名称唯一，如果相同则返回修改后的
-       * </pre>
-       *
-       * <code>required string serverName = 1;</code>
-       */
-      public boolean hasServerName() {
-        return ((bitField0_ & 0x00000001) == 0x00000001);
-      }
-      /**
-       * <pre>
-       *服务器名称唯一，如果相同则返回修改后的
-       * </pre>
-       *
-       * <code>required string serverName = 1;</code>
-       */
-      public java.lang.String getServerName() {
-        java.lang.Object ref = serverName_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            serverName_ = s;
-          }
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
-      }
-      /**
-       * <pre>
-       *服务器名称唯一，如果相同则返回修改后的
-       * </pre>
-       *
-       * <code>required string serverName = 1;</code>
-       */
-      public com.google.protobuf.ByteString
-          getServerNameBytes() {
-        java.lang.Object ref = serverName_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          serverName_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <pre>
-       *服务器名称唯一，如果相同则返回修改后的
-       * </pre>
-       *
-       * <code>required string serverName = 1;</code>
-       */
-      public Builder setServerName(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000001;
-        serverName_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <pre>
-       *服务器名称唯一，如果相同则返回修改后的
-       * </pre>
-       *
-       * <code>required string serverName = 1;</code>
-       */
-      public Builder clearServerName() {
-        bitField0_ = (bitField0_ & ~0x00000001);
-        serverName_ = getDefaultInstance().getServerName();
-        onChanged();
-        return this;
-      }
-      /**
-       * <pre>
-       *服务器名称唯一，如果相同则返回修改后的
-       * </pre>
-       *
-       * <code>required string serverName = 1;</code>
-       */
-      public Builder setServerNameBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000001;
-        serverName_ = value;
-        onChanged();
-        return this;
-      }
-
-      private java.lang.Object ip_ = "";
-      /**
-       * <pre>
-       *公网IP
-       * </pre>
-       *
-       * <code>required string ip = 2;</code>
-       */
-      public boolean hasIp() {
-        return ((bitField0_ & 0x00000002) == 0x00000002);
-      }
-      /**
-       * <pre>
-       *公网IP
-       * </pre>
-       *
-       * <code>required string ip = 2;</code>
-       */
-      public java.lang.String getIp() {
-        java.lang.Object ref = ip_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            ip_ = s;
-          }
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
-      }
-      /**
-       * <pre>
-       *公网IP
-       * </pre>
-       *
-       * <code>required string ip = 2;</code>
-       */
-      public com.google.protobuf.ByteString
-          getIpBytes() {
-        java.lang.Object ref = ip_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          ip_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <pre>
-       *公网IP
-       * </pre>
-       *
-       * <code>required string ip = 2;</code>
-       */
-      public Builder setIp(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000002;
-        ip_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <pre>
-       *公网IP
-       * </pre>
-       *
-       * <code>required string ip = 2;</code>
-       */
-      public Builder clearIp() {
-        bitField0_ = (bitField0_ & ~0x00000002);
-        ip_ = getDefaultInstance().getIp();
-        onChanged();
-        return this;
-      }
-      /**
-       * <pre>
-       *公网IP
-       * </pre>
-       *
-       * <code>required string ip = 2;</code>
-       */
-      public Builder setIpBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000002;
-        ip_ = value;
-        onChanged();
-        return this;
-      }
-
-      private int port_ ;
-      /**
-       * <pre>
-       *公网监听TCP端口
-       * </pre>
-       *
-       * <code>required uint32 port = 3;</code>
-       */
-      public boolean hasPort() {
-        return ((bitField0_ & 0x00000004) == 0x00000004);
-      }
-      /**
-       * <pre>
-       *公网监听TCP端口
-       * </pre>
-       *
-       * <code>required uint32 port = 3;</code>
-       */
-      public int getPort() {
-        return port_;
-      }
-      /**
-       * <pre>
-       *公网监听TCP端口
-       * </pre>
-       *
-       * <code>required uint32 port = 3;</code>
-       */
-      public Builder setPort(int value) {
-        bitField0_ |= 0x00000004;
-        port_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <pre>
-       *公网监听TCP端口
-       * </pre>
-       *
-       * <code>required uint32 port = 3;</code>
-       */
-      public Builder clearPort() {
-        bitField0_ = (bitField0_ & ~0x00000004);
-        port_ = 0;
-        onChanged();
-        return this;
-      }
-      public final Builder setUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFields(unknownFields);
-      }
-
-      public final Builder mergeUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.mergeUnknownFields(unknownFields);
-      }
-
-
-      // @@protoc_insertion_point(builder_scope:RegisterSvrReq)
-    }
-
-    // @@protoc_insertion_point(class_scope:RegisterSvrReq)
-    private static final idevgame.meteor.proto.MeteorMsgs.RegisterSvrReq DEFAULT_INSTANCE;
-    static {
-      DEFAULT_INSTANCE = new idevgame.meteor.proto.MeteorMsgs.RegisterSvrReq();
-    }
-
-    public static idevgame.meteor.proto.MeteorMsgs.RegisterSvrReq getDefaultInstance() {
-      return DEFAULT_INSTANCE;
-    }
-
-    @java.lang.Deprecated public static final com.google.protobuf.Parser<RegisterSvrReq>
-        PARSER = new com.google.protobuf.AbstractParser<RegisterSvrReq>() {
-      public RegisterSvrReq parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return new RegisterSvrReq(input, extensionRegistry);
-      }
-    };
-
-    public static com.google.protobuf.Parser<RegisterSvrReq> parser() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<RegisterSvrReq> getParserForType() {
-      return PARSER;
-    }
-
-    public idevgame.meteor.proto.MeteorMsgs.RegisterSvrReq getDefaultInstanceForType() {
-      return DEFAULT_INSTANCE;
-    }
-
-  }
-
-  public interface RegisterSvrRspOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:RegisterSvrRsp)
-      com.google.protobuf.MessageOrBuilder {
-
-    /**
-     * <pre>
-     *若重名则返回修改后的实际名称,没有重名则不返回
-     * </pre>
-     *
-     * <code>optional string serverName = 1;</code>
-     */
-    boolean hasServerName();
-    /**
-     * <pre>
-     *若重名则返回修改后的实际名称,没有重名则不返回
-     * </pre>
-     *
-     * <code>optional string serverName = 1;</code>
-     */
-    java.lang.String getServerName();
-    /**
-     * <pre>
-     *若重名则返回修改后的实际名称,没有重名则不返回
-     * </pre>
-     *
-     * <code>optional string serverName = 1;</code>
-     */
-    com.google.protobuf.ByteString
-        getServerNameBytes();
-
-    /**
-     * <pre>
-     *注册成功时，中心服返回的标识，在更新服务器信息时有效
-     * </pre>
-     *
-     * <code>required uint32 serverId = 2;</code>
-     */
-    boolean hasServerId();
-    /**
-     * <pre>
-     *注册成功时，中心服返回的标识，在更新服务器信息时有效
-     * </pre>
-     *
-     * <code>required uint32 serverId = 2;</code>
-     */
-    int getServerId();
-
-    /**
-     * <pre>
-     *注册成功1 失败0
-     * </pre>
-     *
-     * <code>required uint32 result = 3;</code>
-     */
-    boolean hasResult();
-    /**
-     * <pre>
-     *注册成功1 失败0
-     * </pre>
-     *
-     * <code>required uint32 result = 3;</code>
-     */
-    int getResult();
-
-    /**
-     * <pre>
-     *失败原因.-1重复注册
-     * </pre>
-     *
-     * <code>optional uint32 reason = 4;</code>
-     */
-    boolean hasReason();
-    /**
-     * <pre>
-     *失败原因.-1重复注册
-     * </pre>
-     *
-     * <code>optional uint32 reason = 4;</code>
-     */
-    int getReason();
-  }
-  /**
-   * <pre>
-   *中心服回应
-   * </pre>
-   *
-   * Protobuf type {@code RegisterSvrRsp}
-   */
-  public  static final class RegisterSvrRsp extends
-      com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:RegisterSvrRsp)
-      RegisterSvrRspOrBuilder {
-  private static final long serialVersionUID = 0L;
-    // Use RegisterSvrRsp.newBuilder() to construct.
-    private RegisterSvrRsp(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
-      super(builder);
-    }
-    private RegisterSvrRsp() {
-      serverName_ = "";
-      serverId_ = 0;
-      result_ = 0;
-      reason_ = 0;
-    }
-
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
-      return this.unknownFields;
-    }
-    private RegisterSvrRsp(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      int mutable_bitField0_ = 0;
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            default: {
-              if (!parseUnknownField(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-            case 10: {
-              com.google.protobuf.ByteString bs = input.readBytes();
-              bitField0_ |= 0x00000001;
-              serverName_ = bs;
-              break;
-            }
-            case 16: {
-              bitField0_ |= 0x00000002;
-              serverId_ = input.readUInt32();
-              break;
-            }
-            case 24: {
-              bitField0_ |= 0x00000004;
-              result_ = input.readUInt32();
-              break;
-            }
-            case 32: {
-              bitField0_ |= 0x00000008;
-              reason_ = input.readUInt32();
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return idevgame.meteor.proto.MeteorMsgs.internal_static_RegisterSvrRsp_descriptor;
-    }
-
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return idevgame.meteor.proto.MeteorMsgs.internal_static_RegisterSvrRsp_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              idevgame.meteor.proto.MeteorMsgs.RegisterSvrRsp.class, idevgame.meteor.proto.MeteorMsgs.RegisterSvrRsp.Builder.class);
-    }
-
-    private int bitField0_;
-    public static final int SERVERNAME_FIELD_NUMBER = 1;
-    private volatile java.lang.Object serverName_;
-    /**
-     * <pre>
-     *若重名则返回修改后的实际名称,没有重名则不返回
-     * </pre>
-     *
-     * <code>optional string serverName = 1;</code>
-     */
-    public boolean hasServerName() {
-      return ((bitField0_ & 0x00000001) == 0x00000001);
-    }
-    /**
-     * <pre>
-     *若重名则返回修改后的实际名称,没有重名则不返回
-     * </pre>
-     *
-     * <code>optional string serverName = 1;</code>
-     */
-    public java.lang.String getServerName() {
-      java.lang.Object ref = serverName_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        if (bs.isValidUtf8()) {
-          serverName_ = s;
-        }
-        return s;
-      }
-    }
-    /**
-     * <pre>
-     *若重名则返回修改后的实际名称,没有重名则不返回
-     * </pre>
-     *
-     * <code>optional string serverName = 1;</code>
-     */
-    public com.google.protobuf.ByteString
-        getServerNameBytes() {
-      java.lang.Object ref = serverName_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        serverName_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
-    public static final int SERVERID_FIELD_NUMBER = 2;
-    private int serverId_;
-    /**
-     * <pre>
-     *注册成功时，中心服返回的标识，在更新服务器信息时有效
-     * </pre>
-     *
-     * <code>required uint32 serverId = 2;</code>
-     */
-    public boolean hasServerId() {
-      return ((bitField0_ & 0x00000002) == 0x00000002);
-    }
-    /**
-     * <pre>
-     *注册成功时，中心服返回的标识，在更新服务器信息时有效
-     * </pre>
-     *
-     * <code>required uint32 serverId = 2;</code>
-     */
-    public int getServerId() {
-      return serverId_;
-    }
-
-    public static final int RESULT_FIELD_NUMBER = 3;
-    private int result_;
-    /**
-     * <pre>
-     *注册成功1 失败0
-     * </pre>
-     *
-     * <code>required uint32 result = 3;</code>
-     */
-    public boolean hasResult() {
-      return ((bitField0_ & 0x00000004) == 0x00000004);
-    }
-    /**
-     * <pre>
-     *注册成功1 失败0
-     * </pre>
-     *
-     * <code>required uint32 result = 3;</code>
-     */
-    public int getResult() {
-      return result_;
-    }
-
-    public static final int REASON_FIELD_NUMBER = 4;
-    private int reason_;
-    /**
-     * <pre>
-     *失败原因.-1重复注册
-     * </pre>
-     *
-     * <code>optional uint32 reason = 4;</code>
-     */
-    public boolean hasReason() {
-      return ((bitField0_ & 0x00000008) == 0x00000008);
-    }
-    /**
-     * <pre>
-     *失败原因.-1重复注册
-     * </pre>
-     *
-     * <code>optional uint32 reason = 4;</code>
-     */
-    public int getReason() {
-      return reason_;
-    }
-
-    private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
-
-      if (!hasServerId()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
-      if (!hasResult()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
-      memoizedIsInitialized = 1;
-      return true;
-    }
-
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, serverName_);
-      }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeUInt32(2, serverId_);
-      }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeUInt32(3, result_);
-      }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        output.writeUInt32(4, reason_);
-      }
-      unknownFields.writeTo(output);
-    }
-
-    public int getSerializedSize() {
-      int size = memoizedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, serverName_);
-      }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeUInt32Size(2, serverId_);
-      }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeUInt32Size(3, result_);
-      }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeUInt32Size(4, reason_);
-      }
-      size += unknownFields.getSerializedSize();
-      memoizedSize = size;
-      return size;
-    }
-
-    @java.lang.Override
-    public boolean equals(final java.lang.Object obj) {
-      if (obj == this) {
-       return true;
-      }
-      if (!(obj instanceof idevgame.meteor.proto.MeteorMsgs.RegisterSvrRsp)) {
-        return super.equals(obj);
-      }
-      idevgame.meteor.proto.MeteorMsgs.RegisterSvrRsp other = (idevgame.meteor.proto.MeteorMsgs.RegisterSvrRsp) obj;
-
-      boolean result = true;
-      result = result && (hasServerName() == other.hasServerName());
-      if (hasServerName()) {
-        result = result && getServerName()
-            .equals(other.getServerName());
-      }
-      result = result && (hasServerId() == other.hasServerId());
-      if (hasServerId()) {
-        result = result && (getServerId()
-            == other.getServerId());
-      }
-      result = result && (hasResult() == other.hasResult());
-      if (hasResult()) {
-        result = result && (getResult()
-            == other.getResult());
-      }
-      result = result && (hasReason() == other.hasReason());
-      if (hasReason()) {
-        result = result && (getReason()
-            == other.getReason());
-      }
-      result = result && unknownFields.equals(other.unknownFields);
-      return result;
-    }
-
-    @java.lang.Override
-    public int hashCode() {
-      if (memoizedHashCode != 0) {
-        return memoizedHashCode;
-      }
-      int hash = 41;
-      hash = (19 * hash) + getDescriptor().hashCode();
-      if (hasServerName()) {
-        hash = (37 * hash) + SERVERNAME_FIELD_NUMBER;
-        hash = (53 * hash) + getServerName().hashCode();
-      }
-      if (hasServerId()) {
-        hash = (37 * hash) + SERVERID_FIELD_NUMBER;
-        hash = (53 * hash) + getServerId();
-      }
-      if (hasResult()) {
-        hash = (37 * hash) + RESULT_FIELD_NUMBER;
-        hash = (53 * hash) + getResult();
-      }
-      if (hasReason()) {
-        hash = (37 * hash) + REASON_FIELD_NUMBER;
-        hash = (53 * hash) + getReason();
-      }
-      hash = (29 * hash) + unknownFields.hashCode();
-      memoizedHashCode = hash;
-      return hash;
-    }
-
-    public static idevgame.meteor.proto.MeteorMsgs.RegisterSvrRsp parseFrom(
-        java.nio.ByteBuffer data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.RegisterSvrRsp parseFrom(
-        java.nio.ByteBuffer data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.RegisterSvrRsp parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.RegisterSvrRsp parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.RegisterSvrRsp parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.RegisterSvrRsp parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.RegisterSvrRsp parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.RegisterSvrRsp parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.RegisterSvrRsp parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.RegisterSvrRsp parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.RegisterSvrRsp parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.RegisterSvrRsp parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder() {
-      return DEFAULT_INSTANCE.toBuilder();
-    }
-    public static Builder newBuilder(idevgame.meteor.proto.MeteorMsgs.RegisterSvrRsp prototype) {
-      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
-    }
-    public Builder toBuilder() {
-      return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
-    }
-
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
-    /**
-     * <pre>
-     *中心服回应
-     * </pre>
-     *
-     * Protobuf type {@code RegisterSvrRsp}
-     */
-    public static final class Builder extends
-        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:RegisterSvrRsp)
-        idevgame.meteor.proto.MeteorMsgs.RegisterSvrRspOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return idevgame.meteor.proto.MeteorMsgs.internal_static_RegisterSvrRsp_descriptor;
-      }
-
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return idevgame.meteor.proto.MeteorMsgs.internal_static_RegisterSvrRsp_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                idevgame.meteor.proto.MeteorMsgs.RegisterSvrRsp.class, idevgame.meteor.proto.MeteorMsgs.RegisterSvrRsp.Builder.class);
-      }
-
-      // Construct using idevgame.meteor.proto.MeteorMsgs.RegisterSvrRsp.newBuilder()
-      private Builder() {
-        maybeForceBuilderInitialization();
-      }
-
-      private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-        super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
-      }
-      public Builder clear() {
-        super.clear();
-        serverName_ = "";
-        bitField0_ = (bitField0_ & ~0x00000001);
-        serverId_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000002);
-        result_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000004);
-        reason_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000008);
-        return this;
-      }
-
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return idevgame.meteor.proto.MeteorMsgs.internal_static_RegisterSvrRsp_descriptor;
-      }
-
-      public idevgame.meteor.proto.MeteorMsgs.RegisterSvrRsp getDefaultInstanceForType() {
-        return idevgame.meteor.proto.MeteorMsgs.RegisterSvrRsp.getDefaultInstance();
-      }
-
-      public idevgame.meteor.proto.MeteorMsgs.RegisterSvrRsp build() {
-        idevgame.meteor.proto.MeteorMsgs.RegisterSvrRsp result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-
-      public idevgame.meteor.proto.MeteorMsgs.RegisterSvrRsp buildPartial() {
-        idevgame.meteor.proto.MeteorMsgs.RegisterSvrRsp result = new idevgame.meteor.proto.MeteorMsgs.RegisterSvrRsp(this);
-        int from_bitField0_ = bitField0_;
-        int to_bitField0_ = 0;
-        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
-          to_bitField0_ |= 0x00000001;
-        }
-        result.serverName_ = serverName_;
-        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
-          to_bitField0_ |= 0x00000002;
-        }
-        result.serverId_ = serverId_;
-        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
-          to_bitField0_ |= 0x00000004;
-        }
-        result.result_ = result_;
-        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
-          to_bitField0_ |= 0x00000008;
-        }
-        result.reason_ = reason_;
-        result.bitField0_ = to_bitField0_;
-        onBuilt();
-        return result;
-      }
-
-      public Builder clone() {
-        return (Builder) super.clone();
-      }
-      public Builder setField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
-        return (Builder) super.setField(field, value);
-      }
-      public Builder clearField(
-          com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return (Builder) super.clearField(field);
-      }
-      public Builder clearOneof(
-          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return (Builder) super.clearOneof(oneof);
-      }
-      public Builder setRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, java.lang.Object value) {
-        return (Builder) super.setRepeatedField(field, index, value);
-      }
-      public Builder addRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
-        return (Builder) super.addRepeatedField(field, value);
-      }
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof idevgame.meteor.proto.MeteorMsgs.RegisterSvrRsp) {
-          return mergeFrom((idevgame.meteor.proto.MeteorMsgs.RegisterSvrRsp)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-
-      public Builder mergeFrom(idevgame.meteor.proto.MeteorMsgs.RegisterSvrRsp other) {
-        if (other == idevgame.meteor.proto.MeteorMsgs.RegisterSvrRsp.getDefaultInstance()) return this;
-        if (other.hasServerName()) {
-          bitField0_ |= 0x00000001;
-          serverName_ = other.serverName_;
-          onChanged();
-        }
-        if (other.hasServerId()) {
-          setServerId(other.getServerId());
-        }
-        if (other.hasResult()) {
-          setResult(other.getResult());
-        }
-        if (other.hasReason()) {
-          setReason(other.getReason());
-        }
-        this.mergeUnknownFields(other.unknownFields);
-        onChanged();
-        return this;
-      }
-
-      public final boolean isInitialized() {
-        if (!hasServerId()) {
-          return false;
-        }
-        if (!hasResult()) {
-          return false;
-        }
-        return true;
-      }
-
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        idevgame.meteor.proto.MeteorMsgs.RegisterSvrRsp parsedMessage = null;
-        try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (idevgame.meteor.proto.MeteorMsgs.RegisterSvrRsp) e.getUnfinishedMessage();
-          throw e.unwrapIOException();
-        } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
-        return this;
-      }
-      private int bitField0_;
-
-      private java.lang.Object serverName_ = "";
-      /**
-       * <pre>
-       *若重名则返回修改后的实际名称,没有重名则不返回
-       * </pre>
-       *
-       * <code>optional string serverName = 1;</code>
-       */
-      public boolean hasServerName() {
-        return ((bitField0_ & 0x00000001) == 0x00000001);
-      }
-      /**
-       * <pre>
-       *若重名则返回修改后的实际名称,没有重名则不返回
-       * </pre>
-       *
-       * <code>optional string serverName = 1;</code>
-       */
-      public java.lang.String getServerName() {
-        java.lang.Object ref = serverName_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            serverName_ = s;
-          }
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
-      }
-      /**
-       * <pre>
-       *若重名则返回修改后的实际名称,没有重名则不返回
-       * </pre>
-       *
-       * <code>optional string serverName = 1;</code>
-       */
-      public com.google.protobuf.ByteString
-          getServerNameBytes() {
-        java.lang.Object ref = serverName_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          serverName_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <pre>
-       *若重名则返回修改后的实际名称,没有重名则不返回
-       * </pre>
-       *
-       * <code>optional string serverName = 1;</code>
-       */
-      public Builder setServerName(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000001;
-        serverName_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <pre>
-       *若重名则返回修改后的实际名称,没有重名则不返回
-       * </pre>
-       *
-       * <code>optional string serverName = 1;</code>
-       */
-      public Builder clearServerName() {
-        bitField0_ = (bitField0_ & ~0x00000001);
-        serverName_ = getDefaultInstance().getServerName();
-        onChanged();
-        return this;
-      }
-      /**
-       * <pre>
-       *若重名则返回修改后的实际名称,没有重名则不返回
-       * </pre>
-       *
-       * <code>optional string serverName = 1;</code>
-       */
-      public Builder setServerNameBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000001;
-        serverName_ = value;
-        onChanged();
-        return this;
-      }
-
-      private int serverId_ ;
-      /**
-       * <pre>
-       *注册成功时，中心服返回的标识，在更新服务器信息时有效
-       * </pre>
-       *
-       * <code>required uint32 serverId = 2;</code>
-       */
-      public boolean hasServerId() {
-        return ((bitField0_ & 0x00000002) == 0x00000002);
-      }
-      /**
-       * <pre>
-       *注册成功时，中心服返回的标识，在更新服务器信息时有效
-       * </pre>
-       *
-       * <code>required uint32 serverId = 2;</code>
-       */
-      public int getServerId() {
-        return serverId_;
-      }
-      /**
-       * <pre>
-       *注册成功时，中心服返回的标识，在更新服务器信息时有效
-       * </pre>
-       *
-       * <code>required uint32 serverId = 2;</code>
-       */
-      public Builder setServerId(int value) {
-        bitField0_ |= 0x00000002;
-        serverId_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <pre>
-       *注册成功时，中心服返回的标识，在更新服务器信息时有效
-       * </pre>
-       *
-       * <code>required uint32 serverId = 2;</code>
-       */
-      public Builder clearServerId() {
-        bitField0_ = (bitField0_ & ~0x00000002);
-        serverId_ = 0;
-        onChanged();
-        return this;
-      }
-
-      private int result_ ;
-      /**
-       * <pre>
-       *注册成功1 失败0
-       * </pre>
-       *
-       * <code>required uint32 result = 3;</code>
-       */
-      public boolean hasResult() {
-        return ((bitField0_ & 0x00000004) == 0x00000004);
-      }
-      /**
-       * <pre>
-       *注册成功1 失败0
-       * </pre>
-       *
-       * <code>required uint32 result = 3;</code>
-       */
-      public int getResult() {
-        return result_;
-      }
-      /**
-       * <pre>
-       *注册成功1 失败0
-       * </pre>
-       *
-       * <code>required uint32 result = 3;</code>
-       */
-      public Builder setResult(int value) {
-        bitField0_ |= 0x00000004;
-        result_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <pre>
-       *注册成功1 失败0
-       * </pre>
-       *
-       * <code>required uint32 result = 3;</code>
-       */
-      public Builder clearResult() {
-        bitField0_ = (bitField0_ & ~0x00000004);
-        result_ = 0;
-        onChanged();
-        return this;
-      }
-
-      private int reason_ ;
-      /**
-       * <pre>
-       *失败原因.-1重复注册
-       * </pre>
-       *
-       * <code>optional uint32 reason = 4;</code>
-       */
-      public boolean hasReason() {
-        return ((bitField0_ & 0x00000008) == 0x00000008);
-      }
-      /**
-       * <pre>
-       *失败原因.-1重复注册
-       * </pre>
-       *
-       * <code>optional uint32 reason = 4;</code>
-       */
-      public int getReason() {
-        return reason_;
-      }
-      /**
-       * <pre>
-       *失败原因.-1重复注册
-       * </pre>
-       *
-       * <code>optional uint32 reason = 4;</code>
-       */
-      public Builder setReason(int value) {
-        bitField0_ |= 0x00000008;
-        reason_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <pre>
-       *失败原因.-1重复注册
-       * </pre>
-       *
-       * <code>optional uint32 reason = 4;</code>
-       */
-      public Builder clearReason() {
-        bitField0_ = (bitField0_ & ~0x00000008);
-        reason_ = 0;
-        onChanged();
-        return this;
-      }
-      public final Builder setUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFields(unknownFields);
-      }
-
-      public final Builder mergeUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.mergeUnknownFields(unknownFields);
-      }
-
-
-      // @@protoc_insertion_point(builder_scope:RegisterSvrRsp)
-    }
-
-    // @@protoc_insertion_point(class_scope:RegisterSvrRsp)
-    private static final idevgame.meteor.proto.MeteorMsgs.RegisterSvrRsp DEFAULT_INSTANCE;
-    static {
-      DEFAULT_INSTANCE = new idevgame.meteor.proto.MeteorMsgs.RegisterSvrRsp();
-    }
-
-    public static idevgame.meteor.proto.MeteorMsgs.RegisterSvrRsp getDefaultInstance() {
-      return DEFAULT_INSTANCE;
-    }
-
-    @java.lang.Deprecated public static final com.google.protobuf.Parser<RegisterSvrRsp>
-        PARSER = new com.google.protobuf.AbstractParser<RegisterSvrRsp>() {
-      public RegisterSvrRsp parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return new RegisterSvrRsp(input, extensionRegistry);
-      }
-    };
-
-    public static com.google.protobuf.Parser<RegisterSvrRsp> parser() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<RegisterSvrRsp> getParserForType() {
-      return PARSER;
-    }
-
-    public idevgame.meteor.proto.MeteorMsgs.RegisterSvrRsp getDefaultInstanceForType() {
-      return DEFAULT_INSTANCE;
-    }
-
-  }
-
-  public interface SvrListOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:SvrList)
-      com.google.protobuf.MessageOrBuilder {
-
-    /**
-     * <pre>
-     *所有服务器的信息
-     * </pre>
-     *
-     * <code>repeated .SvrInfo gameSvrList = 1;</code>
-     */
-    java.util.List<idevgame.meteor.proto.MeteorMsgs.SvrInfo> 
-        getGameSvrListList();
-    /**
-     * <pre>
-     *所有服务器的信息
-     * </pre>
-     *
-     * <code>repeated .SvrInfo gameSvrList = 1;</code>
-     */
-    idevgame.meteor.proto.MeteorMsgs.SvrInfo getGameSvrList(int index);
-    /**
-     * <pre>
-     *所有服务器的信息
-     * </pre>
-     *
-     * <code>repeated .SvrInfo gameSvrList = 1;</code>
-     */
-    int getGameSvrListCount();
-    /**
-     * <pre>
-     *所有服务器的信息
-     * </pre>
-     *
-     * <code>repeated .SvrInfo gameSvrList = 1;</code>
-     */
-    java.util.List<? extends idevgame.meteor.proto.MeteorMsgs.SvrInfoOrBuilder> 
-        getGameSvrListOrBuilderList();
-    /**
-     * <pre>
-     *所有服务器的信息
-     * </pre>
-     *
-     * <code>repeated .SvrInfo gameSvrList = 1;</code>
-     */
-    idevgame.meteor.proto.MeteorMsgs.SvrInfoOrBuilder getGameSvrListOrBuilder(
-        int index);
-  }
-  /**
-   * Protobuf type {@code SvrList}
-   */
-  public  static final class SvrList extends
-      com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:SvrList)
-      SvrListOrBuilder {
-  private static final long serialVersionUID = 0L;
-    // Use SvrList.newBuilder() to construct.
-    private SvrList(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
-      super(builder);
-    }
-    private SvrList() {
-      gameSvrList_ = java.util.Collections.emptyList();
-    }
-
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
-      return this.unknownFields;
-    }
-    private SvrList(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      int mutable_bitField0_ = 0;
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            default: {
-              if (!parseUnknownField(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-            case 10: {
-              if (!((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
-                gameSvrList_ = new java.util.ArrayList<idevgame.meteor.proto.MeteorMsgs.SvrInfo>();
-                mutable_bitField0_ |= 0x00000001;
-              }
-              gameSvrList_.add(
-                  input.readMessage(idevgame.meteor.proto.MeteorMsgs.SvrInfo.PARSER, extensionRegistry));
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
-          gameSvrList_ = java.util.Collections.unmodifiableList(gameSvrList_);
-        }
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return idevgame.meteor.proto.MeteorMsgs.internal_static_SvrList_descriptor;
-    }
-
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return idevgame.meteor.proto.MeteorMsgs.internal_static_SvrList_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              idevgame.meteor.proto.MeteorMsgs.SvrList.class, idevgame.meteor.proto.MeteorMsgs.SvrList.Builder.class);
-    }
-
-    public static final int GAMESVRLIST_FIELD_NUMBER = 1;
-    private java.util.List<idevgame.meteor.proto.MeteorMsgs.SvrInfo> gameSvrList_;
-    /**
-     * <pre>
-     *所有服务器的信息
-     * </pre>
-     *
-     * <code>repeated .SvrInfo gameSvrList = 1;</code>
-     */
-    public java.util.List<idevgame.meteor.proto.MeteorMsgs.SvrInfo> getGameSvrListList() {
-      return gameSvrList_;
-    }
-    /**
-     * <pre>
-     *所有服务器的信息
-     * </pre>
-     *
-     * <code>repeated .SvrInfo gameSvrList = 1;</code>
-     */
-    public java.util.List<? extends idevgame.meteor.proto.MeteorMsgs.SvrInfoOrBuilder> 
-        getGameSvrListOrBuilderList() {
-      return gameSvrList_;
-    }
-    /**
-     * <pre>
-     *所有服务器的信息
-     * </pre>
-     *
-     * <code>repeated .SvrInfo gameSvrList = 1;</code>
-     */
-    public int getGameSvrListCount() {
-      return gameSvrList_.size();
-    }
-    /**
-     * <pre>
-     *所有服务器的信息
-     * </pre>
-     *
-     * <code>repeated .SvrInfo gameSvrList = 1;</code>
-     */
-    public idevgame.meteor.proto.MeteorMsgs.SvrInfo getGameSvrList(int index) {
-      return gameSvrList_.get(index);
-    }
-    /**
-     * <pre>
-     *所有服务器的信息
-     * </pre>
-     *
-     * <code>repeated .SvrInfo gameSvrList = 1;</code>
-     */
-    public idevgame.meteor.proto.MeteorMsgs.SvrInfoOrBuilder getGameSvrListOrBuilder(
-        int index) {
-      return gameSvrList_.get(index);
-    }
-
-    private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
-
-      for (int i = 0; i < getGameSvrListCount(); i++) {
-        if (!getGameSvrList(i).isInitialized()) {
-          memoizedIsInitialized = 0;
-          return false;
-        }
-      }
-      memoizedIsInitialized = 1;
-      return true;
-    }
-
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      for (int i = 0; i < gameSvrList_.size(); i++) {
-        output.writeMessage(1, gameSvrList_.get(i));
-      }
-      unknownFields.writeTo(output);
-    }
-
-    public int getSerializedSize() {
-      int size = memoizedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      for (int i = 0; i < gameSvrList_.size(); i++) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(1, gameSvrList_.get(i));
-      }
-      size += unknownFields.getSerializedSize();
-      memoizedSize = size;
-      return size;
-    }
-
-    @java.lang.Override
-    public boolean equals(final java.lang.Object obj) {
-      if (obj == this) {
-       return true;
-      }
-      if (!(obj instanceof idevgame.meteor.proto.MeteorMsgs.SvrList)) {
-        return super.equals(obj);
-      }
-      idevgame.meteor.proto.MeteorMsgs.SvrList other = (idevgame.meteor.proto.MeteorMsgs.SvrList) obj;
-
-      boolean result = true;
-      result = result && getGameSvrListList()
-          .equals(other.getGameSvrListList());
-      result = result && unknownFields.equals(other.unknownFields);
-      return result;
-    }
-
-    @java.lang.Override
-    public int hashCode() {
-      if (memoizedHashCode != 0) {
-        return memoizedHashCode;
-      }
-      int hash = 41;
-      hash = (19 * hash) + getDescriptor().hashCode();
-      if (getGameSvrListCount() > 0) {
-        hash = (37 * hash) + GAMESVRLIST_FIELD_NUMBER;
-        hash = (53 * hash) + getGameSvrListList().hashCode();
-      }
-      hash = (29 * hash) + unknownFields.hashCode();
-      memoizedHashCode = hash;
-      return hash;
-    }
-
-    public static idevgame.meteor.proto.MeteorMsgs.SvrList parseFrom(
-        java.nio.ByteBuffer data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.SvrList parseFrom(
-        java.nio.ByteBuffer data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.SvrList parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.SvrList parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.SvrList parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.SvrList parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.SvrList parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.SvrList parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.SvrList parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.SvrList parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.SvrList parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.SvrList parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder() {
-      return DEFAULT_INSTANCE.toBuilder();
-    }
-    public static Builder newBuilder(idevgame.meteor.proto.MeteorMsgs.SvrList prototype) {
-      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
-    }
-    public Builder toBuilder() {
-      return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
-    }
-
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
-    /**
-     * Protobuf type {@code SvrList}
-     */
-    public static final class Builder extends
-        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:SvrList)
-        idevgame.meteor.proto.MeteorMsgs.SvrListOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return idevgame.meteor.proto.MeteorMsgs.internal_static_SvrList_descriptor;
-      }
-
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return idevgame.meteor.proto.MeteorMsgs.internal_static_SvrList_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                idevgame.meteor.proto.MeteorMsgs.SvrList.class, idevgame.meteor.proto.MeteorMsgs.SvrList.Builder.class);
-      }
-
-      // Construct using idevgame.meteor.proto.MeteorMsgs.SvrList.newBuilder()
-      private Builder() {
-        maybeForceBuilderInitialization();
-      }
-
-      private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-        super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-          getGameSvrListFieldBuilder();
-        }
-      }
-      public Builder clear() {
-        super.clear();
-        if (gameSvrListBuilder_ == null) {
-          gameSvrList_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000001);
-        } else {
-          gameSvrListBuilder_.clear();
-        }
-        return this;
-      }
-
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return idevgame.meteor.proto.MeteorMsgs.internal_static_SvrList_descriptor;
-      }
-
-      public idevgame.meteor.proto.MeteorMsgs.SvrList getDefaultInstanceForType() {
-        return idevgame.meteor.proto.MeteorMsgs.SvrList.getDefaultInstance();
-      }
-
-      public idevgame.meteor.proto.MeteorMsgs.SvrList build() {
-        idevgame.meteor.proto.MeteorMsgs.SvrList result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-
-      public idevgame.meteor.proto.MeteorMsgs.SvrList buildPartial() {
-        idevgame.meteor.proto.MeteorMsgs.SvrList result = new idevgame.meteor.proto.MeteorMsgs.SvrList(this);
-        int from_bitField0_ = bitField0_;
-        if (gameSvrListBuilder_ == null) {
-          if (((bitField0_ & 0x00000001) == 0x00000001)) {
-            gameSvrList_ = java.util.Collections.unmodifiableList(gameSvrList_);
-            bitField0_ = (bitField0_ & ~0x00000001);
-          }
-          result.gameSvrList_ = gameSvrList_;
-        } else {
-          result.gameSvrList_ = gameSvrListBuilder_.build();
-        }
-        onBuilt();
-        return result;
-      }
-
-      public Builder clone() {
-        return (Builder) super.clone();
-      }
-      public Builder setField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
-        return (Builder) super.setField(field, value);
-      }
-      public Builder clearField(
-          com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return (Builder) super.clearField(field);
-      }
-      public Builder clearOneof(
-          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return (Builder) super.clearOneof(oneof);
-      }
-      public Builder setRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, java.lang.Object value) {
-        return (Builder) super.setRepeatedField(field, index, value);
-      }
-      public Builder addRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
-        return (Builder) super.addRepeatedField(field, value);
-      }
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof idevgame.meteor.proto.MeteorMsgs.SvrList) {
-          return mergeFrom((idevgame.meteor.proto.MeteorMsgs.SvrList)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-
-      public Builder mergeFrom(idevgame.meteor.proto.MeteorMsgs.SvrList other) {
-        if (other == idevgame.meteor.proto.MeteorMsgs.SvrList.getDefaultInstance()) return this;
-        if (gameSvrListBuilder_ == null) {
-          if (!other.gameSvrList_.isEmpty()) {
-            if (gameSvrList_.isEmpty()) {
-              gameSvrList_ = other.gameSvrList_;
-              bitField0_ = (bitField0_ & ~0x00000001);
-            } else {
-              ensureGameSvrListIsMutable();
-              gameSvrList_.addAll(other.gameSvrList_);
-            }
-            onChanged();
-          }
-        } else {
-          if (!other.gameSvrList_.isEmpty()) {
-            if (gameSvrListBuilder_.isEmpty()) {
-              gameSvrListBuilder_.dispose();
-              gameSvrListBuilder_ = null;
-              gameSvrList_ = other.gameSvrList_;
-              bitField0_ = (bitField0_ & ~0x00000001);
-              gameSvrListBuilder_ = 
-                com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
-                   getGameSvrListFieldBuilder() : null;
-            } else {
-              gameSvrListBuilder_.addAllMessages(other.gameSvrList_);
-            }
-          }
-        }
-        this.mergeUnknownFields(other.unknownFields);
-        onChanged();
-        return this;
-      }
-
-      public final boolean isInitialized() {
-        for (int i = 0; i < getGameSvrListCount(); i++) {
-          if (!getGameSvrList(i).isInitialized()) {
-            return false;
-          }
-        }
-        return true;
-      }
-
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        idevgame.meteor.proto.MeteorMsgs.SvrList parsedMessage = null;
-        try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (idevgame.meteor.proto.MeteorMsgs.SvrList) e.getUnfinishedMessage();
-          throw e.unwrapIOException();
-        } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
-        return this;
-      }
-      private int bitField0_;
-
-      private java.util.List<idevgame.meteor.proto.MeteorMsgs.SvrInfo> gameSvrList_ =
-        java.util.Collections.emptyList();
-      private void ensureGameSvrListIsMutable() {
-        if (!((bitField0_ & 0x00000001) == 0x00000001)) {
-          gameSvrList_ = new java.util.ArrayList<idevgame.meteor.proto.MeteorMsgs.SvrInfo>(gameSvrList_);
-          bitField0_ |= 0x00000001;
-         }
-      }
-
-      private com.google.protobuf.RepeatedFieldBuilderV3<
-          idevgame.meteor.proto.MeteorMsgs.SvrInfo, idevgame.meteor.proto.MeteorMsgs.SvrInfo.Builder, idevgame.meteor.proto.MeteorMsgs.SvrInfoOrBuilder> gameSvrListBuilder_;
-
-      /**
-       * <pre>
-       *所有服务器的信息
-       * </pre>
-       *
-       * <code>repeated .SvrInfo gameSvrList = 1;</code>
-       */
-      public java.util.List<idevgame.meteor.proto.MeteorMsgs.SvrInfo> getGameSvrListList() {
-        if (gameSvrListBuilder_ == null) {
-          return java.util.Collections.unmodifiableList(gameSvrList_);
-        } else {
-          return gameSvrListBuilder_.getMessageList();
-        }
-      }
-      /**
-       * <pre>
-       *所有服务器的信息
-       * </pre>
-       *
-       * <code>repeated .SvrInfo gameSvrList = 1;</code>
-       */
-      public int getGameSvrListCount() {
-        if (gameSvrListBuilder_ == null) {
-          return gameSvrList_.size();
-        } else {
-          return gameSvrListBuilder_.getCount();
-        }
-      }
-      /**
-       * <pre>
-       *所有服务器的信息
-       * </pre>
-       *
-       * <code>repeated .SvrInfo gameSvrList = 1;</code>
-       */
-      public idevgame.meteor.proto.MeteorMsgs.SvrInfo getGameSvrList(int index) {
-        if (gameSvrListBuilder_ == null) {
-          return gameSvrList_.get(index);
-        } else {
-          return gameSvrListBuilder_.getMessage(index);
-        }
-      }
-      /**
-       * <pre>
-       *所有服务器的信息
-       * </pre>
-       *
-       * <code>repeated .SvrInfo gameSvrList = 1;</code>
-       */
-      public Builder setGameSvrList(
-          int index, idevgame.meteor.proto.MeteorMsgs.SvrInfo value) {
-        if (gameSvrListBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensureGameSvrListIsMutable();
-          gameSvrList_.set(index, value);
-          onChanged();
-        } else {
-          gameSvrListBuilder_.setMessage(index, value);
-        }
-        return this;
-      }
-      /**
-       * <pre>
-       *所有服务器的信息
-       * </pre>
-       *
-       * <code>repeated .SvrInfo gameSvrList = 1;</code>
-       */
-      public Builder setGameSvrList(
-          int index, idevgame.meteor.proto.MeteorMsgs.SvrInfo.Builder builderForValue) {
-        if (gameSvrListBuilder_ == null) {
-          ensureGameSvrListIsMutable();
-          gameSvrList_.set(index, builderForValue.build());
-          onChanged();
-        } else {
-          gameSvrListBuilder_.setMessage(index, builderForValue.build());
-        }
-        return this;
-      }
-      /**
-       * <pre>
-       *所有服务器的信息
-       * </pre>
-       *
-       * <code>repeated .SvrInfo gameSvrList = 1;</code>
-       */
-      public Builder addGameSvrList(idevgame.meteor.proto.MeteorMsgs.SvrInfo value) {
-        if (gameSvrListBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensureGameSvrListIsMutable();
-          gameSvrList_.add(value);
-          onChanged();
-        } else {
-          gameSvrListBuilder_.addMessage(value);
-        }
-        return this;
-      }
-      /**
-       * <pre>
-       *所有服务器的信息
-       * </pre>
-       *
-       * <code>repeated .SvrInfo gameSvrList = 1;</code>
-       */
-      public Builder addGameSvrList(
-          int index, idevgame.meteor.proto.MeteorMsgs.SvrInfo value) {
-        if (gameSvrListBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensureGameSvrListIsMutable();
-          gameSvrList_.add(index, value);
-          onChanged();
-        } else {
-          gameSvrListBuilder_.addMessage(index, value);
-        }
-        return this;
-      }
-      /**
-       * <pre>
-       *所有服务器的信息
-       * </pre>
-       *
-       * <code>repeated .SvrInfo gameSvrList = 1;</code>
-       */
-      public Builder addGameSvrList(
-          idevgame.meteor.proto.MeteorMsgs.SvrInfo.Builder builderForValue) {
-        if (gameSvrListBuilder_ == null) {
-          ensureGameSvrListIsMutable();
-          gameSvrList_.add(builderForValue.build());
-          onChanged();
-        } else {
-          gameSvrListBuilder_.addMessage(builderForValue.build());
-        }
-        return this;
-      }
-      /**
-       * <pre>
-       *所有服务器的信息
-       * </pre>
-       *
-       * <code>repeated .SvrInfo gameSvrList = 1;</code>
-       */
-      public Builder addGameSvrList(
-          int index, idevgame.meteor.proto.MeteorMsgs.SvrInfo.Builder builderForValue) {
-        if (gameSvrListBuilder_ == null) {
-          ensureGameSvrListIsMutable();
-          gameSvrList_.add(index, builderForValue.build());
-          onChanged();
-        } else {
-          gameSvrListBuilder_.addMessage(index, builderForValue.build());
-        }
-        return this;
-      }
-      /**
-       * <pre>
-       *所有服务器的信息
-       * </pre>
-       *
-       * <code>repeated .SvrInfo gameSvrList = 1;</code>
-       */
-      public Builder addAllGameSvrList(
-          java.lang.Iterable<? extends idevgame.meteor.proto.MeteorMsgs.SvrInfo> values) {
-        if (gameSvrListBuilder_ == null) {
-          ensureGameSvrListIsMutable();
-          com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, gameSvrList_);
-          onChanged();
-        } else {
-          gameSvrListBuilder_.addAllMessages(values);
-        }
-        return this;
-      }
-      /**
-       * <pre>
-       *所有服务器的信息
-       * </pre>
-       *
-       * <code>repeated .SvrInfo gameSvrList = 1;</code>
-       */
-      public Builder clearGameSvrList() {
-        if (gameSvrListBuilder_ == null) {
-          gameSvrList_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000001);
-          onChanged();
-        } else {
-          gameSvrListBuilder_.clear();
-        }
-        return this;
-      }
-      /**
-       * <pre>
-       *所有服务器的信息
-       * </pre>
-       *
-       * <code>repeated .SvrInfo gameSvrList = 1;</code>
-       */
-      public Builder removeGameSvrList(int index) {
-        if (gameSvrListBuilder_ == null) {
-          ensureGameSvrListIsMutable();
-          gameSvrList_.remove(index);
-          onChanged();
-        } else {
-          gameSvrListBuilder_.remove(index);
-        }
-        return this;
-      }
-      /**
-       * <pre>
-       *所有服务器的信息
-       * </pre>
-       *
-       * <code>repeated .SvrInfo gameSvrList = 1;</code>
-       */
-      public idevgame.meteor.proto.MeteorMsgs.SvrInfo.Builder getGameSvrListBuilder(
-          int index) {
-        return getGameSvrListFieldBuilder().getBuilder(index);
-      }
-      /**
-       * <pre>
-       *所有服务器的信息
-       * </pre>
-       *
-       * <code>repeated .SvrInfo gameSvrList = 1;</code>
-       */
-      public idevgame.meteor.proto.MeteorMsgs.SvrInfoOrBuilder getGameSvrListOrBuilder(
-          int index) {
-        if (gameSvrListBuilder_ == null) {
-          return gameSvrList_.get(index);  } else {
-          return gameSvrListBuilder_.getMessageOrBuilder(index);
-        }
-      }
-      /**
-       * <pre>
-       *所有服务器的信息
-       * </pre>
-       *
-       * <code>repeated .SvrInfo gameSvrList = 1;</code>
-       */
-      public java.util.List<? extends idevgame.meteor.proto.MeteorMsgs.SvrInfoOrBuilder> 
-           getGameSvrListOrBuilderList() {
-        if (gameSvrListBuilder_ != null) {
-          return gameSvrListBuilder_.getMessageOrBuilderList();
-        } else {
-          return java.util.Collections.unmodifiableList(gameSvrList_);
-        }
-      }
-      /**
-       * <pre>
-       *所有服务器的信息
-       * </pre>
-       *
-       * <code>repeated .SvrInfo gameSvrList = 1;</code>
-       */
-      public idevgame.meteor.proto.MeteorMsgs.SvrInfo.Builder addGameSvrListBuilder() {
-        return getGameSvrListFieldBuilder().addBuilder(
-            idevgame.meteor.proto.MeteorMsgs.SvrInfo.getDefaultInstance());
-      }
-      /**
-       * <pre>
-       *所有服务器的信息
-       * </pre>
-       *
-       * <code>repeated .SvrInfo gameSvrList = 1;</code>
-       */
-      public idevgame.meteor.proto.MeteorMsgs.SvrInfo.Builder addGameSvrListBuilder(
-          int index) {
-        return getGameSvrListFieldBuilder().addBuilder(
-            index, idevgame.meteor.proto.MeteorMsgs.SvrInfo.getDefaultInstance());
-      }
-      /**
-       * <pre>
-       *所有服务器的信息
-       * </pre>
-       *
-       * <code>repeated .SvrInfo gameSvrList = 1;</code>
-       */
-      public java.util.List<idevgame.meteor.proto.MeteorMsgs.SvrInfo.Builder> 
-           getGameSvrListBuilderList() {
-        return getGameSvrListFieldBuilder().getBuilderList();
-      }
-      private com.google.protobuf.RepeatedFieldBuilderV3<
-          idevgame.meteor.proto.MeteorMsgs.SvrInfo, idevgame.meteor.proto.MeteorMsgs.SvrInfo.Builder, idevgame.meteor.proto.MeteorMsgs.SvrInfoOrBuilder> 
-          getGameSvrListFieldBuilder() {
-        if (gameSvrListBuilder_ == null) {
-          gameSvrListBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
-              idevgame.meteor.proto.MeteorMsgs.SvrInfo, idevgame.meteor.proto.MeteorMsgs.SvrInfo.Builder, idevgame.meteor.proto.MeteorMsgs.SvrInfoOrBuilder>(
-                  gameSvrList_,
-                  ((bitField0_ & 0x00000001) == 0x00000001),
-                  getParentForChildren(),
-                  isClean());
-          gameSvrList_ = null;
-        }
-        return gameSvrListBuilder_;
-      }
-      public final Builder setUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFields(unknownFields);
-      }
-
-      public final Builder mergeUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.mergeUnknownFields(unknownFields);
-      }
-
-
-      // @@protoc_insertion_point(builder_scope:SvrList)
-    }
-
-    // @@protoc_insertion_point(class_scope:SvrList)
-    private static final idevgame.meteor.proto.MeteorMsgs.SvrList DEFAULT_INSTANCE;
-    static {
-      DEFAULT_INSTANCE = new idevgame.meteor.proto.MeteorMsgs.SvrList();
-    }
-
-    public static idevgame.meteor.proto.MeteorMsgs.SvrList getDefaultInstance() {
-      return DEFAULT_INSTANCE;
-    }
-
-    @java.lang.Deprecated public static final com.google.protobuf.Parser<SvrList>
-        PARSER = new com.google.protobuf.AbstractParser<SvrList>() {
-      public SvrList parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return new SvrList(input, extensionRegistry);
-      }
-    };
-
-    public static com.google.protobuf.Parser<SvrList> parser() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<SvrList> getParserForType() {
-      return PARSER;
-    }
-
-    public idevgame.meteor.proto.MeteorMsgs.SvrList getDefaultInstanceForType() {
-      return DEFAULT_INSTANCE;
-    }
-
-  }
-
-  public interface SvrInfoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:SvrInfo)
-      com.google.protobuf.MessageOrBuilder {
-
-    /**
-     * <code>required uint32 Idx = 1;</code>
-     */
-    boolean hasIdx();
-    /**
-     * <code>required uint32 Idx = 1;</code>
-     */
-    int getIdx();
-
-    /**
-     * <code>required string Name = 2;</code>
-     */
-    boolean hasName();
-    /**
-     * <code>required string Name = 2;</code>
-     */
-    java.lang.String getName();
-    /**
-     * <code>required string Name = 2;</code>
-     */
-    com.google.protobuf.ByteString
-        getNameBytes();
-
-    /**
-     * <code>required string Ip = 3;</code>
-     */
-    boolean hasIp();
-    /**
-     * <code>required string Ip = 3;</code>
-     */
-    java.lang.String getIp();
-    /**
-     * <code>required string Ip = 3;</code>
-     */
-    com.google.protobuf.ByteString
-        getIpBytes();
-
-    /**
-     * <code>required uint32 Port = 4;</code>
-     */
-    boolean hasPort();
-    /**
-     * <code>required uint32 Port = 4;</code>
-     */
-    int getPort();
-
-    /**
-     * <pre>
-     *房间列表
-     * </pre>
-     *
-     * <code>repeated .RoomInfo RoomInLobby = 5;</code>
-     */
-    java.util.List<idevgame.meteor.proto.MeteorMsgs.RoomInfo> 
-        getRoomInLobbyList();
-    /**
-     * <pre>
-     *房间列表
-     * </pre>
-     *
-     * <code>repeated .RoomInfo RoomInLobby = 5;</code>
-     */
-    idevgame.meteor.proto.MeteorMsgs.RoomInfo getRoomInLobby(int index);
-    /**
-     * <pre>
-     *房间列表
-     * </pre>
-     *
-     * <code>repeated .RoomInfo RoomInLobby = 5;</code>
-     */
-    int getRoomInLobbyCount();
-    /**
-     * <pre>
-     *房间列表
-     * </pre>
-     *
-     * <code>repeated .RoomInfo RoomInLobby = 5;</code>
-     */
-    java.util.List<? extends idevgame.meteor.proto.MeteorMsgs.RoomInfoOrBuilder> 
-        getRoomInLobbyOrBuilderList();
-    /**
-     * <pre>
-     *房间列表
-     * </pre>
-     *
-     * <code>repeated .RoomInfo RoomInLobby = 5;</code>
-     */
-    idevgame.meteor.proto.MeteorMsgs.RoomInfoOrBuilder getRoomInLobbyOrBuilder(
-        int index);
-  }
-  /**
-   * <pre>
-   *房间规则是，不限时间，等最后一个人离开后，关闭
-   * </pre>
-   *
-   * Protobuf type {@code SvrInfo}
-   */
-  public  static final class SvrInfo extends
-      com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:SvrInfo)
-      SvrInfoOrBuilder {
-  private static final long serialVersionUID = 0L;
-    // Use SvrInfo.newBuilder() to construct.
-    private SvrInfo(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
-      super(builder);
-    }
-    private SvrInfo() {
-      idx_ = 0;
-      name_ = "";
-      ip_ = "";
-      port_ = 0;
-      roomInLobby_ = java.util.Collections.emptyList();
-    }
-
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
-      return this.unknownFields;
-    }
-    private SvrInfo(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      int mutable_bitField0_ = 0;
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            default: {
-              if (!parseUnknownField(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-            case 8: {
-              bitField0_ |= 0x00000001;
-              idx_ = input.readUInt32();
-              break;
-            }
-            case 18: {
-              com.google.protobuf.ByteString bs = input.readBytes();
-              bitField0_ |= 0x00000002;
-              name_ = bs;
-              break;
-            }
-            case 26: {
-              com.google.protobuf.ByteString bs = input.readBytes();
-              bitField0_ |= 0x00000004;
-              ip_ = bs;
-              break;
-            }
-            case 32: {
-              bitField0_ |= 0x00000008;
-              port_ = input.readUInt32();
-              break;
-            }
-            case 42: {
-              if (!((mutable_bitField0_ & 0x00000010) == 0x00000010)) {
-                roomInLobby_ = new java.util.ArrayList<idevgame.meteor.proto.MeteorMsgs.RoomInfo>();
-                mutable_bitField0_ |= 0x00000010;
-              }
-              roomInLobby_.add(
-                  input.readMessage(idevgame.meteor.proto.MeteorMsgs.RoomInfo.PARSER, extensionRegistry));
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        if (((mutable_bitField0_ & 0x00000010) == 0x00000010)) {
-          roomInLobby_ = java.util.Collections.unmodifiableList(roomInLobby_);
-        }
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return idevgame.meteor.proto.MeteorMsgs.internal_static_SvrInfo_descriptor;
-    }
-
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return idevgame.meteor.proto.MeteorMsgs.internal_static_SvrInfo_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              idevgame.meteor.proto.MeteorMsgs.SvrInfo.class, idevgame.meteor.proto.MeteorMsgs.SvrInfo.Builder.class);
-    }
-
-    private int bitField0_;
-    public static final int IDX_FIELD_NUMBER = 1;
-    private int idx_;
-    /**
-     * <code>required uint32 Idx = 1;</code>
-     */
-    public boolean hasIdx() {
-      return ((bitField0_ & 0x00000001) == 0x00000001);
-    }
-    /**
-     * <code>required uint32 Idx = 1;</code>
-     */
-    public int getIdx() {
-      return idx_;
-    }
-
-    public static final int NAME_FIELD_NUMBER = 2;
-    private volatile java.lang.Object name_;
-    /**
-     * <code>required string Name = 2;</code>
-     */
-    public boolean hasName() {
-      return ((bitField0_ & 0x00000002) == 0x00000002);
-    }
-    /**
-     * <code>required string Name = 2;</code>
-     */
-    public java.lang.String getName() {
-      java.lang.Object ref = name_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        if (bs.isValidUtf8()) {
-          name_ = s;
-        }
-        return s;
-      }
-    }
-    /**
-     * <code>required string Name = 2;</code>
-     */
-    public com.google.protobuf.ByteString
-        getNameBytes() {
-      java.lang.Object ref = name_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        name_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
-    public static final int IP_FIELD_NUMBER = 3;
-    private volatile java.lang.Object ip_;
-    /**
-     * <code>required string Ip = 3;</code>
-     */
-    public boolean hasIp() {
-      return ((bitField0_ & 0x00000004) == 0x00000004);
-    }
-    /**
-     * <code>required string Ip = 3;</code>
-     */
-    public java.lang.String getIp() {
-      java.lang.Object ref = ip_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        if (bs.isValidUtf8()) {
-          ip_ = s;
-        }
-        return s;
-      }
-    }
-    /**
-     * <code>required string Ip = 3;</code>
-     */
-    public com.google.protobuf.ByteString
-        getIpBytes() {
-      java.lang.Object ref = ip_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        ip_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
-    public static final int PORT_FIELD_NUMBER = 4;
-    private int port_;
-    /**
-     * <code>required uint32 Port = 4;</code>
-     */
-    public boolean hasPort() {
-      return ((bitField0_ & 0x00000008) == 0x00000008);
-    }
-    /**
-     * <code>required uint32 Port = 4;</code>
-     */
-    public int getPort() {
-      return port_;
-    }
-
-    public static final int ROOMINLOBBY_FIELD_NUMBER = 5;
-    private java.util.List<idevgame.meteor.proto.MeteorMsgs.RoomInfo> roomInLobby_;
-    /**
-     * <pre>
-     *房间列表
-     * </pre>
-     *
-     * <code>repeated .RoomInfo RoomInLobby = 5;</code>
-     */
-    public java.util.List<idevgame.meteor.proto.MeteorMsgs.RoomInfo> getRoomInLobbyList() {
-      return roomInLobby_;
-    }
-    /**
-     * <pre>
-     *房间列表
-     * </pre>
-     *
-     * <code>repeated .RoomInfo RoomInLobby = 5;</code>
-     */
-    public java.util.List<? extends idevgame.meteor.proto.MeteorMsgs.RoomInfoOrBuilder> 
-        getRoomInLobbyOrBuilderList() {
-      return roomInLobby_;
-    }
-    /**
-     * <pre>
-     *房间列表
-     * </pre>
-     *
-     * <code>repeated .RoomInfo RoomInLobby = 5;</code>
-     */
-    public int getRoomInLobbyCount() {
-      return roomInLobby_.size();
-    }
-    /**
-     * <pre>
-     *房间列表
-     * </pre>
-     *
-     * <code>repeated .RoomInfo RoomInLobby = 5;</code>
-     */
-    public idevgame.meteor.proto.MeteorMsgs.RoomInfo getRoomInLobby(int index) {
-      return roomInLobby_.get(index);
-    }
-    /**
-     * <pre>
-     *房间列表
-     * </pre>
-     *
-     * <code>repeated .RoomInfo RoomInLobby = 5;</code>
-     */
-    public idevgame.meteor.proto.MeteorMsgs.RoomInfoOrBuilder getRoomInLobbyOrBuilder(
-        int index) {
-      return roomInLobby_.get(index);
-    }
-
-    private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
-
-      if (!hasIdx()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
-      if (!hasName()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
-      if (!hasIp()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
-      if (!hasPort()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
-      for (int i = 0; i < getRoomInLobbyCount(); i++) {
-        if (!getRoomInLobby(i).isInitialized()) {
-          memoizedIsInitialized = 0;
-          return false;
-        }
-      }
-      memoizedIsInitialized = 1;
-      return true;
-    }
-
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeUInt32(1, idx_);
-      }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, name_);
-      }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 3, ip_);
-      }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        output.writeUInt32(4, port_);
-      }
-      for (int i = 0; i < roomInLobby_.size(); i++) {
-        output.writeMessage(5, roomInLobby_.get(i));
-      }
-      unknownFields.writeTo(output);
-    }
-
-    public int getSerializedSize() {
-      int size = memoizedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeUInt32Size(1, idx_);
-      }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, name_);
-      }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, ip_);
-      }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeUInt32Size(4, port_);
-      }
-      for (int i = 0; i < roomInLobby_.size(); i++) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(5, roomInLobby_.get(i));
-      }
-      size += unknownFields.getSerializedSize();
-      memoizedSize = size;
-      return size;
-    }
-
-    @java.lang.Override
-    public boolean equals(final java.lang.Object obj) {
-      if (obj == this) {
-       return true;
-      }
-      if (!(obj instanceof idevgame.meteor.proto.MeteorMsgs.SvrInfo)) {
-        return super.equals(obj);
-      }
-      idevgame.meteor.proto.MeteorMsgs.SvrInfo other = (idevgame.meteor.proto.MeteorMsgs.SvrInfo) obj;
-
-      boolean result = true;
-      result = result && (hasIdx() == other.hasIdx());
-      if (hasIdx()) {
-        result = result && (getIdx()
-            == other.getIdx());
-      }
-      result = result && (hasName() == other.hasName());
-      if (hasName()) {
-        result = result && getName()
-            .equals(other.getName());
-      }
-      result = result && (hasIp() == other.hasIp());
-      if (hasIp()) {
-        result = result && getIp()
-            .equals(other.getIp());
-      }
-      result = result && (hasPort() == other.hasPort());
-      if (hasPort()) {
-        result = result && (getPort()
-            == other.getPort());
-      }
-      result = result && getRoomInLobbyList()
-          .equals(other.getRoomInLobbyList());
-      result = result && unknownFields.equals(other.unknownFields);
-      return result;
-    }
-
-    @java.lang.Override
-    public int hashCode() {
-      if (memoizedHashCode != 0) {
-        return memoizedHashCode;
-      }
-      int hash = 41;
-      hash = (19 * hash) + getDescriptor().hashCode();
-      if (hasIdx()) {
-        hash = (37 * hash) + IDX_FIELD_NUMBER;
-        hash = (53 * hash) + getIdx();
-      }
-      if (hasName()) {
-        hash = (37 * hash) + NAME_FIELD_NUMBER;
-        hash = (53 * hash) + getName().hashCode();
-      }
-      if (hasIp()) {
-        hash = (37 * hash) + IP_FIELD_NUMBER;
-        hash = (53 * hash) + getIp().hashCode();
-      }
-      if (hasPort()) {
-        hash = (37 * hash) + PORT_FIELD_NUMBER;
-        hash = (53 * hash) + getPort();
-      }
-      if (getRoomInLobbyCount() > 0) {
-        hash = (37 * hash) + ROOMINLOBBY_FIELD_NUMBER;
-        hash = (53 * hash) + getRoomInLobbyList().hashCode();
-      }
-      hash = (29 * hash) + unknownFields.hashCode();
-      memoizedHashCode = hash;
-      return hash;
-    }
-
-    public static idevgame.meteor.proto.MeteorMsgs.SvrInfo parseFrom(
-        java.nio.ByteBuffer data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.SvrInfo parseFrom(
-        java.nio.ByteBuffer data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.SvrInfo parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.SvrInfo parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.SvrInfo parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.SvrInfo parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.SvrInfo parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.SvrInfo parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.SvrInfo parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.SvrInfo parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.SvrInfo parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.SvrInfo parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder() {
-      return DEFAULT_INSTANCE.toBuilder();
-    }
-    public static Builder newBuilder(idevgame.meteor.proto.MeteorMsgs.SvrInfo prototype) {
-      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
-    }
-    public Builder toBuilder() {
-      return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
-    }
-
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
-    /**
-     * <pre>
-     *房间规则是，不限时间，等最后一个人离开后，关闭
-     * </pre>
-     *
-     * Protobuf type {@code SvrInfo}
-     */
-    public static final class Builder extends
-        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:SvrInfo)
-        idevgame.meteor.proto.MeteorMsgs.SvrInfoOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return idevgame.meteor.proto.MeteorMsgs.internal_static_SvrInfo_descriptor;
-      }
-
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return idevgame.meteor.proto.MeteorMsgs.internal_static_SvrInfo_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                idevgame.meteor.proto.MeteorMsgs.SvrInfo.class, idevgame.meteor.proto.MeteorMsgs.SvrInfo.Builder.class);
-      }
-
-      // Construct using idevgame.meteor.proto.MeteorMsgs.SvrInfo.newBuilder()
-      private Builder() {
-        maybeForceBuilderInitialization();
-      }
-
-      private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-        super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-          getRoomInLobbyFieldBuilder();
-        }
-      }
-      public Builder clear() {
-        super.clear();
-        idx_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000001);
-        name_ = "";
-        bitField0_ = (bitField0_ & ~0x00000002);
-        ip_ = "";
-        bitField0_ = (bitField0_ & ~0x00000004);
-        port_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000008);
-        if (roomInLobbyBuilder_ == null) {
-          roomInLobby_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000010);
-        } else {
-          roomInLobbyBuilder_.clear();
-        }
-        return this;
-      }
-
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return idevgame.meteor.proto.MeteorMsgs.internal_static_SvrInfo_descriptor;
-      }
-
-      public idevgame.meteor.proto.MeteorMsgs.SvrInfo getDefaultInstanceForType() {
-        return idevgame.meteor.proto.MeteorMsgs.SvrInfo.getDefaultInstance();
-      }
-
-      public idevgame.meteor.proto.MeteorMsgs.SvrInfo build() {
-        idevgame.meteor.proto.MeteorMsgs.SvrInfo result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-
-      public idevgame.meteor.proto.MeteorMsgs.SvrInfo buildPartial() {
-        idevgame.meteor.proto.MeteorMsgs.SvrInfo result = new idevgame.meteor.proto.MeteorMsgs.SvrInfo(this);
-        int from_bitField0_ = bitField0_;
-        int to_bitField0_ = 0;
-        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
-          to_bitField0_ |= 0x00000001;
-        }
-        result.idx_ = idx_;
-        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
-          to_bitField0_ |= 0x00000002;
-        }
-        result.name_ = name_;
-        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
-          to_bitField0_ |= 0x00000004;
-        }
-        result.ip_ = ip_;
-        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
-          to_bitField0_ |= 0x00000008;
-        }
-        result.port_ = port_;
-        if (roomInLobbyBuilder_ == null) {
-          if (((bitField0_ & 0x00000010) == 0x00000010)) {
-            roomInLobby_ = java.util.Collections.unmodifiableList(roomInLobby_);
-            bitField0_ = (bitField0_ & ~0x00000010);
-          }
-          result.roomInLobby_ = roomInLobby_;
-        } else {
-          result.roomInLobby_ = roomInLobbyBuilder_.build();
-        }
-        result.bitField0_ = to_bitField0_;
-        onBuilt();
-        return result;
-      }
-
-      public Builder clone() {
-        return (Builder) super.clone();
-      }
-      public Builder setField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
-        return (Builder) super.setField(field, value);
-      }
-      public Builder clearField(
-          com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return (Builder) super.clearField(field);
-      }
-      public Builder clearOneof(
-          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return (Builder) super.clearOneof(oneof);
-      }
-      public Builder setRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, java.lang.Object value) {
-        return (Builder) super.setRepeatedField(field, index, value);
-      }
-      public Builder addRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
-        return (Builder) super.addRepeatedField(field, value);
-      }
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof idevgame.meteor.proto.MeteorMsgs.SvrInfo) {
-          return mergeFrom((idevgame.meteor.proto.MeteorMsgs.SvrInfo)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-
-      public Builder mergeFrom(idevgame.meteor.proto.MeteorMsgs.SvrInfo other) {
-        if (other == idevgame.meteor.proto.MeteorMsgs.SvrInfo.getDefaultInstance()) return this;
-        if (other.hasIdx()) {
-          setIdx(other.getIdx());
-        }
-        if (other.hasName()) {
-          bitField0_ |= 0x00000002;
-          name_ = other.name_;
-          onChanged();
-        }
-        if (other.hasIp()) {
-          bitField0_ |= 0x00000004;
-          ip_ = other.ip_;
-          onChanged();
-        }
-        if (other.hasPort()) {
-          setPort(other.getPort());
-        }
-        if (roomInLobbyBuilder_ == null) {
-          if (!other.roomInLobby_.isEmpty()) {
-            if (roomInLobby_.isEmpty()) {
-              roomInLobby_ = other.roomInLobby_;
-              bitField0_ = (bitField0_ & ~0x00000010);
-            } else {
-              ensureRoomInLobbyIsMutable();
-              roomInLobby_.addAll(other.roomInLobby_);
-            }
-            onChanged();
-          }
-        } else {
-          if (!other.roomInLobby_.isEmpty()) {
-            if (roomInLobbyBuilder_.isEmpty()) {
-              roomInLobbyBuilder_.dispose();
-              roomInLobbyBuilder_ = null;
-              roomInLobby_ = other.roomInLobby_;
-              bitField0_ = (bitField0_ & ~0x00000010);
-              roomInLobbyBuilder_ = 
-                com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
-                   getRoomInLobbyFieldBuilder() : null;
-            } else {
-              roomInLobbyBuilder_.addAllMessages(other.roomInLobby_);
-            }
-          }
-        }
-        this.mergeUnknownFields(other.unknownFields);
-        onChanged();
-        return this;
-      }
-
-      public final boolean isInitialized() {
-        if (!hasIdx()) {
-          return false;
-        }
-        if (!hasName()) {
-          return false;
-        }
-        if (!hasIp()) {
-          return false;
-        }
-        if (!hasPort()) {
-          return false;
-        }
-        for (int i = 0; i < getRoomInLobbyCount(); i++) {
-          if (!getRoomInLobby(i).isInitialized()) {
-            return false;
-          }
-        }
-        return true;
-      }
-
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        idevgame.meteor.proto.MeteorMsgs.SvrInfo parsedMessage = null;
-        try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (idevgame.meteor.proto.MeteorMsgs.SvrInfo) e.getUnfinishedMessage();
-          throw e.unwrapIOException();
-        } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
-        return this;
-      }
-      private int bitField0_;
-
-      private int idx_ ;
-      /**
-       * <code>required uint32 Idx = 1;</code>
-       */
-      public boolean hasIdx() {
-        return ((bitField0_ & 0x00000001) == 0x00000001);
-      }
-      /**
-       * <code>required uint32 Idx = 1;</code>
-       */
-      public int getIdx() {
-        return idx_;
-      }
-      /**
-       * <code>required uint32 Idx = 1;</code>
-       */
-      public Builder setIdx(int value) {
-        bitField0_ |= 0x00000001;
-        idx_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>required uint32 Idx = 1;</code>
-       */
-      public Builder clearIdx() {
-        bitField0_ = (bitField0_ & ~0x00000001);
-        idx_ = 0;
-        onChanged();
-        return this;
-      }
-
-      private java.lang.Object name_ = "";
-      /**
-       * <code>required string Name = 2;</code>
-       */
-      public boolean hasName() {
-        return ((bitField0_ & 0x00000002) == 0x00000002);
-      }
-      /**
-       * <code>required string Name = 2;</code>
-       */
-      public java.lang.String getName() {
-        java.lang.Object ref = name_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            name_ = s;
-          }
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
-      }
-      /**
-       * <code>required string Name = 2;</code>
-       */
-      public com.google.protobuf.ByteString
-          getNameBytes() {
-        java.lang.Object ref = name_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          name_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>required string Name = 2;</code>
-       */
-      public Builder setName(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000002;
-        name_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>required string Name = 2;</code>
-       */
-      public Builder clearName() {
-        bitField0_ = (bitField0_ & ~0x00000002);
-        name_ = getDefaultInstance().getName();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>required string Name = 2;</code>
-       */
-      public Builder setNameBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000002;
-        name_ = value;
-        onChanged();
-        return this;
-      }
-
-      private java.lang.Object ip_ = "";
-      /**
-       * <code>required string Ip = 3;</code>
-       */
-      public boolean hasIp() {
-        return ((bitField0_ & 0x00000004) == 0x00000004);
-      }
-      /**
-       * <code>required string Ip = 3;</code>
-       */
-      public java.lang.String getIp() {
-        java.lang.Object ref = ip_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            ip_ = s;
-          }
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
-      }
-      /**
-       * <code>required string Ip = 3;</code>
-       */
-      public com.google.protobuf.ByteString
-          getIpBytes() {
-        java.lang.Object ref = ip_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          ip_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>required string Ip = 3;</code>
-       */
-      public Builder setIp(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000004;
-        ip_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>required string Ip = 3;</code>
-       */
-      public Builder clearIp() {
-        bitField0_ = (bitField0_ & ~0x00000004);
-        ip_ = getDefaultInstance().getIp();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>required string Ip = 3;</code>
-       */
-      public Builder setIpBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000004;
-        ip_ = value;
-        onChanged();
-        return this;
-      }
-
-      private int port_ ;
-      /**
-       * <code>required uint32 Port = 4;</code>
-       */
-      public boolean hasPort() {
-        return ((bitField0_ & 0x00000008) == 0x00000008);
-      }
-      /**
-       * <code>required uint32 Port = 4;</code>
-       */
-      public int getPort() {
-        return port_;
-      }
-      /**
-       * <code>required uint32 Port = 4;</code>
-       */
-      public Builder setPort(int value) {
-        bitField0_ |= 0x00000008;
-        port_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>required uint32 Port = 4;</code>
-       */
-      public Builder clearPort() {
-        bitField0_ = (bitField0_ & ~0x00000008);
-        port_ = 0;
-        onChanged();
-        return this;
-      }
-
-      private java.util.List<idevgame.meteor.proto.MeteorMsgs.RoomInfo> roomInLobby_ =
-        java.util.Collections.emptyList();
-      private void ensureRoomInLobbyIsMutable() {
-        if (!((bitField0_ & 0x00000010) == 0x00000010)) {
-          roomInLobby_ = new java.util.ArrayList<idevgame.meteor.proto.MeteorMsgs.RoomInfo>(roomInLobby_);
-          bitField0_ |= 0x00000010;
-         }
-      }
-
-      private com.google.protobuf.RepeatedFieldBuilderV3<
-          idevgame.meteor.proto.MeteorMsgs.RoomInfo, idevgame.meteor.proto.MeteorMsgs.RoomInfo.Builder, idevgame.meteor.proto.MeteorMsgs.RoomInfoOrBuilder> roomInLobbyBuilder_;
-
-      /**
-       * <pre>
-       *房间列表
-       * </pre>
-       *
-       * <code>repeated .RoomInfo RoomInLobby = 5;</code>
-       */
-      public java.util.List<idevgame.meteor.proto.MeteorMsgs.RoomInfo> getRoomInLobbyList() {
-        if (roomInLobbyBuilder_ == null) {
-          return java.util.Collections.unmodifiableList(roomInLobby_);
-        } else {
-          return roomInLobbyBuilder_.getMessageList();
-        }
-      }
-      /**
-       * <pre>
-       *房间列表
-       * </pre>
-       *
-       * <code>repeated .RoomInfo RoomInLobby = 5;</code>
-       */
-      public int getRoomInLobbyCount() {
-        if (roomInLobbyBuilder_ == null) {
-          return roomInLobby_.size();
-        } else {
-          return roomInLobbyBuilder_.getCount();
-        }
-      }
-      /**
-       * <pre>
-       *房间列表
-       * </pre>
-       *
-       * <code>repeated .RoomInfo RoomInLobby = 5;</code>
-       */
-      public idevgame.meteor.proto.MeteorMsgs.RoomInfo getRoomInLobby(int index) {
-        if (roomInLobbyBuilder_ == null) {
-          return roomInLobby_.get(index);
-        } else {
-          return roomInLobbyBuilder_.getMessage(index);
-        }
-      }
-      /**
-       * <pre>
-       *房间列表
-       * </pre>
-       *
-       * <code>repeated .RoomInfo RoomInLobby = 5;</code>
-       */
-      public Builder setRoomInLobby(
-          int index, idevgame.meteor.proto.MeteorMsgs.RoomInfo value) {
-        if (roomInLobbyBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensureRoomInLobbyIsMutable();
-          roomInLobby_.set(index, value);
-          onChanged();
-        } else {
-          roomInLobbyBuilder_.setMessage(index, value);
-        }
-        return this;
-      }
-      /**
-       * <pre>
-       *房间列表
-       * </pre>
-       *
-       * <code>repeated .RoomInfo RoomInLobby = 5;</code>
-       */
-      public Builder setRoomInLobby(
-          int index, idevgame.meteor.proto.MeteorMsgs.RoomInfo.Builder builderForValue) {
-        if (roomInLobbyBuilder_ == null) {
-          ensureRoomInLobbyIsMutable();
-          roomInLobby_.set(index, builderForValue.build());
-          onChanged();
-        } else {
-          roomInLobbyBuilder_.setMessage(index, builderForValue.build());
-        }
-        return this;
-      }
-      /**
-       * <pre>
-       *房间列表
-       * </pre>
-       *
-       * <code>repeated .RoomInfo RoomInLobby = 5;</code>
-       */
-      public Builder addRoomInLobby(idevgame.meteor.proto.MeteorMsgs.RoomInfo value) {
-        if (roomInLobbyBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensureRoomInLobbyIsMutable();
-          roomInLobby_.add(value);
-          onChanged();
-        } else {
-          roomInLobbyBuilder_.addMessage(value);
-        }
-        return this;
-      }
-      /**
-       * <pre>
-       *房间列表
-       * </pre>
-       *
-       * <code>repeated .RoomInfo RoomInLobby = 5;</code>
-       */
-      public Builder addRoomInLobby(
-          int index, idevgame.meteor.proto.MeteorMsgs.RoomInfo value) {
-        if (roomInLobbyBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensureRoomInLobbyIsMutable();
-          roomInLobby_.add(index, value);
-          onChanged();
-        } else {
-          roomInLobbyBuilder_.addMessage(index, value);
-        }
-        return this;
-      }
-      /**
-       * <pre>
-       *房间列表
-       * </pre>
-       *
-       * <code>repeated .RoomInfo RoomInLobby = 5;</code>
-       */
-      public Builder addRoomInLobby(
-          idevgame.meteor.proto.MeteorMsgs.RoomInfo.Builder builderForValue) {
-        if (roomInLobbyBuilder_ == null) {
-          ensureRoomInLobbyIsMutable();
-          roomInLobby_.add(builderForValue.build());
-          onChanged();
-        } else {
-          roomInLobbyBuilder_.addMessage(builderForValue.build());
-        }
-        return this;
-      }
-      /**
-       * <pre>
-       *房间列表
-       * </pre>
-       *
-       * <code>repeated .RoomInfo RoomInLobby = 5;</code>
-       */
-      public Builder addRoomInLobby(
-          int index, idevgame.meteor.proto.MeteorMsgs.RoomInfo.Builder builderForValue) {
-        if (roomInLobbyBuilder_ == null) {
-          ensureRoomInLobbyIsMutable();
-          roomInLobby_.add(index, builderForValue.build());
-          onChanged();
-        } else {
-          roomInLobbyBuilder_.addMessage(index, builderForValue.build());
-        }
-        return this;
-      }
-      /**
-       * <pre>
-       *房间列表
-       * </pre>
-       *
-       * <code>repeated .RoomInfo RoomInLobby = 5;</code>
-       */
-      public Builder addAllRoomInLobby(
-          java.lang.Iterable<? extends idevgame.meteor.proto.MeteorMsgs.RoomInfo> values) {
-        if (roomInLobbyBuilder_ == null) {
-          ensureRoomInLobbyIsMutable();
-          com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, roomInLobby_);
-          onChanged();
-        } else {
-          roomInLobbyBuilder_.addAllMessages(values);
-        }
-        return this;
-      }
-      /**
-       * <pre>
-       *房间列表
-       * </pre>
-       *
-       * <code>repeated .RoomInfo RoomInLobby = 5;</code>
-       */
-      public Builder clearRoomInLobby() {
-        if (roomInLobbyBuilder_ == null) {
-          roomInLobby_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000010);
-          onChanged();
-        } else {
-          roomInLobbyBuilder_.clear();
-        }
-        return this;
-      }
-      /**
-       * <pre>
-       *房间列表
-       * </pre>
-       *
-       * <code>repeated .RoomInfo RoomInLobby = 5;</code>
-       */
-      public Builder removeRoomInLobby(int index) {
-        if (roomInLobbyBuilder_ == null) {
-          ensureRoomInLobbyIsMutable();
-          roomInLobby_.remove(index);
-          onChanged();
-        } else {
-          roomInLobbyBuilder_.remove(index);
-        }
-        return this;
-      }
-      /**
-       * <pre>
-       *房间列表
-       * </pre>
-       *
-       * <code>repeated .RoomInfo RoomInLobby = 5;</code>
-       */
-      public idevgame.meteor.proto.MeteorMsgs.RoomInfo.Builder getRoomInLobbyBuilder(
-          int index) {
-        return getRoomInLobbyFieldBuilder().getBuilder(index);
-      }
-      /**
-       * <pre>
-       *房间列表
-       * </pre>
-       *
-       * <code>repeated .RoomInfo RoomInLobby = 5;</code>
-       */
-      public idevgame.meteor.proto.MeteorMsgs.RoomInfoOrBuilder getRoomInLobbyOrBuilder(
-          int index) {
-        if (roomInLobbyBuilder_ == null) {
-          return roomInLobby_.get(index);  } else {
-          return roomInLobbyBuilder_.getMessageOrBuilder(index);
-        }
-      }
-      /**
-       * <pre>
-       *房间列表
-       * </pre>
-       *
-       * <code>repeated .RoomInfo RoomInLobby = 5;</code>
-       */
-      public java.util.List<? extends idevgame.meteor.proto.MeteorMsgs.RoomInfoOrBuilder> 
-           getRoomInLobbyOrBuilderList() {
-        if (roomInLobbyBuilder_ != null) {
-          return roomInLobbyBuilder_.getMessageOrBuilderList();
-        } else {
-          return java.util.Collections.unmodifiableList(roomInLobby_);
-        }
-      }
-      /**
-       * <pre>
-       *房间列表
-       * </pre>
-       *
-       * <code>repeated .RoomInfo RoomInLobby = 5;</code>
-       */
-      public idevgame.meteor.proto.MeteorMsgs.RoomInfo.Builder addRoomInLobbyBuilder() {
-        return getRoomInLobbyFieldBuilder().addBuilder(
-            idevgame.meteor.proto.MeteorMsgs.RoomInfo.getDefaultInstance());
-      }
-      /**
-       * <pre>
-       *房间列表
-       * </pre>
-       *
-       * <code>repeated .RoomInfo RoomInLobby = 5;</code>
-       */
-      public idevgame.meteor.proto.MeteorMsgs.RoomInfo.Builder addRoomInLobbyBuilder(
-          int index) {
-        return getRoomInLobbyFieldBuilder().addBuilder(
-            index, idevgame.meteor.proto.MeteorMsgs.RoomInfo.getDefaultInstance());
-      }
-      /**
-       * <pre>
-       *房间列表
-       * </pre>
-       *
-       * <code>repeated .RoomInfo RoomInLobby = 5;</code>
-       */
-      public java.util.List<idevgame.meteor.proto.MeteorMsgs.RoomInfo.Builder> 
-           getRoomInLobbyBuilderList() {
-        return getRoomInLobbyFieldBuilder().getBuilderList();
-      }
-      private com.google.protobuf.RepeatedFieldBuilderV3<
-          idevgame.meteor.proto.MeteorMsgs.RoomInfo, idevgame.meteor.proto.MeteorMsgs.RoomInfo.Builder, idevgame.meteor.proto.MeteorMsgs.RoomInfoOrBuilder> 
-          getRoomInLobbyFieldBuilder() {
-        if (roomInLobbyBuilder_ == null) {
-          roomInLobbyBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
-              idevgame.meteor.proto.MeteorMsgs.RoomInfo, idevgame.meteor.proto.MeteorMsgs.RoomInfo.Builder, idevgame.meteor.proto.MeteorMsgs.RoomInfoOrBuilder>(
-                  roomInLobby_,
-                  ((bitField0_ & 0x00000010) == 0x00000010),
-                  getParentForChildren(),
-                  isClean());
-          roomInLobby_ = null;
-        }
-        return roomInLobbyBuilder_;
-      }
-      public final Builder setUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFields(unknownFields);
-      }
-
-      public final Builder mergeUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.mergeUnknownFields(unknownFields);
-      }
-
-
-      // @@protoc_insertion_point(builder_scope:SvrInfo)
-    }
-
-    // @@protoc_insertion_point(class_scope:SvrInfo)
-    private static final idevgame.meteor.proto.MeteorMsgs.SvrInfo DEFAULT_INSTANCE;
-    static {
-      DEFAULT_INSTANCE = new idevgame.meteor.proto.MeteorMsgs.SvrInfo();
-    }
-
-    public static idevgame.meteor.proto.MeteorMsgs.SvrInfo getDefaultInstance() {
-      return DEFAULT_INSTANCE;
-    }
-
-    @java.lang.Deprecated public static final com.google.protobuf.Parser<SvrInfo>
-        PARSER = new com.google.protobuf.AbstractParser<SvrInfo>() {
-      public SvrInfo parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return new SvrInfo(input, extensionRegistry);
-      }
-    };
-
-    public static com.google.protobuf.Parser<SvrInfo> parser() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<SvrInfo> getParserForType() {
-      return PARSER;
-    }
-
-    public idevgame.meteor.proto.MeteorMsgs.SvrInfo getDefaultInstanceForType() {
-      return DEFAULT_INSTANCE;
-    }
-
-  }
-
-  public interface SyncSvrStateOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:SyncSvrState)
-      com.google.protobuf.MessageOrBuilder {
-
-    /**
-     * <pre>
-     *该服务器相关的大厅房间信息
-     * </pre>
-     *
-     * <code>repeated .RoomInfo RoomInLobby = 1;</code>
-     */
-    java.util.List<idevgame.meteor.proto.MeteorMsgs.RoomInfo> 
-        getRoomInLobbyList();
-    /**
-     * <pre>
-     *该服务器相关的大厅房间信息
-     * </pre>
-     *
-     * <code>repeated .RoomInfo RoomInLobby = 1;</code>
-     */
-    idevgame.meteor.proto.MeteorMsgs.RoomInfo getRoomInLobby(int index);
-    /**
-     * <pre>
-     *该服务器相关的大厅房间信息
-     * </pre>
-     *
-     * <code>repeated .RoomInfo RoomInLobby = 1;</code>
-     */
-    int getRoomInLobbyCount();
-    /**
-     * <pre>
-     *该服务器相关的大厅房间信息
-     * </pre>
-     *
-     * <code>repeated .RoomInfo RoomInLobby = 1;</code>
-     */
-    java.util.List<? extends idevgame.meteor.proto.MeteorMsgs.RoomInfoOrBuilder> 
-        getRoomInLobbyOrBuilderList();
-    /**
-     * <pre>
-     *该服务器相关的大厅房间信息
-     * </pre>
-     *
-     * <code>repeated .RoomInfo RoomInLobby = 1;</code>
-     */
-    idevgame.meteor.proto.MeteorMsgs.RoomInfoOrBuilder getRoomInLobbyOrBuilder(
-        int index);
-  }
-  /**
-   * <pre>
-   *服务器内房间发生变化时（人员数量变化后30S后更新，房间数量），向中心服同步
-   * </pre>
-   *
-   * Protobuf type {@code SyncSvrState}
-   */
-  public  static final class SyncSvrState extends
-      com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:SyncSvrState)
-      SyncSvrStateOrBuilder {
-  private static final long serialVersionUID = 0L;
-    // Use SyncSvrState.newBuilder() to construct.
-    private SyncSvrState(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
-      super(builder);
-    }
-    private SyncSvrState() {
-      roomInLobby_ = java.util.Collections.emptyList();
-    }
-
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
-      return this.unknownFields;
-    }
-    private SyncSvrState(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      int mutable_bitField0_ = 0;
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            default: {
-              if (!parseUnknownField(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-            case 10: {
-              if (!((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
-                roomInLobby_ = new java.util.ArrayList<idevgame.meteor.proto.MeteorMsgs.RoomInfo>();
-                mutable_bitField0_ |= 0x00000001;
-              }
-              roomInLobby_.add(
-                  input.readMessage(idevgame.meteor.proto.MeteorMsgs.RoomInfo.PARSER, extensionRegistry));
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
-          roomInLobby_ = java.util.Collections.unmodifiableList(roomInLobby_);
-        }
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return idevgame.meteor.proto.MeteorMsgs.internal_static_SyncSvrState_descriptor;
-    }
-
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return idevgame.meteor.proto.MeteorMsgs.internal_static_SyncSvrState_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              idevgame.meteor.proto.MeteorMsgs.SyncSvrState.class, idevgame.meteor.proto.MeteorMsgs.SyncSvrState.Builder.class);
-    }
-
-    public static final int ROOMINLOBBY_FIELD_NUMBER = 1;
-    private java.util.List<idevgame.meteor.proto.MeteorMsgs.RoomInfo> roomInLobby_;
-    /**
-     * <pre>
-     *该服务器相关的大厅房间信息
-     * </pre>
-     *
-     * <code>repeated .RoomInfo RoomInLobby = 1;</code>
-     */
-    public java.util.List<idevgame.meteor.proto.MeteorMsgs.RoomInfo> getRoomInLobbyList() {
-      return roomInLobby_;
-    }
-    /**
-     * <pre>
-     *该服务器相关的大厅房间信息
-     * </pre>
-     *
-     * <code>repeated .RoomInfo RoomInLobby = 1;</code>
-     */
-    public java.util.List<? extends idevgame.meteor.proto.MeteorMsgs.RoomInfoOrBuilder> 
-        getRoomInLobbyOrBuilderList() {
-      return roomInLobby_;
-    }
-    /**
-     * <pre>
-     *该服务器相关的大厅房间信息
-     * </pre>
-     *
-     * <code>repeated .RoomInfo RoomInLobby = 1;</code>
-     */
-    public int getRoomInLobbyCount() {
-      return roomInLobby_.size();
-    }
-    /**
-     * <pre>
-     *该服务器相关的大厅房间信息
-     * </pre>
-     *
-     * <code>repeated .RoomInfo RoomInLobby = 1;</code>
-     */
-    public idevgame.meteor.proto.MeteorMsgs.RoomInfo getRoomInLobby(int index) {
-      return roomInLobby_.get(index);
-    }
-    /**
-     * <pre>
-     *该服务器相关的大厅房间信息
-     * </pre>
-     *
-     * <code>repeated .RoomInfo RoomInLobby = 1;</code>
-     */
-    public idevgame.meteor.proto.MeteorMsgs.RoomInfoOrBuilder getRoomInLobbyOrBuilder(
-        int index) {
-      return roomInLobby_.get(index);
-    }
-
-    private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
-
-      for (int i = 0; i < getRoomInLobbyCount(); i++) {
-        if (!getRoomInLobby(i).isInitialized()) {
-          memoizedIsInitialized = 0;
-          return false;
-        }
-      }
-      memoizedIsInitialized = 1;
-      return true;
-    }
-
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      for (int i = 0; i < roomInLobby_.size(); i++) {
-        output.writeMessage(1, roomInLobby_.get(i));
-      }
-      unknownFields.writeTo(output);
-    }
-
-    public int getSerializedSize() {
-      int size = memoizedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      for (int i = 0; i < roomInLobby_.size(); i++) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(1, roomInLobby_.get(i));
-      }
-      size += unknownFields.getSerializedSize();
-      memoizedSize = size;
-      return size;
-    }
-
-    @java.lang.Override
-    public boolean equals(final java.lang.Object obj) {
-      if (obj == this) {
-       return true;
-      }
-      if (!(obj instanceof idevgame.meteor.proto.MeteorMsgs.SyncSvrState)) {
-        return super.equals(obj);
-      }
-      idevgame.meteor.proto.MeteorMsgs.SyncSvrState other = (idevgame.meteor.proto.MeteorMsgs.SyncSvrState) obj;
-
-      boolean result = true;
-      result = result && getRoomInLobbyList()
-          .equals(other.getRoomInLobbyList());
-      result = result && unknownFields.equals(other.unknownFields);
-      return result;
-    }
-
-    @java.lang.Override
-    public int hashCode() {
-      if (memoizedHashCode != 0) {
-        return memoizedHashCode;
-      }
-      int hash = 41;
-      hash = (19 * hash) + getDescriptor().hashCode();
-      if (getRoomInLobbyCount() > 0) {
-        hash = (37 * hash) + ROOMINLOBBY_FIELD_NUMBER;
-        hash = (53 * hash) + getRoomInLobbyList().hashCode();
-      }
-      hash = (29 * hash) + unknownFields.hashCode();
-      memoizedHashCode = hash;
-      return hash;
-    }
-
-    public static idevgame.meteor.proto.MeteorMsgs.SyncSvrState parseFrom(
-        java.nio.ByteBuffer data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.SyncSvrState parseFrom(
-        java.nio.ByteBuffer data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.SyncSvrState parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.SyncSvrState parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.SyncSvrState parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.SyncSvrState parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.SyncSvrState parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.SyncSvrState parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.SyncSvrState parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.SyncSvrState parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.SyncSvrState parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.SyncSvrState parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder() {
-      return DEFAULT_INSTANCE.toBuilder();
-    }
-    public static Builder newBuilder(idevgame.meteor.proto.MeteorMsgs.SyncSvrState prototype) {
-      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
-    }
-    public Builder toBuilder() {
-      return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
-    }
-
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
-    /**
-     * <pre>
-     *服务器内房间发生变化时（人员数量变化后30S后更新，房间数量），向中心服同步
-     * </pre>
-     *
-     * Protobuf type {@code SyncSvrState}
-     */
-    public static final class Builder extends
-        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:SyncSvrState)
-        idevgame.meteor.proto.MeteorMsgs.SyncSvrStateOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return idevgame.meteor.proto.MeteorMsgs.internal_static_SyncSvrState_descriptor;
-      }
-
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return idevgame.meteor.proto.MeteorMsgs.internal_static_SyncSvrState_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                idevgame.meteor.proto.MeteorMsgs.SyncSvrState.class, idevgame.meteor.proto.MeteorMsgs.SyncSvrState.Builder.class);
-      }
-
-      // Construct using idevgame.meteor.proto.MeteorMsgs.SyncSvrState.newBuilder()
-      private Builder() {
-        maybeForceBuilderInitialization();
-      }
-
-      private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-        super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-          getRoomInLobbyFieldBuilder();
-        }
-      }
-      public Builder clear() {
-        super.clear();
-        if (roomInLobbyBuilder_ == null) {
-          roomInLobby_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000001);
-        } else {
-          roomInLobbyBuilder_.clear();
-        }
-        return this;
-      }
-
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return idevgame.meteor.proto.MeteorMsgs.internal_static_SyncSvrState_descriptor;
-      }
-
-      public idevgame.meteor.proto.MeteorMsgs.SyncSvrState getDefaultInstanceForType() {
-        return idevgame.meteor.proto.MeteorMsgs.SyncSvrState.getDefaultInstance();
-      }
-
-      public idevgame.meteor.proto.MeteorMsgs.SyncSvrState build() {
-        idevgame.meteor.proto.MeteorMsgs.SyncSvrState result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-
-      public idevgame.meteor.proto.MeteorMsgs.SyncSvrState buildPartial() {
-        idevgame.meteor.proto.MeteorMsgs.SyncSvrState result = new idevgame.meteor.proto.MeteorMsgs.SyncSvrState(this);
-        int from_bitField0_ = bitField0_;
-        if (roomInLobbyBuilder_ == null) {
-          if (((bitField0_ & 0x00000001) == 0x00000001)) {
-            roomInLobby_ = java.util.Collections.unmodifiableList(roomInLobby_);
-            bitField0_ = (bitField0_ & ~0x00000001);
-          }
-          result.roomInLobby_ = roomInLobby_;
-        } else {
-          result.roomInLobby_ = roomInLobbyBuilder_.build();
-        }
-        onBuilt();
-        return result;
-      }
-
-      public Builder clone() {
-        return (Builder) super.clone();
-      }
-      public Builder setField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
-        return (Builder) super.setField(field, value);
-      }
-      public Builder clearField(
-          com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return (Builder) super.clearField(field);
-      }
-      public Builder clearOneof(
-          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return (Builder) super.clearOneof(oneof);
-      }
-      public Builder setRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, java.lang.Object value) {
-        return (Builder) super.setRepeatedField(field, index, value);
-      }
-      public Builder addRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
-        return (Builder) super.addRepeatedField(field, value);
-      }
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof idevgame.meteor.proto.MeteorMsgs.SyncSvrState) {
-          return mergeFrom((idevgame.meteor.proto.MeteorMsgs.SyncSvrState)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-
-      public Builder mergeFrom(idevgame.meteor.proto.MeteorMsgs.SyncSvrState other) {
-        if (other == idevgame.meteor.proto.MeteorMsgs.SyncSvrState.getDefaultInstance()) return this;
-        if (roomInLobbyBuilder_ == null) {
-          if (!other.roomInLobby_.isEmpty()) {
-            if (roomInLobby_.isEmpty()) {
-              roomInLobby_ = other.roomInLobby_;
-              bitField0_ = (bitField0_ & ~0x00000001);
-            } else {
-              ensureRoomInLobbyIsMutable();
-              roomInLobby_.addAll(other.roomInLobby_);
-            }
-            onChanged();
-          }
-        } else {
-          if (!other.roomInLobby_.isEmpty()) {
-            if (roomInLobbyBuilder_.isEmpty()) {
-              roomInLobbyBuilder_.dispose();
-              roomInLobbyBuilder_ = null;
-              roomInLobby_ = other.roomInLobby_;
-              bitField0_ = (bitField0_ & ~0x00000001);
-              roomInLobbyBuilder_ = 
-                com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
-                   getRoomInLobbyFieldBuilder() : null;
-            } else {
-              roomInLobbyBuilder_.addAllMessages(other.roomInLobby_);
-            }
-          }
-        }
-        this.mergeUnknownFields(other.unknownFields);
-        onChanged();
-        return this;
-      }
-
-      public final boolean isInitialized() {
-        for (int i = 0; i < getRoomInLobbyCount(); i++) {
-          if (!getRoomInLobby(i).isInitialized()) {
-            return false;
-          }
-        }
-        return true;
-      }
-
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        idevgame.meteor.proto.MeteorMsgs.SyncSvrState parsedMessage = null;
-        try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (idevgame.meteor.proto.MeteorMsgs.SyncSvrState) e.getUnfinishedMessage();
-          throw e.unwrapIOException();
-        } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
-        return this;
-      }
-      private int bitField0_;
-
-      private java.util.List<idevgame.meteor.proto.MeteorMsgs.RoomInfo> roomInLobby_ =
-        java.util.Collections.emptyList();
-      private void ensureRoomInLobbyIsMutable() {
-        if (!((bitField0_ & 0x00000001) == 0x00000001)) {
-          roomInLobby_ = new java.util.ArrayList<idevgame.meteor.proto.MeteorMsgs.RoomInfo>(roomInLobby_);
-          bitField0_ |= 0x00000001;
-         }
-      }
-
-      private com.google.protobuf.RepeatedFieldBuilderV3<
-          idevgame.meteor.proto.MeteorMsgs.RoomInfo, idevgame.meteor.proto.MeteorMsgs.RoomInfo.Builder, idevgame.meteor.proto.MeteorMsgs.RoomInfoOrBuilder> roomInLobbyBuilder_;
-
-      /**
-       * <pre>
-       *该服务器相关的大厅房间信息
-       * </pre>
-       *
-       * <code>repeated .RoomInfo RoomInLobby = 1;</code>
-       */
-      public java.util.List<idevgame.meteor.proto.MeteorMsgs.RoomInfo> getRoomInLobbyList() {
-        if (roomInLobbyBuilder_ == null) {
-          return java.util.Collections.unmodifiableList(roomInLobby_);
-        } else {
-          return roomInLobbyBuilder_.getMessageList();
-        }
-      }
-      /**
-       * <pre>
-       *该服务器相关的大厅房间信息
-       * </pre>
-       *
-       * <code>repeated .RoomInfo RoomInLobby = 1;</code>
-       */
-      public int getRoomInLobbyCount() {
-        if (roomInLobbyBuilder_ == null) {
-          return roomInLobby_.size();
-        } else {
-          return roomInLobbyBuilder_.getCount();
-        }
-      }
-      /**
-       * <pre>
-       *该服务器相关的大厅房间信息
-       * </pre>
-       *
-       * <code>repeated .RoomInfo RoomInLobby = 1;</code>
-       */
-      public idevgame.meteor.proto.MeteorMsgs.RoomInfo getRoomInLobby(int index) {
-        if (roomInLobbyBuilder_ == null) {
-          return roomInLobby_.get(index);
-        } else {
-          return roomInLobbyBuilder_.getMessage(index);
-        }
-      }
-      /**
-       * <pre>
-       *该服务器相关的大厅房间信息
-       * </pre>
-       *
-       * <code>repeated .RoomInfo RoomInLobby = 1;</code>
-       */
-      public Builder setRoomInLobby(
-          int index, idevgame.meteor.proto.MeteorMsgs.RoomInfo value) {
-        if (roomInLobbyBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensureRoomInLobbyIsMutable();
-          roomInLobby_.set(index, value);
-          onChanged();
-        } else {
-          roomInLobbyBuilder_.setMessage(index, value);
-        }
-        return this;
-      }
-      /**
-       * <pre>
-       *该服务器相关的大厅房间信息
-       * </pre>
-       *
-       * <code>repeated .RoomInfo RoomInLobby = 1;</code>
-       */
-      public Builder setRoomInLobby(
-          int index, idevgame.meteor.proto.MeteorMsgs.RoomInfo.Builder builderForValue) {
-        if (roomInLobbyBuilder_ == null) {
-          ensureRoomInLobbyIsMutable();
-          roomInLobby_.set(index, builderForValue.build());
-          onChanged();
-        } else {
-          roomInLobbyBuilder_.setMessage(index, builderForValue.build());
-        }
-        return this;
-      }
-      /**
-       * <pre>
-       *该服务器相关的大厅房间信息
-       * </pre>
-       *
-       * <code>repeated .RoomInfo RoomInLobby = 1;</code>
-       */
-      public Builder addRoomInLobby(idevgame.meteor.proto.MeteorMsgs.RoomInfo value) {
-        if (roomInLobbyBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensureRoomInLobbyIsMutable();
-          roomInLobby_.add(value);
-          onChanged();
-        } else {
-          roomInLobbyBuilder_.addMessage(value);
-        }
-        return this;
-      }
-      /**
-       * <pre>
-       *该服务器相关的大厅房间信息
-       * </pre>
-       *
-       * <code>repeated .RoomInfo RoomInLobby = 1;</code>
-       */
-      public Builder addRoomInLobby(
-          int index, idevgame.meteor.proto.MeteorMsgs.RoomInfo value) {
-        if (roomInLobbyBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensureRoomInLobbyIsMutable();
-          roomInLobby_.add(index, value);
-          onChanged();
-        } else {
-          roomInLobbyBuilder_.addMessage(index, value);
-        }
-        return this;
-      }
-      /**
-       * <pre>
-       *该服务器相关的大厅房间信息
-       * </pre>
-       *
-       * <code>repeated .RoomInfo RoomInLobby = 1;</code>
-       */
-      public Builder addRoomInLobby(
-          idevgame.meteor.proto.MeteorMsgs.RoomInfo.Builder builderForValue) {
-        if (roomInLobbyBuilder_ == null) {
-          ensureRoomInLobbyIsMutable();
-          roomInLobby_.add(builderForValue.build());
-          onChanged();
-        } else {
-          roomInLobbyBuilder_.addMessage(builderForValue.build());
-        }
-        return this;
-      }
-      /**
-       * <pre>
-       *该服务器相关的大厅房间信息
-       * </pre>
-       *
-       * <code>repeated .RoomInfo RoomInLobby = 1;</code>
-       */
-      public Builder addRoomInLobby(
-          int index, idevgame.meteor.proto.MeteorMsgs.RoomInfo.Builder builderForValue) {
-        if (roomInLobbyBuilder_ == null) {
-          ensureRoomInLobbyIsMutable();
-          roomInLobby_.add(index, builderForValue.build());
-          onChanged();
-        } else {
-          roomInLobbyBuilder_.addMessage(index, builderForValue.build());
-        }
-        return this;
-      }
-      /**
-       * <pre>
-       *该服务器相关的大厅房间信息
-       * </pre>
-       *
-       * <code>repeated .RoomInfo RoomInLobby = 1;</code>
-       */
-      public Builder addAllRoomInLobby(
-          java.lang.Iterable<? extends idevgame.meteor.proto.MeteorMsgs.RoomInfo> values) {
-        if (roomInLobbyBuilder_ == null) {
-          ensureRoomInLobbyIsMutable();
-          com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, roomInLobby_);
-          onChanged();
-        } else {
-          roomInLobbyBuilder_.addAllMessages(values);
-        }
-        return this;
-      }
-      /**
-       * <pre>
-       *该服务器相关的大厅房间信息
-       * </pre>
-       *
-       * <code>repeated .RoomInfo RoomInLobby = 1;</code>
-       */
-      public Builder clearRoomInLobby() {
-        if (roomInLobbyBuilder_ == null) {
-          roomInLobby_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000001);
-          onChanged();
-        } else {
-          roomInLobbyBuilder_.clear();
-        }
-        return this;
-      }
-      /**
-       * <pre>
-       *该服务器相关的大厅房间信息
-       * </pre>
-       *
-       * <code>repeated .RoomInfo RoomInLobby = 1;</code>
-       */
-      public Builder removeRoomInLobby(int index) {
-        if (roomInLobbyBuilder_ == null) {
-          ensureRoomInLobbyIsMutable();
-          roomInLobby_.remove(index);
-          onChanged();
-        } else {
-          roomInLobbyBuilder_.remove(index);
-        }
-        return this;
-      }
-      /**
-       * <pre>
-       *该服务器相关的大厅房间信息
-       * </pre>
-       *
-       * <code>repeated .RoomInfo RoomInLobby = 1;</code>
-       */
-      public idevgame.meteor.proto.MeteorMsgs.RoomInfo.Builder getRoomInLobbyBuilder(
-          int index) {
-        return getRoomInLobbyFieldBuilder().getBuilder(index);
-      }
-      /**
-       * <pre>
-       *该服务器相关的大厅房间信息
-       * </pre>
-       *
-       * <code>repeated .RoomInfo RoomInLobby = 1;</code>
-       */
-      public idevgame.meteor.proto.MeteorMsgs.RoomInfoOrBuilder getRoomInLobbyOrBuilder(
-          int index) {
-        if (roomInLobbyBuilder_ == null) {
-          return roomInLobby_.get(index);  } else {
-          return roomInLobbyBuilder_.getMessageOrBuilder(index);
-        }
-      }
-      /**
-       * <pre>
-       *该服务器相关的大厅房间信息
-       * </pre>
-       *
-       * <code>repeated .RoomInfo RoomInLobby = 1;</code>
-       */
-      public java.util.List<? extends idevgame.meteor.proto.MeteorMsgs.RoomInfoOrBuilder> 
-           getRoomInLobbyOrBuilderList() {
-        if (roomInLobbyBuilder_ != null) {
-          return roomInLobbyBuilder_.getMessageOrBuilderList();
-        } else {
-          return java.util.Collections.unmodifiableList(roomInLobby_);
-        }
-      }
-      /**
-       * <pre>
-       *该服务器相关的大厅房间信息
-       * </pre>
-       *
-       * <code>repeated .RoomInfo RoomInLobby = 1;</code>
-       */
-      public idevgame.meteor.proto.MeteorMsgs.RoomInfo.Builder addRoomInLobbyBuilder() {
-        return getRoomInLobbyFieldBuilder().addBuilder(
-            idevgame.meteor.proto.MeteorMsgs.RoomInfo.getDefaultInstance());
-      }
-      /**
-       * <pre>
-       *该服务器相关的大厅房间信息
-       * </pre>
-       *
-       * <code>repeated .RoomInfo RoomInLobby = 1;</code>
-       */
-      public idevgame.meteor.proto.MeteorMsgs.RoomInfo.Builder addRoomInLobbyBuilder(
-          int index) {
-        return getRoomInLobbyFieldBuilder().addBuilder(
-            index, idevgame.meteor.proto.MeteorMsgs.RoomInfo.getDefaultInstance());
-      }
-      /**
-       * <pre>
-       *该服务器相关的大厅房间信息
-       * </pre>
-       *
-       * <code>repeated .RoomInfo RoomInLobby = 1;</code>
-       */
-      public java.util.List<idevgame.meteor.proto.MeteorMsgs.RoomInfo.Builder> 
-           getRoomInLobbyBuilderList() {
-        return getRoomInLobbyFieldBuilder().getBuilderList();
-      }
-      private com.google.protobuf.RepeatedFieldBuilderV3<
-          idevgame.meteor.proto.MeteorMsgs.RoomInfo, idevgame.meteor.proto.MeteorMsgs.RoomInfo.Builder, idevgame.meteor.proto.MeteorMsgs.RoomInfoOrBuilder> 
-          getRoomInLobbyFieldBuilder() {
-        if (roomInLobbyBuilder_ == null) {
-          roomInLobbyBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
-              idevgame.meteor.proto.MeteorMsgs.RoomInfo, idevgame.meteor.proto.MeteorMsgs.RoomInfo.Builder, idevgame.meteor.proto.MeteorMsgs.RoomInfoOrBuilder>(
-                  roomInLobby_,
-                  ((bitField0_ & 0x00000001) == 0x00000001),
-                  getParentForChildren(),
-                  isClean());
-          roomInLobby_ = null;
-        }
-        return roomInLobbyBuilder_;
-      }
-      public final Builder setUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFields(unknownFields);
-      }
-
-      public final Builder mergeUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.mergeUnknownFields(unknownFields);
-      }
-
-
-      // @@protoc_insertion_point(builder_scope:SyncSvrState)
-    }
-
-    // @@protoc_insertion_point(class_scope:SyncSvrState)
-    private static final idevgame.meteor.proto.MeteorMsgs.SyncSvrState DEFAULT_INSTANCE;
-    static {
-      DEFAULT_INSTANCE = new idevgame.meteor.proto.MeteorMsgs.SyncSvrState();
-    }
-
-    public static idevgame.meteor.proto.MeteorMsgs.SyncSvrState getDefaultInstance() {
-      return DEFAULT_INSTANCE;
-    }
-
-    @java.lang.Deprecated public static final com.google.protobuf.Parser<SyncSvrState>
-        PARSER = new com.google.protobuf.AbstractParser<SyncSvrState>() {
-      public SyncSvrState parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return new SyncSvrState(input, extensionRegistry);
-      }
-    };
-
-    public static com.google.protobuf.Parser<SyncSvrState> parser() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<SyncSvrState> getParserForType() {
-      return PARSER;
-    }
-
-    public idevgame.meteor.proto.MeteorMsgs.SyncSvrState getDefaultInstanceForType() {
-      return DEFAULT_INSTANCE;
-    }
-
-  }
-
-  public interface SyncInitDataOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:SyncInitData)
-      com.google.protobuf.MessageOrBuilder {
-
-    /**
-     * <pre>
-     * </pre>
-     *
-     * <code>required uint32 randomSeed = 1;</code>
-     */
-    boolean hasRandomSeed();
-    /**
-     * <pre>
-     * </pre>
-     *
-     * <code>required uint32 randomSeed = 1;</code>
-     */
-    int getRandomSeed();
-  }
-  /**
-   * <pre>
-   *SyncRandomSeed
-   * </pre>
-   *
-   * Protobuf type {@code SyncInitData}
-   */
-  public  static final class SyncInitData extends
-      com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:SyncInitData)
-      SyncInitDataOrBuilder {
-  private static final long serialVersionUID = 0L;
-    // Use SyncInitData.newBuilder() to construct.
-    private SyncInitData(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
-      super(builder);
-    }
-    private SyncInitData() {
-      randomSeed_ = 0;
-    }
-
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
-      return this.unknownFields;
-    }
-    private SyncInitData(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      int mutable_bitField0_ = 0;
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            default: {
-              if (!parseUnknownField(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-            case 8: {
-              bitField0_ |= 0x00000001;
-              randomSeed_ = input.readUInt32();
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return idevgame.meteor.proto.MeteorMsgs.internal_static_SyncInitData_descriptor;
-    }
-
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return idevgame.meteor.proto.MeteorMsgs.internal_static_SyncInitData_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              idevgame.meteor.proto.MeteorMsgs.SyncInitData.class, idevgame.meteor.proto.MeteorMsgs.SyncInitData.Builder.class);
-    }
-
-    private int bitField0_;
-    public static final int RANDOMSEED_FIELD_NUMBER = 1;
-    private int randomSeed_;
-    /**
-     * <pre>
-     * </pre>
-     *
-     * <code>required uint32 randomSeed = 1;</code>
-     */
-    public boolean hasRandomSeed() {
-      return ((bitField0_ & 0x00000001) == 0x00000001);
-    }
-    /**
-     * <pre>
-     * </pre>
-     *
-     * <code>required uint32 randomSeed = 1;</code>
-     */
-    public int getRandomSeed() {
-      return randomSeed_;
-    }
-
-    private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
-
-      if (!hasRandomSeed()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
-      memoizedIsInitialized = 1;
-      return true;
-    }
-
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeUInt32(1, randomSeed_);
-      }
-      unknownFields.writeTo(output);
-    }
-
-    public int getSerializedSize() {
-      int size = memoizedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeUInt32Size(1, randomSeed_);
-      }
-      size += unknownFields.getSerializedSize();
-      memoizedSize = size;
-      return size;
-    }
-
-    @java.lang.Override
-    public boolean equals(final java.lang.Object obj) {
-      if (obj == this) {
-       return true;
-      }
-      if (!(obj instanceof idevgame.meteor.proto.MeteorMsgs.SyncInitData)) {
-        return super.equals(obj);
-      }
-      idevgame.meteor.proto.MeteorMsgs.SyncInitData other = (idevgame.meteor.proto.MeteorMsgs.SyncInitData) obj;
-
-      boolean result = true;
-      result = result && (hasRandomSeed() == other.hasRandomSeed());
-      if (hasRandomSeed()) {
-        result = result && (getRandomSeed()
-            == other.getRandomSeed());
-      }
-      result = result && unknownFields.equals(other.unknownFields);
-      return result;
-    }
-
-    @java.lang.Override
-    public int hashCode() {
-      if (memoizedHashCode != 0) {
-        return memoizedHashCode;
-      }
-      int hash = 41;
-      hash = (19 * hash) + getDescriptor().hashCode();
-      if (hasRandomSeed()) {
-        hash = (37 * hash) + RANDOMSEED_FIELD_NUMBER;
-        hash = (53 * hash) + getRandomSeed();
-      }
-      hash = (29 * hash) + unknownFields.hashCode();
-      memoizedHashCode = hash;
-      return hash;
-    }
-
-    public static idevgame.meteor.proto.MeteorMsgs.SyncInitData parseFrom(
-        java.nio.ByteBuffer data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.SyncInitData parseFrom(
-        java.nio.ByteBuffer data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.SyncInitData parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.SyncInitData parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.SyncInitData parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.SyncInitData parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.SyncInitData parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.SyncInitData parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.SyncInitData parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.SyncInitData parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.SyncInitData parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.SyncInitData parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder() {
-      return DEFAULT_INSTANCE.toBuilder();
-    }
-    public static Builder newBuilder(idevgame.meteor.proto.MeteorMsgs.SyncInitData prototype) {
-      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
-    }
-    public Builder toBuilder() {
-      return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
-    }
-
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
-    /**
-     * <pre>
-     *SyncRandomSeed
-     * </pre>
-     *
-     * Protobuf type {@code SyncInitData}
-     */
-    public static final class Builder extends
-        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:SyncInitData)
-        idevgame.meteor.proto.MeteorMsgs.SyncInitDataOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return idevgame.meteor.proto.MeteorMsgs.internal_static_SyncInitData_descriptor;
-      }
-
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return idevgame.meteor.proto.MeteorMsgs.internal_static_SyncInitData_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                idevgame.meteor.proto.MeteorMsgs.SyncInitData.class, idevgame.meteor.proto.MeteorMsgs.SyncInitData.Builder.class);
-      }
-
-      // Construct using idevgame.meteor.proto.MeteorMsgs.SyncInitData.newBuilder()
-      private Builder() {
-        maybeForceBuilderInitialization();
-      }
-
-      private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-        super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
-      }
-      public Builder clear() {
-        super.clear();
-        randomSeed_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000001);
-        return this;
-      }
-
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return idevgame.meteor.proto.MeteorMsgs.internal_static_SyncInitData_descriptor;
-      }
-
-      public idevgame.meteor.proto.MeteorMsgs.SyncInitData getDefaultInstanceForType() {
-        return idevgame.meteor.proto.MeteorMsgs.SyncInitData.getDefaultInstance();
-      }
-
-      public idevgame.meteor.proto.MeteorMsgs.SyncInitData build() {
-        idevgame.meteor.proto.MeteorMsgs.SyncInitData result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-
-      public idevgame.meteor.proto.MeteorMsgs.SyncInitData buildPartial() {
-        idevgame.meteor.proto.MeteorMsgs.SyncInitData result = new idevgame.meteor.proto.MeteorMsgs.SyncInitData(this);
-        int from_bitField0_ = bitField0_;
-        int to_bitField0_ = 0;
-        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
-          to_bitField0_ |= 0x00000001;
-        }
-        result.randomSeed_ = randomSeed_;
-        result.bitField0_ = to_bitField0_;
-        onBuilt();
-        return result;
-      }
-
-      public Builder clone() {
-        return (Builder) super.clone();
-      }
-      public Builder setField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
-        return (Builder) super.setField(field, value);
-      }
-      public Builder clearField(
-          com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return (Builder) super.clearField(field);
-      }
-      public Builder clearOneof(
-          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return (Builder) super.clearOneof(oneof);
-      }
-      public Builder setRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, java.lang.Object value) {
-        return (Builder) super.setRepeatedField(field, index, value);
-      }
-      public Builder addRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
-        return (Builder) super.addRepeatedField(field, value);
-      }
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof idevgame.meteor.proto.MeteorMsgs.SyncInitData) {
-          return mergeFrom((idevgame.meteor.proto.MeteorMsgs.SyncInitData)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-
-      public Builder mergeFrom(idevgame.meteor.proto.MeteorMsgs.SyncInitData other) {
-        if (other == idevgame.meteor.proto.MeteorMsgs.SyncInitData.getDefaultInstance()) return this;
-        if (other.hasRandomSeed()) {
-          setRandomSeed(other.getRandomSeed());
-        }
-        this.mergeUnknownFields(other.unknownFields);
-        onChanged();
-        return this;
-      }
-
-      public final boolean isInitialized() {
-        if (!hasRandomSeed()) {
-          return false;
-        }
-        return true;
-      }
-
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        idevgame.meteor.proto.MeteorMsgs.SyncInitData parsedMessage = null;
-        try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (idevgame.meteor.proto.MeteorMsgs.SyncInitData) e.getUnfinishedMessage();
-          throw e.unwrapIOException();
-        } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
-        return this;
-      }
-      private int bitField0_;
-
-      private int randomSeed_ ;
-      /**
-       * <pre>
-       * </pre>
-       *
-       * <code>required uint32 randomSeed = 1;</code>
-       */
-      public boolean hasRandomSeed() {
-        return ((bitField0_ & 0x00000001) == 0x00000001);
-      }
-      /**
-       * <pre>
-       * </pre>
-       *
-       * <code>required uint32 randomSeed = 1;</code>
-       */
-      public int getRandomSeed() {
-        return randomSeed_;
-      }
-      /**
-       * <pre>
-       * </pre>
-       *
-       * <code>required uint32 randomSeed = 1;</code>
-       */
-      public Builder setRandomSeed(int value) {
-        bitField0_ |= 0x00000001;
-        randomSeed_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <pre>
-       * </pre>
-       *
-       * <code>required uint32 randomSeed = 1;</code>
-       */
-      public Builder clearRandomSeed() {
-        bitField0_ = (bitField0_ & ~0x00000001);
-        randomSeed_ = 0;
-        onChanged();
-        return this;
-      }
-      public final Builder setUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFields(unknownFields);
-      }
-
-      public final Builder mergeUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.mergeUnknownFields(unknownFields);
-      }
-
-
-      // @@protoc_insertion_point(builder_scope:SyncInitData)
-    }
-
-    // @@protoc_insertion_point(class_scope:SyncInitData)
-    private static final idevgame.meteor.proto.MeteorMsgs.SyncInitData DEFAULT_INSTANCE;
-    static {
-      DEFAULT_INSTANCE = new idevgame.meteor.proto.MeteorMsgs.SyncInitData();
-    }
-
-    public static idevgame.meteor.proto.MeteorMsgs.SyncInitData getDefaultInstance() {
-      return DEFAULT_INSTANCE;
-    }
-
-    @java.lang.Deprecated public static final com.google.protobuf.Parser<SyncInitData>
-        PARSER = new com.google.protobuf.AbstractParser<SyncInitData>() {
-      public SyncInitData parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return new SyncInitData(input, extensionRegistry);
-      }
-    };
-
-    public static com.google.protobuf.Parser<SyncInitData> parser() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<SyncInitData> getParserForType() {
-      return PARSER;
-    }
-
-    public idevgame.meteor.proto.MeteorMsgs.SyncInitData getDefaultInstanceForType() {
-      return DEFAULT_INSTANCE;
-    }
-
-  }
-
-  public interface PlayerEventDataOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:PlayerEventData)
+  public interface PlayerEventOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:PlayerEvent)
       com.google.protobuf.MessageOrBuilder {
 
     /**
@@ -7348,29 +1365,39 @@ public final class MeteorMsgs {
      */
     com.google.protobuf.ByteString
         getNameBytes();
+
+    /**
+     * <code>optional uint32 spawnIndex = 6;</code>
+     */
+    boolean hasSpawnIndex();
+    /**
+     * <code>optional uint32 spawnIndex = 6;</code>
+     */
+    int getSpawnIndex();
   }
   /**
    * <pre>
-   *SpawnPlayer/DestroyPlayer/负责角色的创建和删除(进场和退场).
+   *负责角色的进入和退出(进场和退场).
    * </pre>
    *
-   * Protobuf type {@code PlayerEventData}
+   * Protobuf type {@code PlayerEvent}
    */
-  public  static final class PlayerEventData extends
+  public  static final class PlayerEvent extends
       com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:PlayerEventData)
-      PlayerEventDataOrBuilder {
+      // @@protoc_insertion_point(message_implements:PlayerEvent)
+      PlayerEventOrBuilder {
   private static final long serialVersionUID = 0L;
-    // Use PlayerEventData.newBuilder() to construct.
-    private PlayerEventData(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+    // Use PlayerEvent.newBuilder() to construct.
+    private PlayerEvent(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
     }
-    private PlayerEventData() {
+    private PlayerEvent() {
       playerId_ = 0;
       camp_ = 0;
       model_ = 0;
       weapon_ = 0;
       name_ = "";
+      spawnIndex_ = 0;
     }
 
     @java.lang.Override
@@ -7378,7 +1405,7 @@ public final class MeteorMsgs {
     getUnknownFields() {
       return this.unknownFields;
     }
-    private PlayerEventData(
+    private PlayerEvent(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -7430,6 +1457,11 @@ public final class MeteorMsgs {
               name_ = bs;
               break;
             }
+            case 48: {
+              bitField0_ |= 0x00000020;
+              spawnIndex_ = input.readUInt32();
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -7444,14 +1476,14 @@ public final class MeteorMsgs {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return idevgame.meteor.proto.MeteorMsgs.internal_static_PlayerEventData_descriptor;
+      return idevgame.meteor.proto.MeteorMsgs.internal_static_PlayerEvent_descriptor;
     }
 
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return idevgame.meteor.proto.MeteorMsgs.internal_static_PlayerEventData_fieldAccessorTable
+      return idevgame.meteor.proto.MeteorMsgs.internal_static_PlayerEvent_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              idevgame.meteor.proto.MeteorMsgs.PlayerEventData.class, idevgame.meteor.proto.MeteorMsgs.PlayerEventData.Builder.class);
+              idevgame.meteor.proto.MeteorMsgs.PlayerEvent.class, idevgame.meteor.proto.MeteorMsgs.PlayerEvent.Builder.class);
     }
 
     private int bitField0_;
@@ -7557,6 +1589,21 @@ public final class MeteorMsgs {
       }
     }
 
+    public static final int SPAWNINDEX_FIELD_NUMBER = 6;
+    private int spawnIndex_;
+    /**
+     * <code>optional uint32 spawnIndex = 6;</code>
+     */
+    public boolean hasSpawnIndex() {
+      return ((bitField0_ & 0x00000020) == 0x00000020);
+    }
+    /**
+     * <code>optional uint32 spawnIndex = 6;</code>
+     */
+    public int getSpawnIndex() {
+      return spawnIndex_;
+    }
+
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
@@ -7604,6 +1651,9 @@ public final class MeteorMsgs {
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 5, name_);
       }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        output.writeUInt32(6, spawnIndex_);
+      }
       unknownFields.writeTo(output);
     }
 
@@ -7631,6 +1681,10 @@ public final class MeteorMsgs {
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(5, name_);
       }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt32Size(6, spawnIndex_);
+      }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
@@ -7641,10 +1695,10 @@ public final class MeteorMsgs {
       if (obj == this) {
        return true;
       }
-      if (!(obj instanceof idevgame.meteor.proto.MeteorMsgs.PlayerEventData)) {
+      if (!(obj instanceof idevgame.meteor.proto.MeteorMsgs.PlayerEvent)) {
         return super.equals(obj);
       }
-      idevgame.meteor.proto.MeteorMsgs.PlayerEventData other = (idevgame.meteor.proto.MeteorMsgs.PlayerEventData) obj;
+      idevgame.meteor.proto.MeteorMsgs.PlayerEvent other = (idevgame.meteor.proto.MeteorMsgs.PlayerEvent) obj;
 
       boolean result = true;
       result = result && (hasPlayerId() == other.hasPlayerId());
@@ -7671,6 +1725,11 @@ public final class MeteorMsgs {
       if (hasName()) {
         result = result && getName()
             .equals(other.getName());
+      }
+      result = result && (hasSpawnIndex() == other.hasSpawnIndex());
+      if (hasSpawnIndex()) {
+        result = result && (getSpawnIndex()
+            == other.getSpawnIndex());
       }
       result = result && unknownFields.equals(other.unknownFields);
       return result;
@@ -7703,74 +1762,78 @@ public final class MeteorMsgs {
         hash = (37 * hash) + NAME_FIELD_NUMBER;
         hash = (53 * hash) + getName().hashCode();
       }
+      if (hasSpawnIndex()) {
+        hash = (37 * hash) + SPAWNINDEX_FIELD_NUMBER;
+        hash = (53 * hash) + getSpawnIndex();
+      }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
     }
 
-    public static idevgame.meteor.proto.MeteorMsgs.PlayerEventData parseFrom(
+    public static idevgame.meteor.proto.MeteorMsgs.PlayerEvent parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static idevgame.meteor.proto.MeteorMsgs.PlayerEventData parseFrom(
+    public static idevgame.meteor.proto.MeteorMsgs.PlayerEvent parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static idevgame.meteor.proto.MeteorMsgs.PlayerEventData parseFrom(
+    public static idevgame.meteor.proto.MeteorMsgs.PlayerEvent parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static idevgame.meteor.proto.MeteorMsgs.PlayerEventData parseFrom(
+    public static idevgame.meteor.proto.MeteorMsgs.PlayerEvent parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static idevgame.meteor.proto.MeteorMsgs.PlayerEventData parseFrom(byte[] data)
+    public static idevgame.meteor.proto.MeteorMsgs.PlayerEvent parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static idevgame.meteor.proto.MeteorMsgs.PlayerEventData parseFrom(
+    public static idevgame.meteor.proto.MeteorMsgs.PlayerEvent parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static idevgame.meteor.proto.MeteorMsgs.PlayerEventData parseFrom(java.io.InputStream input)
+    public static idevgame.meteor.proto.MeteorMsgs.PlayerEvent parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static idevgame.meteor.proto.MeteorMsgs.PlayerEventData parseFrom(
+    public static idevgame.meteor.proto.MeteorMsgs.PlayerEvent parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
-    public static idevgame.meteor.proto.MeteorMsgs.PlayerEventData parseDelimitedFrom(java.io.InputStream input)
+    public static idevgame.meteor.proto.MeteorMsgs.PlayerEvent parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input);
     }
-    public static idevgame.meteor.proto.MeteorMsgs.PlayerEventData parseDelimitedFrom(
+    public static idevgame.meteor.proto.MeteorMsgs.PlayerEvent parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static idevgame.meteor.proto.MeteorMsgs.PlayerEventData parseFrom(
+    public static idevgame.meteor.proto.MeteorMsgs.PlayerEvent parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static idevgame.meteor.proto.MeteorMsgs.PlayerEventData parseFrom(
+    public static idevgame.meteor.proto.MeteorMsgs.PlayerEvent parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -7782,7 +1845,7 @@ public final class MeteorMsgs {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(idevgame.meteor.proto.MeteorMsgs.PlayerEventData prototype) {
+    public static Builder newBuilder(idevgame.meteor.proto.MeteorMsgs.PlayerEvent prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() {
@@ -7798,28 +1861,28 @@ public final class MeteorMsgs {
     }
     /**
      * <pre>
-     *SpawnPlayer/DestroyPlayer/负责角色的创建和删除(进场和退场).
+     *负责角色的进入和退出(进场和退场).
      * </pre>
      *
-     * Protobuf type {@code PlayerEventData}
+     * Protobuf type {@code PlayerEvent}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:PlayerEventData)
-        idevgame.meteor.proto.MeteorMsgs.PlayerEventDataOrBuilder {
+        // @@protoc_insertion_point(builder_implements:PlayerEvent)
+        idevgame.meteor.proto.MeteorMsgs.PlayerEventOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return idevgame.meteor.proto.MeteorMsgs.internal_static_PlayerEventData_descriptor;
+        return idevgame.meteor.proto.MeteorMsgs.internal_static_PlayerEvent_descriptor;
       }
 
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return idevgame.meteor.proto.MeteorMsgs.internal_static_PlayerEventData_fieldAccessorTable
+        return idevgame.meteor.proto.MeteorMsgs.internal_static_PlayerEvent_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                idevgame.meteor.proto.MeteorMsgs.PlayerEventData.class, idevgame.meteor.proto.MeteorMsgs.PlayerEventData.Builder.class);
+                idevgame.meteor.proto.MeteorMsgs.PlayerEvent.class, idevgame.meteor.proto.MeteorMsgs.PlayerEvent.Builder.class);
       }
 
-      // Construct using idevgame.meteor.proto.MeteorMsgs.PlayerEventData.newBuilder()
+      // Construct using idevgame.meteor.proto.MeteorMsgs.PlayerEvent.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
@@ -7846,28 +1909,30 @@ public final class MeteorMsgs {
         bitField0_ = (bitField0_ & ~0x00000008);
         name_ = "";
         bitField0_ = (bitField0_ & ~0x00000010);
+        spawnIndex_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000020);
         return this;
       }
 
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return idevgame.meteor.proto.MeteorMsgs.internal_static_PlayerEventData_descriptor;
+        return idevgame.meteor.proto.MeteorMsgs.internal_static_PlayerEvent_descriptor;
       }
 
-      public idevgame.meteor.proto.MeteorMsgs.PlayerEventData getDefaultInstanceForType() {
-        return idevgame.meteor.proto.MeteorMsgs.PlayerEventData.getDefaultInstance();
+      public idevgame.meteor.proto.MeteorMsgs.PlayerEvent getDefaultInstanceForType() {
+        return idevgame.meteor.proto.MeteorMsgs.PlayerEvent.getDefaultInstance();
       }
 
-      public idevgame.meteor.proto.MeteorMsgs.PlayerEventData build() {
-        idevgame.meteor.proto.MeteorMsgs.PlayerEventData result = buildPartial();
+      public idevgame.meteor.proto.MeteorMsgs.PlayerEvent build() {
+        idevgame.meteor.proto.MeteorMsgs.PlayerEvent result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      public idevgame.meteor.proto.MeteorMsgs.PlayerEventData buildPartial() {
-        idevgame.meteor.proto.MeteorMsgs.PlayerEventData result = new idevgame.meteor.proto.MeteorMsgs.PlayerEventData(this);
+      public idevgame.meteor.proto.MeteorMsgs.PlayerEvent buildPartial() {
+        idevgame.meteor.proto.MeteorMsgs.PlayerEvent result = new idevgame.meteor.proto.MeteorMsgs.PlayerEvent(this);
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
@@ -7890,6 +1955,10 @@ public final class MeteorMsgs {
           to_bitField0_ |= 0x00000010;
         }
         result.name_ = name_;
+        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
+          to_bitField0_ |= 0x00000020;
+        }
+        result.spawnIndex_ = spawnIndex_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -7922,16 +1991,16 @@ public final class MeteorMsgs {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof idevgame.meteor.proto.MeteorMsgs.PlayerEventData) {
-          return mergeFrom((idevgame.meteor.proto.MeteorMsgs.PlayerEventData)other);
+        if (other instanceof idevgame.meteor.proto.MeteorMsgs.PlayerEvent) {
+          return mergeFrom((idevgame.meteor.proto.MeteorMsgs.PlayerEvent)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(idevgame.meteor.proto.MeteorMsgs.PlayerEventData other) {
-        if (other == idevgame.meteor.proto.MeteorMsgs.PlayerEventData.getDefaultInstance()) return this;
+      public Builder mergeFrom(idevgame.meteor.proto.MeteorMsgs.PlayerEvent other) {
+        if (other == idevgame.meteor.proto.MeteorMsgs.PlayerEvent.getDefaultInstance()) return this;
         if (other.hasPlayerId()) {
           setPlayerId(other.getPlayerId());
         }
@@ -7948,6 +2017,9 @@ public final class MeteorMsgs {
           bitField0_ |= 0x00000010;
           name_ = other.name_;
           onChanged();
+        }
+        if (other.hasSpawnIndex()) {
+          setSpawnIndex(other.getSpawnIndex());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -7977,11 +2049,11 @@ public final class MeteorMsgs {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        idevgame.meteor.proto.MeteorMsgs.PlayerEventData parsedMessage = null;
+        idevgame.meteor.proto.MeteorMsgs.PlayerEvent parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (idevgame.meteor.proto.MeteorMsgs.PlayerEventData) e.getUnfinishedMessage();
+          parsedMessage = (idevgame.meteor.proto.MeteorMsgs.PlayerEvent) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
           if (parsedMessage != null) {
@@ -8195,6 +2267,38 @@ public final class MeteorMsgs {
         onChanged();
         return this;
       }
+
+      private int spawnIndex_ ;
+      /**
+       * <code>optional uint32 spawnIndex = 6;</code>
+       */
+      public boolean hasSpawnIndex() {
+        return ((bitField0_ & 0x00000020) == 0x00000020);
+      }
+      /**
+       * <code>optional uint32 spawnIndex = 6;</code>
+       */
+      public int getSpawnIndex() {
+        return spawnIndex_;
+      }
+      /**
+       * <code>optional uint32 spawnIndex = 6;</code>
+       */
+      public Builder setSpawnIndex(int value) {
+        bitField0_ |= 0x00000020;
+        spawnIndex_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional uint32 spawnIndex = 6;</code>
+       */
+      public Builder clearSpawnIndex() {
+        bitField0_ = (bitField0_ & ~0x00000020);
+        spawnIndex_ = 0;
+        onChanged();
+        return this;
+      }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.setUnknownFields(unknownFields);
@@ -8206,115 +2310,101 @@ public final class MeteorMsgs {
       }
 
 
-      // @@protoc_insertion_point(builder_scope:PlayerEventData)
+      // @@protoc_insertion_point(builder_scope:PlayerEvent)
     }
 
-    // @@protoc_insertion_point(class_scope:PlayerEventData)
-    private static final idevgame.meteor.proto.MeteorMsgs.PlayerEventData DEFAULT_INSTANCE;
+    // @@protoc_insertion_point(class_scope:PlayerEvent)
+    private static final idevgame.meteor.proto.MeteorMsgs.PlayerEvent DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new idevgame.meteor.proto.MeteorMsgs.PlayerEventData();
+      DEFAULT_INSTANCE = new idevgame.meteor.proto.MeteorMsgs.PlayerEvent();
     }
 
-    public static idevgame.meteor.proto.MeteorMsgs.PlayerEventData getDefaultInstance() {
+    public static idevgame.meteor.proto.MeteorMsgs.PlayerEvent getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
-    @java.lang.Deprecated public static final com.google.protobuf.Parser<PlayerEventData>
-        PARSER = new com.google.protobuf.AbstractParser<PlayerEventData>() {
-      public PlayerEventData parsePartialFrom(
+    @java.lang.Deprecated public static final com.google.protobuf.Parser<PlayerEvent>
+        PARSER = new com.google.protobuf.AbstractParser<PlayerEvent>() {
+      public PlayerEvent parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return new PlayerEventData(input, extensionRegistry);
+        return new PlayerEvent(input, extensionRegistry);
       }
     };
 
-    public static com.google.protobuf.Parser<PlayerEventData> parser() {
+    public static com.google.protobuf.Parser<PlayerEvent> parser() {
       return PARSER;
     }
 
     @java.lang.Override
-    public com.google.protobuf.Parser<PlayerEventData> getParserForType() {
+    public com.google.protobuf.Parser<PlayerEvent> getParserForType() {
       return PARSER;
     }
 
-    public idevgame.meteor.proto.MeteorMsgs.PlayerEventData getDefaultInstanceForType() {
+    public idevgame.meteor.proto.MeteorMsgs.PlayerEvent getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
   }
 
-  public interface EnterQueueRspOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:EnterQueueRsp)
+  public interface OperateMsgOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:OperateMsg)
       com.google.protobuf.MessageOrBuilder {
 
     /**
      * <pre>
-     *结果.
+     *杀死目标
      * </pre>
      *
-     * <code>required uint32 result = 1;</code>
+     * <code>required uint32 KillTarget = 1;</code>
      */
-    boolean hasResult();
+    boolean hasKillTarget();
     /**
      * <pre>
-     *结果.
+     *杀死目标
      * </pre>
      *
-     * <code>required uint32 result = 1;</code>
+     * <code>required uint32 KillTarget = 1;</code>
      */
-    int getResult();
+    int getKillTarget();
 
     /**
      * <pre>
-     *进入排队玩家分配到的玩家id
+     *杀，剔，设置为黑名单.
      * </pre>
      *
-     * <code>required uint32 playerId = 2;</code>
+     * <code>required uint32 Operate = 2;</code>
      */
-    boolean hasPlayerId();
+    boolean hasOperate();
     /**
      * <pre>
-     *进入排队玩家分配到的玩家id
+     *杀，剔，设置为黑名单.
      * </pre>
      *
-     * <code>required uint32 playerId = 2;</code>
+     * <code>required uint32 Operate = 2;</code>
      */
-    int getPlayerId();
-
-    /**
-     * <pre>
-     *当前排队人数.
-     * </pre>
-     *
-     * <code>required uint32 playerInQueue = 3;</code>
-     */
-    boolean hasPlayerInQueue();
-    /**
-     * <pre>
-     *当前排队人数.
-     * </pre>
-     *
-     * <code>required uint32 playerInQueue = 3;</code>
-     */
-    int getPlayerInQueue();
+    int getOperate();
   }
   /**
-   * Protobuf type {@code EnterQueueRsp}
+   * <pre>
+   *杀 踢 禁
+   * </pre>
+   *
+   * Protobuf type {@code OperateMsg}
    */
-  public  static final class EnterQueueRsp extends
+  public  static final class OperateMsg extends
       com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:EnterQueueRsp)
-      EnterQueueRspOrBuilder {
+      // @@protoc_insertion_point(message_implements:OperateMsg)
+      OperateMsgOrBuilder {
   private static final long serialVersionUID = 0L;
-    // Use EnterQueueRsp.newBuilder() to construct.
-    private EnterQueueRsp(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+    // Use OperateMsg.newBuilder() to construct.
+    private OperateMsg(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
     }
-    private EnterQueueRsp() {
-      result_ = 0;
-      playerId_ = 0;
-      playerInQueue_ = 0;
+    private OperateMsg() {
+      killTarget_ = 0;
+      operate_ = 0;
     }
 
     @java.lang.Override
@@ -8322,7 +2412,7 @@ public final class MeteorMsgs {
     getUnknownFields() {
       return this.unknownFields;
     }
-    private EnterQueueRsp(
+    private OperateMsg(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -8350,17 +2440,12 @@ public final class MeteorMsgs {
             }
             case 8: {
               bitField0_ |= 0x00000001;
-              result_ = input.readUInt32();
+              killTarget_ = input.readUInt32();
               break;
             }
             case 16: {
               bitField0_ |= 0x00000002;
-              playerId_ = input.readUInt32();
-              break;
-            }
-            case 24: {
-              bitField0_ |= 0x00000004;
-              playerInQueue_ = input.readUInt32();
+              operate_ = input.readUInt32();
               break;
             }
           }
@@ -8377,84 +2462,806 @@ public final class MeteorMsgs {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return idevgame.meteor.proto.MeteorMsgs.internal_static_EnterQueueRsp_descriptor;
+      return idevgame.meteor.proto.MeteorMsgs.internal_static_OperateMsg_descriptor;
     }
 
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return idevgame.meteor.proto.MeteorMsgs.internal_static_EnterQueueRsp_fieldAccessorTable
+      return idevgame.meteor.proto.MeteorMsgs.internal_static_OperateMsg_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              idevgame.meteor.proto.MeteorMsgs.EnterQueueRsp.class, idevgame.meteor.proto.MeteorMsgs.EnterQueueRsp.Builder.class);
+              idevgame.meteor.proto.MeteorMsgs.OperateMsg.class, idevgame.meteor.proto.MeteorMsgs.OperateMsg.Builder.class);
     }
 
     private int bitField0_;
-    public static final int RESULT_FIELD_NUMBER = 1;
-    private int result_;
+    public static final int KILLTARGET_FIELD_NUMBER = 1;
+    private int killTarget_;
     /**
      * <pre>
-     *结果.
+     *杀死目标
      * </pre>
      *
-     * <code>required uint32 result = 1;</code>
+     * <code>required uint32 KillTarget = 1;</code>
      */
-    public boolean hasResult() {
+    public boolean hasKillTarget() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
     /**
      * <pre>
-     *结果.
+     *杀死目标
      * </pre>
      *
-     * <code>required uint32 result = 1;</code>
+     * <code>required uint32 KillTarget = 1;</code>
      */
-    public int getResult() {
-      return result_;
+    public int getKillTarget() {
+      return killTarget_;
     }
 
-    public static final int PLAYERID_FIELD_NUMBER = 2;
-    private int playerId_;
+    public static final int OPERATE_FIELD_NUMBER = 2;
+    private int operate_;
     /**
      * <pre>
-     *进入排队玩家分配到的玩家id
+     *杀，剔，设置为黑名单.
      * </pre>
      *
-     * <code>required uint32 playerId = 2;</code>
+     * <code>required uint32 Operate = 2;</code>
      */
-    public boolean hasPlayerId() {
+    public boolean hasOperate() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
      * <pre>
-     *进入排队玩家分配到的玩家id
+     *杀，剔，设置为黑名单.
      * </pre>
      *
-     * <code>required uint32 playerId = 2;</code>
+     * <code>required uint32 Operate = 2;</code>
      */
-    public int getPlayerId() {
-      return playerId_;
+    public int getOperate() {
+      return operate_;
     }
 
-    public static final int PLAYERINQUEUE_FIELD_NUMBER = 3;
-    private int playerInQueue_;
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      if (!hasKillTarget()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasOperate()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeUInt32(1, killTarget_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeUInt32(2, operate_);
+      }
+      unknownFields.writeTo(output);
+    }
+
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt32Size(1, killTarget_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt32Size(2, operate_);
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof idevgame.meteor.proto.MeteorMsgs.OperateMsg)) {
+        return super.equals(obj);
+      }
+      idevgame.meteor.proto.MeteorMsgs.OperateMsg other = (idevgame.meteor.proto.MeteorMsgs.OperateMsg) obj;
+
+      boolean result = true;
+      result = result && (hasKillTarget() == other.hasKillTarget());
+      if (hasKillTarget()) {
+        result = result && (getKillTarget()
+            == other.getKillTarget());
+      }
+      result = result && (hasOperate() == other.hasOperate());
+      if (hasOperate()) {
+        result = result && (getOperate()
+            == other.getOperate());
+      }
+      result = result && unknownFields.equals(other.unknownFields);
+      return result;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      if (hasKillTarget()) {
+        hash = (37 * hash) + KILLTARGET_FIELD_NUMBER;
+        hash = (53 * hash) + getKillTarget();
+      }
+      if (hasOperate()) {
+        hash = (37 * hash) + OPERATE_FIELD_NUMBER;
+        hash = (53 * hash) + getOperate();
+      }
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static idevgame.meteor.proto.MeteorMsgs.OperateMsg parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static idevgame.meteor.proto.MeteorMsgs.OperateMsg parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static idevgame.meteor.proto.MeteorMsgs.OperateMsg parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static idevgame.meteor.proto.MeteorMsgs.OperateMsg parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static idevgame.meteor.proto.MeteorMsgs.OperateMsg parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static idevgame.meteor.proto.MeteorMsgs.OperateMsg parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static idevgame.meteor.proto.MeteorMsgs.OperateMsg parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static idevgame.meteor.proto.MeteorMsgs.OperateMsg parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static idevgame.meteor.proto.MeteorMsgs.OperateMsg parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static idevgame.meteor.proto.MeteorMsgs.OperateMsg parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static idevgame.meteor.proto.MeteorMsgs.OperateMsg parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static idevgame.meteor.proto.MeteorMsgs.OperateMsg parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(idevgame.meteor.proto.MeteorMsgs.OperateMsg prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
     /**
      * <pre>
-     *当前排队人数.
+     *杀 踢 禁
      * </pre>
      *
-     * <code>required uint32 playerInQueue = 3;</code>
+     * Protobuf type {@code OperateMsg}
      */
-    public boolean hasPlayerInQueue() {
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:OperateMsg)
+        idevgame.meteor.proto.MeteorMsgs.OperateMsgOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return idevgame.meteor.proto.MeteorMsgs.internal_static_OperateMsg_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return idevgame.meteor.proto.MeteorMsgs.internal_static_OperateMsg_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                idevgame.meteor.proto.MeteorMsgs.OperateMsg.class, idevgame.meteor.proto.MeteorMsgs.OperateMsg.Builder.class);
+      }
+
+      // Construct using idevgame.meteor.proto.MeteorMsgs.OperateMsg.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      public Builder clear() {
+        super.clear();
+        killTarget_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        operate_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        return this;
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return idevgame.meteor.proto.MeteorMsgs.internal_static_OperateMsg_descriptor;
+      }
+
+      public idevgame.meteor.proto.MeteorMsgs.OperateMsg getDefaultInstanceForType() {
+        return idevgame.meteor.proto.MeteorMsgs.OperateMsg.getDefaultInstance();
+      }
+
+      public idevgame.meteor.proto.MeteorMsgs.OperateMsg build() {
+        idevgame.meteor.proto.MeteorMsgs.OperateMsg result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public idevgame.meteor.proto.MeteorMsgs.OperateMsg buildPartial() {
+        idevgame.meteor.proto.MeteorMsgs.OperateMsg result = new idevgame.meteor.proto.MeteorMsgs.OperateMsg(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.killTarget_ = killTarget_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.operate_ = operate_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof idevgame.meteor.proto.MeteorMsgs.OperateMsg) {
+          return mergeFrom((idevgame.meteor.proto.MeteorMsgs.OperateMsg)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(idevgame.meteor.proto.MeteorMsgs.OperateMsg other) {
+        if (other == idevgame.meteor.proto.MeteorMsgs.OperateMsg.getDefaultInstance()) return this;
+        if (other.hasKillTarget()) {
+          setKillTarget(other.getKillTarget());
+        }
+        if (other.hasOperate()) {
+          setOperate(other.getOperate());
+        }
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        if (!hasKillTarget()) {
+          return false;
+        }
+        if (!hasOperate()) {
+          return false;
+        }
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        idevgame.meteor.proto.MeteorMsgs.OperateMsg parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (idevgame.meteor.proto.MeteorMsgs.OperateMsg) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private int killTarget_ ;
+      /**
+       * <pre>
+       *杀死目标
+       * </pre>
+       *
+       * <code>required uint32 KillTarget = 1;</code>
+       */
+      public boolean hasKillTarget() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <pre>
+       *杀死目标
+       * </pre>
+       *
+       * <code>required uint32 KillTarget = 1;</code>
+       */
+      public int getKillTarget() {
+        return killTarget_;
+      }
+      /**
+       * <pre>
+       *杀死目标
+       * </pre>
+       *
+       * <code>required uint32 KillTarget = 1;</code>
+       */
+      public Builder setKillTarget(int value) {
+        bitField0_ |= 0x00000001;
+        killTarget_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *杀死目标
+       * </pre>
+       *
+       * <code>required uint32 KillTarget = 1;</code>
+       */
+      public Builder clearKillTarget() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        killTarget_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int operate_ ;
+      /**
+       * <pre>
+       *杀，剔，设置为黑名单.
+       * </pre>
+       *
+       * <code>required uint32 Operate = 2;</code>
+       */
+      public boolean hasOperate() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <pre>
+       *杀，剔，设置为黑名单.
+       * </pre>
+       *
+       * <code>required uint32 Operate = 2;</code>
+       */
+      public int getOperate() {
+        return operate_;
+      }
+      /**
+       * <pre>
+       *杀，剔，设置为黑名单.
+       * </pre>
+       *
+       * <code>required uint32 Operate = 2;</code>
+       */
+      public Builder setOperate(int value) {
+        bitField0_ |= 0x00000002;
+        operate_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *杀，剔，设置为黑名单.
+       * </pre>
+       *
+       * <code>required uint32 Operate = 2;</code>
+       */
+      public Builder clearOperate() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        operate_ = 0;
+        onChanged();
+        return this;
+      }
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFields(unknownFields);
+      }
+
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:OperateMsg)
+    }
+
+    // @@protoc_insertion_point(class_scope:OperateMsg)
+    private static final idevgame.meteor.proto.MeteorMsgs.OperateMsg DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new idevgame.meteor.proto.MeteorMsgs.OperateMsg();
+    }
+
+    public static idevgame.meteor.proto.MeteorMsgs.OperateMsg getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    @java.lang.Deprecated public static final com.google.protobuf.Parser<OperateMsg>
+        PARSER = new com.google.protobuf.AbstractParser<OperateMsg>() {
+      public OperateMsg parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new OperateMsg(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<OperateMsg> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<OperateMsg> getParserForType() {
+      return PARSER;
+    }
+
+    public idevgame.meteor.proto.MeteorMsgs.OperateMsg getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
+  public interface DropMsgOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:DropMsg)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <pre>
+     *扔出的道具是什么
+     * </pre>
+     *
+     * <code>required uint32 item = 1;</code>
+     */
+    boolean hasItem();
+    /**
+     * <pre>
+     *扔出的道具是什么
+     * </pre>
+     *
+     * <code>required uint32 item = 1;</code>
+     */
+    int getItem();
+
+    /**
+     * <pre>
+     *从哪里扔出
+     * </pre>
+     *
+     * <code>required ._Vector3 position = 2;</code>
+     */
+    boolean hasPosition();
+    /**
+     * <pre>
+     *从哪里扔出
+     * </pre>
+     *
+     * <code>required ._Vector3 position = 2;</code>
+     */
+    idevgame.meteor.proto.MeteorMsgs._Vector3 getPosition();
+    /**
+     * <pre>
+     *从哪里扔出
+     * </pre>
+     *
+     * <code>required ._Vector3 position = 2;</code>
+     */
+    idevgame.meteor.proto.MeteorMsgs._Vector3OrBuilder getPositionOrBuilder();
+
+    /**
+     * <pre>
+     *往哪个方向扔出
+     * </pre>
+     *
+     * <code>required ._Vector3 forward = 3;</code>
+     */
+    boolean hasForward();
+    /**
+     * <pre>
+     *往哪个方向扔出
+     * </pre>
+     *
+     * <code>required ._Vector3 forward = 3;</code>
+     */
+    idevgame.meteor.proto.MeteorMsgs._Vector3 getForward();
+    /**
+     * <pre>
+     *往哪个方向扔出
+     * </pre>
+     *
+     * <code>required ._Vector3 forward = 3;</code>
+     */
+    idevgame.meteor.proto.MeteorMsgs._Vector3OrBuilder getForwardOrBuilder();
+  }
+  /**
+   * Protobuf type {@code DropMsg}
+   */
+  public  static final class DropMsg extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:DropMsg)
+      DropMsgOrBuilder {
+  private static final long serialVersionUID = 0L;
+    // Use DropMsg.newBuilder() to construct.
+    private DropMsg(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private DropMsg() {
+      item_ = 0;
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private DropMsg(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 8: {
+              bitField0_ |= 0x00000001;
+              item_ = input.readUInt32();
+              break;
+            }
+            case 18: {
+              idevgame.meteor.proto.MeteorMsgs._Vector3.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000002) == 0x00000002)) {
+                subBuilder = position_.toBuilder();
+              }
+              position_ = input.readMessage(idevgame.meteor.proto.MeteorMsgs._Vector3.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(position_);
+                position_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000002;
+              break;
+            }
+            case 26: {
+              idevgame.meteor.proto.MeteorMsgs._Vector3.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000004) == 0x00000004)) {
+                subBuilder = forward_.toBuilder();
+              }
+              forward_ = input.readMessage(idevgame.meteor.proto.MeteorMsgs._Vector3.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(forward_);
+                forward_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000004;
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return idevgame.meteor.proto.MeteorMsgs.internal_static_DropMsg_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return idevgame.meteor.proto.MeteorMsgs.internal_static_DropMsg_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              idevgame.meteor.proto.MeteorMsgs.DropMsg.class, idevgame.meteor.proto.MeteorMsgs.DropMsg.Builder.class);
+    }
+
+    private int bitField0_;
+    public static final int ITEM_FIELD_NUMBER = 1;
+    private int item_;
+    /**
+     * <pre>
+     *扔出的道具是什么
+     * </pre>
+     *
+     * <code>required uint32 item = 1;</code>
+     */
+    public boolean hasItem() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <pre>
+     *扔出的道具是什么
+     * </pre>
+     *
+     * <code>required uint32 item = 1;</code>
+     */
+    public int getItem() {
+      return item_;
+    }
+
+    public static final int POSITION_FIELD_NUMBER = 2;
+    private idevgame.meteor.proto.MeteorMsgs._Vector3 position_;
+    /**
+     * <pre>
+     *从哪里扔出
+     * </pre>
+     *
+     * <code>required ._Vector3 position = 2;</code>
+     */
+    public boolean hasPosition() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <pre>
+     *从哪里扔出
+     * </pre>
+     *
+     * <code>required ._Vector3 position = 2;</code>
+     */
+    public idevgame.meteor.proto.MeteorMsgs._Vector3 getPosition() {
+      return position_ == null ? idevgame.meteor.proto.MeteorMsgs._Vector3.getDefaultInstance() : position_;
+    }
+    /**
+     * <pre>
+     *从哪里扔出
+     * </pre>
+     *
+     * <code>required ._Vector3 position = 2;</code>
+     */
+    public idevgame.meteor.proto.MeteorMsgs._Vector3OrBuilder getPositionOrBuilder() {
+      return position_ == null ? idevgame.meteor.proto.MeteorMsgs._Vector3.getDefaultInstance() : position_;
+    }
+
+    public static final int FORWARD_FIELD_NUMBER = 3;
+    private idevgame.meteor.proto.MeteorMsgs._Vector3 forward_;
+    /**
+     * <pre>
+     *往哪个方向扔出
+     * </pre>
+     *
+     * <code>required ._Vector3 forward = 3;</code>
+     */
+    public boolean hasForward() {
       return ((bitField0_ & 0x00000004) == 0x00000004);
     }
     /**
      * <pre>
-     *当前排队人数.
+     *往哪个方向扔出
      * </pre>
      *
-     * <code>required uint32 playerInQueue = 3;</code>
+     * <code>required ._Vector3 forward = 3;</code>
      */
-    public int getPlayerInQueue() {
-      return playerInQueue_;
+    public idevgame.meteor.proto.MeteorMsgs._Vector3 getForward() {
+      return forward_ == null ? idevgame.meteor.proto.MeteorMsgs._Vector3.getDefaultInstance() : forward_;
+    }
+    /**
+     * <pre>
+     *往哪个方向扔出
+     * </pre>
+     *
+     * <code>required ._Vector3 forward = 3;</code>
+     */
+    public idevgame.meteor.proto.MeteorMsgs._Vector3OrBuilder getForwardOrBuilder() {
+      return forward_ == null ? idevgame.meteor.proto.MeteorMsgs._Vector3.getDefaultInstance() : forward_;
     }
 
     private byte memoizedIsInitialized = -1;
@@ -8463,15 +3270,23 @@ public final class MeteorMsgs {
       if (isInitialized == 1) return true;
       if (isInitialized == 0) return false;
 
-      if (!hasResult()) {
+      if (!hasItem()) {
         memoizedIsInitialized = 0;
         return false;
       }
-      if (!hasPlayerId()) {
+      if (!hasPosition()) {
         memoizedIsInitialized = 0;
         return false;
       }
-      if (!hasPlayerInQueue()) {
+      if (!hasForward()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!getPosition().isInitialized()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!getForward().isInitialized()) {
         memoizedIsInitialized = 0;
         return false;
       }
@@ -8482,13 +3297,13 @@ public final class MeteorMsgs {
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeUInt32(1, result_);
+        output.writeUInt32(1, item_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeUInt32(2, playerId_);
+        output.writeMessage(2, getPosition());
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeUInt32(3, playerInQueue_);
+        output.writeMessage(3, getForward());
       }
       unknownFields.writeTo(output);
     }
@@ -8500,15 +3315,15 @@ public final class MeteorMsgs {
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeUInt32Size(1, result_);
+          .computeUInt32Size(1, item_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeUInt32Size(2, playerId_);
+          .computeMessageSize(2, getPosition());
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeUInt32Size(3, playerInQueue_);
+          .computeMessageSize(3, getForward());
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -8520,26 +3335,26 @@ public final class MeteorMsgs {
       if (obj == this) {
        return true;
       }
-      if (!(obj instanceof idevgame.meteor.proto.MeteorMsgs.EnterQueueRsp)) {
+      if (!(obj instanceof idevgame.meteor.proto.MeteorMsgs.DropMsg)) {
         return super.equals(obj);
       }
-      idevgame.meteor.proto.MeteorMsgs.EnterQueueRsp other = (idevgame.meteor.proto.MeteorMsgs.EnterQueueRsp) obj;
+      idevgame.meteor.proto.MeteorMsgs.DropMsg other = (idevgame.meteor.proto.MeteorMsgs.DropMsg) obj;
 
       boolean result = true;
-      result = result && (hasResult() == other.hasResult());
-      if (hasResult()) {
-        result = result && (getResult()
-            == other.getResult());
+      result = result && (hasItem() == other.hasItem());
+      if (hasItem()) {
+        result = result && (getItem()
+            == other.getItem());
       }
-      result = result && (hasPlayerId() == other.hasPlayerId());
-      if (hasPlayerId()) {
-        result = result && (getPlayerId()
-            == other.getPlayerId());
+      result = result && (hasPosition() == other.hasPosition());
+      if (hasPosition()) {
+        result = result && getPosition()
+            .equals(other.getPosition());
       }
-      result = result && (hasPlayerInQueue() == other.hasPlayerInQueue());
-      if (hasPlayerInQueue()) {
-        result = result && (getPlayerInQueue()
-            == other.getPlayerInQueue());
+      result = result && (hasForward() == other.hasForward());
+      if (hasForward()) {
+        result = result && getForward()
+            .equals(other.getForward());
       }
       result = result && unknownFields.equals(other.unknownFields);
       return result;
@@ -8552,86 +3367,86 @@ public final class MeteorMsgs {
       }
       int hash = 41;
       hash = (19 * hash) + getDescriptor().hashCode();
-      if (hasResult()) {
-        hash = (37 * hash) + RESULT_FIELD_NUMBER;
-        hash = (53 * hash) + getResult();
+      if (hasItem()) {
+        hash = (37 * hash) + ITEM_FIELD_NUMBER;
+        hash = (53 * hash) + getItem();
       }
-      if (hasPlayerId()) {
-        hash = (37 * hash) + PLAYERID_FIELD_NUMBER;
-        hash = (53 * hash) + getPlayerId();
+      if (hasPosition()) {
+        hash = (37 * hash) + POSITION_FIELD_NUMBER;
+        hash = (53 * hash) + getPosition().hashCode();
       }
-      if (hasPlayerInQueue()) {
-        hash = (37 * hash) + PLAYERINQUEUE_FIELD_NUMBER;
-        hash = (53 * hash) + getPlayerInQueue();
+      if (hasForward()) {
+        hash = (37 * hash) + FORWARD_FIELD_NUMBER;
+        hash = (53 * hash) + getForward().hashCode();
       }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
     }
 
-    public static idevgame.meteor.proto.MeteorMsgs.EnterQueueRsp parseFrom(
+    public static idevgame.meteor.proto.MeteorMsgs.DropMsg parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static idevgame.meteor.proto.MeteorMsgs.EnterQueueRsp parseFrom(
+    public static idevgame.meteor.proto.MeteorMsgs.DropMsg parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static idevgame.meteor.proto.MeteorMsgs.EnterQueueRsp parseFrom(
+    public static idevgame.meteor.proto.MeteorMsgs.DropMsg parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static idevgame.meteor.proto.MeteorMsgs.EnterQueueRsp parseFrom(
+    public static idevgame.meteor.proto.MeteorMsgs.DropMsg parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static idevgame.meteor.proto.MeteorMsgs.EnterQueueRsp parseFrom(byte[] data)
+    public static idevgame.meteor.proto.MeteorMsgs.DropMsg parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static idevgame.meteor.proto.MeteorMsgs.EnterQueueRsp parseFrom(
+    public static idevgame.meteor.proto.MeteorMsgs.DropMsg parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static idevgame.meteor.proto.MeteorMsgs.EnterQueueRsp parseFrom(java.io.InputStream input)
+    public static idevgame.meteor.proto.MeteorMsgs.DropMsg parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static idevgame.meteor.proto.MeteorMsgs.EnterQueueRsp parseFrom(
+    public static idevgame.meteor.proto.MeteorMsgs.DropMsg parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
-    public static idevgame.meteor.proto.MeteorMsgs.EnterQueueRsp parseDelimitedFrom(java.io.InputStream input)
+    public static idevgame.meteor.proto.MeteorMsgs.DropMsg parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input);
     }
-    public static idevgame.meteor.proto.MeteorMsgs.EnterQueueRsp parseDelimitedFrom(
+    public static idevgame.meteor.proto.MeteorMsgs.DropMsg parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static idevgame.meteor.proto.MeteorMsgs.EnterQueueRsp parseFrom(
+    public static idevgame.meteor.proto.MeteorMsgs.DropMsg parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static idevgame.meteor.proto.MeteorMsgs.EnterQueueRsp parseFrom(
+    public static idevgame.meteor.proto.MeteorMsgs.DropMsg parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -8643,7 +3458,7 @@ public final class MeteorMsgs {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(idevgame.meteor.proto.MeteorMsgs.EnterQueueRsp prototype) {
+    public static Builder newBuilder(idevgame.meteor.proto.MeteorMsgs.DropMsg prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() {
@@ -8658,25 +3473,25 @@ public final class MeteorMsgs {
       return builder;
     }
     /**
-     * Protobuf type {@code EnterQueueRsp}
+     * Protobuf type {@code DropMsg}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:EnterQueueRsp)
-        idevgame.meteor.proto.MeteorMsgs.EnterQueueRspOrBuilder {
+        // @@protoc_insertion_point(builder_implements:DropMsg)
+        idevgame.meteor.proto.MeteorMsgs.DropMsgOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return idevgame.meteor.proto.MeteorMsgs.internal_static_EnterQueueRsp_descriptor;
+        return idevgame.meteor.proto.MeteorMsgs.internal_static_DropMsg_descriptor;
       }
 
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return idevgame.meteor.proto.MeteorMsgs.internal_static_EnterQueueRsp_fieldAccessorTable
+        return idevgame.meteor.proto.MeteorMsgs.internal_static_DropMsg_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                idevgame.meteor.proto.MeteorMsgs.EnterQueueRsp.class, idevgame.meteor.proto.MeteorMsgs.EnterQueueRsp.Builder.class);
+                idevgame.meteor.proto.MeteorMsgs.DropMsg.class, idevgame.meteor.proto.MeteorMsgs.DropMsg.Builder.class);
       }
 
-      // Construct using idevgame.meteor.proto.MeteorMsgs.EnterQueueRsp.newBuilder()
+      // Construct using idevgame.meteor.proto.MeteorMsgs.DropMsg.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
@@ -8689,52 +3504,70 @@ public final class MeteorMsgs {
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessageV3
                 .alwaysUseFieldBuilders) {
+          getPositionFieldBuilder();
+          getForwardFieldBuilder();
         }
       }
       public Builder clear() {
         super.clear();
-        result_ = 0;
+        item_ = 0;
         bitField0_ = (bitField0_ & ~0x00000001);
-        playerId_ = 0;
+        if (positionBuilder_ == null) {
+          position_ = null;
+        } else {
+          positionBuilder_.clear();
+        }
         bitField0_ = (bitField0_ & ~0x00000002);
-        playerInQueue_ = 0;
+        if (forwardBuilder_ == null) {
+          forward_ = null;
+        } else {
+          forwardBuilder_.clear();
+        }
         bitField0_ = (bitField0_ & ~0x00000004);
         return this;
       }
 
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return idevgame.meteor.proto.MeteorMsgs.internal_static_EnterQueueRsp_descriptor;
+        return idevgame.meteor.proto.MeteorMsgs.internal_static_DropMsg_descriptor;
       }
 
-      public idevgame.meteor.proto.MeteorMsgs.EnterQueueRsp getDefaultInstanceForType() {
-        return idevgame.meteor.proto.MeteorMsgs.EnterQueueRsp.getDefaultInstance();
+      public idevgame.meteor.proto.MeteorMsgs.DropMsg getDefaultInstanceForType() {
+        return idevgame.meteor.proto.MeteorMsgs.DropMsg.getDefaultInstance();
       }
 
-      public idevgame.meteor.proto.MeteorMsgs.EnterQueueRsp build() {
-        idevgame.meteor.proto.MeteorMsgs.EnterQueueRsp result = buildPartial();
+      public idevgame.meteor.proto.MeteorMsgs.DropMsg build() {
+        idevgame.meteor.proto.MeteorMsgs.DropMsg result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      public idevgame.meteor.proto.MeteorMsgs.EnterQueueRsp buildPartial() {
-        idevgame.meteor.proto.MeteorMsgs.EnterQueueRsp result = new idevgame.meteor.proto.MeteorMsgs.EnterQueueRsp(this);
+      public idevgame.meteor.proto.MeteorMsgs.DropMsg buildPartial() {
+        idevgame.meteor.proto.MeteorMsgs.DropMsg result = new idevgame.meteor.proto.MeteorMsgs.DropMsg(this);
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
           to_bitField0_ |= 0x00000001;
         }
-        result.result_ = result_;
+        result.item_ = item_;
         if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
           to_bitField0_ |= 0x00000002;
         }
-        result.playerId_ = playerId_;
+        if (positionBuilder_ == null) {
+          result.position_ = position_;
+        } else {
+          result.position_ = positionBuilder_.build();
+        }
         if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
           to_bitField0_ |= 0x00000004;
         }
-        result.playerInQueue_ = playerInQueue_;
+        if (forwardBuilder_ == null) {
+          result.forward_ = forward_;
+        } else {
+          result.forward_ = forwardBuilder_.build();
+        }
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -8767,24 +3600,24 @@ public final class MeteorMsgs {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof idevgame.meteor.proto.MeteorMsgs.EnterQueueRsp) {
-          return mergeFrom((idevgame.meteor.proto.MeteorMsgs.EnterQueueRsp)other);
+        if (other instanceof idevgame.meteor.proto.MeteorMsgs.DropMsg) {
+          return mergeFrom((idevgame.meteor.proto.MeteorMsgs.DropMsg)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(idevgame.meteor.proto.MeteorMsgs.EnterQueueRsp other) {
-        if (other == idevgame.meteor.proto.MeteorMsgs.EnterQueueRsp.getDefaultInstance()) return this;
-        if (other.hasResult()) {
-          setResult(other.getResult());
+      public Builder mergeFrom(idevgame.meteor.proto.MeteorMsgs.DropMsg other) {
+        if (other == idevgame.meteor.proto.MeteorMsgs.DropMsg.getDefaultInstance()) return this;
+        if (other.hasItem()) {
+          setItem(other.getItem());
         }
-        if (other.hasPlayerId()) {
-          setPlayerId(other.getPlayerId());
+        if (other.hasPosition()) {
+          mergePosition(other.getPosition());
         }
-        if (other.hasPlayerInQueue()) {
-          setPlayerInQueue(other.getPlayerInQueue());
+        if (other.hasForward()) {
+          mergeForward(other.getForward());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -8792,13 +3625,19 @@ public final class MeteorMsgs {
       }
 
       public final boolean isInitialized() {
-        if (!hasResult()) {
+        if (!hasItem()) {
           return false;
         }
-        if (!hasPlayerId()) {
+        if (!hasPosition()) {
           return false;
         }
-        if (!hasPlayerInQueue()) {
+        if (!hasForward()) {
+          return false;
+        }
+        if (!getPosition().isInitialized()) {
+          return false;
+        }
+        if (!getForward().isInitialized()) {
           return false;
         }
         return true;
@@ -8808,11 +3647,11 @@ public final class MeteorMsgs {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        idevgame.meteor.proto.MeteorMsgs.EnterQueueRsp parsedMessage = null;
+        idevgame.meteor.proto.MeteorMsgs.DropMsg parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (idevgame.meteor.proto.MeteorMsgs.EnterQueueRsp) e.getUnfinishedMessage();
+          parsedMessage = (idevgame.meteor.proto.MeteorMsgs.DropMsg) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
           if (parsedMessage != null) {
@@ -8823,148 +3662,360 @@ public final class MeteorMsgs {
       }
       private int bitField0_;
 
-      private int result_ ;
+      private int item_ ;
       /**
        * <pre>
-       *结果.
+       *扔出的道具是什么
        * </pre>
        *
-       * <code>required uint32 result = 1;</code>
+       * <code>required uint32 item = 1;</code>
        */
-      public boolean hasResult() {
+      public boolean hasItem() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
       /**
        * <pre>
-       *结果.
+       *扔出的道具是什么
        * </pre>
        *
-       * <code>required uint32 result = 1;</code>
+       * <code>required uint32 item = 1;</code>
        */
-      public int getResult() {
-        return result_;
+      public int getItem() {
+        return item_;
       }
       /**
        * <pre>
-       *结果.
+       *扔出的道具是什么
        * </pre>
        *
-       * <code>required uint32 result = 1;</code>
+       * <code>required uint32 item = 1;</code>
        */
-      public Builder setResult(int value) {
+      public Builder setItem(int value) {
         bitField0_ |= 0x00000001;
-        result_ = value;
+        item_ = value;
         onChanged();
         return this;
       }
       /**
        * <pre>
-       *结果.
+       *扔出的道具是什么
        * </pre>
        *
-       * <code>required uint32 result = 1;</code>
+       * <code>required uint32 item = 1;</code>
        */
-      public Builder clearResult() {
+      public Builder clearItem() {
         bitField0_ = (bitField0_ & ~0x00000001);
-        result_ = 0;
+        item_ = 0;
         onChanged();
         return this;
       }
 
-      private int playerId_ ;
+      private idevgame.meteor.proto.MeteorMsgs._Vector3 position_ = null;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          idevgame.meteor.proto.MeteorMsgs._Vector3, idevgame.meteor.proto.MeteorMsgs._Vector3.Builder, idevgame.meteor.proto.MeteorMsgs._Vector3OrBuilder> positionBuilder_;
       /**
        * <pre>
-       *进入排队玩家分配到的玩家id
+       *从哪里扔出
        * </pre>
        *
-       * <code>required uint32 playerId = 2;</code>
+       * <code>required ._Vector3 position = 2;</code>
        */
-      public boolean hasPlayerId() {
+      public boolean hasPosition() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
        * <pre>
-       *进入排队玩家分配到的玩家id
+       *从哪里扔出
        * </pre>
        *
-       * <code>required uint32 playerId = 2;</code>
+       * <code>required ._Vector3 position = 2;</code>
        */
-      public int getPlayerId() {
-        return playerId_;
+      public idevgame.meteor.proto.MeteorMsgs._Vector3 getPosition() {
+        if (positionBuilder_ == null) {
+          return position_ == null ? idevgame.meteor.proto.MeteorMsgs._Vector3.getDefaultInstance() : position_;
+        } else {
+          return positionBuilder_.getMessage();
+        }
       }
       /**
        * <pre>
-       *进入排队玩家分配到的玩家id
+       *从哪里扔出
        * </pre>
        *
-       * <code>required uint32 playerId = 2;</code>
+       * <code>required ._Vector3 position = 2;</code>
        */
-      public Builder setPlayerId(int value) {
+      public Builder setPosition(idevgame.meteor.proto.MeteorMsgs._Vector3 value) {
+        if (positionBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          position_ = value;
+          onChanged();
+        } else {
+          positionBuilder_.setMessage(value);
+        }
         bitField0_ |= 0x00000002;
-        playerId_ = value;
-        onChanged();
         return this;
       }
       /**
        * <pre>
-       *进入排队玩家分配到的玩家id
+       *从哪里扔出
        * </pre>
        *
-       * <code>required uint32 playerId = 2;</code>
+       * <code>required ._Vector3 position = 2;</code>
        */
-      public Builder clearPlayerId() {
-        bitField0_ = (bitField0_ & ~0x00000002);
-        playerId_ = 0;
-        onChanged();
+      public Builder setPosition(
+          idevgame.meteor.proto.MeteorMsgs._Vector3.Builder builderForValue) {
+        if (positionBuilder_ == null) {
+          position_ = builderForValue.build();
+          onChanged();
+        } else {
+          positionBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000002;
         return this;
+      }
+      /**
+       * <pre>
+       *从哪里扔出
+       * </pre>
+       *
+       * <code>required ._Vector3 position = 2;</code>
+       */
+      public Builder mergePosition(idevgame.meteor.proto.MeteorMsgs._Vector3 value) {
+        if (positionBuilder_ == null) {
+          if (((bitField0_ & 0x00000002) == 0x00000002) &&
+              position_ != null &&
+              position_ != idevgame.meteor.proto.MeteorMsgs._Vector3.getDefaultInstance()) {
+            position_ =
+              idevgame.meteor.proto.MeteorMsgs._Vector3.newBuilder(position_).mergeFrom(value).buildPartial();
+          } else {
+            position_ = value;
+          }
+          onChanged();
+        } else {
+          positionBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000002;
+        return this;
+      }
+      /**
+       * <pre>
+       *从哪里扔出
+       * </pre>
+       *
+       * <code>required ._Vector3 position = 2;</code>
+       */
+      public Builder clearPosition() {
+        if (positionBuilder_ == null) {
+          position_ = null;
+          onChanged();
+        } else {
+          positionBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000002);
+        return this;
+      }
+      /**
+       * <pre>
+       *从哪里扔出
+       * </pre>
+       *
+       * <code>required ._Vector3 position = 2;</code>
+       */
+      public idevgame.meteor.proto.MeteorMsgs._Vector3.Builder getPositionBuilder() {
+        bitField0_ |= 0x00000002;
+        onChanged();
+        return getPositionFieldBuilder().getBuilder();
+      }
+      /**
+       * <pre>
+       *从哪里扔出
+       * </pre>
+       *
+       * <code>required ._Vector3 position = 2;</code>
+       */
+      public idevgame.meteor.proto.MeteorMsgs._Vector3OrBuilder getPositionOrBuilder() {
+        if (positionBuilder_ != null) {
+          return positionBuilder_.getMessageOrBuilder();
+        } else {
+          return position_ == null ?
+              idevgame.meteor.proto.MeteorMsgs._Vector3.getDefaultInstance() : position_;
+        }
+      }
+      /**
+       * <pre>
+       *从哪里扔出
+       * </pre>
+       *
+       * <code>required ._Vector3 position = 2;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          idevgame.meteor.proto.MeteorMsgs._Vector3, idevgame.meteor.proto.MeteorMsgs._Vector3.Builder, idevgame.meteor.proto.MeteorMsgs._Vector3OrBuilder> 
+          getPositionFieldBuilder() {
+        if (positionBuilder_ == null) {
+          positionBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              idevgame.meteor.proto.MeteorMsgs._Vector3, idevgame.meteor.proto.MeteorMsgs._Vector3.Builder, idevgame.meteor.proto.MeteorMsgs._Vector3OrBuilder>(
+                  getPosition(),
+                  getParentForChildren(),
+                  isClean());
+          position_ = null;
+        }
+        return positionBuilder_;
       }
 
-      private int playerInQueue_ ;
+      private idevgame.meteor.proto.MeteorMsgs._Vector3 forward_ = null;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          idevgame.meteor.proto.MeteorMsgs._Vector3, idevgame.meteor.proto.MeteorMsgs._Vector3.Builder, idevgame.meteor.proto.MeteorMsgs._Vector3OrBuilder> forwardBuilder_;
       /**
        * <pre>
-       *当前排队人数.
+       *往哪个方向扔出
        * </pre>
        *
-       * <code>required uint32 playerInQueue = 3;</code>
+       * <code>required ._Vector3 forward = 3;</code>
        */
-      public boolean hasPlayerInQueue() {
+      public boolean hasForward() {
         return ((bitField0_ & 0x00000004) == 0x00000004);
       }
       /**
        * <pre>
-       *当前排队人数.
+       *往哪个方向扔出
        * </pre>
        *
-       * <code>required uint32 playerInQueue = 3;</code>
+       * <code>required ._Vector3 forward = 3;</code>
        */
-      public int getPlayerInQueue() {
-        return playerInQueue_;
+      public idevgame.meteor.proto.MeteorMsgs._Vector3 getForward() {
+        if (forwardBuilder_ == null) {
+          return forward_ == null ? idevgame.meteor.proto.MeteorMsgs._Vector3.getDefaultInstance() : forward_;
+        } else {
+          return forwardBuilder_.getMessage();
+        }
       }
       /**
        * <pre>
-       *当前排队人数.
+       *往哪个方向扔出
        * </pre>
        *
-       * <code>required uint32 playerInQueue = 3;</code>
+       * <code>required ._Vector3 forward = 3;</code>
        */
-      public Builder setPlayerInQueue(int value) {
+      public Builder setForward(idevgame.meteor.proto.MeteorMsgs._Vector3 value) {
+        if (forwardBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          forward_ = value;
+          onChanged();
+        } else {
+          forwardBuilder_.setMessage(value);
+        }
         bitField0_ |= 0x00000004;
-        playerInQueue_ = value;
-        onChanged();
         return this;
       }
       /**
        * <pre>
-       *当前排队人数.
+       *往哪个方向扔出
        * </pre>
        *
-       * <code>required uint32 playerInQueue = 3;</code>
+       * <code>required ._Vector3 forward = 3;</code>
        */
-      public Builder clearPlayerInQueue() {
-        bitField0_ = (bitField0_ & ~0x00000004);
-        playerInQueue_ = 0;
-        onChanged();
+      public Builder setForward(
+          idevgame.meteor.proto.MeteorMsgs._Vector3.Builder builderForValue) {
+        if (forwardBuilder_ == null) {
+          forward_ = builderForValue.build();
+          onChanged();
+        } else {
+          forwardBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000004;
         return this;
+      }
+      /**
+       * <pre>
+       *往哪个方向扔出
+       * </pre>
+       *
+       * <code>required ._Vector3 forward = 3;</code>
+       */
+      public Builder mergeForward(idevgame.meteor.proto.MeteorMsgs._Vector3 value) {
+        if (forwardBuilder_ == null) {
+          if (((bitField0_ & 0x00000004) == 0x00000004) &&
+              forward_ != null &&
+              forward_ != idevgame.meteor.proto.MeteorMsgs._Vector3.getDefaultInstance()) {
+            forward_ =
+              idevgame.meteor.proto.MeteorMsgs._Vector3.newBuilder(forward_).mergeFrom(value).buildPartial();
+          } else {
+            forward_ = value;
+          }
+          onChanged();
+        } else {
+          forwardBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000004;
+        return this;
+      }
+      /**
+       * <pre>
+       *往哪个方向扔出
+       * </pre>
+       *
+       * <code>required ._Vector3 forward = 3;</code>
+       */
+      public Builder clearForward() {
+        if (forwardBuilder_ == null) {
+          forward_ = null;
+          onChanged();
+        } else {
+          forwardBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000004);
+        return this;
+      }
+      /**
+       * <pre>
+       *往哪个方向扔出
+       * </pre>
+       *
+       * <code>required ._Vector3 forward = 3;</code>
+       */
+      public idevgame.meteor.proto.MeteorMsgs._Vector3.Builder getForwardBuilder() {
+        bitField0_ |= 0x00000004;
+        onChanged();
+        return getForwardFieldBuilder().getBuilder();
+      }
+      /**
+       * <pre>
+       *往哪个方向扔出
+       * </pre>
+       *
+       * <code>required ._Vector3 forward = 3;</code>
+       */
+      public idevgame.meteor.proto.MeteorMsgs._Vector3OrBuilder getForwardOrBuilder() {
+        if (forwardBuilder_ != null) {
+          return forwardBuilder_.getMessageOrBuilder();
+        } else {
+          return forward_ == null ?
+              idevgame.meteor.proto.MeteorMsgs._Vector3.getDefaultInstance() : forward_;
+        }
+      }
+      /**
+       * <pre>
+       *往哪个方向扔出
+       * </pre>
+       *
+       * <code>required ._Vector3 forward = 3;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          idevgame.meteor.proto.MeteorMsgs._Vector3, idevgame.meteor.proto.MeteorMsgs._Vector3.Builder, idevgame.meteor.proto.MeteorMsgs._Vector3OrBuilder> 
+          getForwardFieldBuilder() {
+        if (forwardBuilder_ == null) {
+          forwardBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              idevgame.meteor.proto.MeteorMsgs._Vector3, idevgame.meteor.proto.MeteorMsgs._Vector3.Builder, idevgame.meteor.proto.MeteorMsgs._Vector3OrBuilder>(
+                  getForward(),
+                  getParentForChildren(),
+                  isClean());
+          forward_ = null;
+        }
+        return forwardBuilder_;
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
@@ -8977,181 +4028,103 @@ public final class MeteorMsgs {
       }
 
 
-      // @@protoc_insertion_point(builder_scope:EnterQueueRsp)
+      // @@protoc_insertion_point(builder_scope:DropMsg)
     }
 
-    // @@protoc_insertion_point(class_scope:EnterQueueRsp)
-    private static final idevgame.meteor.proto.MeteorMsgs.EnterQueueRsp DEFAULT_INSTANCE;
+    // @@protoc_insertion_point(class_scope:DropMsg)
+    private static final idevgame.meteor.proto.MeteorMsgs.DropMsg DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new idevgame.meteor.proto.MeteorMsgs.EnterQueueRsp();
+      DEFAULT_INSTANCE = new idevgame.meteor.proto.MeteorMsgs.DropMsg();
     }
 
-    public static idevgame.meteor.proto.MeteorMsgs.EnterQueueRsp getDefaultInstance() {
+    public static idevgame.meteor.proto.MeteorMsgs.DropMsg getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
-    @java.lang.Deprecated public static final com.google.protobuf.Parser<EnterQueueRsp>
-        PARSER = new com.google.protobuf.AbstractParser<EnterQueueRsp>() {
-      public EnterQueueRsp parsePartialFrom(
+    @java.lang.Deprecated public static final com.google.protobuf.Parser<DropMsg>
+        PARSER = new com.google.protobuf.AbstractParser<DropMsg>() {
+      public DropMsg parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return new EnterQueueRsp(input, extensionRegistry);
+        return new DropMsg(input, extensionRegistry);
       }
     };
 
-    public static com.google.protobuf.Parser<EnterQueueRsp> parser() {
+    public static com.google.protobuf.Parser<DropMsg> parser() {
       return PARSER;
     }
 
     @java.lang.Override
-    public com.google.protobuf.Parser<EnterQueueRsp> getParserForType() {
+    public com.google.protobuf.Parser<DropMsg> getParserForType() {
       return PARSER;
     }
 
-    public idevgame.meteor.proto.MeteorMsgs.EnterQueueRsp getDefaultInstanceForType() {
+    public idevgame.meteor.proto.MeteorMsgs.DropMsg getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
   }
 
-  public interface OnBattleBeginOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:OnBattleBegin)
+  public interface GetItemMsgOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:GetItemMsg)
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <pre>
-     *自己队伍的ID
-     * </pre>
-     *
-     * <code>repeated uint32 TeamMemberAId = 1;</code>
+     * <code>required uint32 playerId = 1;</code>
      */
-    java.util.List<java.lang.Integer> getTeamMemberAIdList();
+    boolean hasPlayerId();
     /**
-     * <pre>
-     *自己队伍的ID
-     * </pre>
-     *
-     * <code>repeated uint32 TeamMemberAId = 1;</code>
+     * <code>required uint32 playerId = 1;</code>
      */
-    int getTeamMemberAIdCount();
+    int getPlayerId();
+
     /**
-     * <pre>
-     *自己队伍的ID
-     * </pre>
-     *
-     * <code>repeated uint32 TeamMemberAId = 1;</code>
+     * <code>required uint32 instance = 2;</code>
      */
-    int getTeamMemberAId(int index);
+    boolean hasInstance();
+    /**
+     * <code>required uint32 instance = 2;</code>
+     */
+    int getInstance();
 
     /**
      * <pre>
-     *对方队伍的ID
+     *1为场景道具，2为pickup道具
      * </pre>
      *
-     * <code>repeated uint32 TeamMemberBId = 2;</code>
+     * <code>required uint32 type = 3;</code>
      */
-    java.util.List<java.lang.Integer> getTeamMemberBIdList();
+    boolean hasType();
     /**
      * <pre>
-     *对方队伍的ID
+     *1为场景道具，2为pickup道具
      * </pre>
      *
-     * <code>repeated uint32 TeamMemberBId = 2;</code>
+     * <code>required uint32 type = 3;</code>
      */
-    int getTeamMemberBIdCount();
-    /**
-     * <pre>
-     *对方队伍的ID
-     * </pre>
-     *
-     * <code>repeated uint32 TeamMemberBId = 2;</code>
-     */
-    int getTeamMemberBId(int index);
-
-    /**
-     * <pre>
-     *自己队伍的队友名称-和ID一一对应
-     * </pre>
-     *
-     * <code>repeated string TeamMemberA = 3;</code>
-     */
-    java.util.List<java.lang.String>
-        getTeamMemberAList();
-    /**
-     * <pre>
-     *自己队伍的队友名称-和ID一一对应
-     * </pre>
-     *
-     * <code>repeated string TeamMemberA = 3;</code>
-     */
-    int getTeamMemberACount();
-    /**
-     * <pre>
-     *自己队伍的队友名称-和ID一一对应
-     * </pre>
-     *
-     * <code>repeated string TeamMemberA = 3;</code>
-     */
-    java.lang.String getTeamMemberA(int index);
-    /**
-     * <pre>
-     *自己队伍的队友名称-和ID一一对应
-     * </pre>
-     *
-     * <code>repeated string TeamMemberA = 3;</code>
-     */
-    com.google.protobuf.ByteString
-        getTeamMemberABytes(int index);
-
-    /**
-     * <pre>
-     * </pre>
-     *
-     * <code>repeated string TeamMemberB = 4;</code>
-     */
-    java.util.List<java.lang.String>
-        getTeamMemberBList();
-    /**
-     * <pre>
-     * </pre>
-     *
-     * <code>repeated string TeamMemberB = 4;</code>
-     */
-    int getTeamMemberBCount();
-    /**
-     * <pre>
-     * </pre>
-     *
-     * <code>repeated string TeamMemberB = 4;</code>
-     */
-    java.lang.String getTeamMemberB(int index);
-    /**
-     * <pre>
-     * </pre>
-     *
-     * <code>repeated string TeamMemberB = 4;</code>
-     */
-    com.google.protobuf.ByteString
-        getTeamMemberBBytes(int index);
+    int getType();
   }
   /**
-   * Protobuf type {@code OnBattleBegin}
+   * <pre>
+   *场景道具同步
+   * </pre>
+   *
+   * Protobuf type {@code GetItemMsg}
    */
-  public  static final class OnBattleBegin extends
+  public  static final class GetItemMsg extends
       com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:OnBattleBegin)
-      OnBattleBeginOrBuilder {
+      // @@protoc_insertion_point(message_implements:GetItemMsg)
+      GetItemMsgOrBuilder {
   private static final long serialVersionUID = 0L;
-    // Use OnBattleBegin.newBuilder() to construct.
-    private OnBattleBegin(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+    // Use GetItemMsg.newBuilder() to construct.
+    private GetItemMsg(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
     }
-    private OnBattleBegin() {
-      teamMemberAId_ = java.util.Collections.emptyList();
-      teamMemberBId_ = java.util.Collections.emptyList();
-      teamMemberA_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-      teamMemberB_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+    private GetItemMsg() {
+      playerId_ = 0;
+      instance_ = 0;
+      type_ = 0;
     }
 
     @java.lang.Override
@@ -9159,7 +4132,7 @@ public final class MeteorMsgs {
     getUnknownFields() {
       return this.unknownFields;
     }
-    private OnBattleBegin(
+    private GetItemMsg(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -9186,63 +4159,18 @@ public final class MeteorMsgs {
               break;
             }
             case 8: {
-              if (!((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
-                teamMemberAId_ = new java.util.ArrayList<java.lang.Integer>();
-                mutable_bitField0_ |= 0x00000001;
-              }
-              teamMemberAId_.add(input.readUInt32());
-              break;
-            }
-            case 10: {
-              int length = input.readRawVarint32();
-              int limit = input.pushLimit(length);
-              if (!((mutable_bitField0_ & 0x00000001) == 0x00000001) && input.getBytesUntilLimit() > 0) {
-                teamMemberAId_ = new java.util.ArrayList<java.lang.Integer>();
-                mutable_bitField0_ |= 0x00000001;
-              }
-              while (input.getBytesUntilLimit() > 0) {
-                teamMemberAId_.add(input.readUInt32());
-              }
-              input.popLimit(limit);
+              bitField0_ |= 0x00000001;
+              playerId_ = input.readUInt32();
               break;
             }
             case 16: {
-              if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
-                teamMemberBId_ = new java.util.ArrayList<java.lang.Integer>();
-                mutable_bitField0_ |= 0x00000002;
-              }
-              teamMemberBId_.add(input.readUInt32());
+              bitField0_ |= 0x00000002;
+              instance_ = input.readUInt32();
               break;
             }
-            case 18: {
-              int length = input.readRawVarint32();
-              int limit = input.pushLimit(length);
-              if (!((mutable_bitField0_ & 0x00000002) == 0x00000002) && input.getBytesUntilLimit() > 0) {
-                teamMemberBId_ = new java.util.ArrayList<java.lang.Integer>();
-                mutable_bitField0_ |= 0x00000002;
-              }
-              while (input.getBytesUntilLimit() > 0) {
-                teamMemberBId_.add(input.readUInt32());
-              }
-              input.popLimit(limit);
-              break;
-            }
-            case 26: {
-              com.google.protobuf.ByteString bs = input.readBytes();
-              if (!((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
-                teamMemberA_ = new com.google.protobuf.LazyStringArrayList();
-                mutable_bitField0_ |= 0x00000004;
-              }
-              teamMemberA_.add(bs);
-              break;
-            }
-            case 34: {
-              com.google.protobuf.ByteString bs = input.readBytes();
-              if (!((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
-                teamMemberB_ = new com.google.protobuf.LazyStringArrayList();
-                mutable_bitField0_ |= 0x00000008;
-              }
-              teamMemberB_.add(bs);
+            case 24: {
+              bitField0_ |= 0x00000004;
+              type_ = input.readUInt32();
               break;
             }
           }
@@ -9253,186 +4181,74 @@ public final class MeteorMsgs {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
-        if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
-          teamMemberAId_ = java.util.Collections.unmodifiableList(teamMemberAId_);
-        }
-        if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
-          teamMemberBId_ = java.util.Collections.unmodifiableList(teamMemberBId_);
-        }
-        if (((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
-          teamMemberA_ = teamMemberA_.getUnmodifiableView();
-        }
-        if (((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
-          teamMemberB_ = teamMemberB_.getUnmodifiableView();
-        }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return idevgame.meteor.proto.MeteorMsgs.internal_static_OnBattleBegin_descriptor;
+      return idevgame.meteor.proto.MeteorMsgs.internal_static_GetItemMsg_descriptor;
     }
 
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return idevgame.meteor.proto.MeteorMsgs.internal_static_OnBattleBegin_fieldAccessorTable
+      return idevgame.meteor.proto.MeteorMsgs.internal_static_GetItemMsg_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              idevgame.meteor.proto.MeteorMsgs.OnBattleBegin.class, idevgame.meteor.proto.MeteorMsgs.OnBattleBegin.Builder.class);
+              idevgame.meteor.proto.MeteorMsgs.GetItemMsg.class, idevgame.meteor.proto.MeteorMsgs.GetItemMsg.Builder.class);
     }
 
-    public static final int TEAMMEMBERAID_FIELD_NUMBER = 1;
-    private java.util.List<java.lang.Integer> teamMemberAId_;
+    private int bitField0_;
+    public static final int PLAYERID_FIELD_NUMBER = 1;
+    private int playerId_;
     /**
-     * <pre>
-     *自己队伍的ID
-     * </pre>
-     *
-     * <code>repeated uint32 TeamMemberAId = 1;</code>
+     * <code>required uint32 playerId = 1;</code>
      */
-    public java.util.List<java.lang.Integer>
-        getTeamMemberAIdList() {
-      return teamMemberAId_;
+    public boolean hasPlayerId() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
     }
     /**
-     * <pre>
-     *自己队伍的ID
-     * </pre>
-     *
-     * <code>repeated uint32 TeamMemberAId = 1;</code>
+     * <code>required uint32 playerId = 1;</code>
      */
-    public int getTeamMemberAIdCount() {
-      return teamMemberAId_.size();
-    }
-    /**
-     * <pre>
-     *自己队伍的ID
-     * </pre>
-     *
-     * <code>repeated uint32 TeamMemberAId = 1;</code>
-     */
-    public int getTeamMemberAId(int index) {
-      return teamMemberAId_.get(index);
+    public int getPlayerId() {
+      return playerId_;
     }
 
-    public static final int TEAMMEMBERBID_FIELD_NUMBER = 2;
-    private java.util.List<java.lang.Integer> teamMemberBId_;
+    public static final int INSTANCE_FIELD_NUMBER = 2;
+    private int instance_;
     /**
-     * <pre>
-     *对方队伍的ID
-     * </pre>
-     *
-     * <code>repeated uint32 TeamMemberBId = 2;</code>
+     * <code>required uint32 instance = 2;</code>
      */
-    public java.util.List<java.lang.Integer>
-        getTeamMemberBIdList() {
-      return teamMemberBId_;
+    public boolean hasInstance() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <pre>
-     *对方队伍的ID
-     * </pre>
-     *
-     * <code>repeated uint32 TeamMemberBId = 2;</code>
+     * <code>required uint32 instance = 2;</code>
      */
-    public int getTeamMemberBIdCount() {
-      return teamMemberBId_.size();
-    }
-    /**
-     * <pre>
-     *对方队伍的ID
-     * </pre>
-     *
-     * <code>repeated uint32 TeamMemberBId = 2;</code>
-     */
-    public int getTeamMemberBId(int index) {
-      return teamMemberBId_.get(index);
+    public int getInstance() {
+      return instance_;
     }
 
-    public static final int TEAMMEMBERA_FIELD_NUMBER = 3;
-    private com.google.protobuf.LazyStringList teamMemberA_;
+    public static final int TYPE_FIELD_NUMBER = 3;
+    private int type_;
     /**
      * <pre>
-     *自己队伍的队友名称-和ID一一对应
+     *1为场景道具，2为pickup道具
      * </pre>
      *
-     * <code>repeated string TeamMemberA = 3;</code>
+     * <code>required uint32 type = 3;</code>
      */
-    public com.google.protobuf.ProtocolStringList
-        getTeamMemberAList() {
-      return teamMemberA_;
+    public boolean hasType() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
     }
     /**
      * <pre>
-     *自己队伍的队友名称-和ID一一对应
+     *1为场景道具，2为pickup道具
      * </pre>
      *
-     * <code>repeated string TeamMemberA = 3;</code>
+     * <code>required uint32 type = 3;</code>
      */
-    public int getTeamMemberACount() {
-      return teamMemberA_.size();
-    }
-    /**
-     * <pre>
-     *自己队伍的队友名称-和ID一一对应
-     * </pre>
-     *
-     * <code>repeated string TeamMemberA = 3;</code>
-     */
-    public java.lang.String getTeamMemberA(int index) {
-      return teamMemberA_.get(index);
-    }
-    /**
-     * <pre>
-     *自己队伍的队友名称-和ID一一对应
-     * </pre>
-     *
-     * <code>repeated string TeamMemberA = 3;</code>
-     */
-    public com.google.protobuf.ByteString
-        getTeamMemberABytes(int index) {
-      return teamMemberA_.getByteString(index);
-    }
-
-    public static final int TEAMMEMBERB_FIELD_NUMBER = 4;
-    private com.google.protobuf.LazyStringList teamMemberB_;
-    /**
-     * <pre>
-     * </pre>
-     *
-     * <code>repeated string TeamMemberB = 4;</code>
-     */
-    public com.google.protobuf.ProtocolStringList
-        getTeamMemberBList() {
-      return teamMemberB_;
-    }
-    /**
-     * <pre>
-     * </pre>
-     *
-     * <code>repeated string TeamMemberB = 4;</code>
-     */
-    public int getTeamMemberBCount() {
-      return teamMemberB_.size();
-    }
-    /**
-     * <pre>
-     * </pre>
-     *
-     * <code>repeated string TeamMemberB = 4;</code>
-     */
-    public java.lang.String getTeamMemberB(int index) {
-      return teamMemberB_.get(index);
-    }
-    /**
-     * <pre>
-     * </pre>
-     *
-     * <code>repeated string TeamMemberB = 4;</code>
-     */
-    public com.google.protobuf.ByteString
-        getTeamMemberBBytes(int index) {
-      return teamMemberB_.getByteString(index);
+    public int getType() {
+      return type_;
     }
 
     private byte memoizedIsInitialized = -1;
@@ -9441,23 +4257,32 @@ public final class MeteorMsgs {
       if (isInitialized == 1) return true;
       if (isInitialized == 0) return false;
 
+      if (!hasPlayerId()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasInstance()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasType()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
       memoizedIsInitialized = 1;
       return true;
     }
 
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      for (int i = 0; i < teamMemberAId_.size(); i++) {
-        output.writeUInt32(1, teamMemberAId_.get(i));
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeUInt32(1, playerId_);
       }
-      for (int i = 0; i < teamMemberBId_.size(); i++) {
-        output.writeUInt32(2, teamMemberBId_.get(i));
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeUInt32(2, instance_);
       }
-      for (int i = 0; i < teamMemberA_.size(); i++) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 3, teamMemberA_.getRaw(i));
-      }
-      for (int i = 0; i < teamMemberB_.size(); i++) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 4, teamMemberB_.getRaw(i));
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeUInt32(3, type_);
       }
       unknownFields.writeTo(output);
     }
@@ -9467,39 +4292,17 @@ public final class MeteorMsgs {
       if (size != -1) return size;
 
       size = 0;
-      {
-        int dataSize = 0;
-        for (int i = 0; i < teamMemberAId_.size(); i++) {
-          dataSize += com.google.protobuf.CodedOutputStream
-            .computeUInt32SizeNoTag(teamMemberAId_.get(i));
-        }
-        size += dataSize;
-        size += 1 * getTeamMemberAIdList().size();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt32Size(1, playerId_);
       }
-      {
-        int dataSize = 0;
-        for (int i = 0; i < teamMemberBId_.size(); i++) {
-          dataSize += com.google.protobuf.CodedOutputStream
-            .computeUInt32SizeNoTag(teamMemberBId_.get(i));
-        }
-        size += dataSize;
-        size += 1 * getTeamMemberBIdList().size();
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt32Size(2, instance_);
       }
-      {
-        int dataSize = 0;
-        for (int i = 0; i < teamMemberA_.size(); i++) {
-          dataSize += computeStringSizeNoTag(teamMemberA_.getRaw(i));
-        }
-        size += dataSize;
-        size += 1 * getTeamMemberAList().size();
-      }
-      {
-        int dataSize = 0;
-        for (int i = 0; i < teamMemberB_.size(); i++) {
-          dataSize += computeStringSizeNoTag(teamMemberB_.getRaw(i));
-        }
-        size += dataSize;
-        size += 1 * getTeamMemberBList().size();
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt32Size(3, type_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -9511,20 +4314,27 @@ public final class MeteorMsgs {
       if (obj == this) {
        return true;
       }
-      if (!(obj instanceof idevgame.meteor.proto.MeteorMsgs.OnBattleBegin)) {
+      if (!(obj instanceof idevgame.meteor.proto.MeteorMsgs.GetItemMsg)) {
         return super.equals(obj);
       }
-      idevgame.meteor.proto.MeteorMsgs.OnBattleBegin other = (idevgame.meteor.proto.MeteorMsgs.OnBattleBegin) obj;
+      idevgame.meteor.proto.MeteorMsgs.GetItemMsg other = (idevgame.meteor.proto.MeteorMsgs.GetItemMsg) obj;
 
       boolean result = true;
-      result = result && getTeamMemberAIdList()
-          .equals(other.getTeamMemberAIdList());
-      result = result && getTeamMemberBIdList()
-          .equals(other.getTeamMemberBIdList());
-      result = result && getTeamMemberAList()
-          .equals(other.getTeamMemberAList());
-      result = result && getTeamMemberBList()
-          .equals(other.getTeamMemberBList());
+      result = result && (hasPlayerId() == other.hasPlayerId());
+      if (hasPlayerId()) {
+        result = result && (getPlayerId()
+            == other.getPlayerId());
+      }
+      result = result && (hasInstance() == other.hasInstance());
+      if (hasInstance()) {
+        result = result && (getInstance()
+            == other.getInstance());
+      }
+      result = result && (hasType() == other.hasType());
+      if (hasType()) {
+        result = result && (getType()
+            == other.getType());
+      }
       result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
@@ -9536,90 +4346,86 @@ public final class MeteorMsgs {
       }
       int hash = 41;
       hash = (19 * hash) + getDescriptor().hashCode();
-      if (getTeamMemberAIdCount() > 0) {
-        hash = (37 * hash) + TEAMMEMBERAID_FIELD_NUMBER;
-        hash = (53 * hash) + getTeamMemberAIdList().hashCode();
+      if (hasPlayerId()) {
+        hash = (37 * hash) + PLAYERID_FIELD_NUMBER;
+        hash = (53 * hash) + getPlayerId();
       }
-      if (getTeamMemberBIdCount() > 0) {
-        hash = (37 * hash) + TEAMMEMBERBID_FIELD_NUMBER;
-        hash = (53 * hash) + getTeamMemberBIdList().hashCode();
+      if (hasInstance()) {
+        hash = (37 * hash) + INSTANCE_FIELD_NUMBER;
+        hash = (53 * hash) + getInstance();
       }
-      if (getTeamMemberACount() > 0) {
-        hash = (37 * hash) + TEAMMEMBERA_FIELD_NUMBER;
-        hash = (53 * hash) + getTeamMemberAList().hashCode();
-      }
-      if (getTeamMemberBCount() > 0) {
-        hash = (37 * hash) + TEAMMEMBERB_FIELD_NUMBER;
-        hash = (53 * hash) + getTeamMemberBList().hashCode();
+      if (hasType()) {
+        hash = (37 * hash) + TYPE_FIELD_NUMBER;
+        hash = (53 * hash) + getType();
       }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
     }
 
-    public static idevgame.meteor.proto.MeteorMsgs.OnBattleBegin parseFrom(
+    public static idevgame.meteor.proto.MeteorMsgs.GetItemMsg parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static idevgame.meteor.proto.MeteorMsgs.OnBattleBegin parseFrom(
+    public static idevgame.meteor.proto.MeteorMsgs.GetItemMsg parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static idevgame.meteor.proto.MeteorMsgs.OnBattleBegin parseFrom(
+    public static idevgame.meteor.proto.MeteorMsgs.GetItemMsg parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static idevgame.meteor.proto.MeteorMsgs.OnBattleBegin parseFrom(
+    public static idevgame.meteor.proto.MeteorMsgs.GetItemMsg parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static idevgame.meteor.proto.MeteorMsgs.OnBattleBegin parseFrom(byte[] data)
+    public static idevgame.meteor.proto.MeteorMsgs.GetItemMsg parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static idevgame.meteor.proto.MeteorMsgs.OnBattleBegin parseFrom(
+    public static idevgame.meteor.proto.MeteorMsgs.GetItemMsg parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static idevgame.meteor.proto.MeteorMsgs.OnBattleBegin parseFrom(java.io.InputStream input)
+    public static idevgame.meteor.proto.MeteorMsgs.GetItemMsg parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static idevgame.meteor.proto.MeteorMsgs.OnBattleBegin parseFrom(
+    public static idevgame.meteor.proto.MeteorMsgs.GetItemMsg parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
-    public static idevgame.meteor.proto.MeteorMsgs.OnBattleBegin parseDelimitedFrom(java.io.InputStream input)
+    public static idevgame.meteor.proto.MeteorMsgs.GetItemMsg parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input);
     }
-    public static idevgame.meteor.proto.MeteorMsgs.OnBattleBegin parseDelimitedFrom(
+    public static idevgame.meteor.proto.MeteorMsgs.GetItemMsg parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static idevgame.meteor.proto.MeteorMsgs.OnBattleBegin parseFrom(
+    public static idevgame.meteor.proto.MeteorMsgs.GetItemMsg parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static idevgame.meteor.proto.MeteorMsgs.OnBattleBegin parseFrom(
+    public static idevgame.meteor.proto.MeteorMsgs.GetItemMsg parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -9631,7 +4437,7 @@ public final class MeteorMsgs {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(idevgame.meteor.proto.MeteorMsgs.OnBattleBegin prototype) {
+    public static Builder newBuilder(idevgame.meteor.proto.MeteorMsgs.GetItemMsg prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() {
@@ -9646,25 +4452,29 @@ public final class MeteorMsgs {
       return builder;
     }
     /**
-     * Protobuf type {@code OnBattleBegin}
+     * <pre>
+     *场景道具同步
+     * </pre>
+     *
+     * Protobuf type {@code GetItemMsg}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:OnBattleBegin)
-        idevgame.meteor.proto.MeteorMsgs.OnBattleBeginOrBuilder {
+        // @@protoc_insertion_point(builder_implements:GetItemMsg)
+        idevgame.meteor.proto.MeteorMsgs.GetItemMsgOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return idevgame.meteor.proto.MeteorMsgs.internal_static_OnBattleBegin_descriptor;
+        return idevgame.meteor.proto.MeteorMsgs.internal_static_GetItemMsg_descriptor;
       }
 
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return idevgame.meteor.proto.MeteorMsgs.internal_static_OnBattleBegin_fieldAccessorTable
+        return idevgame.meteor.proto.MeteorMsgs.internal_static_GetItemMsg_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                idevgame.meteor.proto.MeteorMsgs.OnBattleBegin.class, idevgame.meteor.proto.MeteorMsgs.OnBattleBegin.Builder.class);
+                idevgame.meteor.proto.MeteorMsgs.GetItemMsg.class, idevgame.meteor.proto.MeteorMsgs.GetItemMsg.Builder.class);
       }
 
-      // Construct using idevgame.meteor.proto.MeteorMsgs.OnBattleBegin.newBuilder()
+      // Construct using idevgame.meteor.proto.MeteorMsgs.GetItemMsg.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
@@ -9681,57 +4491,49 @@ public final class MeteorMsgs {
       }
       public Builder clear() {
         super.clear();
-        teamMemberAId_ = java.util.Collections.emptyList();
+        playerId_ = 0;
         bitField0_ = (bitField0_ & ~0x00000001);
-        teamMemberBId_ = java.util.Collections.emptyList();
+        instance_ = 0;
         bitField0_ = (bitField0_ & ~0x00000002);
-        teamMemberA_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        type_ = 0;
         bitField0_ = (bitField0_ & ~0x00000004);
-        teamMemberB_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-        bitField0_ = (bitField0_ & ~0x00000008);
         return this;
       }
 
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return idevgame.meteor.proto.MeteorMsgs.internal_static_OnBattleBegin_descriptor;
+        return idevgame.meteor.proto.MeteorMsgs.internal_static_GetItemMsg_descriptor;
       }
 
-      public idevgame.meteor.proto.MeteorMsgs.OnBattleBegin getDefaultInstanceForType() {
-        return idevgame.meteor.proto.MeteorMsgs.OnBattleBegin.getDefaultInstance();
+      public idevgame.meteor.proto.MeteorMsgs.GetItemMsg getDefaultInstanceForType() {
+        return idevgame.meteor.proto.MeteorMsgs.GetItemMsg.getDefaultInstance();
       }
 
-      public idevgame.meteor.proto.MeteorMsgs.OnBattleBegin build() {
-        idevgame.meteor.proto.MeteorMsgs.OnBattleBegin result = buildPartial();
+      public idevgame.meteor.proto.MeteorMsgs.GetItemMsg build() {
+        idevgame.meteor.proto.MeteorMsgs.GetItemMsg result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      public idevgame.meteor.proto.MeteorMsgs.OnBattleBegin buildPartial() {
-        idevgame.meteor.proto.MeteorMsgs.OnBattleBegin result = new idevgame.meteor.proto.MeteorMsgs.OnBattleBegin(this);
+      public idevgame.meteor.proto.MeteorMsgs.GetItemMsg buildPartial() {
+        idevgame.meteor.proto.MeteorMsgs.GetItemMsg result = new idevgame.meteor.proto.MeteorMsgs.GetItemMsg(this);
         int from_bitField0_ = bitField0_;
-        if (((bitField0_ & 0x00000001) == 0x00000001)) {
-          teamMemberAId_ = java.util.Collections.unmodifiableList(teamMemberAId_);
-          bitField0_ = (bitField0_ & ~0x00000001);
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
         }
-        result.teamMemberAId_ = teamMemberAId_;
-        if (((bitField0_ & 0x00000002) == 0x00000002)) {
-          teamMemberBId_ = java.util.Collections.unmodifiableList(teamMemberBId_);
-          bitField0_ = (bitField0_ & ~0x00000002);
+        result.playerId_ = playerId_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
         }
-        result.teamMemberBId_ = teamMemberBId_;
-        if (((bitField0_ & 0x00000004) == 0x00000004)) {
-          teamMemberA_ = teamMemberA_.getUnmodifiableView();
-          bitField0_ = (bitField0_ & ~0x00000004);
+        result.instance_ = instance_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
         }
-        result.teamMemberA_ = teamMemberA_;
-        if (((bitField0_ & 0x00000008) == 0x00000008)) {
-          teamMemberB_ = teamMemberB_.getUnmodifiableView();
-          bitField0_ = (bitField0_ & ~0x00000008);
-        }
-        result.teamMemberB_ = teamMemberB_;
+        result.type_ = type_;
+        result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
       }
@@ -9763,55 +4565,24 @@ public final class MeteorMsgs {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof idevgame.meteor.proto.MeteorMsgs.OnBattleBegin) {
-          return mergeFrom((idevgame.meteor.proto.MeteorMsgs.OnBattleBegin)other);
+        if (other instanceof idevgame.meteor.proto.MeteorMsgs.GetItemMsg) {
+          return mergeFrom((idevgame.meteor.proto.MeteorMsgs.GetItemMsg)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(idevgame.meteor.proto.MeteorMsgs.OnBattleBegin other) {
-        if (other == idevgame.meteor.proto.MeteorMsgs.OnBattleBegin.getDefaultInstance()) return this;
-        if (!other.teamMemberAId_.isEmpty()) {
-          if (teamMemberAId_.isEmpty()) {
-            teamMemberAId_ = other.teamMemberAId_;
-            bitField0_ = (bitField0_ & ~0x00000001);
-          } else {
-            ensureTeamMemberAIdIsMutable();
-            teamMemberAId_.addAll(other.teamMemberAId_);
-          }
-          onChanged();
+      public Builder mergeFrom(idevgame.meteor.proto.MeteorMsgs.GetItemMsg other) {
+        if (other == idevgame.meteor.proto.MeteorMsgs.GetItemMsg.getDefaultInstance()) return this;
+        if (other.hasPlayerId()) {
+          setPlayerId(other.getPlayerId());
         }
-        if (!other.teamMemberBId_.isEmpty()) {
-          if (teamMemberBId_.isEmpty()) {
-            teamMemberBId_ = other.teamMemberBId_;
-            bitField0_ = (bitField0_ & ~0x00000002);
-          } else {
-            ensureTeamMemberBIdIsMutable();
-            teamMemberBId_.addAll(other.teamMemberBId_);
-          }
-          onChanged();
+        if (other.hasInstance()) {
+          setInstance(other.getInstance());
         }
-        if (!other.teamMemberA_.isEmpty()) {
-          if (teamMemberA_.isEmpty()) {
-            teamMemberA_ = other.teamMemberA_;
-            bitField0_ = (bitField0_ & ~0x00000004);
-          } else {
-            ensureTeamMemberAIsMutable();
-            teamMemberA_.addAll(other.teamMemberA_);
-          }
-          onChanged();
-        }
-        if (!other.teamMemberB_.isEmpty()) {
-          if (teamMemberB_.isEmpty()) {
-            teamMemberB_ = other.teamMemberB_;
-            bitField0_ = (bitField0_ & ~0x00000008);
-          } else {
-            ensureTeamMemberBIsMutable();
-            teamMemberB_.addAll(other.teamMemberB_);
-          }
-          onChanged();
+        if (other.hasType()) {
+          setType(other.getType());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -9819,6 +4590,15 @@ public final class MeteorMsgs {
       }
 
       public final boolean isInitialized() {
+        if (!hasPlayerId()) {
+          return false;
+        }
+        if (!hasInstance()) {
+          return false;
+        }
+        if (!hasType()) {
+          return false;
+        }
         return true;
       }
 
@@ -9826,11 +4606,11 @@ public final class MeteorMsgs {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        idevgame.meteor.proto.MeteorMsgs.OnBattleBegin parsedMessage = null;
+        idevgame.meteor.proto.MeteorMsgs.GetItemMsg parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (idevgame.meteor.proto.MeteorMsgs.OnBattleBegin) e.getUnfinishedMessage();
+          parsedMessage = (idevgame.meteor.proto.MeteorMsgs.GetItemMsg) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
           if (parsedMessage != null) {
@@ -9841,3525 +4621,2093 @@ public final class MeteorMsgs {
       }
       private int bitField0_;
 
-      private java.util.List<java.lang.Integer> teamMemberAId_ = java.util.Collections.emptyList();
-      private void ensureTeamMemberAIdIsMutable() {
-        if (!((bitField0_ & 0x00000001) == 0x00000001)) {
-          teamMemberAId_ = new java.util.ArrayList<java.lang.Integer>(teamMemberAId_);
-          bitField0_ |= 0x00000001;
-         }
+      private int playerId_ ;
+      /**
+       * <code>required uint32 playerId = 1;</code>
+       */
+      public boolean hasPlayerId() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
       }
       /**
-       * <pre>
-       *自己队伍的ID
-       * </pre>
-       *
-       * <code>repeated uint32 TeamMemberAId = 1;</code>
+       * <code>required uint32 playerId = 1;</code>
        */
-      public java.util.List<java.lang.Integer>
-          getTeamMemberAIdList() {
-        return java.util.Collections.unmodifiableList(teamMemberAId_);
+      public int getPlayerId() {
+        return playerId_;
       }
       /**
-       * <pre>
-       *自己队伍的ID
-       * </pre>
-       *
-       * <code>repeated uint32 TeamMemberAId = 1;</code>
+       * <code>required uint32 playerId = 1;</code>
        */
-      public int getTeamMemberAIdCount() {
-        return teamMemberAId_.size();
-      }
-      /**
-       * <pre>
-       *自己队伍的ID
-       * </pre>
-       *
-       * <code>repeated uint32 TeamMemberAId = 1;</code>
-       */
-      public int getTeamMemberAId(int index) {
-        return teamMemberAId_.get(index);
-      }
-      /**
-       * <pre>
-       *自己队伍的ID
-       * </pre>
-       *
-       * <code>repeated uint32 TeamMemberAId = 1;</code>
-       */
-      public Builder setTeamMemberAId(
-          int index, int value) {
-        ensureTeamMemberAIdIsMutable();
-        teamMemberAId_.set(index, value);
+      public Builder setPlayerId(int value) {
+        bitField0_ |= 0x00000001;
+        playerId_ = value;
         onChanged();
         return this;
       }
       /**
-       * <pre>
-       *自己队伍的ID
-       * </pre>
-       *
-       * <code>repeated uint32 TeamMemberAId = 1;</code>
+       * <code>required uint32 playerId = 1;</code>
        */
-      public Builder addTeamMemberAId(int value) {
-        ensureTeamMemberAIdIsMutable();
-        teamMemberAId_.add(value);
-        onChanged();
-        return this;
-      }
-      /**
-       * <pre>
-       *自己队伍的ID
-       * </pre>
-       *
-       * <code>repeated uint32 TeamMemberAId = 1;</code>
-       */
-      public Builder addAllTeamMemberAId(
-          java.lang.Iterable<? extends java.lang.Integer> values) {
-        ensureTeamMemberAIdIsMutable();
-        com.google.protobuf.AbstractMessageLite.Builder.addAll(
-            values, teamMemberAId_);
-        onChanged();
-        return this;
-      }
-      /**
-       * <pre>
-       *自己队伍的ID
-       * </pre>
-       *
-       * <code>repeated uint32 TeamMemberAId = 1;</code>
-       */
-      public Builder clearTeamMemberAId() {
-        teamMemberAId_ = java.util.Collections.emptyList();
+      public Builder clearPlayerId() {
         bitField0_ = (bitField0_ & ~0x00000001);
+        playerId_ = 0;
         onChanged();
         return this;
       }
 
-      private java.util.List<java.lang.Integer> teamMemberBId_ = java.util.Collections.emptyList();
-      private void ensureTeamMemberBIdIsMutable() {
-        if (!((bitField0_ & 0x00000002) == 0x00000002)) {
-          teamMemberBId_ = new java.util.ArrayList<java.lang.Integer>(teamMemberBId_);
-          bitField0_ |= 0x00000002;
-         }
+      private int instance_ ;
+      /**
+       * <code>required uint32 instance = 2;</code>
+       */
+      public boolean hasInstance() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <pre>
-       *对方队伍的ID
-       * </pre>
-       *
-       * <code>repeated uint32 TeamMemberBId = 2;</code>
+       * <code>required uint32 instance = 2;</code>
        */
-      public java.util.List<java.lang.Integer>
-          getTeamMemberBIdList() {
-        return java.util.Collections.unmodifiableList(teamMemberBId_);
+      public int getInstance() {
+        return instance_;
       }
       /**
-       * <pre>
-       *对方队伍的ID
-       * </pre>
-       *
-       * <code>repeated uint32 TeamMemberBId = 2;</code>
+       * <code>required uint32 instance = 2;</code>
        */
-      public int getTeamMemberBIdCount() {
-        return teamMemberBId_.size();
-      }
-      /**
-       * <pre>
-       *对方队伍的ID
-       * </pre>
-       *
-       * <code>repeated uint32 TeamMemberBId = 2;</code>
-       */
-      public int getTeamMemberBId(int index) {
-        return teamMemberBId_.get(index);
-      }
-      /**
-       * <pre>
-       *对方队伍的ID
-       * </pre>
-       *
-       * <code>repeated uint32 TeamMemberBId = 2;</code>
-       */
-      public Builder setTeamMemberBId(
-          int index, int value) {
-        ensureTeamMemberBIdIsMutable();
-        teamMemberBId_.set(index, value);
+      public Builder setInstance(int value) {
+        bitField0_ |= 0x00000002;
+        instance_ = value;
         onChanged();
         return this;
       }
       /**
-       * <pre>
-       *对方队伍的ID
-       * </pre>
-       *
-       * <code>repeated uint32 TeamMemberBId = 2;</code>
+       * <code>required uint32 instance = 2;</code>
        */
-      public Builder addTeamMemberBId(int value) {
-        ensureTeamMemberBIdIsMutable();
-        teamMemberBId_.add(value);
-        onChanged();
-        return this;
-      }
-      /**
-       * <pre>
-       *对方队伍的ID
-       * </pre>
-       *
-       * <code>repeated uint32 TeamMemberBId = 2;</code>
-       */
-      public Builder addAllTeamMemberBId(
-          java.lang.Iterable<? extends java.lang.Integer> values) {
-        ensureTeamMemberBIdIsMutable();
-        com.google.protobuf.AbstractMessageLite.Builder.addAll(
-            values, teamMemberBId_);
-        onChanged();
-        return this;
-      }
-      /**
-       * <pre>
-       *对方队伍的ID
-       * </pre>
-       *
-       * <code>repeated uint32 TeamMemberBId = 2;</code>
-       */
-      public Builder clearTeamMemberBId() {
-        teamMemberBId_ = java.util.Collections.emptyList();
+      public Builder clearInstance() {
         bitField0_ = (bitField0_ & ~0x00000002);
+        instance_ = 0;
         onChanged();
         return this;
       }
 
-      private com.google.protobuf.LazyStringList teamMemberA_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-      private void ensureTeamMemberAIsMutable() {
-        if (!((bitField0_ & 0x00000004) == 0x00000004)) {
-          teamMemberA_ = new com.google.protobuf.LazyStringArrayList(teamMemberA_);
-          bitField0_ |= 0x00000004;
-         }
-      }
+      private int type_ ;
       /**
        * <pre>
-       *自己队伍的队友名称-和ID一一对应
+       *1为场景道具，2为pickup道具
        * </pre>
        *
-       * <code>repeated string TeamMemberA = 3;</code>
+       * <code>required uint32 type = 3;</code>
        */
-      public com.google.protobuf.ProtocolStringList
-          getTeamMemberAList() {
-        return teamMemberA_.getUnmodifiableView();
+      public boolean hasType() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
       }
       /**
        * <pre>
-       *自己队伍的队友名称-和ID一一对应
+       *1为场景道具，2为pickup道具
        * </pre>
        *
-       * <code>repeated string TeamMemberA = 3;</code>
+       * <code>required uint32 type = 3;</code>
        */
-      public int getTeamMemberACount() {
-        return teamMemberA_.size();
+      public int getType() {
+        return type_;
       }
       /**
        * <pre>
-       *自己队伍的队友名称-和ID一一对应
+       *1为场景道具，2为pickup道具
        * </pre>
        *
-       * <code>repeated string TeamMemberA = 3;</code>
+       * <code>required uint32 type = 3;</code>
        */
-      public java.lang.String getTeamMemberA(int index) {
-        return teamMemberA_.get(index);
+      public Builder setType(int value) {
+        bitField0_ |= 0x00000004;
+        type_ = value;
+        onChanged();
+        return this;
       }
       /**
        * <pre>
-       *自己队伍的队友名称-和ID一一对应
+       *1为场景道具，2为pickup道具
        * </pre>
        *
-       * <code>repeated string TeamMemberA = 3;</code>
+       * <code>required uint32 type = 3;</code>
+       */
+      public Builder clearType() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        type_ = 0;
+        onChanged();
+        return this;
+      }
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFields(unknownFields);
+      }
+
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:GetItemMsg)
+    }
+
+    // @@protoc_insertion_point(class_scope:GetItemMsg)
+    private static final idevgame.meteor.proto.MeteorMsgs.GetItemMsg DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new idevgame.meteor.proto.MeteorMsgs.GetItemMsg();
+    }
+
+    public static idevgame.meteor.proto.MeteorMsgs.GetItemMsg getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    @java.lang.Deprecated public static final com.google.protobuf.Parser<GetItemMsg>
+        PARSER = new com.google.protobuf.AbstractParser<GetItemMsg>() {
+      public GetItemMsg parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new GetItemMsg(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<GetItemMsg> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<GetItemMsg> getParserForType() {
+      return PARSER;
+    }
+
+    public idevgame.meteor.proto.MeteorMsgs.GetItemMsg getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
+  public interface PlayerSyncOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:PlayerSync)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>required uint32 playerId = 1;</code>
+     */
+    boolean hasPlayerId();
+    /**
+     * <code>required uint32 playerId = 1;</code>
+     */
+    int getPlayerId();
+
+    /**
+     * <code>optional string name = 2;</code>
+     */
+    boolean hasName();
+    /**
+     * <code>optional string name = 2;</code>
+     */
+    java.lang.String getName();
+    /**
+     * <code>optional string name = 2;</code>
+     */
+    com.google.protobuf.ByteString
+        getNameBytes();
+
+    /**
+     * <code>required uint32 model = 3;</code>
+     */
+    boolean hasModel();
+    /**
+     * <code>required uint32 model = 3;</code>
+     */
+    int getModel();
+
+    /**
+     * <code>required uint32 weapon = 4;</code>
+     */
+    boolean hasWeapon();
+    /**
+     * <code>required uint32 weapon = 4;</code>
+     */
+    int getWeapon();
+
+    /**
+     * <code>required uint32 weapon1 = 5;</code>
+     */
+    boolean hasWeapon1();
+    /**
+     * <code>required uint32 weapon1 = 5;</code>
+     */
+    int getWeapon1();
+
+    /**
+     * <code>required uint32 camp = 6;</code>
+     */
+    boolean hasCamp();
+    /**
+     * <code>required uint32 camp = 6;</code>
+     */
+    int getCamp();
+
+    /**
+     * <code>required uint32 hp = 7;</code>
+     */
+    boolean hasHp();
+    /**
+     * <code>required uint32 hp = 7;</code>
+     */
+    int getHp();
+
+    /**
+     * <code>required uint32 ang = 8;</code>
+     */
+    boolean hasAng();
+    /**
+     * <code>required uint32 ang = 8;</code>
+     */
+    int getAng();
+
+    /**
+     * <code>optional uint32 spwanIndex = 9;</code>
+     */
+    boolean hasSpwanIndex();
+    /**
+     * <code>optional uint32 spwanIndex = 9;</code>
+     */
+    int getSpwanIndex();
+
+    /**
+     * <code>optional ._Vector3 position = 10;</code>
+     */
+    boolean hasPosition();
+    /**
+     * <code>optional ._Vector3 position = 10;</code>
+     */
+    idevgame.meteor.proto.MeteorMsgs._Vector3 getPosition();
+    /**
+     * <code>optional ._Vector3 position = 10;</code>
+     */
+    idevgame.meteor.proto.MeteorMsgs._Vector3OrBuilder getPositionOrBuilder();
+
+    /**
+     * <code>optional ._Quaternion rotation = 11;</code>
+     */
+    boolean hasRotation();
+    /**
+     * <code>optional ._Quaternion rotation = 11;</code>
+     */
+    idevgame.meteor.proto.MeteorMsgs._Quaternion getRotation();
+    /**
+     * <code>optional ._Quaternion rotation = 11;</code>
+     */
+    idevgame.meteor.proto.MeteorMsgs._QuaternionOrBuilder getRotationOrBuilder();
+
+    /**
+     * <code>optional int32 action = 12;</code>
+     */
+    boolean hasAction();
+    /**
+     * <code>optional int32 action = 12;</code>
+     */
+    int getAction();
+
+    /**
+     * <code>repeated uint32 buff = 13;</code>
+     */
+    java.util.List<java.lang.Integer> getBuffList();
+    /**
+     * <code>repeated uint32 buff = 13;</code>
+     */
+    int getBuffCount();
+    /**
+     * <code>repeated uint32 buff = 13;</code>
+     */
+    int getBuff(int index);
+  }
+  /**
+   * <pre>
+   *角色信息同步-一定时间内同步一次.
+   * </pre>
+   *
+   * Protobuf type {@code PlayerSync}
+   */
+  public  static final class PlayerSync extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:PlayerSync)
+      PlayerSyncOrBuilder {
+  private static final long serialVersionUID = 0L;
+    // Use PlayerSync.newBuilder() to construct.
+    private PlayerSync(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private PlayerSync() {
+      playerId_ = 0;
+      name_ = "";
+      model_ = 0;
+      weapon_ = 0;
+      weapon1_ = 0;
+      camp_ = 0;
+      hp_ = 0;
+      ang_ = 0;
+      spwanIndex_ = 0;
+      action_ = 0;
+      buff_ = java.util.Collections.emptyList();
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private PlayerSync(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 8: {
+              bitField0_ |= 0x00000001;
+              playerId_ = input.readUInt32();
+              break;
+            }
+            case 18: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000002;
+              name_ = bs;
+              break;
+            }
+            case 24: {
+              bitField0_ |= 0x00000004;
+              model_ = input.readUInt32();
+              break;
+            }
+            case 32: {
+              bitField0_ |= 0x00000008;
+              weapon_ = input.readUInt32();
+              break;
+            }
+            case 40: {
+              bitField0_ |= 0x00000010;
+              weapon1_ = input.readUInt32();
+              break;
+            }
+            case 48: {
+              bitField0_ |= 0x00000020;
+              camp_ = input.readUInt32();
+              break;
+            }
+            case 56: {
+              bitField0_ |= 0x00000040;
+              hp_ = input.readUInt32();
+              break;
+            }
+            case 64: {
+              bitField0_ |= 0x00000080;
+              ang_ = input.readUInt32();
+              break;
+            }
+            case 72: {
+              bitField0_ |= 0x00000100;
+              spwanIndex_ = input.readUInt32();
+              break;
+            }
+            case 82: {
+              idevgame.meteor.proto.MeteorMsgs._Vector3.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000200) == 0x00000200)) {
+                subBuilder = position_.toBuilder();
+              }
+              position_ = input.readMessage(idevgame.meteor.proto.MeteorMsgs._Vector3.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(position_);
+                position_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000200;
+              break;
+            }
+            case 90: {
+              idevgame.meteor.proto.MeteorMsgs._Quaternion.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000400) == 0x00000400)) {
+                subBuilder = rotation_.toBuilder();
+              }
+              rotation_ = input.readMessage(idevgame.meteor.proto.MeteorMsgs._Quaternion.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(rotation_);
+                rotation_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000400;
+              break;
+            }
+            case 96: {
+              bitField0_ |= 0x00000800;
+              action_ = input.readInt32();
+              break;
+            }
+            case 104: {
+              if (!((mutable_bitField0_ & 0x00001000) == 0x00001000)) {
+                buff_ = new java.util.ArrayList<java.lang.Integer>();
+                mutable_bitField0_ |= 0x00001000;
+              }
+              buff_.add(input.readUInt32());
+              break;
+            }
+            case 106: {
+              int length = input.readRawVarint32();
+              int limit = input.pushLimit(length);
+              if (!((mutable_bitField0_ & 0x00001000) == 0x00001000) && input.getBytesUntilLimit() > 0) {
+                buff_ = new java.util.ArrayList<java.lang.Integer>();
+                mutable_bitField0_ |= 0x00001000;
+              }
+              while (input.getBytesUntilLimit() > 0) {
+                buff_.add(input.readUInt32());
+              }
+              input.popLimit(limit);
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        if (((mutable_bitField0_ & 0x00001000) == 0x00001000)) {
+          buff_ = java.util.Collections.unmodifiableList(buff_);
+        }
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return idevgame.meteor.proto.MeteorMsgs.internal_static_PlayerSync_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return idevgame.meteor.proto.MeteorMsgs.internal_static_PlayerSync_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              idevgame.meteor.proto.MeteorMsgs.PlayerSync.class, idevgame.meteor.proto.MeteorMsgs.PlayerSync.Builder.class);
+    }
+
+    private int bitField0_;
+    public static final int PLAYERID_FIELD_NUMBER = 1;
+    private int playerId_;
+    /**
+     * <code>required uint32 playerId = 1;</code>
+     */
+    public boolean hasPlayerId() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>required uint32 playerId = 1;</code>
+     */
+    public int getPlayerId() {
+      return playerId_;
+    }
+
+    public static final int NAME_FIELD_NUMBER = 2;
+    private volatile java.lang.Object name_;
+    /**
+     * <code>optional string name = 2;</code>
+     */
+    public boolean hasName() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional string name = 2;</code>
+     */
+    public java.lang.String getName() {
+      java.lang.Object ref = name_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          name_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string name = 2;</code>
+     */
+    public com.google.protobuf.ByteString
+        getNameBytes() {
+      java.lang.Object ref = name_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        name_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int MODEL_FIELD_NUMBER = 3;
+    private int model_;
+    /**
+     * <code>required uint32 model = 3;</code>
+     */
+    public boolean hasModel() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>required uint32 model = 3;</code>
+     */
+    public int getModel() {
+      return model_;
+    }
+
+    public static final int WEAPON_FIELD_NUMBER = 4;
+    private int weapon_;
+    /**
+     * <code>required uint32 weapon = 4;</code>
+     */
+    public boolean hasWeapon() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>required uint32 weapon = 4;</code>
+     */
+    public int getWeapon() {
+      return weapon_;
+    }
+
+    public static final int WEAPON1_FIELD_NUMBER = 5;
+    private int weapon1_;
+    /**
+     * <code>required uint32 weapon1 = 5;</code>
+     */
+    public boolean hasWeapon1() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    /**
+     * <code>required uint32 weapon1 = 5;</code>
+     */
+    public int getWeapon1() {
+      return weapon1_;
+    }
+
+    public static final int CAMP_FIELD_NUMBER = 6;
+    private int camp_;
+    /**
+     * <code>required uint32 camp = 6;</code>
+     */
+    public boolean hasCamp() {
+      return ((bitField0_ & 0x00000020) == 0x00000020);
+    }
+    /**
+     * <code>required uint32 camp = 6;</code>
+     */
+    public int getCamp() {
+      return camp_;
+    }
+
+    public static final int HP_FIELD_NUMBER = 7;
+    private int hp_;
+    /**
+     * <code>required uint32 hp = 7;</code>
+     */
+    public boolean hasHp() {
+      return ((bitField0_ & 0x00000040) == 0x00000040);
+    }
+    /**
+     * <code>required uint32 hp = 7;</code>
+     */
+    public int getHp() {
+      return hp_;
+    }
+
+    public static final int ANG_FIELD_NUMBER = 8;
+    private int ang_;
+    /**
+     * <code>required uint32 ang = 8;</code>
+     */
+    public boolean hasAng() {
+      return ((bitField0_ & 0x00000080) == 0x00000080);
+    }
+    /**
+     * <code>required uint32 ang = 8;</code>
+     */
+    public int getAng() {
+      return ang_;
+    }
+
+    public static final int SPWANINDEX_FIELD_NUMBER = 9;
+    private int spwanIndex_;
+    /**
+     * <code>optional uint32 spwanIndex = 9;</code>
+     */
+    public boolean hasSpwanIndex() {
+      return ((bitField0_ & 0x00000100) == 0x00000100);
+    }
+    /**
+     * <code>optional uint32 spwanIndex = 9;</code>
+     */
+    public int getSpwanIndex() {
+      return spwanIndex_;
+    }
+
+    public static final int POSITION_FIELD_NUMBER = 10;
+    private idevgame.meteor.proto.MeteorMsgs._Vector3 position_;
+    /**
+     * <code>optional ._Vector3 position = 10;</code>
+     */
+    public boolean hasPosition() {
+      return ((bitField0_ & 0x00000200) == 0x00000200);
+    }
+    /**
+     * <code>optional ._Vector3 position = 10;</code>
+     */
+    public idevgame.meteor.proto.MeteorMsgs._Vector3 getPosition() {
+      return position_ == null ? idevgame.meteor.proto.MeteorMsgs._Vector3.getDefaultInstance() : position_;
+    }
+    /**
+     * <code>optional ._Vector3 position = 10;</code>
+     */
+    public idevgame.meteor.proto.MeteorMsgs._Vector3OrBuilder getPositionOrBuilder() {
+      return position_ == null ? idevgame.meteor.proto.MeteorMsgs._Vector3.getDefaultInstance() : position_;
+    }
+
+    public static final int ROTATION_FIELD_NUMBER = 11;
+    private idevgame.meteor.proto.MeteorMsgs._Quaternion rotation_;
+    /**
+     * <code>optional ._Quaternion rotation = 11;</code>
+     */
+    public boolean hasRotation() {
+      return ((bitField0_ & 0x00000400) == 0x00000400);
+    }
+    /**
+     * <code>optional ._Quaternion rotation = 11;</code>
+     */
+    public idevgame.meteor.proto.MeteorMsgs._Quaternion getRotation() {
+      return rotation_ == null ? idevgame.meteor.proto.MeteorMsgs._Quaternion.getDefaultInstance() : rotation_;
+    }
+    /**
+     * <code>optional ._Quaternion rotation = 11;</code>
+     */
+    public idevgame.meteor.proto.MeteorMsgs._QuaternionOrBuilder getRotationOrBuilder() {
+      return rotation_ == null ? idevgame.meteor.proto.MeteorMsgs._Quaternion.getDefaultInstance() : rotation_;
+    }
+
+    public static final int ACTION_FIELD_NUMBER = 12;
+    private int action_;
+    /**
+     * <code>optional int32 action = 12;</code>
+     */
+    public boolean hasAction() {
+      return ((bitField0_ & 0x00000800) == 0x00000800);
+    }
+    /**
+     * <code>optional int32 action = 12;</code>
+     */
+    public int getAction() {
+      return action_;
+    }
+
+    public static final int BUFF_FIELD_NUMBER = 13;
+    private java.util.List<java.lang.Integer> buff_;
+    /**
+     * <code>repeated uint32 buff = 13;</code>
+     */
+    public java.util.List<java.lang.Integer>
+        getBuffList() {
+      return buff_;
+    }
+    /**
+     * <code>repeated uint32 buff = 13;</code>
+     */
+    public int getBuffCount() {
+      return buff_.size();
+    }
+    /**
+     * <code>repeated uint32 buff = 13;</code>
+     */
+    public int getBuff(int index) {
+      return buff_.get(index);
+    }
+
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      if (!hasPlayerId()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasModel()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasWeapon()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasWeapon1()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasCamp()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasHp()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasAng()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (hasPosition()) {
+        if (!getPosition().isInitialized()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+      }
+      if (hasRotation()) {
+        if (!getRotation().isInitialized()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeUInt32(1, playerId_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, name_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeUInt32(3, model_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeUInt32(4, weapon_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeUInt32(5, weapon1_);
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        output.writeUInt32(6, camp_);
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        output.writeUInt32(7, hp_);
+      }
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+        output.writeUInt32(8, ang_);
+      }
+      if (((bitField0_ & 0x00000100) == 0x00000100)) {
+        output.writeUInt32(9, spwanIndex_);
+      }
+      if (((bitField0_ & 0x00000200) == 0x00000200)) {
+        output.writeMessage(10, getPosition());
+      }
+      if (((bitField0_ & 0x00000400) == 0x00000400)) {
+        output.writeMessage(11, getRotation());
+      }
+      if (((bitField0_ & 0x00000800) == 0x00000800)) {
+        output.writeInt32(12, action_);
+      }
+      for (int i = 0; i < buff_.size(); i++) {
+        output.writeUInt32(13, buff_.get(i));
+      }
+      unknownFields.writeTo(output);
+    }
+
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt32Size(1, playerId_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, name_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt32Size(3, model_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt32Size(4, weapon_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt32Size(5, weapon1_);
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt32Size(6, camp_);
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt32Size(7, hp_);
+      }
+      if (((bitField0_ & 0x00000080) == 0x00000080)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt32Size(8, ang_);
+      }
+      if (((bitField0_ & 0x00000100) == 0x00000100)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt32Size(9, spwanIndex_);
+      }
+      if (((bitField0_ & 0x00000200) == 0x00000200)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(10, getPosition());
+      }
+      if (((bitField0_ & 0x00000400) == 0x00000400)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(11, getRotation());
+      }
+      if (((bitField0_ & 0x00000800) == 0x00000800)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(12, action_);
+      }
+      {
+        int dataSize = 0;
+        for (int i = 0; i < buff_.size(); i++) {
+          dataSize += com.google.protobuf.CodedOutputStream
+            .computeUInt32SizeNoTag(buff_.get(i));
+        }
+        size += dataSize;
+        size += 1 * getBuffList().size();
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof idevgame.meteor.proto.MeteorMsgs.PlayerSync)) {
+        return super.equals(obj);
+      }
+      idevgame.meteor.proto.MeteorMsgs.PlayerSync other = (idevgame.meteor.proto.MeteorMsgs.PlayerSync) obj;
+
+      boolean result = true;
+      result = result && (hasPlayerId() == other.hasPlayerId());
+      if (hasPlayerId()) {
+        result = result && (getPlayerId()
+            == other.getPlayerId());
+      }
+      result = result && (hasName() == other.hasName());
+      if (hasName()) {
+        result = result && getName()
+            .equals(other.getName());
+      }
+      result = result && (hasModel() == other.hasModel());
+      if (hasModel()) {
+        result = result && (getModel()
+            == other.getModel());
+      }
+      result = result && (hasWeapon() == other.hasWeapon());
+      if (hasWeapon()) {
+        result = result && (getWeapon()
+            == other.getWeapon());
+      }
+      result = result && (hasWeapon1() == other.hasWeapon1());
+      if (hasWeapon1()) {
+        result = result && (getWeapon1()
+            == other.getWeapon1());
+      }
+      result = result && (hasCamp() == other.hasCamp());
+      if (hasCamp()) {
+        result = result && (getCamp()
+            == other.getCamp());
+      }
+      result = result && (hasHp() == other.hasHp());
+      if (hasHp()) {
+        result = result && (getHp()
+            == other.getHp());
+      }
+      result = result && (hasAng() == other.hasAng());
+      if (hasAng()) {
+        result = result && (getAng()
+            == other.getAng());
+      }
+      result = result && (hasSpwanIndex() == other.hasSpwanIndex());
+      if (hasSpwanIndex()) {
+        result = result && (getSpwanIndex()
+            == other.getSpwanIndex());
+      }
+      result = result && (hasPosition() == other.hasPosition());
+      if (hasPosition()) {
+        result = result && getPosition()
+            .equals(other.getPosition());
+      }
+      result = result && (hasRotation() == other.hasRotation());
+      if (hasRotation()) {
+        result = result && getRotation()
+            .equals(other.getRotation());
+      }
+      result = result && (hasAction() == other.hasAction());
+      if (hasAction()) {
+        result = result && (getAction()
+            == other.getAction());
+      }
+      result = result && getBuffList()
+          .equals(other.getBuffList());
+      result = result && unknownFields.equals(other.unknownFields);
+      return result;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      if (hasPlayerId()) {
+        hash = (37 * hash) + PLAYERID_FIELD_NUMBER;
+        hash = (53 * hash) + getPlayerId();
+      }
+      if (hasName()) {
+        hash = (37 * hash) + NAME_FIELD_NUMBER;
+        hash = (53 * hash) + getName().hashCode();
+      }
+      if (hasModel()) {
+        hash = (37 * hash) + MODEL_FIELD_NUMBER;
+        hash = (53 * hash) + getModel();
+      }
+      if (hasWeapon()) {
+        hash = (37 * hash) + WEAPON_FIELD_NUMBER;
+        hash = (53 * hash) + getWeapon();
+      }
+      if (hasWeapon1()) {
+        hash = (37 * hash) + WEAPON1_FIELD_NUMBER;
+        hash = (53 * hash) + getWeapon1();
+      }
+      if (hasCamp()) {
+        hash = (37 * hash) + CAMP_FIELD_NUMBER;
+        hash = (53 * hash) + getCamp();
+      }
+      if (hasHp()) {
+        hash = (37 * hash) + HP_FIELD_NUMBER;
+        hash = (53 * hash) + getHp();
+      }
+      if (hasAng()) {
+        hash = (37 * hash) + ANG_FIELD_NUMBER;
+        hash = (53 * hash) + getAng();
+      }
+      if (hasSpwanIndex()) {
+        hash = (37 * hash) + SPWANINDEX_FIELD_NUMBER;
+        hash = (53 * hash) + getSpwanIndex();
+      }
+      if (hasPosition()) {
+        hash = (37 * hash) + POSITION_FIELD_NUMBER;
+        hash = (53 * hash) + getPosition().hashCode();
+      }
+      if (hasRotation()) {
+        hash = (37 * hash) + ROTATION_FIELD_NUMBER;
+        hash = (53 * hash) + getRotation().hashCode();
+      }
+      if (hasAction()) {
+        hash = (37 * hash) + ACTION_FIELD_NUMBER;
+        hash = (53 * hash) + getAction();
+      }
+      if (getBuffCount() > 0) {
+        hash = (37 * hash) + BUFF_FIELD_NUMBER;
+        hash = (53 * hash) + getBuffList().hashCode();
+      }
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static idevgame.meteor.proto.MeteorMsgs.PlayerSync parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static idevgame.meteor.proto.MeteorMsgs.PlayerSync parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static idevgame.meteor.proto.MeteorMsgs.PlayerSync parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static idevgame.meteor.proto.MeteorMsgs.PlayerSync parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static idevgame.meteor.proto.MeteorMsgs.PlayerSync parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static idevgame.meteor.proto.MeteorMsgs.PlayerSync parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static idevgame.meteor.proto.MeteorMsgs.PlayerSync parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static idevgame.meteor.proto.MeteorMsgs.PlayerSync parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static idevgame.meteor.proto.MeteorMsgs.PlayerSync parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static idevgame.meteor.proto.MeteorMsgs.PlayerSync parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static idevgame.meteor.proto.MeteorMsgs.PlayerSync parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static idevgame.meteor.proto.MeteorMsgs.PlayerSync parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(idevgame.meteor.proto.MeteorMsgs.PlayerSync prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * <pre>
+     *角色信息同步-一定时间内同步一次.
+     * </pre>
+     *
+     * Protobuf type {@code PlayerSync}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:PlayerSync)
+        idevgame.meteor.proto.MeteorMsgs.PlayerSyncOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return idevgame.meteor.proto.MeteorMsgs.internal_static_PlayerSync_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return idevgame.meteor.proto.MeteorMsgs.internal_static_PlayerSync_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                idevgame.meteor.proto.MeteorMsgs.PlayerSync.class, idevgame.meteor.proto.MeteorMsgs.PlayerSync.Builder.class);
+      }
+
+      // Construct using idevgame.meteor.proto.MeteorMsgs.PlayerSync.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+          getPositionFieldBuilder();
+          getRotationFieldBuilder();
+        }
+      }
+      public Builder clear() {
+        super.clear();
+        playerId_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        name_ = "";
+        bitField0_ = (bitField0_ & ~0x00000002);
+        model_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        weapon_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000008);
+        weapon1_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000010);
+        camp_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000020);
+        hp_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000040);
+        ang_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000080);
+        spwanIndex_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000100);
+        if (positionBuilder_ == null) {
+          position_ = null;
+        } else {
+          positionBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000200);
+        if (rotationBuilder_ == null) {
+          rotation_ = null;
+        } else {
+          rotationBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000400);
+        action_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000800);
+        buff_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00001000);
+        return this;
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return idevgame.meteor.proto.MeteorMsgs.internal_static_PlayerSync_descriptor;
+      }
+
+      public idevgame.meteor.proto.MeteorMsgs.PlayerSync getDefaultInstanceForType() {
+        return idevgame.meteor.proto.MeteorMsgs.PlayerSync.getDefaultInstance();
+      }
+
+      public idevgame.meteor.proto.MeteorMsgs.PlayerSync build() {
+        idevgame.meteor.proto.MeteorMsgs.PlayerSync result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public idevgame.meteor.proto.MeteorMsgs.PlayerSync buildPartial() {
+        idevgame.meteor.proto.MeteorMsgs.PlayerSync result = new idevgame.meteor.proto.MeteorMsgs.PlayerSync(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.playerId_ = playerId_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.name_ = name_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.model_ = model_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.weapon_ = weapon_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000010;
+        }
+        result.weapon1_ = weapon1_;
+        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
+          to_bitField0_ |= 0x00000020;
+        }
+        result.camp_ = camp_;
+        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
+          to_bitField0_ |= 0x00000040;
+        }
+        result.hp_ = hp_;
+        if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
+          to_bitField0_ |= 0x00000080;
+        }
+        result.ang_ = ang_;
+        if (((from_bitField0_ & 0x00000100) == 0x00000100)) {
+          to_bitField0_ |= 0x00000100;
+        }
+        result.spwanIndex_ = spwanIndex_;
+        if (((from_bitField0_ & 0x00000200) == 0x00000200)) {
+          to_bitField0_ |= 0x00000200;
+        }
+        if (positionBuilder_ == null) {
+          result.position_ = position_;
+        } else {
+          result.position_ = positionBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000400) == 0x00000400)) {
+          to_bitField0_ |= 0x00000400;
+        }
+        if (rotationBuilder_ == null) {
+          result.rotation_ = rotation_;
+        } else {
+          result.rotation_ = rotationBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000800) == 0x00000800)) {
+          to_bitField0_ |= 0x00000800;
+        }
+        result.action_ = action_;
+        if (((bitField0_ & 0x00001000) == 0x00001000)) {
+          buff_ = java.util.Collections.unmodifiableList(buff_);
+          bitField0_ = (bitField0_ & ~0x00001000);
+        }
+        result.buff_ = buff_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof idevgame.meteor.proto.MeteorMsgs.PlayerSync) {
+          return mergeFrom((idevgame.meteor.proto.MeteorMsgs.PlayerSync)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(idevgame.meteor.proto.MeteorMsgs.PlayerSync other) {
+        if (other == idevgame.meteor.proto.MeteorMsgs.PlayerSync.getDefaultInstance()) return this;
+        if (other.hasPlayerId()) {
+          setPlayerId(other.getPlayerId());
+        }
+        if (other.hasName()) {
+          bitField0_ |= 0x00000002;
+          name_ = other.name_;
+          onChanged();
+        }
+        if (other.hasModel()) {
+          setModel(other.getModel());
+        }
+        if (other.hasWeapon()) {
+          setWeapon(other.getWeapon());
+        }
+        if (other.hasWeapon1()) {
+          setWeapon1(other.getWeapon1());
+        }
+        if (other.hasCamp()) {
+          setCamp(other.getCamp());
+        }
+        if (other.hasHp()) {
+          setHp(other.getHp());
+        }
+        if (other.hasAng()) {
+          setAng(other.getAng());
+        }
+        if (other.hasSpwanIndex()) {
+          setSpwanIndex(other.getSpwanIndex());
+        }
+        if (other.hasPosition()) {
+          mergePosition(other.getPosition());
+        }
+        if (other.hasRotation()) {
+          mergeRotation(other.getRotation());
+        }
+        if (other.hasAction()) {
+          setAction(other.getAction());
+        }
+        if (!other.buff_.isEmpty()) {
+          if (buff_.isEmpty()) {
+            buff_ = other.buff_;
+            bitField0_ = (bitField0_ & ~0x00001000);
+          } else {
+            ensureBuffIsMutable();
+            buff_.addAll(other.buff_);
+          }
+          onChanged();
+        }
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        if (!hasPlayerId()) {
+          return false;
+        }
+        if (!hasModel()) {
+          return false;
+        }
+        if (!hasWeapon()) {
+          return false;
+        }
+        if (!hasWeapon1()) {
+          return false;
+        }
+        if (!hasCamp()) {
+          return false;
+        }
+        if (!hasHp()) {
+          return false;
+        }
+        if (!hasAng()) {
+          return false;
+        }
+        if (hasPosition()) {
+          if (!getPosition().isInitialized()) {
+            return false;
+          }
+        }
+        if (hasRotation()) {
+          if (!getRotation().isInitialized()) {
+            return false;
+          }
+        }
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        idevgame.meteor.proto.MeteorMsgs.PlayerSync parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (idevgame.meteor.proto.MeteorMsgs.PlayerSync) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private int playerId_ ;
+      /**
+       * <code>required uint32 playerId = 1;</code>
+       */
+      public boolean hasPlayerId() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>required uint32 playerId = 1;</code>
+       */
+      public int getPlayerId() {
+        return playerId_;
+      }
+      /**
+       * <code>required uint32 playerId = 1;</code>
+       */
+      public Builder setPlayerId(int value) {
+        bitField0_ |= 0x00000001;
+        playerId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required uint32 playerId = 1;</code>
+       */
+      public Builder clearPlayerId() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        playerId_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object name_ = "";
+      /**
+       * <code>optional string name = 2;</code>
+       */
+      public boolean hasName() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>optional string name = 2;</code>
+       */
+      public java.lang.String getName() {
+        java.lang.Object ref = name_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            name_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string name = 2;</code>
        */
       public com.google.protobuf.ByteString
-          getTeamMemberABytes(int index) {
-        return teamMemberA_.getByteString(index);
+          getNameBytes() {
+        java.lang.Object ref = name_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          name_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
       }
       /**
-       * <pre>
-       *自己队伍的队友名称-和ID一一对应
-       * </pre>
-       *
-       * <code>repeated string TeamMemberA = 3;</code>
+       * <code>optional string name = 2;</code>
        */
-      public Builder setTeamMemberA(
-          int index, java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  ensureTeamMemberAIsMutable();
-        teamMemberA_.set(index, value);
-        onChanged();
-        return this;
-      }
-      /**
-       * <pre>
-       *自己队伍的队友名称-和ID一一对应
-       * </pre>
-       *
-       * <code>repeated string TeamMemberA = 3;</code>
-       */
-      public Builder addTeamMemberA(
+      public Builder setName(
           java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  ensureTeamMemberAIsMutable();
-        teamMemberA_.add(value);
+  bitField0_ |= 0x00000002;
+        name_ = value;
         onChanged();
         return this;
       }
       /**
-       * <pre>
-       *自己队伍的队友名称-和ID一一对应
-       * </pre>
-       *
-       * <code>repeated string TeamMemberA = 3;</code>
+       * <code>optional string name = 2;</code>
        */
-      public Builder addAllTeamMemberA(
-          java.lang.Iterable<java.lang.String> values) {
-        ensureTeamMemberAIsMutable();
-        com.google.protobuf.AbstractMessageLite.Builder.addAll(
-            values, teamMemberA_);
+      public Builder clearName() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        name_ = getDefaultInstance().getName();
         onChanged();
         return this;
       }
       /**
-       * <pre>
-       *自己队伍的队友名称-和ID一一对应
-       * </pre>
-       *
-       * <code>repeated string TeamMemberA = 3;</code>
+       * <code>optional string name = 2;</code>
        */
-      public Builder clearTeamMemberA() {
-        teamMemberA_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      public Builder setNameBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        name_ = value;
+        onChanged();
+        return this;
+      }
+
+      private int model_ ;
+      /**
+       * <code>required uint32 model = 3;</code>
+       */
+      public boolean hasModel() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>required uint32 model = 3;</code>
+       */
+      public int getModel() {
+        return model_;
+      }
+      /**
+       * <code>required uint32 model = 3;</code>
+       */
+      public Builder setModel(int value) {
+        bitField0_ |= 0x00000004;
+        model_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required uint32 model = 3;</code>
+       */
+      public Builder clearModel() {
         bitField0_ = (bitField0_ & ~0x00000004);
-        onChanged();
-        return this;
-      }
-      /**
-       * <pre>
-       *自己队伍的队友名称-和ID一一对应
-       * </pre>
-       *
-       * <code>repeated string TeamMemberA = 3;</code>
-       */
-      public Builder addTeamMemberABytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  ensureTeamMemberAIsMutable();
-        teamMemberA_.add(value);
+        model_ = 0;
         onChanged();
         return this;
       }
 
-      private com.google.protobuf.LazyStringList teamMemberB_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-      private void ensureTeamMemberBIsMutable() {
-        if (!((bitField0_ & 0x00000008) == 0x00000008)) {
-          teamMemberB_ = new com.google.protobuf.LazyStringArrayList(teamMemberB_);
-          bitField0_ |= 0x00000008;
-         }
+      private int weapon_ ;
+      /**
+       * <code>required uint32 weapon = 4;</code>
+       */
+      public boolean hasWeapon() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
       }
       /**
-       * <pre>
-       * </pre>
-       *
-       * <code>repeated string TeamMemberB = 4;</code>
+       * <code>required uint32 weapon = 4;</code>
        */
-      public com.google.protobuf.ProtocolStringList
-          getTeamMemberBList() {
-        return teamMemberB_.getUnmodifiableView();
+      public int getWeapon() {
+        return weapon_;
       }
       /**
-       * <pre>
-       * </pre>
-       *
-       * <code>repeated string TeamMemberB = 4;</code>
+       * <code>required uint32 weapon = 4;</code>
        */
-      public int getTeamMemberBCount() {
-        return teamMemberB_.size();
-      }
-      /**
-       * <pre>
-       * </pre>
-       *
-       * <code>repeated string TeamMemberB = 4;</code>
-       */
-      public java.lang.String getTeamMemberB(int index) {
-        return teamMemberB_.get(index);
-      }
-      /**
-       * <pre>
-       * </pre>
-       *
-       * <code>repeated string TeamMemberB = 4;</code>
-       */
-      public com.google.protobuf.ByteString
-          getTeamMemberBBytes(int index) {
-        return teamMemberB_.getByteString(index);
-      }
-      /**
-       * <pre>
-       * </pre>
-       *
-       * <code>repeated string TeamMemberB = 4;</code>
-       */
-      public Builder setTeamMemberB(
-          int index, java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  ensureTeamMemberBIsMutable();
-        teamMemberB_.set(index, value);
+      public Builder setWeapon(int value) {
+        bitField0_ |= 0x00000008;
+        weapon_ = value;
         onChanged();
         return this;
       }
       /**
-       * <pre>
-       * </pre>
-       *
-       * <code>repeated string TeamMemberB = 4;</code>
+       * <code>required uint32 weapon = 4;</code>
        */
-      public Builder addTeamMemberB(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  ensureTeamMemberBIsMutable();
-        teamMemberB_.add(value);
-        onChanged();
-        return this;
-      }
-      /**
-       * <pre>
-       * </pre>
-       *
-       * <code>repeated string TeamMemberB = 4;</code>
-       */
-      public Builder addAllTeamMemberB(
-          java.lang.Iterable<java.lang.String> values) {
-        ensureTeamMemberBIsMutable();
-        com.google.protobuf.AbstractMessageLite.Builder.addAll(
-            values, teamMemberB_);
-        onChanged();
-        return this;
-      }
-      /**
-       * <pre>
-       * </pre>
-       *
-       * <code>repeated string TeamMemberB = 4;</code>
-       */
-      public Builder clearTeamMemberB() {
-        teamMemberB_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      public Builder clearWeapon() {
         bitField0_ = (bitField0_ & ~0x00000008);
+        weapon_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int weapon1_ ;
+      /**
+       * <code>required uint32 weapon1 = 5;</code>
+       */
+      public boolean hasWeapon1() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      /**
+       * <code>required uint32 weapon1 = 5;</code>
+       */
+      public int getWeapon1() {
+        return weapon1_;
+      }
+      /**
+       * <code>required uint32 weapon1 = 5;</code>
+       */
+      public Builder setWeapon1(int value) {
+        bitField0_ |= 0x00000010;
+        weapon1_ = value;
         onChanged();
         return this;
       }
       /**
-       * <pre>
-       * </pre>
-       *
-       * <code>repeated string TeamMemberB = 4;</code>
+       * <code>required uint32 weapon1 = 5;</code>
        */
-      public Builder addTeamMemberBBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  ensureTeamMemberBIsMutable();
-        teamMemberB_.add(value);
+      public Builder clearWeapon1() {
+        bitField0_ = (bitField0_ & ~0x00000010);
+        weapon1_ = 0;
         onChanged();
         return this;
       }
-      public final Builder setUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFields(unknownFields);
+
+      private int camp_ ;
+      /**
+       * <code>required uint32 camp = 6;</code>
+       */
+      public boolean hasCamp() {
+        return ((bitField0_ & 0x00000020) == 0x00000020);
       }
-
-      public final Builder mergeUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.mergeUnknownFields(unknownFields);
+      /**
+       * <code>required uint32 camp = 6;</code>
+       */
+      public int getCamp() {
+        return camp_;
       }
-
-
-      // @@protoc_insertion_point(builder_scope:OnBattleBegin)
-    }
-
-    // @@protoc_insertion_point(class_scope:OnBattleBegin)
-    private static final idevgame.meteor.proto.MeteorMsgs.OnBattleBegin DEFAULT_INSTANCE;
-    static {
-      DEFAULT_INSTANCE = new idevgame.meteor.proto.MeteorMsgs.OnBattleBegin();
-    }
-
-    public static idevgame.meteor.proto.MeteorMsgs.OnBattleBegin getDefaultInstance() {
-      return DEFAULT_INSTANCE;
-    }
-
-    @java.lang.Deprecated public static final com.google.protobuf.Parser<OnBattleBegin>
-        PARSER = new com.google.protobuf.AbstractParser<OnBattleBegin>() {
-      public OnBattleBegin parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return new OnBattleBegin(input, extensionRegistry);
+      /**
+       * <code>required uint32 camp = 6;</code>
+       */
+      public Builder setCamp(int value) {
+        bitField0_ |= 0x00000020;
+        camp_ = value;
+        onChanged();
+        return this;
       }
-    };
-
-    public static com.google.protobuf.Parser<OnBattleBegin> parser() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<OnBattleBegin> getParserForType() {
-      return PARSER;
-    }
-
-    public idevgame.meteor.proto.MeteorMsgs.OnBattleBegin getDefaultInstanceForType() {
-      return DEFAULT_INSTANCE;
-    }
-
-  }
-
-  public interface UserSelectRoleOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:UserSelectRole)
-      com.google.protobuf.MessageOrBuilder {
-
-    /**
-     * <code>required uint32 playerId = 1;</code>
-     */
-    boolean hasPlayerId();
-    /**
-     * <code>required uint32 playerId = 1;</code>
-     */
-    int getPlayerId();
-
-    /**
-     * <code>required uint32 HeroId = 2;</code>
-     */
-    boolean hasHeroId();
-    /**
-     * <code>required uint32 HeroId = 2;</code>
-     */
-    int getHeroId();
-  }
-  /**
-   * Protobuf type {@code UserSelectRole}
-   */
-  public  static final class UserSelectRole extends
-      com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:UserSelectRole)
-      UserSelectRoleOrBuilder {
-  private static final long serialVersionUID = 0L;
-    // Use UserSelectRole.newBuilder() to construct.
-    private UserSelectRole(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
-      super(builder);
-    }
-    private UserSelectRole() {
-      playerId_ = 0;
-      heroId_ = 0;
-    }
-
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
-      return this.unknownFields;
-    }
-    private UserSelectRole(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      int mutable_bitField0_ = 0;
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            default: {
-              if (!parseUnknownField(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-            case 8: {
-              bitField0_ |= 0x00000001;
-              playerId_ = input.readUInt32();
-              break;
-            }
-            case 16: {
-              bitField0_ |= 0x00000002;
-              heroId_ = input.readUInt32();
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return idevgame.meteor.proto.MeteorMsgs.internal_static_UserSelectRole_descriptor;
-    }
-
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return idevgame.meteor.proto.MeteorMsgs.internal_static_UserSelectRole_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              idevgame.meteor.proto.MeteorMsgs.UserSelectRole.class, idevgame.meteor.proto.MeteorMsgs.UserSelectRole.Builder.class);
-    }
-
-    private int bitField0_;
-    public static final int PLAYERID_FIELD_NUMBER = 1;
-    private int playerId_;
-    /**
-     * <code>required uint32 playerId = 1;</code>
-     */
-    public boolean hasPlayerId() {
-      return ((bitField0_ & 0x00000001) == 0x00000001);
-    }
-    /**
-     * <code>required uint32 playerId = 1;</code>
-     */
-    public int getPlayerId() {
-      return playerId_;
-    }
-
-    public static final int HEROID_FIELD_NUMBER = 2;
-    private int heroId_;
-    /**
-     * <code>required uint32 HeroId = 2;</code>
-     */
-    public boolean hasHeroId() {
-      return ((bitField0_ & 0x00000002) == 0x00000002);
-    }
-    /**
-     * <code>required uint32 HeroId = 2;</code>
-     */
-    public int getHeroId() {
-      return heroId_;
-    }
-
-    private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
-
-      if (!hasPlayerId()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
-      if (!hasHeroId()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
-      memoizedIsInitialized = 1;
-      return true;
-    }
-
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeUInt32(1, playerId_);
-      }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeUInt32(2, heroId_);
-      }
-      unknownFields.writeTo(output);
-    }
-
-    public int getSerializedSize() {
-      int size = memoizedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeUInt32Size(1, playerId_);
-      }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeUInt32Size(2, heroId_);
-      }
-      size += unknownFields.getSerializedSize();
-      memoizedSize = size;
-      return size;
-    }
-
-    @java.lang.Override
-    public boolean equals(final java.lang.Object obj) {
-      if (obj == this) {
-       return true;
-      }
-      if (!(obj instanceof idevgame.meteor.proto.MeteorMsgs.UserSelectRole)) {
-        return super.equals(obj);
-      }
-      idevgame.meteor.proto.MeteorMsgs.UserSelectRole other = (idevgame.meteor.proto.MeteorMsgs.UserSelectRole) obj;
-
-      boolean result = true;
-      result = result && (hasPlayerId() == other.hasPlayerId());
-      if (hasPlayerId()) {
-        result = result && (getPlayerId()
-            == other.getPlayerId());
-      }
-      result = result && (hasHeroId() == other.hasHeroId());
-      if (hasHeroId()) {
-        result = result && (getHeroId()
-            == other.getHeroId());
-      }
-      result = result && unknownFields.equals(other.unknownFields);
-      return result;
-    }
-
-    @java.lang.Override
-    public int hashCode() {
-      if (memoizedHashCode != 0) {
-        return memoizedHashCode;
-      }
-      int hash = 41;
-      hash = (19 * hash) + getDescriptor().hashCode();
-      if (hasPlayerId()) {
-        hash = (37 * hash) + PLAYERID_FIELD_NUMBER;
-        hash = (53 * hash) + getPlayerId();
-      }
-      if (hasHeroId()) {
-        hash = (37 * hash) + HEROID_FIELD_NUMBER;
-        hash = (53 * hash) + getHeroId();
-      }
-      hash = (29 * hash) + unknownFields.hashCode();
-      memoizedHashCode = hash;
-      return hash;
-    }
-
-    public static idevgame.meteor.proto.MeteorMsgs.UserSelectRole parseFrom(
-        java.nio.ByteBuffer data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.UserSelectRole parseFrom(
-        java.nio.ByteBuffer data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.UserSelectRole parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.UserSelectRole parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.UserSelectRole parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.UserSelectRole parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.UserSelectRole parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.UserSelectRole parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.UserSelectRole parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.UserSelectRole parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.UserSelectRole parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.UserSelectRole parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder() {
-      return DEFAULT_INSTANCE.toBuilder();
-    }
-    public static Builder newBuilder(idevgame.meteor.proto.MeteorMsgs.UserSelectRole prototype) {
-      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
-    }
-    public Builder toBuilder() {
-      return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
-    }
-
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
-    /**
-     * Protobuf type {@code UserSelectRole}
-     */
-    public static final class Builder extends
-        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:UserSelectRole)
-        idevgame.meteor.proto.MeteorMsgs.UserSelectRoleOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return idevgame.meteor.proto.MeteorMsgs.internal_static_UserSelectRole_descriptor;
-      }
-
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return idevgame.meteor.proto.MeteorMsgs.internal_static_UserSelectRole_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                idevgame.meteor.proto.MeteorMsgs.UserSelectRole.class, idevgame.meteor.proto.MeteorMsgs.UserSelectRole.Builder.class);
-      }
-
-      // Construct using idevgame.meteor.proto.MeteorMsgs.UserSelectRole.newBuilder()
-      private Builder() {
-        maybeForceBuilderInitialization();
-      }
-
-      private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-        super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
-      }
-      public Builder clear() {
-        super.clear();
-        playerId_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000001);
-        heroId_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000002);
+      /**
+       * <code>required uint32 camp = 6;</code>
+       */
+      public Builder clearCamp() {
+        bitField0_ = (bitField0_ & ~0x00000020);
+        camp_ = 0;
+        onChanged();
         return this;
       }
 
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return idevgame.meteor.proto.MeteorMsgs.internal_static_UserSelectRole_descriptor;
+      private int hp_ ;
+      /**
+       * <code>required uint32 hp = 7;</code>
+       */
+      public boolean hasHp() {
+        return ((bitField0_ & 0x00000040) == 0x00000040);
+      }
+      /**
+       * <code>required uint32 hp = 7;</code>
+       */
+      public int getHp() {
+        return hp_;
+      }
+      /**
+       * <code>required uint32 hp = 7;</code>
+       */
+      public Builder setHp(int value) {
+        bitField0_ |= 0x00000040;
+        hp_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required uint32 hp = 7;</code>
+       */
+      public Builder clearHp() {
+        bitField0_ = (bitField0_ & ~0x00000040);
+        hp_ = 0;
+        onChanged();
+        return this;
       }
 
-      public idevgame.meteor.proto.MeteorMsgs.UserSelectRole getDefaultInstanceForType() {
-        return idevgame.meteor.proto.MeteorMsgs.UserSelectRole.getDefaultInstance();
+      private int ang_ ;
+      /**
+       * <code>required uint32 ang = 8;</code>
+       */
+      public boolean hasAng() {
+        return ((bitField0_ & 0x00000080) == 0x00000080);
+      }
+      /**
+       * <code>required uint32 ang = 8;</code>
+       */
+      public int getAng() {
+        return ang_;
+      }
+      /**
+       * <code>required uint32 ang = 8;</code>
+       */
+      public Builder setAng(int value) {
+        bitField0_ |= 0x00000080;
+        ang_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required uint32 ang = 8;</code>
+       */
+      public Builder clearAng() {
+        bitField0_ = (bitField0_ & ~0x00000080);
+        ang_ = 0;
+        onChanged();
+        return this;
       }
 
-      public idevgame.meteor.proto.MeteorMsgs.UserSelectRole build() {
-        idevgame.meteor.proto.MeteorMsgs.UserSelectRole result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
+      private int spwanIndex_ ;
+      /**
+       * <code>optional uint32 spwanIndex = 9;</code>
+       */
+      public boolean hasSpwanIndex() {
+        return ((bitField0_ & 0x00000100) == 0x00000100);
+      }
+      /**
+       * <code>optional uint32 spwanIndex = 9;</code>
+       */
+      public int getSpwanIndex() {
+        return spwanIndex_;
+      }
+      /**
+       * <code>optional uint32 spwanIndex = 9;</code>
+       */
+      public Builder setSpwanIndex(int value) {
+        bitField0_ |= 0x00000100;
+        spwanIndex_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional uint32 spwanIndex = 9;</code>
+       */
+      public Builder clearSpwanIndex() {
+        bitField0_ = (bitField0_ & ~0x00000100);
+        spwanIndex_ = 0;
+        onChanged();
+        return this;
       }
 
-      public idevgame.meteor.proto.MeteorMsgs.UserSelectRole buildPartial() {
-        idevgame.meteor.proto.MeteorMsgs.UserSelectRole result = new idevgame.meteor.proto.MeteorMsgs.UserSelectRole(this);
-        int from_bitField0_ = bitField0_;
-        int to_bitField0_ = 0;
-        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
-          to_bitField0_ |= 0x00000001;
-        }
-        result.playerId_ = playerId_;
-        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
-          to_bitField0_ |= 0x00000002;
-        }
-        result.heroId_ = heroId_;
-        result.bitField0_ = to_bitField0_;
-        onBuilt();
-        return result;
+      private idevgame.meteor.proto.MeteorMsgs._Vector3 position_ = null;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          idevgame.meteor.proto.MeteorMsgs._Vector3, idevgame.meteor.proto.MeteorMsgs._Vector3.Builder, idevgame.meteor.proto.MeteorMsgs._Vector3OrBuilder> positionBuilder_;
+      /**
+       * <code>optional ._Vector3 position = 10;</code>
+       */
+      public boolean hasPosition() {
+        return ((bitField0_ & 0x00000200) == 0x00000200);
       }
-
-      public Builder clone() {
-        return (Builder) super.clone();
-      }
-      public Builder setField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
-        return (Builder) super.setField(field, value);
-      }
-      public Builder clearField(
-          com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return (Builder) super.clearField(field);
-      }
-      public Builder clearOneof(
-          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return (Builder) super.clearOneof(oneof);
-      }
-      public Builder setRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, java.lang.Object value) {
-        return (Builder) super.setRepeatedField(field, index, value);
-      }
-      public Builder addRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
-        return (Builder) super.addRepeatedField(field, value);
-      }
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof idevgame.meteor.proto.MeteorMsgs.UserSelectRole) {
-          return mergeFrom((idevgame.meteor.proto.MeteorMsgs.UserSelectRole)other);
+      /**
+       * <code>optional ._Vector3 position = 10;</code>
+       */
+      public idevgame.meteor.proto.MeteorMsgs._Vector3 getPosition() {
+        if (positionBuilder_ == null) {
+          return position_ == null ? idevgame.meteor.proto.MeteorMsgs._Vector3.getDefaultInstance() : position_;
         } else {
-          super.mergeFrom(other);
-          return this;
+          return positionBuilder_.getMessage();
         }
       }
-
-      public Builder mergeFrom(idevgame.meteor.proto.MeteorMsgs.UserSelectRole other) {
-        if (other == idevgame.meteor.proto.MeteorMsgs.UserSelectRole.getDefaultInstance()) return this;
-        if (other.hasPlayerId()) {
-          setPlayerId(other.getPlayerId());
-        }
-        if (other.hasHeroId()) {
-          setHeroId(other.getHeroId());
-        }
-        this.mergeUnknownFields(other.unknownFields);
-        onChanged();
-        return this;
-      }
-
-      public final boolean isInitialized() {
-        if (!hasPlayerId()) {
-          return false;
-        }
-        if (!hasHeroId()) {
-          return false;
-        }
-        return true;
-      }
-
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        idevgame.meteor.proto.MeteorMsgs.UserSelectRole parsedMessage = null;
-        try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (idevgame.meteor.proto.MeteorMsgs.UserSelectRole) e.getUnfinishedMessage();
-          throw e.unwrapIOException();
-        } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
+      /**
+       * <code>optional ._Vector3 position = 10;</code>
+       */
+      public Builder setPosition(idevgame.meteor.proto.MeteorMsgs._Vector3 value) {
+        if (positionBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
           }
-        }
-        return this;
-      }
-      private int bitField0_;
-
-      private int playerId_ ;
-      /**
-       * <code>required uint32 playerId = 1;</code>
-       */
-      public boolean hasPlayerId() {
-        return ((bitField0_ & 0x00000001) == 0x00000001);
-      }
-      /**
-       * <code>required uint32 playerId = 1;</code>
-       */
-      public int getPlayerId() {
-        return playerId_;
-      }
-      /**
-       * <code>required uint32 playerId = 1;</code>
-       */
-      public Builder setPlayerId(int value) {
-        bitField0_ |= 0x00000001;
-        playerId_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>required uint32 playerId = 1;</code>
-       */
-      public Builder clearPlayerId() {
-        bitField0_ = (bitField0_ & ~0x00000001);
-        playerId_ = 0;
-        onChanged();
-        return this;
-      }
-
-      private int heroId_ ;
-      /**
-       * <code>required uint32 HeroId = 2;</code>
-       */
-      public boolean hasHeroId() {
-        return ((bitField0_ & 0x00000002) == 0x00000002);
-      }
-      /**
-       * <code>required uint32 HeroId = 2;</code>
-       */
-      public int getHeroId() {
-        return heroId_;
-      }
-      /**
-       * <code>required uint32 HeroId = 2;</code>
-       */
-      public Builder setHeroId(int value) {
-        bitField0_ |= 0x00000002;
-        heroId_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>required uint32 HeroId = 2;</code>
-       */
-      public Builder clearHeroId() {
-        bitField0_ = (bitField0_ & ~0x00000002);
-        heroId_ = 0;
-        onChanged();
-        return this;
-      }
-      public final Builder setUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFields(unknownFields);
-      }
-
-      public final Builder mergeUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.mergeUnknownFields(unknownFields);
-      }
-
-
-      // @@protoc_insertion_point(builder_scope:UserSelectRole)
-    }
-
-    // @@protoc_insertion_point(class_scope:UserSelectRole)
-    private static final idevgame.meteor.proto.MeteorMsgs.UserSelectRole DEFAULT_INSTANCE;
-    static {
-      DEFAULT_INSTANCE = new idevgame.meteor.proto.MeteorMsgs.UserSelectRole();
-    }
-
-    public static idevgame.meteor.proto.MeteorMsgs.UserSelectRole getDefaultInstance() {
-      return DEFAULT_INSTANCE;
-    }
-
-    @java.lang.Deprecated public static final com.google.protobuf.Parser<UserSelectRole>
-        PARSER = new com.google.protobuf.AbstractParser<UserSelectRole>() {
-      public UserSelectRole parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return new UserSelectRole(input, extensionRegistry);
-      }
-    };
-
-    public static com.google.protobuf.Parser<UserSelectRole> parser() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<UserSelectRole> getParserForType() {
-      return PARSER;
-    }
-
-    public idevgame.meteor.proto.MeteorMsgs.UserSelectRole getDefaultInstanceForType() {
-      return DEFAULT_INSTANCE;
-    }
-
-  }
-
-  public interface UserSelectSkillOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:UserSelectSkill)
-      com.google.protobuf.MessageOrBuilder {
-
-    /**
-     * <code>required uint32 playerId = 1;</code>
-     */
-    boolean hasPlayerId();
-    /**
-     * <code>required uint32 playerId = 1;</code>
-     */
-    int getPlayerId();
-
-    /**
-     * <code>required uint32 SkillId = 2;</code>
-     */
-    boolean hasSkillId();
-    /**
-     * <code>required uint32 SkillId = 2;</code>
-     */
-    int getSkillId();
-  }
-  /**
-   * Protobuf type {@code UserSelectSkill}
-   */
-  public  static final class UserSelectSkill extends
-      com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:UserSelectSkill)
-      UserSelectSkillOrBuilder {
-  private static final long serialVersionUID = 0L;
-    // Use UserSelectSkill.newBuilder() to construct.
-    private UserSelectSkill(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
-      super(builder);
-    }
-    private UserSelectSkill() {
-      playerId_ = 0;
-      skillId_ = 0;
-    }
-
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
-      return this.unknownFields;
-    }
-    private UserSelectSkill(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      int mutable_bitField0_ = 0;
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            default: {
-              if (!parseUnknownField(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-            case 8: {
-              bitField0_ |= 0x00000001;
-              playerId_ = input.readUInt32();
-              break;
-            }
-            case 16: {
-              bitField0_ |= 0x00000002;
-              skillId_ = input.readUInt32();
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return idevgame.meteor.proto.MeteorMsgs.internal_static_UserSelectSkill_descriptor;
-    }
-
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return idevgame.meteor.proto.MeteorMsgs.internal_static_UserSelectSkill_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              idevgame.meteor.proto.MeteorMsgs.UserSelectSkill.class, idevgame.meteor.proto.MeteorMsgs.UserSelectSkill.Builder.class);
-    }
-
-    private int bitField0_;
-    public static final int PLAYERID_FIELD_NUMBER = 1;
-    private int playerId_;
-    /**
-     * <code>required uint32 playerId = 1;</code>
-     */
-    public boolean hasPlayerId() {
-      return ((bitField0_ & 0x00000001) == 0x00000001);
-    }
-    /**
-     * <code>required uint32 playerId = 1;</code>
-     */
-    public int getPlayerId() {
-      return playerId_;
-    }
-
-    public static final int SKILLID_FIELD_NUMBER = 2;
-    private int skillId_;
-    /**
-     * <code>required uint32 SkillId = 2;</code>
-     */
-    public boolean hasSkillId() {
-      return ((bitField0_ & 0x00000002) == 0x00000002);
-    }
-    /**
-     * <code>required uint32 SkillId = 2;</code>
-     */
-    public int getSkillId() {
-      return skillId_;
-    }
-
-    private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
-
-      if (!hasPlayerId()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
-      if (!hasSkillId()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
-      memoizedIsInitialized = 1;
-      return true;
-    }
-
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeUInt32(1, playerId_);
-      }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeUInt32(2, skillId_);
-      }
-      unknownFields.writeTo(output);
-    }
-
-    public int getSerializedSize() {
-      int size = memoizedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeUInt32Size(1, playerId_);
-      }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeUInt32Size(2, skillId_);
-      }
-      size += unknownFields.getSerializedSize();
-      memoizedSize = size;
-      return size;
-    }
-
-    @java.lang.Override
-    public boolean equals(final java.lang.Object obj) {
-      if (obj == this) {
-       return true;
-      }
-      if (!(obj instanceof idevgame.meteor.proto.MeteorMsgs.UserSelectSkill)) {
-        return super.equals(obj);
-      }
-      idevgame.meteor.proto.MeteorMsgs.UserSelectSkill other = (idevgame.meteor.proto.MeteorMsgs.UserSelectSkill) obj;
-
-      boolean result = true;
-      result = result && (hasPlayerId() == other.hasPlayerId());
-      if (hasPlayerId()) {
-        result = result && (getPlayerId()
-            == other.getPlayerId());
-      }
-      result = result && (hasSkillId() == other.hasSkillId());
-      if (hasSkillId()) {
-        result = result && (getSkillId()
-            == other.getSkillId());
-      }
-      result = result && unknownFields.equals(other.unknownFields);
-      return result;
-    }
-
-    @java.lang.Override
-    public int hashCode() {
-      if (memoizedHashCode != 0) {
-        return memoizedHashCode;
-      }
-      int hash = 41;
-      hash = (19 * hash) + getDescriptor().hashCode();
-      if (hasPlayerId()) {
-        hash = (37 * hash) + PLAYERID_FIELD_NUMBER;
-        hash = (53 * hash) + getPlayerId();
-      }
-      if (hasSkillId()) {
-        hash = (37 * hash) + SKILLID_FIELD_NUMBER;
-        hash = (53 * hash) + getSkillId();
-      }
-      hash = (29 * hash) + unknownFields.hashCode();
-      memoizedHashCode = hash;
-      return hash;
-    }
-
-    public static idevgame.meteor.proto.MeteorMsgs.UserSelectSkill parseFrom(
-        java.nio.ByteBuffer data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.UserSelectSkill parseFrom(
-        java.nio.ByteBuffer data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.UserSelectSkill parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.UserSelectSkill parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.UserSelectSkill parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.UserSelectSkill parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.UserSelectSkill parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.UserSelectSkill parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.UserSelectSkill parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.UserSelectSkill parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.UserSelectSkill parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.UserSelectSkill parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder() {
-      return DEFAULT_INSTANCE.toBuilder();
-    }
-    public static Builder newBuilder(idevgame.meteor.proto.MeteorMsgs.UserSelectSkill prototype) {
-      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
-    }
-    public Builder toBuilder() {
-      return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
-    }
-
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
-    /**
-     * Protobuf type {@code UserSelectSkill}
-     */
-    public static final class Builder extends
-        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:UserSelectSkill)
-        idevgame.meteor.proto.MeteorMsgs.UserSelectSkillOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return idevgame.meteor.proto.MeteorMsgs.internal_static_UserSelectSkill_descriptor;
-      }
-
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return idevgame.meteor.proto.MeteorMsgs.internal_static_UserSelectSkill_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                idevgame.meteor.proto.MeteorMsgs.UserSelectSkill.class, idevgame.meteor.proto.MeteorMsgs.UserSelectSkill.Builder.class);
-      }
-
-      // Construct using idevgame.meteor.proto.MeteorMsgs.UserSelectSkill.newBuilder()
-      private Builder() {
-        maybeForceBuilderInitialization();
-      }
-
-      private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-        super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
-      }
-      public Builder clear() {
-        super.clear();
-        playerId_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000001);
-        skillId_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000002);
-        return this;
-      }
-
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return idevgame.meteor.proto.MeteorMsgs.internal_static_UserSelectSkill_descriptor;
-      }
-
-      public idevgame.meteor.proto.MeteorMsgs.UserSelectSkill getDefaultInstanceForType() {
-        return idevgame.meteor.proto.MeteorMsgs.UserSelectSkill.getDefaultInstance();
-      }
-
-      public idevgame.meteor.proto.MeteorMsgs.UserSelectSkill build() {
-        idevgame.meteor.proto.MeteorMsgs.UserSelectSkill result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-
-      public idevgame.meteor.proto.MeteorMsgs.UserSelectSkill buildPartial() {
-        idevgame.meteor.proto.MeteorMsgs.UserSelectSkill result = new idevgame.meteor.proto.MeteorMsgs.UserSelectSkill(this);
-        int from_bitField0_ = bitField0_;
-        int to_bitField0_ = 0;
-        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
-          to_bitField0_ |= 0x00000001;
-        }
-        result.playerId_ = playerId_;
-        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
-          to_bitField0_ |= 0x00000002;
-        }
-        result.skillId_ = skillId_;
-        result.bitField0_ = to_bitField0_;
-        onBuilt();
-        return result;
-      }
-
-      public Builder clone() {
-        return (Builder) super.clone();
-      }
-      public Builder setField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
-        return (Builder) super.setField(field, value);
-      }
-      public Builder clearField(
-          com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return (Builder) super.clearField(field);
-      }
-      public Builder clearOneof(
-          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return (Builder) super.clearOneof(oneof);
-      }
-      public Builder setRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, java.lang.Object value) {
-        return (Builder) super.setRepeatedField(field, index, value);
-      }
-      public Builder addRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
-        return (Builder) super.addRepeatedField(field, value);
-      }
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof idevgame.meteor.proto.MeteorMsgs.UserSelectSkill) {
-          return mergeFrom((idevgame.meteor.proto.MeteorMsgs.UserSelectSkill)other);
+          position_ = value;
+          onChanged();
         } else {
-          super.mergeFrom(other);
-          return this;
+          positionBuilder_.setMessage(value);
         }
-      }
-
-      public Builder mergeFrom(idevgame.meteor.proto.MeteorMsgs.UserSelectSkill other) {
-        if (other == idevgame.meteor.proto.MeteorMsgs.UserSelectSkill.getDefaultInstance()) return this;
-        if (other.hasPlayerId()) {
-          setPlayerId(other.getPlayerId());
-        }
-        if (other.hasSkillId()) {
-          setSkillId(other.getSkillId());
-        }
-        this.mergeUnknownFields(other.unknownFields);
-        onChanged();
-        return this;
-      }
-
-      public final boolean isInitialized() {
-        if (!hasPlayerId()) {
-          return false;
-        }
-        if (!hasSkillId()) {
-          return false;
-        }
-        return true;
-      }
-
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        idevgame.meteor.proto.MeteorMsgs.UserSelectSkill parsedMessage = null;
-        try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (idevgame.meteor.proto.MeteorMsgs.UserSelectSkill) e.getUnfinishedMessage();
-          throw e.unwrapIOException();
-        } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
-        return this;
-      }
-      private int bitField0_;
-
-      private int playerId_ ;
-      /**
-       * <code>required uint32 playerId = 1;</code>
-       */
-      public boolean hasPlayerId() {
-        return ((bitField0_ & 0x00000001) == 0x00000001);
-      }
-      /**
-       * <code>required uint32 playerId = 1;</code>
-       */
-      public int getPlayerId() {
-        return playerId_;
-      }
-      /**
-       * <code>required uint32 playerId = 1;</code>
-       */
-      public Builder setPlayerId(int value) {
-        bitField0_ |= 0x00000001;
-        playerId_ = value;
-        onChanged();
+        bitField0_ |= 0x00000200;
         return this;
       }
       /**
-       * <code>required uint32 playerId = 1;</code>
+       * <code>optional ._Vector3 position = 10;</code>
        */
-      public Builder clearPlayerId() {
-        bitField0_ = (bitField0_ & ~0x00000001);
-        playerId_ = 0;
-        onChanged();
-        return this;
-      }
-
-      private int skillId_ ;
-      /**
-       * <code>required uint32 SkillId = 2;</code>
-       */
-      public boolean hasSkillId() {
-        return ((bitField0_ & 0x00000002) == 0x00000002);
-      }
-      /**
-       * <code>required uint32 SkillId = 2;</code>
-       */
-      public int getSkillId() {
-        return skillId_;
-      }
-      /**
-       * <code>required uint32 SkillId = 2;</code>
-       */
-      public Builder setSkillId(int value) {
-        bitField0_ |= 0x00000002;
-        skillId_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>required uint32 SkillId = 2;</code>
-       */
-      public Builder clearSkillId() {
-        bitField0_ = (bitField0_ & ~0x00000002);
-        skillId_ = 0;
-        onChanged();
-        return this;
-      }
-      public final Builder setUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFields(unknownFields);
-      }
-
-      public final Builder mergeUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.mergeUnknownFields(unknownFields);
-      }
-
-
-      // @@protoc_insertion_point(builder_scope:UserSelectSkill)
-    }
-
-    // @@protoc_insertion_point(class_scope:UserSelectSkill)
-    private static final idevgame.meteor.proto.MeteorMsgs.UserSelectSkill DEFAULT_INSTANCE;
-    static {
-      DEFAULT_INSTANCE = new idevgame.meteor.proto.MeteorMsgs.UserSelectSkill();
-    }
-
-    public static idevgame.meteor.proto.MeteorMsgs.UserSelectSkill getDefaultInstance() {
-      return DEFAULT_INSTANCE;
-    }
-
-    @java.lang.Deprecated public static final com.google.protobuf.Parser<UserSelectSkill>
-        PARSER = new com.google.protobuf.AbstractParser<UserSelectSkill>() {
-      public UserSelectSkill parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return new UserSelectSkill(input, extensionRegistry);
-      }
-    };
-
-    public static com.google.protobuf.Parser<UserSelectSkill> parser() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<UserSelectSkill> getParserForType() {
-      return PARSER;
-    }
-
-    public idevgame.meteor.proto.MeteorMsgs.UserSelectSkill getDefaultInstanceForType() {
-      return DEFAULT_INSTANCE;
-    }
-
-  }
-
-  public interface UserSelectSkinOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:UserSelectSkin)
-      com.google.protobuf.MessageOrBuilder {
-
-    /**
-     * <code>required uint32 playerId = 1;</code>
-     */
-    boolean hasPlayerId();
-    /**
-     * <code>required uint32 playerId = 1;</code>
-     */
-    int getPlayerId();
-
-    /**
-     * <code>required uint32 Skin = 2;</code>
-     */
-    boolean hasSkin();
-    /**
-     * <code>required uint32 Skin = 2;</code>
-     */
-    int getSkin();
-  }
-  /**
-   * Protobuf type {@code UserSelectSkin}
-   */
-  public  static final class UserSelectSkin extends
-      com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:UserSelectSkin)
-      UserSelectSkinOrBuilder {
-  private static final long serialVersionUID = 0L;
-    // Use UserSelectSkin.newBuilder() to construct.
-    private UserSelectSkin(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
-      super(builder);
-    }
-    private UserSelectSkin() {
-      playerId_ = 0;
-      skin_ = 0;
-    }
-
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
-      return this.unknownFields;
-    }
-    private UserSelectSkin(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      int mutable_bitField0_ = 0;
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            default: {
-              if (!parseUnknownField(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-            case 8: {
-              bitField0_ |= 0x00000001;
-              playerId_ = input.readUInt32();
-              break;
-            }
-            case 16: {
-              bitField0_ |= 0x00000002;
-              skin_ = input.readUInt32();
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return idevgame.meteor.proto.MeteorMsgs.internal_static_UserSelectSkin_descriptor;
-    }
-
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return idevgame.meteor.proto.MeteorMsgs.internal_static_UserSelectSkin_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              idevgame.meteor.proto.MeteorMsgs.UserSelectSkin.class, idevgame.meteor.proto.MeteorMsgs.UserSelectSkin.Builder.class);
-    }
-
-    private int bitField0_;
-    public static final int PLAYERID_FIELD_NUMBER = 1;
-    private int playerId_;
-    /**
-     * <code>required uint32 playerId = 1;</code>
-     */
-    public boolean hasPlayerId() {
-      return ((bitField0_ & 0x00000001) == 0x00000001);
-    }
-    /**
-     * <code>required uint32 playerId = 1;</code>
-     */
-    public int getPlayerId() {
-      return playerId_;
-    }
-
-    public static final int SKIN_FIELD_NUMBER = 2;
-    private int skin_;
-    /**
-     * <code>required uint32 Skin = 2;</code>
-     */
-    public boolean hasSkin() {
-      return ((bitField0_ & 0x00000002) == 0x00000002);
-    }
-    /**
-     * <code>required uint32 Skin = 2;</code>
-     */
-    public int getSkin() {
-      return skin_;
-    }
-
-    private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
-
-      if (!hasPlayerId()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
-      if (!hasSkin()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
-      memoizedIsInitialized = 1;
-      return true;
-    }
-
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeUInt32(1, playerId_);
-      }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeUInt32(2, skin_);
-      }
-      unknownFields.writeTo(output);
-    }
-
-    public int getSerializedSize() {
-      int size = memoizedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeUInt32Size(1, playerId_);
-      }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeUInt32Size(2, skin_);
-      }
-      size += unknownFields.getSerializedSize();
-      memoizedSize = size;
-      return size;
-    }
-
-    @java.lang.Override
-    public boolean equals(final java.lang.Object obj) {
-      if (obj == this) {
-       return true;
-      }
-      if (!(obj instanceof idevgame.meteor.proto.MeteorMsgs.UserSelectSkin)) {
-        return super.equals(obj);
-      }
-      idevgame.meteor.proto.MeteorMsgs.UserSelectSkin other = (idevgame.meteor.proto.MeteorMsgs.UserSelectSkin) obj;
-
-      boolean result = true;
-      result = result && (hasPlayerId() == other.hasPlayerId());
-      if (hasPlayerId()) {
-        result = result && (getPlayerId()
-            == other.getPlayerId());
-      }
-      result = result && (hasSkin() == other.hasSkin());
-      if (hasSkin()) {
-        result = result && (getSkin()
-            == other.getSkin());
-      }
-      result = result && unknownFields.equals(other.unknownFields);
-      return result;
-    }
-
-    @java.lang.Override
-    public int hashCode() {
-      if (memoizedHashCode != 0) {
-        return memoizedHashCode;
-      }
-      int hash = 41;
-      hash = (19 * hash) + getDescriptor().hashCode();
-      if (hasPlayerId()) {
-        hash = (37 * hash) + PLAYERID_FIELD_NUMBER;
-        hash = (53 * hash) + getPlayerId();
-      }
-      if (hasSkin()) {
-        hash = (37 * hash) + SKIN_FIELD_NUMBER;
-        hash = (53 * hash) + getSkin();
-      }
-      hash = (29 * hash) + unknownFields.hashCode();
-      memoizedHashCode = hash;
-      return hash;
-    }
-
-    public static idevgame.meteor.proto.MeteorMsgs.UserSelectSkin parseFrom(
-        java.nio.ByteBuffer data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.UserSelectSkin parseFrom(
-        java.nio.ByteBuffer data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.UserSelectSkin parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.UserSelectSkin parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.UserSelectSkin parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.UserSelectSkin parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.UserSelectSkin parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.UserSelectSkin parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.UserSelectSkin parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.UserSelectSkin parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.UserSelectSkin parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.UserSelectSkin parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder() {
-      return DEFAULT_INSTANCE.toBuilder();
-    }
-    public static Builder newBuilder(idevgame.meteor.proto.MeteorMsgs.UserSelectSkin prototype) {
-      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
-    }
-    public Builder toBuilder() {
-      return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
-    }
-
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
-    /**
-     * Protobuf type {@code UserSelectSkin}
-     */
-    public static final class Builder extends
-        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:UserSelectSkin)
-        idevgame.meteor.proto.MeteorMsgs.UserSelectSkinOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return idevgame.meteor.proto.MeteorMsgs.internal_static_UserSelectSkin_descriptor;
-      }
-
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return idevgame.meteor.proto.MeteorMsgs.internal_static_UserSelectSkin_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                idevgame.meteor.proto.MeteorMsgs.UserSelectSkin.class, idevgame.meteor.proto.MeteorMsgs.UserSelectSkin.Builder.class);
-      }
-
-      // Construct using idevgame.meteor.proto.MeteorMsgs.UserSelectSkin.newBuilder()
-      private Builder() {
-        maybeForceBuilderInitialization();
-      }
-
-      private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-        super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
-      }
-      public Builder clear() {
-        super.clear();
-        playerId_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000001);
-        skin_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000002);
-        return this;
-      }
-
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return idevgame.meteor.proto.MeteorMsgs.internal_static_UserSelectSkin_descriptor;
-      }
-
-      public idevgame.meteor.proto.MeteorMsgs.UserSelectSkin getDefaultInstanceForType() {
-        return idevgame.meteor.proto.MeteorMsgs.UserSelectSkin.getDefaultInstance();
-      }
-
-      public idevgame.meteor.proto.MeteorMsgs.UserSelectSkin build() {
-        idevgame.meteor.proto.MeteorMsgs.UserSelectSkin result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-
-      public idevgame.meteor.proto.MeteorMsgs.UserSelectSkin buildPartial() {
-        idevgame.meteor.proto.MeteorMsgs.UserSelectSkin result = new idevgame.meteor.proto.MeteorMsgs.UserSelectSkin(this);
-        int from_bitField0_ = bitField0_;
-        int to_bitField0_ = 0;
-        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
-          to_bitField0_ |= 0x00000001;
-        }
-        result.playerId_ = playerId_;
-        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
-          to_bitField0_ |= 0x00000002;
-        }
-        result.skin_ = skin_;
-        result.bitField0_ = to_bitField0_;
-        onBuilt();
-        return result;
-      }
-
-      public Builder clone() {
-        return (Builder) super.clone();
-      }
-      public Builder setField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
-        return (Builder) super.setField(field, value);
-      }
-      public Builder clearField(
-          com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return (Builder) super.clearField(field);
-      }
-      public Builder clearOneof(
-          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return (Builder) super.clearOneof(oneof);
-      }
-      public Builder setRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, java.lang.Object value) {
-        return (Builder) super.setRepeatedField(field, index, value);
-      }
-      public Builder addRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
-        return (Builder) super.addRepeatedField(field, value);
-      }
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof idevgame.meteor.proto.MeteorMsgs.UserSelectSkin) {
-          return mergeFrom((idevgame.meteor.proto.MeteorMsgs.UserSelectSkin)other);
+      public Builder setPosition(
+          idevgame.meteor.proto.MeteorMsgs._Vector3.Builder builderForValue) {
+        if (positionBuilder_ == null) {
+          position_ = builderForValue.build();
+          onChanged();
         } else {
-          super.mergeFrom(other);
-          return this;
+          positionBuilder_.setMessage(builderForValue.build());
         }
-      }
-
-      public Builder mergeFrom(idevgame.meteor.proto.MeteorMsgs.UserSelectSkin other) {
-        if (other == idevgame.meteor.proto.MeteorMsgs.UserSelectSkin.getDefaultInstance()) return this;
-        if (other.hasPlayerId()) {
-          setPlayerId(other.getPlayerId());
-        }
-        if (other.hasSkin()) {
-          setSkin(other.getSkin());
-        }
-        this.mergeUnknownFields(other.unknownFields);
-        onChanged();
-        return this;
-      }
-
-      public final boolean isInitialized() {
-        if (!hasPlayerId()) {
-          return false;
-        }
-        if (!hasSkin()) {
-          return false;
-        }
-        return true;
-      }
-
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        idevgame.meteor.proto.MeteorMsgs.UserSelectSkin parsedMessage = null;
-        try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (idevgame.meteor.proto.MeteorMsgs.UserSelectSkin) e.getUnfinishedMessage();
-          throw e.unwrapIOException();
-        } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
-        return this;
-      }
-      private int bitField0_;
-
-      private int playerId_ ;
-      /**
-       * <code>required uint32 playerId = 1;</code>
-       */
-      public boolean hasPlayerId() {
-        return ((bitField0_ & 0x00000001) == 0x00000001);
-      }
-      /**
-       * <code>required uint32 playerId = 1;</code>
-       */
-      public int getPlayerId() {
-        return playerId_;
-      }
-      /**
-       * <code>required uint32 playerId = 1;</code>
-       */
-      public Builder setPlayerId(int value) {
-        bitField0_ |= 0x00000001;
-        playerId_ = value;
-        onChanged();
+        bitField0_ |= 0x00000200;
         return this;
       }
       /**
-       * <code>required uint32 playerId = 1;</code>
+       * <code>optional ._Vector3 position = 10;</code>
        */
-      public Builder clearPlayerId() {
-        bitField0_ = (bitField0_ & ~0x00000001);
-        playerId_ = 0;
-        onChanged();
-        return this;
-      }
-
-      private int skin_ ;
-      /**
-       * <code>required uint32 Skin = 2;</code>
-       */
-      public boolean hasSkin() {
-        return ((bitField0_ & 0x00000002) == 0x00000002);
-      }
-      /**
-       * <code>required uint32 Skin = 2;</code>
-       */
-      public int getSkin() {
-        return skin_;
-      }
-      /**
-       * <code>required uint32 Skin = 2;</code>
-       */
-      public Builder setSkin(int value) {
-        bitField0_ |= 0x00000002;
-        skin_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>required uint32 Skin = 2;</code>
-       */
-      public Builder clearSkin() {
-        bitField0_ = (bitField0_ & ~0x00000002);
-        skin_ = 0;
-        onChanged();
-        return this;
-      }
-      public final Builder setUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFields(unknownFields);
-      }
-
-      public final Builder mergeUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.mergeUnknownFields(unknownFields);
-      }
-
-
-      // @@protoc_insertion_point(builder_scope:UserSelectSkin)
-    }
-
-    // @@protoc_insertion_point(class_scope:UserSelectSkin)
-    private static final idevgame.meteor.proto.MeteorMsgs.UserSelectSkin DEFAULT_INSTANCE;
-    static {
-      DEFAULT_INSTANCE = new idevgame.meteor.proto.MeteorMsgs.UserSelectSkin();
-    }
-
-    public static idevgame.meteor.proto.MeteorMsgs.UserSelectSkin getDefaultInstance() {
-      return DEFAULT_INSTANCE;
-    }
-
-    @java.lang.Deprecated public static final com.google.protobuf.Parser<UserSelectSkin>
-        PARSER = new com.google.protobuf.AbstractParser<UserSelectSkin>() {
-      public UserSelectSkin parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return new UserSelectSkin(input, extensionRegistry);
-      }
-    };
-
-    public static com.google.protobuf.Parser<UserSelectSkin> parser() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<UserSelectSkin> getParserForType() {
-      return PARSER;
-    }
-
-    public idevgame.meteor.proto.MeteorMsgs.UserSelectSkin getDefaultInstanceForType() {
-      return DEFAULT_INSTANCE;
-    }
-
-  }
-
-  public interface OnBattleCanceledOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:OnBattleCanceled)
-      com.google.protobuf.MessageOrBuilder {
-
-    /**
-     * <pre>
-     *解散原因
-     * </pre>
-     *
-     * <code>required uint32 reason = 1;</code>
-     */
-    boolean hasReason();
-    /**
-     * <pre>
-     *解散原因
-     * </pre>
-     *
-     * <code>required uint32 reason = 1;</code>
-     */
-    int getReason();
-  }
-  /**
-   * <pre>
-   *本次组队被解散
-   * </pre>
-   *
-   * Protobuf type {@code OnBattleCanceled}
-   */
-  public  static final class OnBattleCanceled extends
-      com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:OnBattleCanceled)
-      OnBattleCanceledOrBuilder {
-  private static final long serialVersionUID = 0L;
-    // Use OnBattleCanceled.newBuilder() to construct.
-    private OnBattleCanceled(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
-      super(builder);
-    }
-    private OnBattleCanceled() {
-      reason_ = 0;
-    }
-
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
-      return this.unknownFields;
-    }
-    private OnBattleCanceled(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      int mutable_bitField0_ = 0;
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            default: {
-              if (!parseUnknownField(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-            case 8: {
-              bitField0_ |= 0x00000001;
-              reason_ = input.readUInt32();
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return idevgame.meteor.proto.MeteorMsgs.internal_static_OnBattleCanceled_descriptor;
-    }
-
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return idevgame.meteor.proto.MeteorMsgs.internal_static_OnBattleCanceled_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              idevgame.meteor.proto.MeteorMsgs.OnBattleCanceled.class, idevgame.meteor.proto.MeteorMsgs.OnBattleCanceled.Builder.class);
-    }
-
-    private int bitField0_;
-    public static final int REASON_FIELD_NUMBER = 1;
-    private int reason_;
-    /**
-     * <pre>
-     *解散原因
-     * </pre>
-     *
-     * <code>required uint32 reason = 1;</code>
-     */
-    public boolean hasReason() {
-      return ((bitField0_ & 0x00000001) == 0x00000001);
-    }
-    /**
-     * <pre>
-     *解散原因
-     * </pre>
-     *
-     * <code>required uint32 reason = 1;</code>
-     */
-    public int getReason() {
-      return reason_;
-    }
-
-    private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
-
-      if (!hasReason()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
-      memoizedIsInitialized = 1;
-      return true;
-    }
-
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeUInt32(1, reason_);
-      }
-      unknownFields.writeTo(output);
-    }
-
-    public int getSerializedSize() {
-      int size = memoizedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeUInt32Size(1, reason_);
-      }
-      size += unknownFields.getSerializedSize();
-      memoizedSize = size;
-      return size;
-    }
-
-    @java.lang.Override
-    public boolean equals(final java.lang.Object obj) {
-      if (obj == this) {
-       return true;
-      }
-      if (!(obj instanceof idevgame.meteor.proto.MeteorMsgs.OnBattleCanceled)) {
-        return super.equals(obj);
-      }
-      idevgame.meteor.proto.MeteorMsgs.OnBattleCanceled other = (idevgame.meteor.proto.MeteorMsgs.OnBattleCanceled) obj;
-
-      boolean result = true;
-      result = result && (hasReason() == other.hasReason());
-      if (hasReason()) {
-        result = result && (getReason()
-            == other.getReason());
-      }
-      result = result && unknownFields.equals(other.unknownFields);
-      return result;
-    }
-
-    @java.lang.Override
-    public int hashCode() {
-      if (memoizedHashCode != 0) {
-        return memoizedHashCode;
-      }
-      int hash = 41;
-      hash = (19 * hash) + getDescriptor().hashCode();
-      if (hasReason()) {
-        hash = (37 * hash) + REASON_FIELD_NUMBER;
-        hash = (53 * hash) + getReason();
-      }
-      hash = (29 * hash) + unknownFields.hashCode();
-      memoizedHashCode = hash;
-      return hash;
-    }
-
-    public static idevgame.meteor.proto.MeteorMsgs.OnBattleCanceled parseFrom(
-        java.nio.ByteBuffer data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.OnBattleCanceled parseFrom(
-        java.nio.ByteBuffer data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.OnBattleCanceled parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.OnBattleCanceled parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.OnBattleCanceled parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.OnBattleCanceled parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.OnBattleCanceled parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.OnBattleCanceled parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.OnBattleCanceled parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.OnBattleCanceled parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.OnBattleCanceled parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.OnBattleCanceled parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder() {
-      return DEFAULT_INSTANCE.toBuilder();
-    }
-    public static Builder newBuilder(idevgame.meteor.proto.MeteorMsgs.OnBattleCanceled prototype) {
-      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
-    }
-    public Builder toBuilder() {
-      return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
-    }
-
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
-    /**
-     * <pre>
-     *本次组队被解散
-     * </pre>
-     *
-     * Protobuf type {@code OnBattleCanceled}
-     */
-    public static final class Builder extends
-        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:OnBattleCanceled)
-        idevgame.meteor.proto.MeteorMsgs.OnBattleCanceledOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return idevgame.meteor.proto.MeteorMsgs.internal_static_OnBattleCanceled_descriptor;
-      }
-
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return idevgame.meteor.proto.MeteorMsgs.internal_static_OnBattleCanceled_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                idevgame.meteor.proto.MeteorMsgs.OnBattleCanceled.class, idevgame.meteor.proto.MeteorMsgs.OnBattleCanceled.Builder.class);
-      }
-
-      // Construct using idevgame.meteor.proto.MeteorMsgs.OnBattleCanceled.newBuilder()
-      private Builder() {
-        maybeForceBuilderInitialization();
-      }
-
-      private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-        super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
-      }
-      public Builder clear() {
-        super.clear();
-        reason_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000001);
-        return this;
-      }
-
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return idevgame.meteor.proto.MeteorMsgs.internal_static_OnBattleCanceled_descriptor;
-      }
-
-      public idevgame.meteor.proto.MeteorMsgs.OnBattleCanceled getDefaultInstanceForType() {
-        return idevgame.meteor.proto.MeteorMsgs.OnBattleCanceled.getDefaultInstance();
-      }
-
-      public idevgame.meteor.proto.MeteorMsgs.OnBattleCanceled build() {
-        idevgame.meteor.proto.MeteorMsgs.OnBattleCanceled result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-
-      public idevgame.meteor.proto.MeteorMsgs.OnBattleCanceled buildPartial() {
-        idevgame.meteor.proto.MeteorMsgs.OnBattleCanceled result = new idevgame.meteor.proto.MeteorMsgs.OnBattleCanceled(this);
-        int from_bitField0_ = bitField0_;
-        int to_bitField0_ = 0;
-        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
-          to_bitField0_ |= 0x00000001;
-        }
-        result.reason_ = reason_;
-        result.bitField0_ = to_bitField0_;
-        onBuilt();
-        return result;
-      }
-
-      public Builder clone() {
-        return (Builder) super.clone();
-      }
-      public Builder setField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
-        return (Builder) super.setField(field, value);
-      }
-      public Builder clearField(
-          com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return (Builder) super.clearField(field);
-      }
-      public Builder clearOneof(
-          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return (Builder) super.clearOneof(oneof);
-      }
-      public Builder setRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, java.lang.Object value) {
-        return (Builder) super.setRepeatedField(field, index, value);
-      }
-      public Builder addRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
-        return (Builder) super.addRepeatedField(field, value);
-      }
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof idevgame.meteor.proto.MeteorMsgs.OnBattleCanceled) {
-          return mergeFrom((idevgame.meteor.proto.MeteorMsgs.OnBattleCanceled)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-
-      public Builder mergeFrom(idevgame.meteor.proto.MeteorMsgs.OnBattleCanceled other) {
-        if (other == idevgame.meteor.proto.MeteorMsgs.OnBattleCanceled.getDefaultInstance()) return this;
-        if (other.hasReason()) {
-          setReason(other.getReason());
-        }
-        this.mergeUnknownFields(other.unknownFields);
-        onChanged();
-        return this;
-      }
-
-      public final boolean isInitialized() {
-        if (!hasReason()) {
-          return false;
-        }
-        return true;
-      }
-
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        idevgame.meteor.proto.MeteorMsgs.OnBattleCanceled parsedMessage = null;
-        try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (idevgame.meteor.proto.MeteorMsgs.OnBattleCanceled) e.getUnfinishedMessage();
-          throw e.unwrapIOException();
-        } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
-        return this;
-      }
-      private int bitField0_;
-
-      private int reason_ ;
-      /**
-       * <pre>
-       *解散原因
-       * </pre>
-       *
-       * <code>required uint32 reason = 1;</code>
-       */
-      public boolean hasReason() {
-        return ((bitField0_ & 0x00000001) == 0x00000001);
-      }
-      /**
-       * <pre>
-       *解散原因
-       * </pre>
-       *
-       * <code>required uint32 reason = 1;</code>
-       */
-      public int getReason() {
-        return reason_;
-      }
-      /**
-       * <pre>
-       *解散原因
-       * </pre>
-       *
-       * <code>required uint32 reason = 1;</code>
-       */
-      public Builder setReason(int value) {
-        bitField0_ |= 0x00000001;
-        reason_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <pre>
-       *解散原因
-       * </pre>
-       *
-       * <code>required uint32 reason = 1;</code>
-       */
-      public Builder clearReason() {
-        bitField0_ = (bitField0_ & ~0x00000001);
-        reason_ = 0;
-        onChanged();
-        return this;
-      }
-      public final Builder setUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFields(unknownFields);
-      }
-
-      public final Builder mergeUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.mergeUnknownFields(unknownFields);
-      }
-
-
-      // @@protoc_insertion_point(builder_scope:OnBattleCanceled)
-    }
-
-    // @@protoc_insertion_point(class_scope:OnBattleCanceled)
-    private static final idevgame.meteor.proto.MeteorMsgs.OnBattleCanceled DEFAULT_INSTANCE;
-    static {
-      DEFAULT_INSTANCE = new idevgame.meteor.proto.MeteorMsgs.OnBattleCanceled();
-    }
-
-    public static idevgame.meteor.proto.MeteorMsgs.OnBattleCanceled getDefaultInstance() {
-      return DEFAULT_INSTANCE;
-    }
-
-    @java.lang.Deprecated public static final com.google.protobuf.Parser<OnBattleCanceled>
-        PARSER = new com.google.protobuf.AbstractParser<OnBattleCanceled>() {
-      public OnBattleCanceled parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return new OnBattleCanceled(input, extensionRegistry);
-      }
-    };
-
-    public static com.google.protobuf.Parser<OnBattleCanceled> parser() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<OnBattleCanceled> getParserForType() {
-      return PARSER;
-    }
-
-    public idevgame.meteor.proto.MeteorMsgs.OnBattleCanceled getDefaultInstanceForType() {
-      return DEFAULT_INSTANCE;
-    }
-
-  }
-
-  public interface OnBattleLoadingOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:OnBattleLoading)
-      com.google.protobuf.MessageOrBuilder {
-
-    /**
-     * <pre>
-     *所有玩家ID
-     * </pre>
-     *
-     * <code>repeated uint32 playerId = 1;</code>
-     */
-    java.util.List<java.lang.Integer> getPlayerIdList();
-    /**
-     * <pre>
-     *所有玩家ID
-     * </pre>
-     *
-     * <code>repeated uint32 playerId = 1;</code>
-     */
-    int getPlayerIdCount();
-    /**
-     * <pre>
-     *所有玩家ID
-     * </pre>
-     *
-     * <code>repeated uint32 playerId = 1;</code>
-     */
-    int getPlayerId(int index);
-
-    /**
-     * <pre>
-     *所有玩家加载进度
-     * </pre>
-     *
-     * <code>repeated uint32 percent = 2;</code>
-     */
-    java.util.List<java.lang.Integer> getPercentList();
-    /**
-     * <pre>
-     *所有玩家加载进度
-     * </pre>
-     *
-     * <code>repeated uint32 percent = 2;</code>
-     */
-    int getPercentCount();
-    /**
-     * <pre>
-     *所有玩家加载进度
-     * </pre>
-     *
-     * <code>repeated uint32 percent = 2;</code>
-     */
-    int getPercent(int index);
-  }
-  /**
-   * Protobuf type {@code OnBattleLoading}
-   */
-  public  static final class OnBattleLoading extends
-      com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:OnBattleLoading)
-      OnBattleLoadingOrBuilder {
-  private static final long serialVersionUID = 0L;
-    // Use OnBattleLoading.newBuilder() to construct.
-    private OnBattleLoading(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
-      super(builder);
-    }
-    private OnBattleLoading() {
-      playerId_ = java.util.Collections.emptyList();
-      percent_ = java.util.Collections.emptyList();
-    }
-
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
-      return this.unknownFields;
-    }
-    private OnBattleLoading(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      int mutable_bitField0_ = 0;
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            default: {
-              if (!parseUnknownField(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-            case 8: {
-              if (!((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
-                playerId_ = new java.util.ArrayList<java.lang.Integer>();
-                mutable_bitField0_ |= 0x00000001;
-              }
-              playerId_.add(input.readUInt32());
-              break;
-            }
-            case 10: {
-              int length = input.readRawVarint32();
-              int limit = input.pushLimit(length);
-              if (!((mutable_bitField0_ & 0x00000001) == 0x00000001) && input.getBytesUntilLimit() > 0) {
-                playerId_ = new java.util.ArrayList<java.lang.Integer>();
-                mutable_bitField0_ |= 0x00000001;
-              }
-              while (input.getBytesUntilLimit() > 0) {
-                playerId_.add(input.readUInt32());
-              }
-              input.popLimit(limit);
-              break;
-            }
-            case 16: {
-              if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
-                percent_ = new java.util.ArrayList<java.lang.Integer>();
-                mutable_bitField0_ |= 0x00000002;
-              }
-              percent_.add(input.readUInt32());
-              break;
-            }
-            case 18: {
-              int length = input.readRawVarint32();
-              int limit = input.pushLimit(length);
-              if (!((mutable_bitField0_ & 0x00000002) == 0x00000002) && input.getBytesUntilLimit() > 0) {
-                percent_ = new java.util.ArrayList<java.lang.Integer>();
-                mutable_bitField0_ |= 0x00000002;
-              }
-              while (input.getBytesUntilLimit() > 0) {
-                percent_.add(input.readUInt32());
-              }
-              input.popLimit(limit);
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
-          playerId_ = java.util.Collections.unmodifiableList(playerId_);
-        }
-        if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
-          percent_ = java.util.Collections.unmodifiableList(percent_);
-        }
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return idevgame.meteor.proto.MeteorMsgs.internal_static_OnBattleLoading_descriptor;
-    }
-
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return idevgame.meteor.proto.MeteorMsgs.internal_static_OnBattleLoading_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              idevgame.meteor.proto.MeteorMsgs.OnBattleLoading.class, idevgame.meteor.proto.MeteorMsgs.OnBattleLoading.Builder.class);
-    }
-
-    public static final int PLAYERID_FIELD_NUMBER = 1;
-    private java.util.List<java.lang.Integer> playerId_;
-    /**
-     * <pre>
-     *所有玩家ID
-     * </pre>
-     *
-     * <code>repeated uint32 playerId = 1;</code>
-     */
-    public java.util.List<java.lang.Integer>
-        getPlayerIdList() {
-      return playerId_;
-    }
-    /**
-     * <pre>
-     *所有玩家ID
-     * </pre>
-     *
-     * <code>repeated uint32 playerId = 1;</code>
-     */
-    public int getPlayerIdCount() {
-      return playerId_.size();
-    }
-    /**
-     * <pre>
-     *所有玩家ID
-     * </pre>
-     *
-     * <code>repeated uint32 playerId = 1;</code>
-     */
-    public int getPlayerId(int index) {
-      return playerId_.get(index);
-    }
-
-    public static final int PERCENT_FIELD_NUMBER = 2;
-    private java.util.List<java.lang.Integer> percent_;
-    /**
-     * <pre>
-     *所有玩家加载进度
-     * </pre>
-     *
-     * <code>repeated uint32 percent = 2;</code>
-     */
-    public java.util.List<java.lang.Integer>
-        getPercentList() {
-      return percent_;
-    }
-    /**
-     * <pre>
-     *所有玩家加载进度
-     * </pre>
-     *
-     * <code>repeated uint32 percent = 2;</code>
-     */
-    public int getPercentCount() {
-      return percent_.size();
-    }
-    /**
-     * <pre>
-     *所有玩家加载进度
-     * </pre>
-     *
-     * <code>repeated uint32 percent = 2;</code>
-     */
-    public int getPercent(int index) {
-      return percent_.get(index);
-    }
-
-    private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
-
-      memoizedIsInitialized = 1;
-      return true;
-    }
-
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      for (int i = 0; i < playerId_.size(); i++) {
-        output.writeUInt32(1, playerId_.get(i));
-      }
-      for (int i = 0; i < percent_.size(); i++) {
-        output.writeUInt32(2, percent_.get(i));
-      }
-      unknownFields.writeTo(output);
-    }
-
-    public int getSerializedSize() {
-      int size = memoizedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      {
-        int dataSize = 0;
-        for (int i = 0; i < playerId_.size(); i++) {
-          dataSize += com.google.protobuf.CodedOutputStream
-            .computeUInt32SizeNoTag(playerId_.get(i));
-        }
-        size += dataSize;
-        size += 1 * getPlayerIdList().size();
-      }
-      {
-        int dataSize = 0;
-        for (int i = 0; i < percent_.size(); i++) {
-          dataSize += com.google.protobuf.CodedOutputStream
-            .computeUInt32SizeNoTag(percent_.get(i));
-        }
-        size += dataSize;
-        size += 1 * getPercentList().size();
-      }
-      size += unknownFields.getSerializedSize();
-      memoizedSize = size;
-      return size;
-    }
-
-    @java.lang.Override
-    public boolean equals(final java.lang.Object obj) {
-      if (obj == this) {
-       return true;
-      }
-      if (!(obj instanceof idevgame.meteor.proto.MeteorMsgs.OnBattleLoading)) {
-        return super.equals(obj);
-      }
-      idevgame.meteor.proto.MeteorMsgs.OnBattleLoading other = (idevgame.meteor.proto.MeteorMsgs.OnBattleLoading) obj;
-
-      boolean result = true;
-      result = result && getPlayerIdList()
-          .equals(other.getPlayerIdList());
-      result = result && getPercentList()
-          .equals(other.getPercentList());
-      result = result && unknownFields.equals(other.unknownFields);
-      return result;
-    }
-
-    @java.lang.Override
-    public int hashCode() {
-      if (memoizedHashCode != 0) {
-        return memoizedHashCode;
-      }
-      int hash = 41;
-      hash = (19 * hash) + getDescriptor().hashCode();
-      if (getPlayerIdCount() > 0) {
-        hash = (37 * hash) + PLAYERID_FIELD_NUMBER;
-        hash = (53 * hash) + getPlayerIdList().hashCode();
-      }
-      if (getPercentCount() > 0) {
-        hash = (37 * hash) + PERCENT_FIELD_NUMBER;
-        hash = (53 * hash) + getPercentList().hashCode();
-      }
-      hash = (29 * hash) + unknownFields.hashCode();
-      memoizedHashCode = hash;
-      return hash;
-    }
-
-    public static idevgame.meteor.proto.MeteorMsgs.OnBattleLoading parseFrom(
-        java.nio.ByteBuffer data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.OnBattleLoading parseFrom(
-        java.nio.ByteBuffer data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.OnBattleLoading parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.OnBattleLoading parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.OnBattleLoading parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.OnBattleLoading parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.OnBattleLoading parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.OnBattleLoading parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.OnBattleLoading parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.OnBattleLoading parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.OnBattleLoading parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.OnBattleLoading parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder() {
-      return DEFAULT_INSTANCE.toBuilder();
-    }
-    public static Builder newBuilder(idevgame.meteor.proto.MeteorMsgs.OnBattleLoading prototype) {
-      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
-    }
-    public Builder toBuilder() {
-      return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
-    }
-
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
-    /**
-     * Protobuf type {@code OnBattleLoading}
-     */
-    public static final class Builder extends
-        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:OnBattleLoading)
-        idevgame.meteor.proto.MeteorMsgs.OnBattleLoadingOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return idevgame.meteor.proto.MeteorMsgs.internal_static_OnBattleLoading_descriptor;
-      }
-
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return idevgame.meteor.proto.MeteorMsgs.internal_static_OnBattleLoading_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                idevgame.meteor.proto.MeteorMsgs.OnBattleLoading.class, idevgame.meteor.proto.MeteorMsgs.OnBattleLoading.Builder.class);
-      }
-
-      // Construct using idevgame.meteor.proto.MeteorMsgs.OnBattleLoading.newBuilder()
-      private Builder() {
-        maybeForceBuilderInitialization();
-      }
-
-      private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-        super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
-      }
-      public Builder clear() {
-        super.clear();
-        playerId_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00000001);
-        percent_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00000002);
-        return this;
-      }
-
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return idevgame.meteor.proto.MeteorMsgs.internal_static_OnBattleLoading_descriptor;
-      }
-
-      public idevgame.meteor.proto.MeteorMsgs.OnBattleLoading getDefaultInstanceForType() {
-        return idevgame.meteor.proto.MeteorMsgs.OnBattleLoading.getDefaultInstance();
-      }
-
-      public idevgame.meteor.proto.MeteorMsgs.OnBattleLoading build() {
-        idevgame.meteor.proto.MeteorMsgs.OnBattleLoading result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-
-      public idevgame.meteor.proto.MeteorMsgs.OnBattleLoading buildPartial() {
-        idevgame.meteor.proto.MeteorMsgs.OnBattleLoading result = new idevgame.meteor.proto.MeteorMsgs.OnBattleLoading(this);
-        int from_bitField0_ = bitField0_;
-        if (((bitField0_ & 0x00000001) == 0x00000001)) {
-          playerId_ = java.util.Collections.unmodifiableList(playerId_);
-          bitField0_ = (bitField0_ & ~0x00000001);
-        }
-        result.playerId_ = playerId_;
-        if (((bitField0_ & 0x00000002) == 0x00000002)) {
-          percent_ = java.util.Collections.unmodifiableList(percent_);
-          bitField0_ = (bitField0_ & ~0x00000002);
-        }
-        result.percent_ = percent_;
-        onBuilt();
-        return result;
-      }
-
-      public Builder clone() {
-        return (Builder) super.clone();
-      }
-      public Builder setField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
-        return (Builder) super.setField(field, value);
-      }
-      public Builder clearField(
-          com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return (Builder) super.clearField(field);
-      }
-      public Builder clearOneof(
-          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return (Builder) super.clearOneof(oneof);
-      }
-      public Builder setRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, java.lang.Object value) {
-        return (Builder) super.setRepeatedField(field, index, value);
-      }
-      public Builder addRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
-        return (Builder) super.addRepeatedField(field, value);
-      }
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof idevgame.meteor.proto.MeteorMsgs.OnBattleLoading) {
-          return mergeFrom((idevgame.meteor.proto.MeteorMsgs.OnBattleLoading)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-
-      public Builder mergeFrom(idevgame.meteor.proto.MeteorMsgs.OnBattleLoading other) {
-        if (other == idevgame.meteor.proto.MeteorMsgs.OnBattleLoading.getDefaultInstance()) return this;
-        if (!other.playerId_.isEmpty()) {
-          if (playerId_.isEmpty()) {
-            playerId_ = other.playerId_;
-            bitField0_ = (bitField0_ & ~0x00000001);
+      public Builder mergePosition(idevgame.meteor.proto.MeteorMsgs._Vector3 value) {
+        if (positionBuilder_ == null) {
+          if (((bitField0_ & 0x00000200) == 0x00000200) &&
+              position_ != null &&
+              position_ != idevgame.meteor.proto.MeteorMsgs._Vector3.getDefaultInstance()) {
+            position_ =
+              idevgame.meteor.proto.MeteorMsgs._Vector3.newBuilder(position_).mergeFrom(value).buildPartial();
           } else {
-            ensurePlayerIdIsMutable();
-            playerId_.addAll(other.playerId_);
+            position_ = value;
           }
           onChanged();
+        } else {
+          positionBuilder_.mergeFrom(value);
         }
-        if (!other.percent_.isEmpty()) {
-          if (percent_.isEmpty()) {
-            percent_ = other.percent_;
-            bitField0_ = (bitField0_ & ~0x00000002);
+        bitField0_ |= 0x00000200;
+        return this;
+      }
+      /**
+       * <code>optional ._Vector3 position = 10;</code>
+       */
+      public Builder clearPosition() {
+        if (positionBuilder_ == null) {
+          position_ = null;
+          onChanged();
+        } else {
+          positionBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000200);
+        return this;
+      }
+      /**
+       * <code>optional ._Vector3 position = 10;</code>
+       */
+      public idevgame.meteor.proto.MeteorMsgs._Vector3.Builder getPositionBuilder() {
+        bitField0_ |= 0x00000200;
+        onChanged();
+        return getPositionFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional ._Vector3 position = 10;</code>
+       */
+      public idevgame.meteor.proto.MeteorMsgs._Vector3OrBuilder getPositionOrBuilder() {
+        if (positionBuilder_ != null) {
+          return positionBuilder_.getMessageOrBuilder();
+        } else {
+          return position_ == null ?
+              idevgame.meteor.proto.MeteorMsgs._Vector3.getDefaultInstance() : position_;
+        }
+      }
+      /**
+       * <code>optional ._Vector3 position = 10;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          idevgame.meteor.proto.MeteorMsgs._Vector3, idevgame.meteor.proto.MeteorMsgs._Vector3.Builder, idevgame.meteor.proto.MeteorMsgs._Vector3OrBuilder> 
+          getPositionFieldBuilder() {
+        if (positionBuilder_ == null) {
+          positionBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              idevgame.meteor.proto.MeteorMsgs._Vector3, idevgame.meteor.proto.MeteorMsgs._Vector3.Builder, idevgame.meteor.proto.MeteorMsgs._Vector3OrBuilder>(
+                  getPosition(),
+                  getParentForChildren(),
+                  isClean());
+          position_ = null;
+        }
+        return positionBuilder_;
+      }
+
+      private idevgame.meteor.proto.MeteorMsgs._Quaternion rotation_ = null;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          idevgame.meteor.proto.MeteorMsgs._Quaternion, idevgame.meteor.proto.MeteorMsgs._Quaternion.Builder, idevgame.meteor.proto.MeteorMsgs._QuaternionOrBuilder> rotationBuilder_;
+      /**
+       * <code>optional ._Quaternion rotation = 11;</code>
+       */
+      public boolean hasRotation() {
+        return ((bitField0_ & 0x00000400) == 0x00000400);
+      }
+      /**
+       * <code>optional ._Quaternion rotation = 11;</code>
+       */
+      public idevgame.meteor.proto.MeteorMsgs._Quaternion getRotation() {
+        if (rotationBuilder_ == null) {
+          return rotation_ == null ? idevgame.meteor.proto.MeteorMsgs._Quaternion.getDefaultInstance() : rotation_;
+        } else {
+          return rotationBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>optional ._Quaternion rotation = 11;</code>
+       */
+      public Builder setRotation(idevgame.meteor.proto.MeteorMsgs._Quaternion value) {
+        if (rotationBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          rotation_ = value;
+          onChanged();
+        } else {
+          rotationBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000400;
+        return this;
+      }
+      /**
+       * <code>optional ._Quaternion rotation = 11;</code>
+       */
+      public Builder setRotation(
+          idevgame.meteor.proto.MeteorMsgs._Quaternion.Builder builderForValue) {
+        if (rotationBuilder_ == null) {
+          rotation_ = builderForValue.build();
+          onChanged();
+        } else {
+          rotationBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000400;
+        return this;
+      }
+      /**
+       * <code>optional ._Quaternion rotation = 11;</code>
+       */
+      public Builder mergeRotation(idevgame.meteor.proto.MeteorMsgs._Quaternion value) {
+        if (rotationBuilder_ == null) {
+          if (((bitField0_ & 0x00000400) == 0x00000400) &&
+              rotation_ != null &&
+              rotation_ != idevgame.meteor.proto.MeteorMsgs._Quaternion.getDefaultInstance()) {
+            rotation_ =
+              idevgame.meteor.proto.MeteorMsgs._Quaternion.newBuilder(rotation_).mergeFrom(value).buildPartial();
           } else {
-            ensurePercentIsMutable();
-            percent_.addAll(other.percent_);
+            rotation_ = value;
           }
           onChanged();
+        } else {
+          rotationBuilder_.mergeFrom(value);
         }
-        this.mergeUnknownFields(other.unknownFields);
+        bitField0_ |= 0x00000400;
+        return this;
+      }
+      /**
+       * <code>optional ._Quaternion rotation = 11;</code>
+       */
+      public Builder clearRotation() {
+        if (rotationBuilder_ == null) {
+          rotation_ = null;
+          onChanged();
+        } else {
+          rotationBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000400);
+        return this;
+      }
+      /**
+       * <code>optional ._Quaternion rotation = 11;</code>
+       */
+      public idevgame.meteor.proto.MeteorMsgs._Quaternion.Builder getRotationBuilder() {
+        bitField0_ |= 0x00000400;
+        onChanged();
+        return getRotationFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional ._Quaternion rotation = 11;</code>
+       */
+      public idevgame.meteor.proto.MeteorMsgs._QuaternionOrBuilder getRotationOrBuilder() {
+        if (rotationBuilder_ != null) {
+          return rotationBuilder_.getMessageOrBuilder();
+        } else {
+          return rotation_ == null ?
+              idevgame.meteor.proto.MeteorMsgs._Quaternion.getDefaultInstance() : rotation_;
+        }
+      }
+      /**
+       * <code>optional ._Quaternion rotation = 11;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          idevgame.meteor.proto.MeteorMsgs._Quaternion, idevgame.meteor.proto.MeteorMsgs._Quaternion.Builder, idevgame.meteor.proto.MeteorMsgs._QuaternionOrBuilder> 
+          getRotationFieldBuilder() {
+        if (rotationBuilder_ == null) {
+          rotationBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              idevgame.meteor.proto.MeteorMsgs._Quaternion, idevgame.meteor.proto.MeteorMsgs._Quaternion.Builder, idevgame.meteor.proto.MeteorMsgs._QuaternionOrBuilder>(
+                  getRotation(),
+                  getParentForChildren(),
+                  isClean());
+          rotation_ = null;
+        }
+        return rotationBuilder_;
+      }
+
+      private int action_ ;
+      /**
+       * <code>optional int32 action = 12;</code>
+       */
+      public boolean hasAction() {
+        return ((bitField0_ & 0x00000800) == 0x00000800);
+      }
+      /**
+       * <code>optional int32 action = 12;</code>
+       */
+      public int getAction() {
+        return action_;
+      }
+      /**
+       * <code>optional int32 action = 12;</code>
+       */
+      public Builder setAction(int value) {
+        bitField0_ |= 0x00000800;
+        action_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 action = 12;</code>
+       */
+      public Builder clearAction() {
+        bitField0_ = (bitField0_ & ~0x00000800);
+        action_ = 0;
         onChanged();
         return this;
       }
 
-      public final boolean isInitialized() {
-        return true;
-      }
-
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        idevgame.meteor.proto.MeteorMsgs.OnBattleLoading parsedMessage = null;
-        try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (idevgame.meteor.proto.MeteorMsgs.OnBattleLoading) e.getUnfinishedMessage();
-          throw e.unwrapIOException();
-        } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
-        return this;
-      }
-      private int bitField0_;
-
-      private java.util.List<java.lang.Integer> playerId_ = java.util.Collections.emptyList();
-      private void ensurePlayerIdIsMutable() {
-        if (!((bitField0_ & 0x00000001) == 0x00000001)) {
-          playerId_ = new java.util.ArrayList<java.lang.Integer>(playerId_);
-          bitField0_ |= 0x00000001;
+      private java.util.List<java.lang.Integer> buff_ = java.util.Collections.emptyList();
+      private void ensureBuffIsMutable() {
+        if (!((bitField0_ & 0x00001000) == 0x00001000)) {
+          buff_ = new java.util.ArrayList<java.lang.Integer>(buff_);
+          bitField0_ |= 0x00001000;
          }
       }
       /**
-       * <pre>
-       *所有玩家ID
-       * </pre>
-       *
-       * <code>repeated uint32 playerId = 1;</code>
+       * <code>repeated uint32 buff = 13;</code>
        */
       public java.util.List<java.lang.Integer>
-          getPlayerIdList() {
-        return java.util.Collections.unmodifiableList(playerId_);
+          getBuffList() {
+        return java.util.Collections.unmodifiableList(buff_);
       }
       /**
-       * <pre>
-       *所有玩家ID
-       * </pre>
-       *
-       * <code>repeated uint32 playerId = 1;</code>
+       * <code>repeated uint32 buff = 13;</code>
        */
-      public int getPlayerIdCount() {
-        return playerId_.size();
+      public int getBuffCount() {
+        return buff_.size();
       }
       /**
-       * <pre>
-       *所有玩家ID
-       * </pre>
-       *
-       * <code>repeated uint32 playerId = 1;</code>
+       * <code>repeated uint32 buff = 13;</code>
        */
-      public int getPlayerId(int index) {
-        return playerId_.get(index);
+      public int getBuff(int index) {
+        return buff_.get(index);
       }
       /**
-       * <pre>
-       *所有玩家ID
-       * </pre>
-       *
-       * <code>repeated uint32 playerId = 1;</code>
+       * <code>repeated uint32 buff = 13;</code>
        */
-      public Builder setPlayerId(
+      public Builder setBuff(
           int index, int value) {
-        ensurePlayerIdIsMutable();
-        playerId_.set(index, value);
+        ensureBuffIsMutable();
+        buff_.set(index, value);
         onChanged();
         return this;
       }
       /**
-       * <pre>
-       *所有玩家ID
-       * </pre>
-       *
-       * <code>repeated uint32 playerId = 1;</code>
+       * <code>repeated uint32 buff = 13;</code>
        */
-      public Builder addPlayerId(int value) {
-        ensurePlayerIdIsMutable();
-        playerId_.add(value);
+      public Builder addBuff(int value) {
+        ensureBuffIsMutable();
+        buff_.add(value);
         onChanged();
         return this;
       }
       /**
-       * <pre>
-       *所有玩家ID
-       * </pre>
-       *
-       * <code>repeated uint32 playerId = 1;</code>
+       * <code>repeated uint32 buff = 13;</code>
        */
-      public Builder addAllPlayerId(
+      public Builder addAllBuff(
           java.lang.Iterable<? extends java.lang.Integer> values) {
-        ensurePlayerIdIsMutable();
+        ensureBuffIsMutable();
         com.google.protobuf.AbstractMessageLite.Builder.addAll(
-            values, playerId_);
+            values, buff_);
         onChanged();
         return this;
       }
       /**
-       * <pre>
-       *所有玩家ID
-       * </pre>
-       *
-       * <code>repeated uint32 playerId = 1;</code>
+       * <code>repeated uint32 buff = 13;</code>
        */
-      public Builder clearPlayerId() {
-        playerId_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00000001);
-        onChanged();
-        return this;
-      }
-
-      private java.util.List<java.lang.Integer> percent_ = java.util.Collections.emptyList();
-      private void ensurePercentIsMutable() {
-        if (!((bitField0_ & 0x00000002) == 0x00000002)) {
-          percent_ = new java.util.ArrayList<java.lang.Integer>(percent_);
-          bitField0_ |= 0x00000002;
-         }
-      }
-      /**
-       * <pre>
-       *所有玩家加载进度
-       * </pre>
-       *
-       * <code>repeated uint32 percent = 2;</code>
-       */
-      public java.util.List<java.lang.Integer>
-          getPercentList() {
-        return java.util.Collections.unmodifiableList(percent_);
-      }
-      /**
-       * <pre>
-       *所有玩家加载进度
-       * </pre>
-       *
-       * <code>repeated uint32 percent = 2;</code>
-       */
-      public int getPercentCount() {
-        return percent_.size();
-      }
-      /**
-       * <pre>
-       *所有玩家加载进度
-       * </pre>
-       *
-       * <code>repeated uint32 percent = 2;</code>
-       */
-      public int getPercent(int index) {
-        return percent_.get(index);
-      }
-      /**
-       * <pre>
-       *所有玩家加载进度
-       * </pre>
-       *
-       * <code>repeated uint32 percent = 2;</code>
-       */
-      public Builder setPercent(
-          int index, int value) {
-        ensurePercentIsMutable();
-        percent_.set(index, value);
-        onChanged();
-        return this;
-      }
-      /**
-       * <pre>
-       *所有玩家加载进度
-       * </pre>
-       *
-       * <code>repeated uint32 percent = 2;</code>
-       */
-      public Builder addPercent(int value) {
-        ensurePercentIsMutable();
-        percent_.add(value);
-        onChanged();
-        return this;
-      }
-      /**
-       * <pre>
-       *所有玩家加载进度
-       * </pre>
-       *
-       * <code>repeated uint32 percent = 2;</code>
-       */
-      public Builder addAllPercent(
-          java.lang.Iterable<? extends java.lang.Integer> values) {
-        ensurePercentIsMutable();
-        com.google.protobuf.AbstractMessageLite.Builder.addAll(
-            values, percent_);
-        onChanged();
-        return this;
-      }
-      /**
-       * <pre>
-       *所有玩家加载进度
-       * </pre>
-       *
-       * <code>repeated uint32 percent = 2;</code>
-       */
-      public Builder clearPercent() {
-        percent_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00000002);
+      public Builder clearBuff() {
+        buff_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00001000);
         onChanged();
         return this;
       }
@@ -13374,1736 +6722,39 @@ public final class MeteorMsgs {
       }
 
 
-      // @@protoc_insertion_point(builder_scope:OnBattleLoading)
+      // @@protoc_insertion_point(builder_scope:PlayerSync)
     }
 
-    // @@protoc_insertion_point(class_scope:OnBattleLoading)
-    private static final idevgame.meteor.proto.MeteorMsgs.OnBattleLoading DEFAULT_INSTANCE;
+    // @@protoc_insertion_point(class_scope:PlayerSync)
+    private static final idevgame.meteor.proto.MeteorMsgs.PlayerSync DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new idevgame.meteor.proto.MeteorMsgs.OnBattleLoading();
+      DEFAULT_INSTANCE = new idevgame.meteor.proto.MeteorMsgs.PlayerSync();
     }
 
-    public static idevgame.meteor.proto.MeteorMsgs.OnBattleLoading getDefaultInstance() {
+    public static idevgame.meteor.proto.MeteorMsgs.PlayerSync getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
-    @java.lang.Deprecated public static final com.google.protobuf.Parser<OnBattleLoading>
-        PARSER = new com.google.protobuf.AbstractParser<OnBattleLoading>() {
-      public OnBattleLoading parsePartialFrom(
+    @java.lang.Deprecated public static final com.google.protobuf.Parser<PlayerSync>
+        PARSER = new com.google.protobuf.AbstractParser<PlayerSync>() {
+      public PlayerSync parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return new OnBattleLoading(input, extensionRegistry);
+        return new PlayerSync(input, extensionRegistry);
       }
     };
 
-    public static com.google.protobuf.Parser<OnBattleLoading> parser() {
+    public static com.google.protobuf.Parser<PlayerSync> parser() {
       return PARSER;
     }
 
     @java.lang.Override
-    public com.google.protobuf.Parser<OnBattleLoading> getParserForType() {
+    public com.google.protobuf.Parser<PlayerSync> getParserForType() {
       return PARSER;
     }
 
-    public idevgame.meteor.proto.MeteorMsgs.OnBattleLoading getDefaultInstanceForType() {
-      return DEFAULT_INSTANCE;
-    }
-
-  }
-
-  public interface OnBattleResultOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:OnBattleResult)
-      com.google.protobuf.MessageOrBuilder {
-
-    /**
-     * <pre>
-     *战斗结果 [1：我方胜利] [0：我方失败]
-     * </pre>
-     *
-     * <code>required uint32 result = 1;</code>
-     */
-    boolean hasResult();
-    /**
-     * <pre>
-     *战斗结果 [1：我方胜利] [0：我方失败]
-     * </pre>
-     *
-     * <code>required uint32 result = 1;</code>
-     */
-    int getResult();
-  }
-  /**
-   * Protobuf type {@code OnBattleResult}
-   */
-  public  static final class OnBattleResult extends
-      com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:OnBattleResult)
-      OnBattleResultOrBuilder {
-  private static final long serialVersionUID = 0L;
-    // Use OnBattleResult.newBuilder() to construct.
-    private OnBattleResult(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
-      super(builder);
-    }
-    private OnBattleResult() {
-      result_ = 0;
-    }
-
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
-      return this.unknownFields;
-    }
-    private OnBattleResult(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      int mutable_bitField0_ = 0;
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            default: {
-              if (!parseUnknownField(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-            case 8: {
-              bitField0_ |= 0x00000001;
-              result_ = input.readUInt32();
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return idevgame.meteor.proto.MeteorMsgs.internal_static_OnBattleResult_descriptor;
-    }
-
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return idevgame.meteor.proto.MeteorMsgs.internal_static_OnBattleResult_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              idevgame.meteor.proto.MeteorMsgs.OnBattleResult.class, idevgame.meteor.proto.MeteorMsgs.OnBattleResult.Builder.class);
-    }
-
-    private int bitField0_;
-    public static final int RESULT_FIELD_NUMBER = 1;
-    private int result_;
-    /**
-     * <pre>
-     *战斗结果 [1：我方胜利] [0：我方失败]
-     * </pre>
-     *
-     * <code>required uint32 result = 1;</code>
-     */
-    public boolean hasResult() {
-      return ((bitField0_ & 0x00000001) == 0x00000001);
-    }
-    /**
-     * <pre>
-     *战斗结果 [1：我方胜利] [0：我方失败]
-     * </pre>
-     *
-     * <code>required uint32 result = 1;</code>
-     */
-    public int getResult() {
-      return result_;
-    }
-
-    private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
-
-      if (!hasResult()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
-      memoizedIsInitialized = 1;
-      return true;
-    }
-
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeUInt32(1, result_);
-      }
-      unknownFields.writeTo(output);
-    }
-
-    public int getSerializedSize() {
-      int size = memoizedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeUInt32Size(1, result_);
-      }
-      size += unknownFields.getSerializedSize();
-      memoizedSize = size;
-      return size;
-    }
-
-    @java.lang.Override
-    public boolean equals(final java.lang.Object obj) {
-      if (obj == this) {
-       return true;
-      }
-      if (!(obj instanceof idevgame.meteor.proto.MeteorMsgs.OnBattleResult)) {
-        return super.equals(obj);
-      }
-      idevgame.meteor.proto.MeteorMsgs.OnBattleResult other = (idevgame.meteor.proto.MeteorMsgs.OnBattleResult) obj;
-
-      boolean result = true;
-      result = result && (hasResult() == other.hasResult());
-      if (hasResult()) {
-        result = result && (getResult()
-            == other.getResult());
-      }
-      result = result && unknownFields.equals(other.unknownFields);
-      return result;
-    }
-
-    @java.lang.Override
-    public int hashCode() {
-      if (memoizedHashCode != 0) {
-        return memoizedHashCode;
-      }
-      int hash = 41;
-      hash = (19 * hash) + getDescriptor().hashCode();
-      if (hasResult()) {
-        hash = (37 * hash) + RESULT_FIELD_NUMBER;
-        hash = (53 * hash) + getResult();
-      }
-      hash = (29 * hash) + unknownFields.hashCode();
-      memoizedHashCode = hash;
-      return hash;
-    }
-
-    public static idevgame.meteor.proto.MeteorMsgs.OnBattleResult parseFrom(
-        java.nio.ByteBuffer data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.OnBattleResult parseFrom(
-        java.nio.ByteBuffer data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.OnBattleResult parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.OnBattleResult parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.OnBattleResult parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.OnBattleResult parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.OnBattleResult parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.OnBattleResult parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.OnBattleResult parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.OnBattleResult parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.OnBattleResult parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.OnBattleResult parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder() {
-      return DEFAULT_INSTANCE.toBuilder();
-    }
-    public static Builder newBuilder(idevgame.meteor.proto.MeteorMsgs.OnBattleResult prototype) {
-      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
-    }
-    public Builder toBuilder() {
-      return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
-    }
-
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
-    /**
-     * Protobuf type {@code OnBattleResult}
-     */
-    public static final class Builder extends
-        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:OnBattleResult)
-        idevgame.meteor.proto.MeteorMsgs.OnBattleResultOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return idevgame.meteor.proto.MeteorMsgs.internal_static_OnBattleResult_descriptor;
-      }
-
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return idevgame.meteor.proto.MeteorMsgs.internal_static_OnBattleResult_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                idevgame.meteor.proto.MeteorMsgs.OnBattleResult.class, idevgame.meteor.proto.MeteorMsgs.OnBattleResult.Builder.class);
-      }
-
-      // Construct using idevgame.meteor.proto.MeteorMsgs.OnBattleResult.newBuilder()
-      private Builder() {
-        maybeForceBuilderInitialization();
-      }
-
-      private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-        super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
-      }
-      public Builder clear() {
-        super.clear();
-        result_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000001);
-        return this;
-      }
-
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return idevgame.meteor.proto.MeteorMsgs.internal_static_OnBattleResult_descriptor;
-      }
-
-      public idevgame.meteor.proto.MeteorMsgs.OnBattleResult getDefaultInstanceForType() {
-        return idevgame.meteor.proto.MeteorMsgs.OnBattleResult.getDefaultInstance();
-      }
-
-      public idevgame.meteor.proto.MeteorMsgs.OnBattleResult build() {
-        idevgame.meteor.proto.MeteorMsgs.OnBattleResult result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-
-      public idevgame.meteor.proto.MeteorMsgs.OnBattleResult buildPartial() {
-        idevgame.meteor.proto.MeteorMsgs.OnBattleResult result = new idevgame.meteor.proto.MeteorMsgs.OnBattleResult(this);
-        int from_bitField0_ = bitField0_;
-        int to_bitField0_ = 0;
-        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
-          to_bitField0_ |= 0x00000001;
-        }
-        result.result_ = result_;
-        result.bitField0_ = to_bitField0_;
-        onBuilt();
-        return result;
-      }
-
-      public Builder clone() {
-        return (Builder) super.clone();
-      }
-      public Builder setField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
-        return (Builder) super.setField(field, value);
-      }
-      public Builder clearField(
-          com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return (Builder) super.clearField(field);
-      }
-      public Builder clearOneof(
-          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return (Builder) super.clearOneof(oneof);
-      }
-      public Builder setRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, java.lang.Object value) {
-        return (Builder) super.setRepeatedField(field, index, value);
-      }
-      public Builder addRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
-        return (Builder) super.addRepeatedField(field, value);
-      }
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof idevgame.meteor.proto.MeteorMsgs.OnBattleResult) {
-          return mergeFrom((idevgame.meteor.proto.MeteorMsgs.OnBattleResult)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-
-      public Builder mergeFrom(idevgame.meteor.proto.MeteorMsgs.OnBattleResult other) {
-        if (other == idevgame.meteor.proto.MeteorMsgs.OnBattleResult.getDefaultInstance()) return this;
-        if (other.hasResult()) {
-          setResult(other.getResult());
-        }
-        this.mergeUnknownFields(other.unknownFields);
-        onChanged();
-        return this;
-      }
-
-      public final boolean isInitialized() {
-        if (!hasResult()) {
-          return false;
-        }
-        return true;
-      }
-
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        idevgame.meteor.proto.MeteorMsgs.OnBattleResult parsedMessage = null;
-        try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (idevgame.meteor.proto.MeteorMsgs.OnBattleResult) e.getUnfinishedMessage();
-          throw e.unwrapIOException();
-        } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
-        return this;
-      }
-      private int bitField0_;
-
-      private int result_ ;
-      /**
-       * <pre>
-       *战斗结果 [1：我方胜利] [0：我方失败]
-       * </pre>
-       *
-       * <code>required uint32 result = 1;</code>
-       */
-      public boolean hasResult() {
-        return ((bitField0_ & 0x00000001) == 0x00000001);
-      }
-      /**
-       * <pre>
-       *战斗结果 [1：我方胜利] [0：我方失败]
-       * </pre>
-       *
-       * <code>required uint32 result = 1;</code>
-       */
-      public int getResult() {
-        return result_;
-      }
-      /**
-       * <pre>
-       *战斗结果 [1：我方胜利] [0：我方失败]
-       * </pre>
-       *
-       * <code>required uint32 result = 1;</code>
-       */
-      public Builder setResult(int value) {
-        bitField0_ |= 0x00000001;
-        result_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <pre>
-       *战斗结果 [1：我方胜利] [0：我方失败]
-       * </pre>
-       *
-       * <code>required uint32 result = 1;</code>
-       */
-      public Builder clearResult() {
-        bitField0_ = (bitField0_ & ~0x00000001);
-        result_ = 0;
-        onChanged();
-        return this;
-      }
-      public final Builder setUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFields(unknownFields);
-      }
-
-      public final Builder mergeUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.mergeUnknownFields(unknownFields);
-      }
-
-
-      // @@protoc_insertion_point(builder_scope:OnBattleResult)
-    }
-
-    // @@protoc_insertion_point(class_scope:OnBattleResult)
-    private static final idevgame.meteor.proto.MeteorMsgs.OnBattleResult DEFAULT_INSTANCE;
-    static {
-      DEFAULT_INSTANCE = new idevgame.meteor.proto.MeteorMsgs.OnBattleResult();
-    }
-
-    public static idevgame.meteor.proto.MeteorMsgs.OnBattleResult getDefaultInstance() {
-      return DEFAULT_INSTANCE;
-    }
-
-    @java.lang.Deprecated public static final com.google.protobuf.Parser<OnBattleResult>
-        PARSER = new com.google.protobuf.AbstractParser<OnBattleResult>() {
-      public OnBattleResult parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return new OnBattleResult(input, extensionRegistry);
-      }
-    };
-
-    public static com.google.protobuf.Parser<OnBattleResult> parser() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<OnBattleResult> getParserForType() {
-      return PARSER;
-    }
-
-    public idevgame.meteor.proto.MeteorMsgs.OnBattleResult getDefaultInstanceForType() {
-      return DEFAULT_INSTANCE;
-    }
-
-  }
-
-  public interface PlayerSellItemOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:PlayerSellItem)
-      com.google.protobuf.MessageOrBuilder {
-
-    /**
-     * <code>required uint32 playerId = 1;</code>
-     */
-    boolean hasPlayerId();
-    /**
-     * <code>required uint32 playerId = 1;</code>
-     */
-    int getPlayerId();
-
-    /**
-     * <code>required uint32 itemId = 2;</code>
-     */
-    boolean hasItemId();
-    /**
-     * <code>required uint32 itemId = 2;</code>
-     */
-    int getItemId();
-  }
-  /**
-   * <pre>
-   *玩家请求售出物品-
-   * </pre>
-   *
-   * Protobuf type {@code PlayerSellItem}
-   */
-  public  static final class PlayerSellItem extends
-      com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:PlayerSellItem)
-      PlayerSellItemOrBuilder {
-  private static final long serialVersionUID = 0L;
-    // Use PlayerSellItem.newBuilder() to construct.
-    private PlayerSellItem(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
-      super(builder);
-    }
-    private PlayerSellItem() {
-      playerId_ = 0;
-      itemId_ = 0;
-    }
-
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
-      return this.unknownFields;
-    }
-    private PlayerSellItem(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      int mutable_bitField0_ = 0;
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            default: {
-              if (!parseUnknownField(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-            case 8: {
-              bitField0_ |= 0x00000001;
-              playerId_ = input.readUInt32();
-              break;
-            }
-            case 16: {
-              bitField0_ |= 0x00000002;
-              itemId_ = input.readUInt32();
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return idevgame.meteor.proto.MeteorMsgs.internal_static_PlayerSellItem_descriptor;
-    }
-
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return idevgame.meteor.proto.MeteorMsgs.internal_static_PlayerSellItem_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              idevgame.meteor.proto.MeteorMsgs.PlayerSellItem.class, idevgame.meteor.proto.MeteorMsgs.PlayerSellItem.Builder.class);
-    }
-
-    private int bitField0_;
-    public static final int PLAYERID_FIELD_NUMBER = 1;
-    private int playerId_;
-    /**
-     * <code>required uint32 playerId = 1;</code>
-     */
-    public boolean hasPlayerId() {
-      return ((bitField0_ & 0x00000001) == 0x00000001);
-    }
-    /**
-     * <code>required uint32 playerId = 1;</code>
-     */
-    public int getPlayerId() {
-      return playerId_;
-    }
-
-    public static final int ITEMID_FIELD_NUMBER = 2;
-    private int itemId_;
-    /**
-     * <code>required uint32 itemId = 2;</code>
-     */
-    public boolean hasItemId() {
-      return ((bitField0_ & 0x00000002) == 0x00000002);
-    }
-    /**
-     * <code>required uint32 itemId = 2;</code>
-     */
-    public int getItemId() {
-      return itemId_;
-    }
-
-    private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
-
-      if (!hasPlayerId()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
-      if (!hasItemId()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
-      memoizedIsInitialized = 1;
-      return true;
-    }
-
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeUInt32(1, playerId_);
-      }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeUInt32(2, itemId_);
-      }
-      unknownFields.writeTo(output);
-    }
-
-    public int getSerializedSize() {
-      int size = memoizedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeUInt32Size(1, playerId_);
-      }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeUInt32Size(2, itemId_);
-      }
-      size += unknownFields.getSerializedSize();
-      memoizedSize = size;
-      return size;
-    }
-
-    @java.lang.Override
-    public boolean equals(final java.lang.Object obj) {
-      if (obj == this) {
-       return true;
-      }
-      if (!(obj instanceof idevgame.meteor.proto.MeteorMsgs.PlayerSellItem)) {
-        return super.equals(obj);
-      }
-      idevgame.meteor.proto.MeteorMsgs.PlayerSellItem other = (idevgame.meteor.proto.MeteorMsgs.PlayerSellItem) obj;
-
-      boolean result = true;
-      result = result && (hasPlayerId() == other.hasPlayerId());
-      if (hasPlayerId()) {
-        result = result && (getPlayerId()
-            == other.getPlayerId());
-      }
-      result = result && (hasItemId() == other.hasItemId());
-      if (hasItemId()) {
-        result = result && (getItemId()
-            == other.getItemId());
-      }
-      result = result && unknownFields.equals(other.unknownFields);
-      return result;
-    }
-
-    @java.lang.Override
-    public int hashCode() {
-      if (memoizedHashCode != 0) {
-        return memoizedHashCode;
-      }
-      int hash = 41;
-      hash = (19 * hash) + getDescriptor().hashCode();
-      if (hasPlayerId()) {
-        hash = (37 * hash) + PLAYERID_FIELD_NUMBER;
-        hash = (53 * hash) + getPlayerId();
-      }
-      if (hasItemId()) {
-        hash = (37 * hash) + ITEMID_FIELD_NUMBER;
-        hash = (53 * hash) + getItemId();
-      }
-      hash = (29 * hash) + unknownFields.hashCode();
-      memoizedHashCode = hash;
-      return hash;
-    }
-
-    public static idevgame.meteor.proto.MeteorMsgs.PlayerSellItem parseFrom(
-        java.nio.ByteBuffer data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.PlayerSellItem parseFrom(
-        java.nio.ByteBuffer data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.PlayerSellItem parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.PlayerSellItem parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.PlayerSellItem parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.PlayerSellItem parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.PlayerSellItem parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.PlayerSellItem parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.PlayerSellItem parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.PlayerSellItem parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.PlayerSellItem parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.PlayerSellItem parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder() {
-      return DEFAULT_INSTANCE.toBuilder();
-    }
-    public static Builder newBuilder(idevgame.meteor.proto.MeteorMsgs.PlayerSellItem prototype) {
-      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
-    }
-    public Builder toBuilder() {
-      return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
-    }
-
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
-    /**
-     * <pre>
-     *玩家请求售出物品-
-     * </pre>
-     *
-     * Protobuf type {@code PlayerSellItem}
-     */
-    public static final class Builder extends
-        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:PlayerSellItem)
-        idevgame.meteor.proto.MeteorMsgs.PlayerSellItemOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return idevgame.meteor.proto.MeteorMsgs.internal_static_PlayerSellItem_descriptor;
-      }
-
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return idevgame.meteor.proto.MeteorMsgs.internal_static_PlayerSellItem_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                idevgame.meteor.proto.MeteorMsgs.PlayerSellItem.class, idevgame.meteor.proto.MeteorMsgs.PlayerSellItem.Builder.class);
-      }
-
-      // Construct using idevgame.meteor.proto.MeteorMsgs.PlayerSellItem.newBuilder()
-      private Builder() {
-        maybeForceBuilderInitialization();
-      }
-
-      private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-        super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
-      }
-      public Builder clear() {
-        super.clear();
-        playerId_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000001);
-        itemId_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000002);
-        return this;
-      }
-
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return idevgame.meteor.proto.MeteorMsgs.internal_static_PlayerSellItem_descriptor;
-      }
-
-      public idevgame.meteor.proto.MeteorMsgs.PlayerSellItem getDefaultInstanceForType() {
-        return idevgame.meteor.proto.MeteorMsgs.PlayerSellItem.getDefaultInstance();
-      }
-
-      public idevgame.meteor.proto.MeteorMsgs.PlayerSellItem build() {
-        idevgame.meteor.proto.MeteorMsgs.PlayerSellItem result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-
-      public idevgame.meteor.proto.MeteorMsgs.PlayerSellItem buildPartial() {
-        idevgame.meteor.proto.MeteorMsgs.PlayerSellItem result = new idevgame.meteor.proto.MeteorMsgs.PlayerSellItem(this);
-        int from_bitField0_ = bitField0_;
-        int to_bitField0_ = 0;
-        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
-          to_bitField0_ |= 0x00000001;
-        }
-        result.playerId_ = playerId_;
-        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
-          to_bitField0_ |= 0x00000002;
-        }
-        result.itemId_ = itemId_;
-        result.bitField0_ = to_bitField0_;
-        onBuilt();
-        return result;
-      }
-
-      public Builder clone() {
-        return (Builder) super.clone();
-      }
-      public Builder setField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
-        return (Builder) super.setField(field, value);
-      }
-      public Builder clearField(
-          com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return (Builder) super.clearField(field);
-      }
-      public Builder clearOneof(
-          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return (Builder) super.clearOneof(oneof);
-      }
-      public Builder setRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, java.lang.Object value) {
-        return (Builder) super.setRepeatedField(field, index, value);
-      }
-      public Builder addRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
-        return (Builder) super.addRepeatedField(field, value);
-      }
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof idevgame.meteor.proto.MeteorMsgs.PlayerSellItem) {
-          return mergeFrom((idevgame.meteor.proto.MeteorMsgs.PlayerSellItem)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-
-      public Builder mergeFrom(idevgame.meteor.proto.MeteorMsgs.PlayerSellItem other) {
-        if (other == idevgame.meteor.proto.MeteorMsgs.PlayerSellItem.getDefaultInstance()) return this;
-        if (other.hasPlayerId()) {
-          setPlayerId(other.getPlayerId());
-        }
-        if (other.hasItemId()) {
-          setItemId(other.getItemId());
-        }
-        this.mergeUnknownFields(other.unknownFields);
-        onChanged();
-        return this;
-      }
-
-      public final boolean isInitialized() {
-        if (!hasPlayerId()) {
-          return false;
-        }
-        if (!hasItemId()) {
-          return false;
-        }
-        return true;
-      }
-
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        idevgame.meteor.proto.MeteorMsgs.PlayerSellItem parsedMessage = null;
-        try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (idevgame.meteor.proto.MeteorMsgs.PlayerSellItem) e.getUnfinishedMessage();
-          throw e.unwrapIOException();
-        } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
-        return this;
-      }
-      private int bitField0_;
-
-      private int playerId_ ;
-      /**
-       * <code>required uint32 playerId = 1;</code>
-       */
-      public boolean hasPlayerId() {
-        return ((bitField0_ & 0x00000001) == 0x00000001);
-      }
-      /**
-       * <code>required uint32 playerId = 1;</code>
-       */
-      public int getPlayerId() {
-        return playerId_;
-      }
-      /**
-       * <code>required uint32 playerId = 1;</code>
-       */
-      public Builder setPlayerId(int value) {
-        bitField0_ |= 0x00000001;
-        playerId_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>required uint32 playerId = 1;</code>
-       */
-      public Builder clearPlayerId() {
-        bitField0_ = (bitField0_ & ~0x00000001);
-        playerId_ = 0;
-        onChanged();
-        return this;
-      }
-
-      private int itemId_ ;
-      /**
-       * <code>required uint32 itemId = 2;</code>
-       */
-      public boolean hasItemId() {
-        return ((bitField0_ & 0x00000002) == 0x00000002);
-      }
-      /**
-       * <code>required uint32 itemId = 2;</code>
-       */
-      public int getItemId() {
-        return itemId_;
-      }
-      /**
-       * <code>required uint32 itemId = 2;</code>
-       */
-      public Builder setItemId(int value) {
-        bitField0_ |= 0x00000002;
-        itemId_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>required uint32 itemId = 2;</code>
-       */
-      public Builder clearItemId() {
-        bitField0_ = (bitField0_ & ~0x00000002);
-        itemId_ = 0;
-        onChanged();
-        return this;
-      }
-      public final Builder setUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFields(unknownFields);
-      }
-
-      public final Builder mergeUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.mergeUnknownFields(unknownFields);
-      }
-
-
-      // @@protoc_insertion_point(builder_scope:PlayerSellItem)
-    }
-
-    // @@protoc_insertion_point(class_scope:PlayerSellItem)
-    private static final idevgame.meteor.proto.MeteorMsgs.PlayerSellItem DEFAULT_INSTANCE;
-    static {
-      DEFAULT_INSTANCE = new idevgame.meteor.proto.MeteorMsgs.PlayerSellItem();
-    }
-
-    public static idevgame.meteor.proto.MeteorMsgs.PlayerSellItem getDefaultInstance() {
-      return DEFAULT_INSTANCE;
-    }
-
-    @java.lang.Deprecated public static final com.google.protobuf.Parser<PlayerSellItem>
-        PARSER = new com.google.protobuf.AbstractParser<PlayerSellItem>() {
-      public PlayerSellItem parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return new PlayerSellItem(input, extensionRegistry);
-      }
-    };
-
-    public static com.google.protobuf.Parser<PlayerSellItem> parser() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<PlayerSellItem> getParserForType() {
-      return PARSER;
-    }
-
-    public idevgame.meteor.proto.MeteorMsgs.PlayerSellItem getDefaultInstanceForType() {
-      return DEFAULT_INSTANCE;
-    }
-
-  }
-
-  public interface PlayerBuyItemOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:PlayerBuyItem)
-      com.google.protobuf.MessageOrBuilder {
-
-    /**
-     * <code>required uint32 playerId = 1;</code>
-     */
-    boolean hasPlayerId();
-    /**
-     * <code>required uint32 playerId = 1;</code>
-     */
-    int getPlayerId();
-
-    /**
-     * <code>required uint32 itemId = 2;</code>
-     */
-    boolean hasItemId();
-    /**
-     * <code>required uint32 itemId = 2;</code>
-     */
-    int getItemId();
-  }
-  /**
-   * <pre>
-   *玩家请求购买物品-
-   * </pre>
-   *
-   * Protobuf type {@code PlayerBuyItem}
-   */
-  public  static final class PlayerBuyItem extends
-      com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:PlayerBuyItem)
-      PlayerBuyItemOrBuilder {
-  private static final long serialVersionUID = 0L;
-    // Use PlayerBuyItem.newBuilder() to construct.
-    private PlayerBuyItem(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
-      super(builder);
-    }
-    private PlayerBuyItem() {
-      playerId_ = 0;
-      itemId_ = 0;
-    }
-
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
-      return this.unknownFields;
-    }
-    private PlayerBuyItem(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      int mutable_bitField0_ = 0;
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            default: {
-              if (!parseUnknownField(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-            case 8: {
-              bitField0_ |= 0x00000001;
-              playerId_ = input.readUInt32();
-              break;
-            }
-            case 16: {
-              bitField0_ |= 0x00000002;
-              itemId_ = input.readUInt32();
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return idevgame.meteor.proto.MeteorMsgs.internal_static_PlayerBuyItem_descriptor;
-    }
-
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return idevgame.meteor.proto.MeteorMsgs.internal_static_PlayerBuyItem_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              idevgame.meteor.proto.MeteorMsgs.PlayerBuyItem.class, idevgame.meteor.proto.MeteorMsgs.PlayerBuyItem.Builder.class);
-    }
-
-    private int bitField0_;
-    public static final int PLAYERID_FIELD_NUMBER = 1;
-    private int playerId_;
-    /**
-     * <code>required uint32 playerId = 1;</code>
-     */
-    public boolean hasPlayerId() {
-      return ((bitField0_ & 0x00000001) == 0x00000001);
-    }
-    /**
-     * <code>required uint32 playerId = 1;</code>
-     */
-    public int getPlayerId() {
-      return playerId_;
-    }
-
-    public static final int ITEMID_FIELD_NUMBER = 2;
-    private int itemId_;
-    /**
-     * <code>required uint32 itemId = 2;</code>
-     */
-    public boolean hasItemId() {
-      return ((bitField0_ & 0x00000002) == 0x00000002);
-    }
-    /**
-     * <code>required uint32 itemId = 2;</code>
-     */
-    public int getItemId() {
-      return itemId_;
-    }
-
-    private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
-
-      if (!hasPlayerId()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
-      if (!hasItemId()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
-      memoizedIsInitialized = 1;
-      return true;
-    }
-
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeUInt32(1, playerId_);
-      }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeUInt32(2, itemId_);
-      }
-      unknownFields.writeTo(output);
-    }
-
-    public int getSerializedSize() {
-      int size = memoizedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeUInt32Size(1, playerId_);
-      }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeUInt32Size(2, itemId_);
-      }
-      size += unknownFields.getSerializedSize();
-      memoizedSize = size;
-      return size;
-    }
-
-    @java.lang.Override
-    public boolean equals(final java.lang.Object obj) {
-      if (obj == this) {
-       return true;
-      }
-      if (!(obj instanceof idevgame.meteor.proto.MeteorMsgs.PlayerBuyItem)) {
-        return super.equals(obj);
-      }
-      idevgame.meteor.proto.MeteorMsgs.PlayerBuyItem other = (idevgame.meteor.proto.MeteorMsgs.PlayerBuyItem) obj;
-
-      boolean result = true;
-      result = result && (hasPlayerId() == other.hasPlayerId());
-      if (hasPlayerId()) {
-        result = result && (getPlayerId()
-            == other.getPlayerId());
-      }
-      result = result && (hasItemId() == other.hasItemId());
-      if (hasItemId()) {
-        result = result && (getItemId()
-            == other.getItemId());
-      }
-      result = result && unknownFields.equals(other.unknownFields);
-      return result;
-    }
-
-    @java.lang.Override
-    public int hashCode() {
-      if (memoizedHashCode != 0) {
-        return memoizedHashCode;
-      }
-      int hash = 41;
-      hash = (19 * hash) + getDescriptor().hashCode();
-      if (hasPlayerId()) {
-        hash = (37 * hash) + PLAYERID_FIELD_NUMBER;
-        hash = (53 * hash) + getPlayerId();
-      }
-      if (hasItemId()) {
-        hash = (37 * hash) + ITEMID_FIELD_NUMBER;
-        hash = (53 * hash) + getItemId();
-      }
-      hash = (29 * hash) + unknownFields.hashCode();
-      memoizedHashCode = hash;
-      return hash;
-    }
-
-    public static idevgame.meteor.proto.MeteorMsgs.PlayerBuyItem parseFrom(
-        java.nio.ByteBuffer data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.PlayerBuyItem parseFrom(
-        java.nio.ByteBuffer data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.PlayerBuyItem parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.PlayerBuyItem parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.PlayerBuyItem parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.PlayerBuyItem parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.PlayerBuyItem parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.PlayerBuyItem parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.PlayerBuyItem parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.PlayerBuyItem parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.PlayerBuyItem parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static idevgame.meteor.proto.MeteorMsgs.PlayerBuyItem parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder() {
-      return DEFAULT_INSTANCE.toBuilder();
-    }
-    public static Builder newBuilder(idevgame.meteor.proto.MeteorMsgs.PlayerBuyItem prototype) {
-      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
-    }
-    public Builder toBuilder() {
-      return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
-    }
-
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
-    /**
-     * <pre>
-     *玩家请求购买物品-
-     * </pre>
-     *
-     * Protobuf type {@code PlayerBuyItem}
-     */
-    public static final class Builder extends
-        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:PlayerBuyItem)
-        idevgame.meteor.proto.MeteorMsgs.PlayerBuyItemOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return idevgame.meteor.proto.MeteorMsgs.internal_static_PlayerBuyItem_descriptor;
-      }
-
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return idevgame.meteor.proto.MeteorMsgs.internal_static_PlayerBuyItem_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                idevgame.meteor.proto.MeteorMsgs.PlayerBuyItem.class, idevgame.meteor.proto.MeteorMsgs.PlayerBuyItem.Builder.class);
-      }
-
-      // Construct using idevgame.meteor.proto.MeteorMsgs.PlayerBuyItem.newBuilder()
-      private Builder() {
-        maybeForceBuilderInitialization();
-      }
-
-      private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-        super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
-      }
-      public Builder clear() {
-        super.clear();
-        playerId_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000001);
-        itemId_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000002);
-        return this;
-      }
-
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return idevgame.meteor.proto.MeteorMsgs.internal_static_PlayerBuyItem_descriptor;
-      }
-
-      public idevgame.meteor.proto.MeteorMsgs.PlayerBuyItem getDefaultInstanceForType() {
-        return idevgame.meteor.proto.MeteorMsgs.PlayerBuyItem.getDefaultInstance();
-      }
-
-      public idevgame.meteor.proto.MeteorMsgs.PlayerBuyItem build() {
-        idevgame.meteor.proto.MeteorMsgs.PlayerBuyItem result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-
-      public idevgame.meteor.proto.MeteorMsgs.PlayerBuyItem buildPartial() {
-        idevgame.meteor.proto.MeteorMsgs.PlayerBuyItem result = new idevgame.meteor.proto.MeteorMsgs.PlayerBuyItem(this);
-        int from_bitField0_ = bitField0_;
-        int to_bitField0_ = 0;
-        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
-          to_bitField0_ |= 0x00000001;
-        }
-        result.playerId_ = playerId_;
-        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
-          to_bitField0_ |= 0x00000002;
-        }
-        result.itemId_ = itemId_;
-        result.bitField0_ = to_bitField0_;
-        onBuilt();
-        return result;
-      }
-
-      public Builder clone() {
-        return (Builder) super.clone();
-      }
-      public Builder setField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
-        return (Builder) super.setField(field, value);
-      }
-      public Builder clearField(
-          com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return (Builder) super.clearField(field);
-      }
-      public Builder clearOneof(
-          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return (Builder) super.clearOneof(oneof);
-      }
-      public Builder setRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, java.lang.Object value) {
-        return (Builder) super.setRepeatedField(field, index, value);
-      }
-      public Builder addRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
-        return (Builder) super.addRepeatedField(field, value);
-      }
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof idevgame.meteor.proto.MeteorMsgs.PlayerBuyItem) {
-          return mergeFrom((idevgame.meteor.proto.MeteorMsgs.PlayerBuyItem)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-
-      public Builder mergeFrom(idevgame.meteor.proto.MeteorMsgs.PlayerBuyItem other) {
-        if (other == idevgame.meteor.proto.MeteorMsgs.PlayerBuyItem.getDefaultInstance()) return this;
-        if (other.hasPlayerId()) {
-          setPlayerId(other.getPlayerId());
-        }
-        if (other.hasItemId()) {
-          setItemId(other.getItemId());
-        }
-        this.mergeUnknownFields(other.unknownFields);
-        onChanged();
-        return this;
-      }
-
-      public final boolean isInitialized() {
-        if (!hasPlayerId()) {
-          return false;
-        }
-        if (!hasItemId()) {
-          return false;
-        }
-        return true;
-      }
-
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        idevgame.meteor.proto.MeteorMsgs.PlayerBuyItem parsedMessage = null;
-        try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (idevgame.meteor.proto.MeteorMsgs.PlayerBuyItem) e.getUnfinishedMessage();
-          throw e.unwrapIOException();
-        } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
-        return this;
-      }
-      private int bitField0_;
-
-      private int playerId_ ;
-      /**
-       * <code>required uint32 playerId = 1;</code>
-       */
-      public boolean hasPlayerId() {
-        return ((bitField0_ & 0x00000001) == 0x00000001);
-      }
-      /**
-       * <code>required uint32 playerId = 1;</code>
-       */
-      public int getPlayerId() {
-        return playerId_;
-      }
-      /**
-       * <code>required uint32 playerId = 1;</code>
-       */
-      public Builder setPlayerId(int value) {
-        bitField0_ |= 0x00000001;
-        playerId_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>required uint32 playerId = 1;</code>
-       */
-      public Builder clearPlayerId() {
-        bitField0_ = (bitField0_ & ~0x00000001);
-        playerId_ = 0;
-        onChanged();
-        return this;
-      }
-
-      private int itemId_ ;
-      /**
-       * <code>required uint32 itemId = 2;</code>
-       */
-      public boolean hasItemId() {
-        return ((bitField0_ & 0x00000002) == 0x00000002);
-      }
-      /**
-       * <code>required uint32 itemId = 2;</code>
-       */
-      public int getItemId() {
-        return itemId_;
-      }
-      /**
-       * <code>required uint32 itemId = 2;</code>
-       */
-      public Builder setItemId(int value) {
-        bitField0_ |= 0x00000002;
-        itemId_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>required uint32 itemId = 2;</code>
-       */
-      public Builder clearItemId() {
-        bitField0_ = (bitField0_ & ~0x00000002);
-        itemId_ = 0;
-        onChanged();
-        return this;
-      }
-      public final Builder setUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFields(unknownFields);
-      }
-
-      public final Builder mergeUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.mergeUnknownFields(unknownFields);
-      }
-
-
-      // @@protoc_insertion_point(builder_scope:PlayerBuyItem)
-    }
-
-    // @@protoc_insertion_point(class_scope:PlayerBuyItem)
-    private static final idevgame.meteor.proto.MeteorMsgs.PlayerBuyItem DEFAULT_INSTANCE;
-    static {
-      DEFAULT_INSTANCE = new idevgame.meteor.proto.MeteorMsgs.PlayerBuyItem();
-    }
-
-    public static idevgame.meteor.proto.MeteorMsgs.PlayerBuyItem getDefaultInstance() {
-      return DEFAULT_INSTANCE;
-    }
-
-    @java.lang.Deprecated public static final com.google.protobuf.Parser<PlayerBuyItem>
-        PARSER = new com.google.protobuf.AbstractParser<PlayerBuyItem>() {
-      public PlayerBuyItem parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return new PlayerBuyItem(input, extensionRegistry);
-      }
-    };
-
-    public static com.google.protobuf.Parser<PlayerBuyItem> parser() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<PlayerBuyItem> getParserForType() {
-      return PARSER;
-    }
-
-    public idevgame.meteor.proto.MeteorMsgs.PlayerBuyItem getDefaultInstanceForType() {
+    public idevgame.meteor.proto.MeteorMsgs.PlayerSync getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
@@ -15118,47 +6769,21 @@ public final class MeteorMsgs {
      *协议版本号
      * </pre>
      *
-     * <code>required uint32 protocol = 1;</code>
+     * <code>required uint32 version = 1;</code>
      */
-    boolean hasProtocol();
+    boolean hasVersion();
     /**
      * <pre>
      *协议版本号
      * </pre>
      *
-     * <code>required uint32 protocol = 1;</code>
+     * <code>required uint32 version = 1;</code>
      */
-    int getProtocol();
-
-    /**
-     * <pre>
-     *客户端-玩家名称，用来在大厅发消息标识
-     * </pre>
-     *
-     * <code>required string data = 2;</code>
-     */
-    boolean hasData();
-    /**
-     * <pre>
-     *客户端-玩家名称，用来在大厅发消息标识
-     * </pre>
-     *
-     * <code>required string data = 2;</code>
-     */
-    java.lang.String getData();
-    /**
-     * <pre>
-     *客户端-玩家名称，用来在大厅发消息标识
-     * </pre>
-     *
-     * <code>required string data = 2;</code>
-     */
-    com.google.protobuf.ByteString
-        getDataBytes();
+    int getVersion();
   }
   /**
    * <pre>
-   *客户端链接中心服协议验证-防止中心服被随意使用
+   *客户端服务器协议验证-防止不兼容的客户端链接
    * </pre>
    *
    * Protobuf type {@code ProtocolVerifyReq}
@@ -15173,8 +6798,7 @@ public final class MeteorMsgs {
       super(builder);
     }
     private ProtocolVerifyReq() {
-      protocol_ = 0;
-      data_ = "";
+      version_ = 0;
     }
 
     @java.lang.Override
@@ -15210,13 +6834,7 @@ public final class MeteorMsgs {
             }
             case 8: {
               bitField0_ |= 0x00000001;
-              protocol_ = input.readUInt32();
-              break;
-            }
-            case 18: {
-              com.google.protobuf.ByteString bs = input.readBytes();
-              bitField0_ |= 0x00000002;
-              data_ = bs;
+              version_ = input.readUInt32();
               break;
             }
           }
@@ -15244,16 +6862,16 @@ public final class MeteorMsgs {
     }
 
     private int bitField0_;
-    public static final int PROTOCOL_FIELD_NUMBER = 1;
-    private int protocol_;
+    public static final int VERSION_FIELD_NUMBER = 1;
+    private int version_;
     /**
      * <pre>
      *协议版本号
      * </pre>
      *
-     * <code>required uint32 protocol = 1;</code>
+     * <code>required uint32 version = 1;</code>
      */
-    public boolean hasProtocol() {
+    public boolean hasVersion() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
     /**
@@ -15261,64 +6879,10 @@ public final class MeteorMsgs {
      *协议版本号
      * </pre>
      *
-     * <code>required uint32 protocol = 1;</code>
+     * <code>required uint32 version = 1;</code>
      */
-    public int getProtocol() {
-      return protocol_;
-    }
-
-    public static final int DATA_FIELD_NUMBER = 2;
-    private volatile java.lang.Object data_;
-    /**
-     * <pre>
-     *客户端-玩家名称，用来在大厅发消息标识
-     * </pre>
-     *
-     * <code>required string data = 2;</code>
-     */
-    public boolean hasData() {
-      return ((bitField0_ & 0x00000002) == 0x00000002);
-    }
-    /**
-     * <pre>
-     *客户端-玩家名称，用来在大厅发消息标识
-     * </pre>
-     *
-     * <code>required string data = 2;</code>
-     */
-    public java.lang.String getData() {
-      java.lang.Object ref = data_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        if (bs.isValidUtf8()) {
-          data_ = s;
-        }
-        return s;
-      }
-    }
-    /**
-     * <pre>
-     *客户端-玩家名称，用来在大厅发消息标识
-     * </pre>
-     *
-     * <code>required string data = 2;</code>
-     */
-    public com.google.protobuf.ByteString
-        getDataBytes() {
-      java.lang.Object ref = data_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        data_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
+    public int getVersion() {
+      return version_;
     }
 
     private byte memoizedIsInitialized = -1;
@@ -15327,11 +6891,7 @@ public final class MeteorMsgs {
       if (isInitialized == 1) return true;
       if (isInitialized == 0) return false;
 
-      if (!hasProtocol()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
-      if (!hasData()) {
+      if (!hasVersion()) {
         memoizedIsInitialized = 0;
         return false;
       }
@@ -15342,10 +6902,7 @@ public final class MeteorMsgs {
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeUInt32(1, protocol_);
-      }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, data_);
+        output.writeUInt32(1, version_);
       }
       unknownFields.writeTo(output);
     }
@@ -15357,10 +6914,7 @@ public final class MeteorMsgs {
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeUInt32Size(1, protocol_);
-      }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, data_);
+          .computeUInt32Size(1, version_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -15378,15 +6932,10 @@ public final class MeteorMsgs {
       idevgame.meteor.proto.MeteorMsgs.ProtocolVerifyReq other = (idevgame.meteor.proto.MeteorMsgs.ProtocolVerifyReq) obj;
 
       boolean result = true;
-      result = result && (hasProtocol() == other.hasProtocol());
-      if (hasProtocol()) {
-        result = result && (getProtocol()
-            == other.getProtocol());
-      }
-      result = result && (hasData() == other.hasData());
-      if (hasData()) {
-        result = result && getData()
-            .equals(other.getData());
+      result = result && (hasVersion() == other.hasVersion());
+      if (hasVersion()) {
+        result = result && (getVersion()
+            == other.getVersion());
       }
       result = result && unknownFields.equals(other.unknownFields);
       return result;
@@ -15399,13 +6948,9 @@ public final class MeteorMsgs {
       }
       int hash = 41;
       hash = (19 * hash) + getDescriptor().hashCode();
-      if (hasProtocol()) {
-        hash = (37 * hash) + PROTOCOL_FIELD_NUMBER;
-        hash = (53 * hash) + getProtocol();
-      }
-      if (hasData()) {
-        hash = (37 * hash) + DATA_FIELD_NUMBER;
-        hash = (53 * hash) + getData().hashCode();
+      if (hasVersion()) {
+        hash = (37 * hash) + VERSION_FIELD_NUMBER;
+        hash = (53 * hash) + getVersion();
       }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
@@ -15502,7 +7047,7 @@ public final class MeteorMsgs {
     }
     /**
      * <pre>
-     *客户端链接中心服协议验证-防止中心服被随意使用
+     *客户端服务器协议验证-防止不兼容的客户端链接
      * </pre>
      *
      * Protobuf type {@code ProtocolVerifyReq}
@@ -15540,10 +7085,8 @@ public final class MeteorMsgs {
       }
       public Builder clear() {
         super.clear();
-        protocol_ = 0;
+        version_ = 0;
         bitField0_ = (bitField0_ & ~0x00000001);
-        data_ = "";
-        bitField0_ = (bitField0_ & ~0x00000002);
         return this;
       }
 
@@ -15571,11 +7114,7 @@ public final class MeteorMsgs {
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
           to_bitField0_ |= 0x00000001;
         }
-        result.protocol_ = protocol_;
-        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
-          to_bitField0_ |= 0x00000002;
-        }
-        result.data_ = data_;
+        result.version_ = version_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -15618,13 +7157,8 @@ public final class MeteorMsgs {
 
       public Builder mergeFrom(idevgame.meteor.proto.MeteorMsgs.ProtocolVerifyReq other) {
         if (other == idevgame.meteor.proto.MeteorMsgs.ProtocolVerifyReq.getDefaultInstance()) return this;
-        if (other.hasProtocol()) {
-          setProtocol(other.getProtocol());
-        }
-        if (other.hasData()) {
-          bitField0_ |= 0x00000002;
-          data_ = other.data_;
-          onChanged();
+        if (other.hasVersion()) {
+          setVersion(other.getVersion());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -15632,10 +7166,7 @@ public final class MeteorMsgs {
       }
 
       public final boolean isInitialized() {
-        if (!hasProtocol()) {
-          return false;
-        }
-        if (!hasData()) {
+        if (!hasVersion()) {
           return false;
         }
         return true;
@@ -15660,15 +7191,15 @@ public final class MeteorMsgs {
       }
       private int bitField0_;
 
-      private int protocol_ ;
+      private int version_ ;
       /**
        * <pre>
        *协议版本号
        * </pre>
        *
-       * <code>required uint32 protocol = 1;</code>
+       * <code>required uint32 version = 1;</code>
        */
-      public boolean hasProtocol() {
+      public boolean hasVersion() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
       /**
@@ -15676,21 +7207,21 @@ public final class MeteorMsgs {
        *协议版本号
        * </pre>
        *
-       * <code>required uint32 protocol = 1;</code>
+       * <code>required uint32 version = 1;</code>
        */
-      public int getProtocol() {
-        return protocol_;
+      public int getVersion() {
+        return version_;
       }
       /**
        * <pre>
        *协议版本号
        * </pre>
        *
-       * <code>required uint32 protocol = 1;</code>
+       * <code>required uint32 version = 1;</code>
        */
-      public Builder setProtocol(int value) {
+      public Builder setVersion(int value) {
         bitField0_ |= 0x00000001;
-        protocol_ = value;
+        version_ = value;
         onChanged();
         return this;
       }
@@ -15699,111 +7230,11 @@ public final class MeteorMsgs {
        *协议版本号
        * </pre>
        *
-       * <code>required uint32 protocol = 1;</code>
+       * <code>required uint32 version = 1;</code>
        */
-      public Builder clearProtocol() {
+      public Builder clearVersion() {
         bitField0_ = (bitField0_ & ~0x00000001);
-        protocol_ = 0;
-        onChanged();
-        return this;
-      }
-
-      private java.lang.Object data_ = "";
-      /**
-       * <pre>
-       *客户端-玩家名称，用来在大厅发消息标识
-       * </pre>
-       *
-       * <code>required string data = 2;</code>
-       */
-      public boolean hasData() {
-        return ((bitField0_ & 0x00000002) == 0x00000002);
-      }
-      /**
-       * <pre>
-       *客户端-玩家名称，用来在大厅发消息标识
-       * </pre>
-       *
-       * <code>required string data = 2;</code>
-       */
-      public java.lang.String getData() {
-        java.lang.Object ref = data_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            data_ = s;
-          }
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
-      }
-      /**
-       * <pre>
-       *客户端-玩家名称，用来在大厅发消息标识
-       * </pre>
-       *
-       * <code>required string data = 2;</code>
-       */
-      public com.google.protobuf.ByteString
-          getDataBytes() {
-        java.lang.Object ref = data_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          data_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <pre>
-       *客户端-玩家名称，用来在大厅发消息标识
-       * </pre>
-       *
-       * <code>required string data = 2;</code>
-       */
-      public Builder setData(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000002;
-        data_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <pre>
-       *客户端-玩家名称，用来在大厅发消息标识
-       * </pre>
-       *
-       * <code>required string data = 2;</code>
-       */
-      public Builder clearData() {
-        bitField0_ = (bitField0_ & ~0x00000002);
-        data_ = getDefaultInstance().getData();
-        onChanged();
-        return this;
-      }
-      /**
-       * <pre>
-       *客户端-玩家名称，用来在大厅发消息标识
-       * </pre>
-       *
-       * <code>required string data = 2;</code>
-       */
-      public Builder setDataBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000002;
-        data_ = value;
+        version_ = 0;
         onChanged();
         return this;
       }
@@ -15905,29 +7336,20 @@ public final class MeteorMsgs {
 
     /**
      * <pre>
-     *需要最低的客户端版本号是
+     *成功时，分配的玩家ID
      * </pre>
      *
-     * <code>required string clientV = 3;</code>
+     * <code>required uint32 player = 3;</code>
      */
-    boolean hasClientV();
+    boolean hasPlayer();
     /**
      * <pre>
-     *需要最低的客户端版本号是
+     *成功时，分配的玩家ID
      * </pre>
      *
-     * <code>required string clientV = 3;</code>
+     * <code>required uint32 player = 3;</code>
      */
-    java.lang.String getClientV();
-    /**
-     * <pre>
-     *需要最低的客户端版本号是
-     * </pre>
-     *
-     * <code>required string clientV = 3;</code>
-     */
-    com.google.protobuf.ByteString
-        getClientVBytes();
+    int getPlayer();
   }
   /**
    * Protobuf type {@code ProtocolVerifyRsp}
@@ -15944,7 +7366,7 @@ public final class MeteorMsgs {
     private ProtocolVerifyRsp() {
       result_ = 0;
       message_ = "";
-      clientV_ = "";
+      player_ = 0;
     }
 
     @java.lang.Override
@@ -15989,10 +7411,9 @@ public final class MeteorMsgs {
               message_ = bs;
               break;
             }
-            case 26: {
-              com.google.protobuf.ByteString bs = input.readBytes();
+            case 24: {
               bitField0_ |= 0x00000004;
-              clientV_ = bs;
+              player_ = input.readUInt32();
               break;
             }
           }
@@ -16097,58 +7518,27 @@ public final class MeteorMsgs {
       }
     }
 
-    public static final int CLIENTV_FIELD_NUMBER = 3;
-    private volatile java.lang.Object clientV_;
+    public static final int PLAYER_FIELD_NUMBER = 3;
+    private int player_;
     /**
      * <pre>
-     *需要最低的客户端版本号是
+     *成功时，分配的玩家ID
      * </pre>
      *
-     * <code>required string clientV = 3;</code>
+     * <code>required uint32 player = 3;</code>
      */
-    public boolean hasClientV() {
+    public boolean hasPlayer() {
       return ((bitField0_ & 0x00000004) == 0x00000004);
     }
     /**
      * <pre>
-     *需要最低的客户端版本号是
+     *成功时，分配的玩家ID
      * </pre>
      *
-     * <code>required string clientV = 3;</code>
+     * <code>required uint32 player = 3;</code>
      */
-    public java.lang.String getClientV() {
-      java.lang.Object ref = clientV_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        if (bs.isValidUtf8()) {
-          clientV_ = s;
-        }
-        return s;
-      }
-    }
-    /**
-     * <pre>
-     *需要最低的客户端版本号是
-     * </pre>
-     *
-     * <code>required string clientV = 3;</code>
-     */
-    public com.google.protobuf.ByteString
-        getClientVBytes() {
-      java.lang.Object ref = clientV_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        clientV_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
+    public int getPlayer() {
+      return player_;
     }
 
     private byte memoizedIsInitialized = -1;
@@ -16165,7 +7555,7 @@ public final class MeteorMsgs {
         memoizedIsInitialized = 0;
         return false;
       }
-      if (!hasClientV()) {
+      if (!hasPlayer()) {
         memoizedIsInitialized = 0;
         return false;
       }
@@ -16182,7 +7572,7 @@ public final class MeteorMsgs {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 2, message_);
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 3, clientV_);
+        output.writeUInt32(3, player_);
       }
       unknownFields.writeTo(output);
     }
@@ -16200,7 +7590,8 @@ public final class MeteorMsgs {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, message_);
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, clientV_);
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt32Size(3, player_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -16228,10 +7619,10 @@ public final class MeteorMsgs {
         result = result && getMessage()
             .equals(other.getMessage());
       }
-      result = result && (hasClientV() == other.hasClientV());
-      if (hasClientV()) {
-        result = result && getClientV()
-            .equals(other.getClientV());
+      result = result && (hasPlayer() == other.hasPlayer());
+      if (hasPlayer()) {
+        result = result && (getPlayer()
+            == other.getPlayer());
       }
       result = result && unknownFields.equals(other.unknownFields);
       return result;
@@ -16252,9 +7643,9 @@ public final class MeteorMsgs {
         hash = (37 * hash) + MESSAGE_FIELD_NUMBER;
         hash = (53 * hash) + getMessage().hashCode();
       }
-      if (hasClientV()) {
-        hash = (37 * hash) + CLIENTV_FIELD_NUMBER;
-        hash = (53 * hash) + getClientV().hashCode();
+      if (hasPlayer()) {
+        hash = (37 * hash) + PLAYER_FIELD_NUMBER;
+        hash = (53 * hash) + getPlayer();
       }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
@@ -16389,7 +7780,7 @@ public final class MeteorMsgs {
         bitField0_ = (bitField0_ & ~0x00000001);
         message_ = "";
         bitField0_ = (bitField0_ & ~0x00000002);
-        clientV_ = "";
+        player_ = 0;
         bitField0_ = (bitField0_ & ~0x00000004);
         return this;
       }
@@ -16426,7 +7817,7 @@ public final class MeteorMsgs {
         if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
           to_bitField0_ |= 0x00000004;
         }
-        result.clientV_ = clientV_;
+        result.player_ = player_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -16477,10 +7868,8 @@ public final class MeteorMsgs {
           message_ = other.message_;
           onChanged();
         }
-        if (other.hasClientV()) {
-          bitField0_ |= 0x00000004;
-          clientV_ = other.clientV_;
-          onChanged();
+        if (other.hasPlayer()) {
+          setPlayer(other.getPlayer());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -16494,7 +7883,7 @@ public final class MeteorMsgs {
         if (!hasMessage()) {
           return false;
         }
-        if (!hasClientV()) {
+        if (!hasPlayer()) {
           return false;
         }
         return true;
@@ -16667,102 +8056,50 @@ public final class MeteorMsgs {
         return this;
       }
 
-      private java.lang.Object clientV_ = "";
+      private int player_ ;
       /**
        * <pre>
-       *需要最低的客户端版本号是
+       *成功时，分配的玩家ID
        * </pre>
        *
-       * <code>required string clientV = 3;</code>
+       * <code>required uint32 player = 3;</code>
        */
-      public boolean hasClientV() {
+      public boolean hasPlayer() {
         return ((bitField0_ & 0x00000004) == 0x00000004);
       }
       /**
        * <pre>
-       *需要最低的客户端版本号是
+       *成功时，分配的玩家ID
        * </pre>
        *
-       * <code>required string clientV = 3;</code>
+       * <code>required uint32 player = 3;</code>
        */
-      public java.lang.String getClientV() {
-        java.lang.Object ref = clientV_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            clientV_ = s;
-          }
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
+      public int getPlayer() {
+        return player_;
       }
       /**
        * <pre>
-       *需要最低的客户端版本号是
+       *成功时，分配的玩家ID
        * </pre>
        *
-       * <code>required string clientV = 3;</code>
+       * <code>required uint32 player = 3;</code>
        */
-      public com.google.protobuf.ByteString
-          getClientVBytes() {
-        java.lang.Object ref = clientV_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          clientV_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <pre>
-       *需要最低的客户端版本号是
-       * </pre>
-       *
-       * <code>required string clientV = 3;</code>
-       */
-      public Builder setClientV(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000004;
-        clientV_ = value;
+      public Builder setPlayer(int value) {
+        bitField0_ |= 0x00000004;
+        player_ = value;
         onChanged();
         return this;
       }
       /**
        * <pre>
-       *需要最低的客户端版本号是
+       *成功时，分配的玩家ID
        * </pre>
        *
-       * <code>required string clientV = 3;</code>
+       * <code>required uint32 player = 3;</code>
        */
-      public Builder clearClientV() {
+      public Builder clearPlayer() {
         bitField0_ = (bitField0_ & ~0x00000004);
-        clientV_ = getDefaultInstance().getClientV();
-        onChanged();
-        return this;
-      }
-      /**
-       * <pre>
-       *需要最低的客户端版本号是
-       * </pre>
-       *
-       * <code>required string clientV = 3;</code>
-       */
-      public Builder setClientVBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000004;
-        clientV_ = value;
+        player_ = 0;
         onChanged();
         return this;
       }
@@ -16990,20 +8327,45 @@ public final class MeteorMsgs {
 
     /**
      * <pre>
-     *kcp端口，每个房间一个Kcp端口处理所有帧指令
+     *房间主人
      * </pre>
      *
-     * <code>required uint32 kcpPort = 13;</code>
+     * <code>required uint32 owner = 13;</code>
      */
-    boolean hasKcpPort();
+    boolean hasOwner();
     /**
      * <pre>
-     *kcp端口，每个房间一个Kcp端口处理所有帧指令
+     *房间主人
      * </pre>
      *
-     * <code>required uint32 kcpPort = 13;</code>
+     * <code>required uint32 owner = 13;</code>
      */
-    int getKcpPort();
+    int getOwner();
+
+    /**
+     * <pre>
+     *房间需要什么模型-只需要安装了这些角色模型就可以玩.
+     * </pre>
+     *
+     * <code>repeated uint32 models = 14;</code>
+     */
+    java.util.List<java.lang.Integer> getModelsList();
+    /**
+     * <pre>
+     *房间需要什么模型-只需要安装了这些角色模型就可以玩.
+     * </pre>
+     *
+     * <code>repeated uint32 models = 14;</code>
+     */
+    int getModelsCount();
+    /**
+     * <pre>
+     *房间需要什么模型-只需要安装了这些角色模型就可以玩.
+     * </pre>
+     *
+     * <code>repeated uint32 models = 14;</code>
+     */
+    int getModels(int index);
   }
   /**
    * <pre>
@@ -17034,7 +8396,8 @@ public final class MeteorMsgs {
       group2_ = 0;
       playerCount_ = 0;
       maxPlayer_ = 0;
-      kcpPort_ = 0;
+      owner_ = 0;
+      models_ = java.util.Collections.emptyList();
     }
 
     @java.lang.Override
@@ -17149,7 +8512,28 @@ public final class MeteorMsgs {
             }
             case 104: {
               bitField0_ |= 0x00001000;
-              kcpPort_ = input.readUInt32();
+              owner_ = input.readUInt32();
+              break;
+            }
+            case 112: {
+              if (!((mutable_bitField0_ & 0x00002000) == 0x00002000)) {
+                models_ = new java.util.ArrayList<java.lang.Integer>();
+                mutable_bitField0_ |= 0x00002000;
+              }
+              models_.add(input.readUInt32());
+              break;
+            }
+            case 114: {
+              int length = input.readRawVarint32();
+              int limit = input.pushLimit(length);
+              if (!((mutable_bitField0_ & 0x00002000) == 0x00002000) && input.getBytesUntilLimit() > 0) {
+                models_ = new java.util.ArrayList<java.lang.Integer>();
+                mutable_bitField0_ |= 0x00002000;
+              }
+              while (input.getBytesUntilLimit() > 0) {
+                models_.add(input.readUInt32());
+              }
+              input.popLimit(limit);
               break;
             }
           }
@@ -17160,6 +8544,9 @@ public final class MeteorMsgs {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
+        if (((mutable_bitField0_ & 0x00002000) == 0x00002000)) {
+          models_ = java.util.Collections.unmodifiableList(models_);
+        }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
@@ -17399,20 +8786,12 @@ public final class MeteorMsgs {
       _Normal(1),
       /**
        * <pre>
-       *录制
+       *转播
        * </pre>
        *
-       * <code>_Record = 2;</code>
+       * <code>_Replay = 2;</code>
        */
-      _Record(2),
-      /**
-       * <pre>
-       *重播
-       * </pre>
-       *
-       * <code>_Replay = 3;</code>
-       */
-      _Replay(3),
+      _Replay(2),
       ;
 
       /**
@@ -17425,20 +8804,12 @@ public final class MeteorMsgs {
       public static final int _Normal_VALUE = 1;
       /**
        * <pre>
-       *录制
+       *转播
        * </pre>
        *
-       * <code>_Record = 2;</code>
+       * <code>_Replay = 2;</code>
        */
-      public static final int _Record_VALUE = 2;
-      /**
-       * <pre>
-       *重播
-       * </pre>
-       *
-       * <code>_Replay = 3;</code>
-       */
-      public static final int _Replay_VALUE = 3;
+      public static final int _Replay_VALUE = 2;
 
 
       public final int getNumber() {
@@ -17456,8 +8827,7 @@ public final class MeteorMsgs {
       public static RoomPattern forNumber(int value) {
         switch (value) {
           case 1: return _Normal;
-          case 2: return _Record;
-          case 3: return _Replay;
+          case 2: return _Replay;
           default: return null;
         }
       }
@@ -17595,136 +8965,6 @@ public final class MeteorMsgs {
       }
 
       // @@protoc_insertion_point(enum_scope:RoomInfo.MeteorVersion)
-    }
-
-    /**
-     * <pre>
-     *错误码
-     * </pre>
-     *
-     * Protobuf enum {@code RoomInfo.ErrorCode}
-     */
-    public enum ErrorCode
-        implements com.google.protobuf.ProtocolMessageEnum {
-      /**
-       * <code>RoomNotExist = 1;</code>
-       */
-      RoomNotExist(1),
-      /**
-       * <code>RoomPlayerFull = 2;</code>
-       */
-      RoomPlayerFull(2),
-      /**
-       * <code>RoomNeedPassword = 3;</code>
-       */
-      RoomNeedPassword(3),
-      /**
-       * <code>RoomVersionErr = 4;</code>
-       */
-      RoomVersionErr(4),
-      /**
-       * <code>UserInAnotherRoom = 5;</code>
-       */
-      UserInAnotherRoom(5),
-      /**
-       * <code>RoomFull = 6;</code>
-       */
-      RoomFull(6),
-      ;
-
-      /**
-       * <code>RoomNotExist = 1;</code>
-       */
-      public static final int RoomNotExist_VALUE = 1;
-      /**
-       * <code>RoomPlayerFull = 2;</code>
-       */
-      public static final int RoomPlayerFull_VALUE = 2;
-      /**
-       * <code>RoomNeedPassword = 3;</code>
-       */
-      public static final int RoomNeedPassword_VALUE = 3;
-      /**
-       * <code>RoomVersionErr = 4;</code>
-       */
-      public static final int RoomVersionErr_VALUE = 4;
-      /**
-       * <code>UserInAnotherRoom = 5;</code>
-       */
-      public static final int UserInAnotherRoom_VALUE = 5;
-      /**
-       * <code>RoomFull = 6;</code>
-       */
-      public static final int RoomFull_VALUE = 6;
-
-
-      public final int getNumber() {
-        return value;
-      }
-
-      /**
-       * @deprecated Use {@link #forNumber(int)} instead.
-       */
-      @java.lang.Deprecated
-      public static ErrorCode valueOf(int value) {
-        return forNumber(value);
-      }
-
-      public static ErrorCode forNumber(int value) {
-        switch (value) {
-          case 1: return RoomNotExist;
-          case 2: return RoomPlayerFull;
-          case 3: return RoomNeedPassword;
-          case 4: return RoomVersionErr;
-          case 5: return UserInAnotherRoom;
-          case 6: return RoomFull;
-          default: return null;
-        }
-      }
-
-      public static com.google.protobuf.Internal.EnumLiteMap<ErrorCode>
-          internalGetValueMap() {
-        return internalValueMap;
-      }
-      private static final com.google.protobuf.Internal.EnumLiteMap<
-          ErrorCode> internalValueMap =
-            new com.google.protobuf.Internal.EnumLiteMap<ErrorCode>() {
-              public ErrorCode findValueByNumber(int number) {
-                return ErrorCode.forNumber(number);
-              }
-            };
-
-      public final com.google.protobuf.Descriptors.EnumValueDescriptor
-          getValueDescriptor() {
-        return getDescriptor().getValues().get(ordinal());
-      }
-      public final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptorForType() {
-        return getDescriptor();
-      }
-      public static final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptor() {
-        return idevgame.meteor.proto.MeteorMsgs.RoomInfo.getDescriptor().getEnumTypes().get(3);
-      }
-
-      private static final ErrorCode[] VALUES = values();
-
-      public static ErrorCode valueOf(
-          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-        if (desc.getType() != getDescriptor()) {
-          throw new java.lang.IllegalArgumentException(
-            "EnumValueDescriptor is not for this type.");
-        }
-        return VALUES[desc.getIndex()];
-      }
-
-      private final int value;
-
-      private ErrorCode(int value) {
-        this.value = value;
-      }
-
-      // @@protoc_insertion_point(enum_scope:RoomInfo.ErrorCode)
     }
 
     private int bitField0_;
@@ -17994,27 +9234,61 @@ public final class MeteorMsgs {
       return maxPlayer_;
     }
 
-    public static final int KCPPORT_FIELD_NUMBER = 13;
-    private int kcpPort_;
+    public static final int OWNER_FIELD_NUMBER = 13;
+    private int owner_;
     /**
      * <pre>
-     *kcp端口，每个房间一个Kcp端口处理所有帧指令
+     *房间主人
      * </pre>
      *
-     * <code>required uint32 kcpPort = 13;</code>
+     * <code>required uint32 owner = 13;</code>
      */
-    public boolean hasKcpPort() {
+    public boolean hasOwner() {
       return ((bitField0_ & 0x00001000) == 0x00001000);
     }
     /**
      * <pre>
-     *kcp端口，每个房间一个Kcp端口处理所有帧指令
+     *房间主人
      * </pre>
      *
-     * <code>required uint32 kcpPort = 13;</code>
+     * <code>required uint32 owner = 13;</code>
      */
-    public int getKcpPort() {
-      return kcpPort_;
+    public int getOwner() {
+      return owner_;
+    }
+
+    public static final int MODELS_FIELD_NUMBER = 14;
+    private java.util.List<java.lang.Integer> models_;
+    /**
+     * <pre>
+     *房间需要什么模型-只需要安装了这些角色模型就可以玩.
+     * </pre>
+     *
+     * <code>repeated uint32 models = 14;</code>
+     */
+    public java.util.List<java.lang.Integer>
+        getModelsList() {
+      return models_;
+    }
+    /**
+     * <pre>
+     *房间需要什么模型-只需要安装了这些角色模型就可以玩.
+     * </pre>
+     *
+     * <code>repeated uint32 models = 14;</code>
+     */
+    public int getModelsCount() {
+      return models_.size();
+    }
+    /**
+     * <pre>
+     *房间需要什么模型-只需要安装了这些角色模型就可以玩.
+     * </pre>
+     *
+     * <code>repeated uint32 models = 14;</code>
+     */
+    public int getModels(int index) {
+      return models_.get(index);
     }
 
     private byte memoizedIsInitialized = -1;
@@ -18071,7 +9345,7 @@ public final class MeteorMsgs {
         memoizedIsInitialized = 0;
         return false;
       }
-      if (!hasKcpPort()) {
+      if (!hasOwner()) {
         memoizedIsInitialized = 0;
         return false;
       }
@@ -18118,7 +9392,10 @@ public final class MeteorMsgs {
         output.writeUInt32(12, maxPlayer_);
       }
       if (((bitField0_ & 0x00001000) == 0x00001000)) {
-        output.writeUInt32(13, kcpPort_);
+        output.writeUInt32(13, owner_);
+      }
+      for (int i = 0; i < models_.size(); i++) {
+        output.writeUInt32(14, models_.get(i));
       }
       unknownFields.writeTo(output);
     }
@@ -18177,7 +9454,16 @@ public final class MeteorMsgs {
       }
       if (((bitField0_ & 0x00001000) == 0x00001000)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeUInt32Size(13, kcpPort_);
+          .computeUInt32Size(13, owner_);
+      }
+      {
+        int dataSize = 0;
+        for (int i = 0; i < models_.size(); i++) {
+          dataSize += com.google.protobuf.CodedOutputStream
+            .computeUInt32SizeNoTag(models_.get(i));
+        }
+        size += dataSize;
+        size += 1 * getModelsList().size();
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -18252,11 +9538,13 @@ public final class MeteorMsgs {
         result = result && (getMaxPlayer()
             == other.getMaxPlayer());
       }
-      result = result && (hasKcpPort() == other.hasKcpPort());
-      if (hasKcpPort()) {
-        result = result && (getKcpPort()
-            == other.getKcpPort());
+      result = result && (hasOwner() == other.hasOwner());
+      if (hasOwner()) {
+        result = result && (getOwner()
+            == other.getOwner());
       }
+      result = result && getModelsList()
+          .equals(other.getModelsList());
       result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
@@ -18316,9 +9604,13 @@ public final class MeteorMsgs {
         hash = (37 * hash) + MAXPLAYER_FIELD_NUMBER;
         hash = (53 * hash) + getMaxPlayer();
       }
-      if (hasKcpPort()) {
-        hash = (37 * hash) + KCPPORT_FIELD_NUMBER;
-        hash = (53 * hash) + getKcpPort();
+      if (hasOwner()) {
+        hash = (37 * hash) + OWNER_FIELD_NUMBER;
+        hash = (53 * hash) + getOwner();
+      }
+      if (getModelsCount() > 0) {
+        hash = (37 * hash) + MODELS_FIELD_NUMBER;
+        hash = (53 * hash) + getModelsList().hashCode();
       }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
@@ -18477,8 +9769,10 @@ public final class MeteorMsgs {
         bitField0_ = (bitField0_ & ~0x00000400);
         maxPlayer_ = 0;
         bitField0_ = (bitField0_ & ~0x00000800);
-        kcpPort_ = 0;
+        owner_ = 0;
         bitField0_ = (bitField0_ & ~0x00001000);
+        models_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00002000);
         return this;
       }
 
@@ -18554,7 +9848,12 @@ public final class MeteorMsgs {
         if (((from_bitField0_ & 0x00001000) == 0x00001000)) {
           to_bitField0_ |= 0x00001000;
         }
-        result.kcpPort_ = kcpPort_;
+        result.owner_ = owner_;
+        if (((bitField0_ & 0x00002000) == 0x00002000)) {
+          models_ = java.util.Collections.unmodifiableList(models_);
+          bitField0_ = (bitField0_ & ~0x00002000);
+        }
+        result.models_ = models_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -18635,8 +9934,18 @@ public final class MeteorMsgs {
         if (other.hasMaxPlayer()) {
           setMaxPlayer(other.getMaxPlayer());
         }
-        if (other.hasKcpPort()) {
-          setKcpPort(other.getKcpPort());
+        if (other.hasOwner()) {
+          setOwner(other.getOwner());
+        }
+        if (!other.models_.isEmpty()) {
+          if (models_.isEmpty()) {
+            models_ = other.models_;
+            bitField0_ = (bitField0_ & ~0x00002000);
+          } else {
+            ensureModelsIsMutable();
+            models_.addAll(other.models_);
+          }
+          onChanged();
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -18680,7 +9989,7 @@ public final class MeteorMsgs {
         if (!hasMaxPlayer()) {
           return false;
         }
-        if (!hasKcpPort()) {
+        if (!hasOwner()) {
           return false;
         }
         return true;
@@ -19257,50 +10566,144 @@ public final class MeteorMsgs {
         return this;
       }
 
-      private int kcpPort_ ;
+      private int owner_ ;
       /**
        * <pre>
-       *kcp端口，每个房间一个Kcp端口处理所有帧指令
+       *房间主人
        * </pre>
        *
-       * <code>required uint32 kcpPort = 13;</code>
+       * <code>required uint32 owner = 13;</code>
        */
-      public boolean hasKcpPort() {
+      public boolean hasOwner() {
         return ((bitField0_ & 0x00001000) == 0x00001000);
       }
       /**
        * <pre>
-       *kcp端口，每个房间一个Kcp端口处理所有帧指令
+       *房间主人
        * </pre>
        *
-       * <code>required uint32 kcpPort = 13;</code>
+       * <code>required uint32 owner = 13;</code>
        */
-      public int getKcpPort() {
-        return kcpPort_;
+      public int getOwner() {
+        return owner_;
       }
       /**
        * <pre>
-       *kcp端口，每个房间一个Kcp端口处理所有帧指令
+       *房间主人
        * </pre>
        *
-       * <code>required uint32 kcpPort = 13;</code>
+       * <code>required uint32 owner = 13;</code>
        */
-      public Builder setKcpPort(int value) {
+      public Builder setOwner(int value) {
         bitField0_ |= 0x00001000;
-        kcpPort_ = value;
+        owner_ = value;
         onChanged();
         return this;
       }
       /**
        * <pre>
-       *kcp端口，每个房间一个Kcp端口处理所有帧指令
+       *房间主人
        * </pre>
        *
-       * <code>required uint32 kcpPort = 13;</code>
+       * <code>required uint32 owner = 13;</code>
        */
-      public Builder clearKcpPort() {
+      public Builder clearOwner() {
         bitField0_ = (bitField0_ & ~0x00001000);
-        kcpPort_ = 0;
+        owner_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private java.util.List<java.lang.Integer> models_ = java.util.Collections.emptyList();
+      private void ensureModelsIsMutable() {
+        if (!((bitField0_ & 0x00002000) == 0x00002000)) {
+          models_ = new java.util.ArrayList<java.lang.Integer>(models_);
+          bitField0_ |= 0x00002000;
+         }
+      }
+      /**
+       * <pre>
+       *房间需要什么模型-只需要安装了这些角色模型就可以玩.
+       * </pre>
+       *
+       * <code>repeated uint32 models = 14;</code>
+       */
+      public java.util.List<java.lang.Integer>
+          getModelsList() {
+        return java.util.Collections.unmodifiableList(models_);
+      }
+      /**
+       * <pre>
+       *房间需要什么模型-只需要安装了这些角色模型就可以玩.
+       * </pre>
+       *
+       * <code>repeated uint32 models = 14;</code>
+       */
+      public int getModelsCount() {
+        return models_.size();
+      }
+      /**
+       * <pre>
+       *房间需要什么模型-只需要安装了这些角色模型就可以玩.
+       * </pre>
+       *
+       * <code>repeated uint32 models = 14;</code>
+       */
+      public int getModels(int index) {
+        return models_.get(index);
+      }
+      /**
+       * <pre>
+       *房间需要什么模型-只需要安装了这些角色模型就可以玩.
+       * </pre>
+       *
+       * <code>repeated uint32 models = 14;</code>
+       */
+      public Builder setModels(
+          int index, int value) {
+        ensureModelsIsMutable();
+        models_.set(index, value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *房间需要什么模型-只需要安装了这些角色模型就可以玩.
+       * </pre>
+       *
+       * <code>repeated uint32 models = 14;</code>
+       */
+      public Builder addModels(int value) {
+        ensureModelsIsMutable();
+        models_.add(value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *房间需要什么模型-只需要安装了这些角色模型就可以玩.
+       * </pre>
+       *
+       * <code>repeated uint32 models = 14;</code>
+       */
+      public Builder addAllModels(
+          java.lang.Iterable<? extends java.lang.Integer> values) {
+        ensureModelsIsMutable();
+        com.google.protobuf.AbstractMessageLite.Builder.addAll(
+            values, models_);
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *房间需要什么模型-只需要安装了这些角色模型就可以玩.
+       * </pre>
+       *
+       * <code>repeated uint32 models = 14;</code>
+       */
+      public Builder clearModels() {
+        models_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00002000);
         onChanged();
         return this;
       }
@@ -19358,27 +10761,27 @@ public final class MeteorMsgs {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>repeated .RoomInfo RoomInLobby = 1;</code>
+     * <code>repeated .RoomInfo Rooms = 1;</code>
      */
     java.util.List<idevgame.meteor.proto.MeteorMsgs.RoomInfo> 
-        getRoomInLobbyList();
+        getRoomsList();
     /**
-     * <code>repeated .RoomInfo RoomInLobby = 1;</code>
+     * <code>repeated .RoomInfo Rooms = 1;</code>
      */
-    idevgame.meteor.proto.MeteorMsgs.RoomInfo getRoomInLobby(int index);
+    idevgame.meteor.proto.MeteorMsgs.RoomInfo getRooms(int index);
     /**
-     * <code>repeated .RoomInfo RoomInLobby = 1;</code>
+     * <code>repeated .RoomInfo Rooms = 1;</code>
      */
-    int getRoomInLobbyCount();
+    int getRoomsCount();
     /**
-     * <code>repeated .RoomInfo RoomInLobby = 1;</code>
+     * <code>repeated .RoomInfo Rooms = 1;</code>
      */
     java.util.List<? extends idevgame.meteor.proto.MeteorMsgs.RoomInfoOrBuilder> 
-        getRoomInLobbyOrBuilderList();
+        getRoomsOrBuilderList();
     /**
-     * <code>repeated .RoomInfo RoomInLobby = 1;</code>
+     * <code>repeated .RoomInfo Rooms = 1;</code>
      */
-    idevgame.meteor.proto.MeteorMsgs.RoomInfoOrBuilder getRoomInLobbyOrBuilder(
+    idevgame.meteor.proto.MeteorMsgs.RoomInfoOrBuilder getRoomsOrBuilder(
         int index);
   }
   /**
@@ -19394,7 +10797,7 @@ public final class MeteorMsgs {
       super(builder);
     }
     private GetRoomRsp() {
-      roomInLobby_ = java.util.Collections.emptyList();
+      rooms_ = java.util.Collections.emptyList();
     }
 
     @java.lang.Override
@@ -19430,10 +10833,10 @@ public final class MeteorMsgs {
             }
             case 10: {
               if (!((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
-                roomInLobby_ = new java.util.ArrayList<idevgame.meteor.proto.MeteorMsgs.RoomInfo>();
+                rooms_ = new java.util.ArrayList<idevgame.meteor.proto.MeteorMsgs.RoomInfo>();
                 mutable_bitField0_ |= 0x00000001;
               }
-              roomInLobby_.add(
+              rooms_.add(
                   input.readMessage(idevgame.meteor.proto.MeteorMsgs.RoomInfo.PARSER, extensionRegistry));
               break;
             }
@@ -19446,7 +10849,7 @@ public final class MeteorMsgs {
             e).setUnfinishedMessage(this);
       } finally {
         if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
-          roomInLobby_ = java.util.Collections.unmodifiableList(roomInLobby_);
+          rooms_ = java.util.Collections.unmodifiableList(rooms_);
         }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
@@ -19464,39 +10867,39 @@ public final class MeteorMsgs {
               idevgame.meteor.proto.MeteorMsgs.GetRoomRsp.class, idevgame.meteor.proto.MeteorMsgs.GetRoomRsp.Builder.class);
     }
 
-    public static final int ROOMINLOBBY_FIELD_NUMBER = 1;
-    private java.util.List<idevgame.meteor.proto.MeteorMsgs.RoomInfo> roomInLobby_;
+    public static final int ROOMS_FIELD_NUMBER = 1;
+    private java.util.List<idevgame.meteor.proto.MeteorMsgs.RoomInfo> rooms_;
     /**
-     * <code>repeated .RoomInfo RoomInLobby = 1;</code>
+     * <code>repeated .RoomInfo Rooms = 1;</code>
      */
-    public java.util.List<idevgame.meteor.proto.MeteorMsgs.RoomInfo> getRoomInLobbyList() {
-      return roomInLobby_;
+    public java.util.List<idevgame.meteor.proto.MeteorMsgs.RoomInfo> getRoomsList() {
+      return rooms_;
     }
     /**
-     * <code>repeated .RoomInfo RoomInLobby = 1;</code>
+     * <code>repeated .RoomInfo Rooms = 1;</code>
      */
     public java.util.List<? extends idevgame.meteor.proto.MeteorMsgs.RoomInfoOrBuilder> 
-        getRoomInLobbyOrBuilderList() {
-      return roomInLobby_;
+        getRoomsOrBuilderList() {
+      return rooms_;
     }
     /**
-     * <code>repeated .RoomInfo RoomInLobby = 1;</code>
+     * <code>repeated .RoomInfo Rooms = 1;</code>
      */
-    public int getRoomInLobbyCount() {
-      return roomInLobby_.size();
+    public int getRoomsCount() {
+      return rooms_.size();
     }
     /**
-     * <code>repeated .RoomInfo RoomInLobby = 1;</code>
+     * <code>repeated .RoomInfo Rooms = 1;</code>
      */
-    public idevgame.meteor.proto.MeteorMsgs.RoomInfo getRoomInLobby(int index) {
-      return roomInLobby_.get(index);
+    public idevgame.meteor.proto.MeteorMsgs.RoomInfo getRooms(int index) {
+      return rooms_.get(index);
     }
     /**
-     * <code>repeated .RoomInfo RoomInLobby = 1;</code>
+     * <code>repeated .RoomInfo Rooms = 1;</code>
      */
-    public idevgame.meteor.proto.MeteorMsgs.RoomInfoOrBuilder getRoomInLobbyOrBuilder(
+    public idevgame.meteor.proto.MeteorMsgs.RoomInfoOrBuilder getRoomsOrBuilder(
         int index) {
-      return roomInLobby_.get(index);
+      return rooms_.get(index);
     }
 
     private byte memoizedIsInitialized = -1;
@@ -19505,8 +10908,8 @@ public final class MeteorMsgs {
       if (isInitialized == 1) return true;
       if (isInitialized == 0) return false;
 
-      for (int i = 0; i < getRoomInLobbyCount(); i++) {
-        if (!getRoomInLobby(i).isInitialized()) {
+      for (int i = 0; i < getRoomsCount(); i++) {
+        if (!getRooms(i).isInitialized()) {
           memoizedIsInitialized = 0;
           return false;
         }
@@ -19517,8 +10920,8 @@ public final class MeteorMsgs {
 
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      for (int i = 0; i < roomInLobby_.size(); i++) {
-        output.writeMessage(1, roomInLobby_.get(i));
+      for (int i = 0; i < rooms_.size(); i++) {
+        output.writeMessage(1, rooms_.get(i));
       }
       unknownFields.writeTo(output);
     }
@@ -19528,9 +10931,9 @@ public final class MeteorMsgs {
       if (size != -1) return size;
 
       size = 0;
-      for (int i = 0; i < roomInLobby_.size(); i++) {
+      for (int i = 0; i < rooms_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(1, roomInLobby_.get(i));
+          .computeMessageSize(1, rooms_.get(i));
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -19548,8 +10951,8 @@ public final class MeteorMsgs {
       idevgame.meteor.proto.MeteorMsgs.GetRoomRsp other = (idevgame.meteor.proto.MeteorMsgs.GetRoomRsp) obj;
 
       boolean result = true;
-      result = result && getRoomInLobbyList()
-          .equals(other.getRoomInLobbyList());
+      result = result && getRoomsList()
+          .equals(other.getRoomsList());
       result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
@@ -19561,9 +10964,9 @@ public final class MeteorMsgs {
       }
       int hash = 41;
       hash = (19 * hash) + getDescriptor().hashCode();
-      if (getRoomInLobbyCount() > 0) {
-        hash = (37 * hash) + ROOMINLOBBY_FIELD_NUMBER;
-        hash = (53 * hash) + getRoomInLobbyList().hashCode();
+      if (getRoomsCount() > 0) {
+        hash = (37 * hash) + ROOMS_FIELD_NUMBER;
+        hash = (53 * hash) + getRoomsList().hashCode();
       }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
@@ -19690,16 +11093,16 @@ public final class MeteorMsgs {
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessageV3
                 .alwaysUseFieldBuilders) {
-          getRoomInLobbyFieldBuilder();
+          getRoomsFieldBuilder();
         }
       }
       public Builder clear() {
         super.clear();
-        if (roomInLobbyBuilder_ == null) {
-          roomInLobby_ = java.util.Collections.emptyList();
+        if (roomsBuilder_ == null) {
+          rooms_ = java.util.Collections.emptyList();
           bitField0_ = (bitField0_ & ~0x00000001);
         } else {
-          roomInLobbyBuilder_.clear();
+          roomsBuilder_.clear();
         }
         return this;
       }
@@ -19724,14 +11127,14 @@ public final class MeteorMsgs {
       public idevgame.meteor.proto.MeteorMsgs.GetRoomRsp buildPartial() {
         idevgame.meteor.proto.MeteorMsgs.GetRoomRsp result = new idevgame.meteor.proto.MeteorMsgs.GetRoomRsp(this);
         int from_bitField0_ = bitField0_;
-        if (roomInLobbyBuilder_ == null) {
+        if (roomsBuilder_ == null) {
           if (((bitField0_ & 0x00000001) == 0x00000001)) {
-            roomInLobby_ = java.util.Collections.unmodifiableList(roomInLobby_);
+            rooms_ = java.util.Collections.unmodifiableList(rooms_);
             bitField0_ = (bitField0_ & ~0x00000001);
           }
-          result.roomInLobby_ = roomInLobby_;
+          result.rooms_ = rooms_;
         } else {
-          result.roomInLobby_ = roomInLobbyBuilder_.build();
+          result.rooms_ = roomsBuilder_.build();
         }
         onBuilt();
         return result;
@@ -19774,29 +11177,29 @@ public final class MeteorMsgs {
 
       public Builder mergeFrom(idevgame.meteor.proto.MeteorMsgs.GetRoomRsp other) {
         if (other == idevgame.meteor.proto.MeteorMsgs.GetRoomRsp.getDefaultInstance()) return this;
-        if (roomInLobbyBuilder_ == null) {
-          if (!other.roomInLobby_.isEmpty()) {
-            if (roomInLobby_.isEmpty()) {
-              roomInLobby_ = other.roomInLobby_;
+        if (roomsBuilder_ == null) {
+          if (!other.rooms_.isEmpty()) {
+            if (rooms_.isEmpty()) {
+              rooms_ = other.rooms_;
               bitField0_ = (bitField0_ & ~0x00000001);
             } else {
-              ensureRoomInLobbyIsMutable();
-              roomInLobby_.addAll(other.roomInLobby_);
+              ensureRoomsIsMutable();
+              rooms_.addAll(other.rooms_);
             }
             onChanged();
           }
         } else {
-          if (!other.roomInLobby_.isEmpty()) {
-            if (roomInLobbyBuilder_.isEmpty()) {
-              roomInLobbyBuilder_.dispose();
-              roomInLobbyBuilder_ = null;
-              roomInLobby_ = other.roomInLobby_;
+          if (!other.rooms_.isEmpty()) {
+            if (roomsBuilder_.isEmpty()) {
+              roomsBuilder_.dispose();
+              roomsBuilder_ = null;
+              rooms_ = other.rooms_;
               bitField0_ = (bitField0_ & ~0x00000001);
-              roomInLobbyBuilder_ = 
+              roomsBuilder_ = 
                 com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
-                   getRoomInLobbyFieldBuilder() : null;
+                   getRoomsFieldBuilder() : null;
             } else {
-              roomInLobbyBuilder_.addAllMessages(other.roomInLobby_);
+              roomsBuilder_.addAllMessages(other.rooms_);
             }
           }
         }
@@ -19806,8 +11209,8 @@ public final class MeteorMsgs {
       }
 
       public final boolean isInitialized() {
-        for (int i = 0; i < getRoomInLobbyCount(); i++) {
-          if (!getRoomInLobby(i).isInitialized()) {
+        for (int i = 0; i < getRoomsCount(); i++) {
+          if (!getRooms(i).isInitialized()) {
             return false;
           }
         }
@@ -19833,244 +11236,244 @@ public final class MeteorMsgs {
       }
       private int bitField0_;
 
-      private java.util.List<idevgame.meteor.proto.MeteorMsgs.RoomInfo> roomInLobby_ =
+      private java.util.List<idevgame.meteor.proto.MeteorMsgs.RoomInfo> rooms_ =
         java.util.Collections.emptyList();
-      private void ensureRoomInLobbyIsMutable() {
+      private void ensureRoomsIsMutable() {
         if (!((bitField0_ & 0x00000001) == 0x00000001)) {
-          roomInLobby_ = new java.util.ArrayList<idevgame.meteor.proto.MeteorMsgs.RoomInfo>(roomInLobby_);
+          rooms_ = new java.util.ArrayList<idevgame.meteor.proto.MeteorMsgs.RoomInfo>(rooms_);
           bitField0_ |= 0x00000001;
          }
       }
 
       private com.google.protobuf.RepeatedFieldBuilderV3<
-          idevgame.meteor.proto.MeteorMsgs.RoomInfo, idevgame.meteor.proto.MeteorMsgs.RoomInfo.Builder, idevgame.meteor.proto.MeteorMsgs.RoomInfoOrBuilder> roomInLobbyBuilder_;
+          idevgame.meteor.proto.MeteorMsgs.RoomInfo, idevgame.meteor.proto.MeteorMsgs.RoomInfo.Builder, idevgame.meteor.proto.MeteorMsgs.RoomInfoOrBuilder> roomsBuilder_;
 
       /**
-       * <code>repeated .RoomInfo RoomInLobby = 1;</code>
+       * <code>repeated .RoomInfo Rooms = 1;</code>
        */
-      public java.util.List<idevgame.meteor.proto.MeteorMsgs.RoomInfo> getRoomInLobbyList() {
-        if (roomInLobbyBuilder_ == null) {
-          return java.util.Collections.unmodifiableList(roomInLobby_);
+      public java.util.List<idevgame.meteor.proto.MeteorMsgs.RoomInfo> getRoomsList() {
+        if (roomsBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(rooms_);
         } else {
-          return roomInLobbyBuilder_.getMessageList();
+          return roomsBuilder_.getMessageList();
         }
       }
       /**
-       * <code>repeated .RoomInfo RoomInLobby = 1;</code>
+       * <code>repeated .RoomInfo Rooms = 1;</code>
        */
-      public int getRoomInLobbyCount() {
-        if (roomInLobbyBuilder_ == null) {
-          return roomInLobby_.size();
+      public int getRoomsCount() {
+        if (roomsBuilder_ == null) {
+          return rooms_.size();
         } else {
-          return roomInLobbyBuilder_.getCount();
+          return roomsBuilder_.getCount();
         }
       }
       /**
-       * <code>repeated .RoomInfo RoomInLobby = 1;</code>
+       * <code>repeated .RoomInfo Rooms = 1;</code>
        */
-      public idevgame.meteor.proto.MeteorMsgs.RoomInfo getRoomInLobby(int index) {
-        if (roomInLobbyBuilder_ == null) {
-          return roomInLobby_.get(index);
+      public idevgame.meteor.proto.MeteorMsgs.RoomInfo getRooms(int index) {
+        if (roomsBuilder_ == null) {
+          return rooms_.get(index);
         } else {
-          return roomInLobbyBuilder_.getMessage(index);
+          return roomsBuilder_.getMessage(index);
         }
       }
       /**
-       * <code>repeated .RoomInfo RoomInLobby = 1;</code>
+       * <code>repeated .RoomInfo Rooms = 1;</code>
        */
-      public Builder setRoomInLobby(
+      public Builder setRooms(
           int index, idevgame.meteor.proto.MeteorMsgs.RoomInfo value) {
-        if (roomInLobbyBuilder_ == null) {
+        if (roomsBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          ensureRoomInLobbyIsMutable();
-          roomInLobby_.set(index, value);
+          ensureRoomsIsMutable();
+          rooms_.set(index, value);
           onChanged();
         } else {
-          roomInLobbyBuilder_.setMessage(index, value);
+          roomsBuilder_.setMessage(index, value);
         }
         return this;
       }
       /**
-       * <code>repeated .RoomInfo RoomInLobby = 1;</code>
+       * <code>repeated .RoomInfo Rooms = 1;</code>
        */
-      public Builder setRoomInLobby(
+      public Builder setRooms(
           int index, idevgame.meteor.proto.MeteorMsgs.RoomInfo.Builder builderForValue) {
-        if (roomInLobbyBuilder_ == null) {
-          ensureRoomInLobbyIsMutable();
-          roomInLobby_.set(index, builderForValue.build());
+        if (roomsBuilder_ == null) {
+          ensureRoomsIsMutable();
+          rooms_.set(index, builderForValue.build());
           onChanged();
         } else {
-          roomInLobbyBuilder_.setMessage(index, builderForValue.build());
+          roomsBuilder_.setMessage(index, builderForValue.build());
         }
         return this;
       }
       /**
-       * <code>repeated .RoomInfo RoomInLobby = 1;</code>
+       * <code>repeated .RoomInfo Rooms = 1;</code>
        */
-      public Builder addRoomInLobby(idevgame.meteor.proto.MeteorMsgs.RoomInfo value) {
-        if (roomInLobbyBuilder_ == null) {
+      public Builder addRooms(idevgame.meteor.proto.MeteorMsgs.RoomInfo value) {
+        if (roomsBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          ensureRoomInLobbyIsMutable();
-          roomInLobby_.add(value);
+          ensureRoomsIsMutable();
+          rooms_.add(value);
           onChanged();
         } else {
-          roomInLobbyBuilder_.addMessage(value);
+          roomsBuilder_.addMessage(value);
         }
         return this;
       }
       /**
-       * <code>repeated .RoomInfo RoomInLobby = 1;</code>
+       * <code>repeated .RoomInfo Rooms = 1;</code>
        */
-      public Builder addRoomInLobby(
+      public Builder addRooms(
           int index, idevgame.meteor.proto.MeteorMsgs.RoomInfo value) {
-        if (roomInLobbyBuilder_ == null) {
+        if (roomsBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          ensureRoomInLobbyIsMutable();
-          roomInLobby_.add(index, value);
+          ensureRoomsIsMutable();
+          rooms_.add(index, value);
           onChanged();
         } else {
-          roomInLobbyBuilder_.addMessage(index, value);
+          roomsBuilder_.addMessage(index, value);
         }
         return this;
       }
       /**
-       * <code>repeated .RoomInfo RoomInLobby = 1;</code>
+       * <code>repeated .RoomInfo Rooms = 1;</code>
        */
-      public Builder addRoomInLobby(
+      public Builder addRooms(
           idevgame.meteor.proto.MeteorMsgs.RoomInfo.Builder builderForValue) {
-        if (roomInLobbyBuilder_ == null) {
-          ensureRoomInLobbyIsMutable();
-          roomInLobby_.add(builderForValue.build());
+        if (roomsBuilder_ == null) {
+          ensureRoomsIsMutable();
+          rooms_.add(builderForValue.build());
           onChanged();
         } else {
-          roomInLobbyBuilder_.addMessage(builderForValue.build());
+          roomsBuilder_.addMessage(builderForValue.build());
         }
         return this;
       }
       /**
-       * <code>repeated .RoomInfo RoomInLobby = 1;</code>
+       * <code>repeated .RoomInfo Rooms = 1;</code>
        */
-      public Builder addRoomInLobby(
+      public Builder addRooms(
           int index, idevgame.meteor.proto.MeteorMsgs.RoomInfo.Builder builderForValue) {
-        if (roomInLobbyBuilder_ == null) {
-          ensureRoomInLobbyIsMutable();
-          roomInLobby_.add(index, builderForValue.build());
+        if (roomsBuilder_ == null) {
+          ensureRoomsIsMutable();
+          rooms_.add(index, builderForValue.build());
           onChanged();
         } else {
-          roomInLobbyBuilder_.addMessage(index, builderForValue.build());
+          roomsBuilder_.addMessage(index, builderForValue.build());
         }
         return this;
       }
       /**
-       * <code>repeated .RoomInfo RoomInLobby = 1;</code>
+       * <code>repeated .RoomInfo Rooms = 1;</code>
        */
-      public Builder addAllRoomInLobby(
+      public Builder addAllRooms(
           java.lang.Iterable<? extends idevgame.meteor.proto.MeteorMsgs.RoomInfo> values) {
-        if (roomInLobbyBuilder_ == null) {
-          ensureRoomInLobbyIsMutable();
+        if (roomsBuilder_ == null) {
+          ensureRoomsIsMutable();
           com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, roomInLobby_);
+              values, rooms_);
           onChanged();
         } else {
-          roomInLobbyBuilder_.addAllMessages(values);
+          roomsBuilder_.addAllMessages(values);
         }
         return this;
       }
       /**
-       * <code>repeated .RoomInfo RoomInLobby = 1;</code>
+       * <code>repeated .RoomInfo Rooms = 1;</code>
        */
-      public Builder clearRoomInLobby() {
-        if (roomInLobbyBuilder_ == null) {
-          roomInLobby_ = java.util.Collections.emptyList();
+      public Builder clearRooms() {
+        if (roomsBuilder_ == null) {
+          rooms_ = java.util.Collections.emptyList();
           bitField0_ = (bitField0_ & ~0x00000001);
           onChanged();
         } else {
-          roomInLobbyBuilder_.clear();
+          roomsBuilder_.clear();
         }
         return this;
       }
       /**
-       * <code>repeated .RoomInfo RoomInLobby = 1;</code>
+       * <code>repeated .RoomInfo Rooms = 1;</code>
        */
-      public Builder removeRoomInLobby(int index) {
-        if (roomInLobbyBuilder_ == null) {
-          ensureRoomInLobbyIsMutable();
-          roomInLobby_.remove(index);
+      public Builder removeRooms(int index) {
+        if (roomsBuilder_ == null) {
+          ensureRoomsIsMutable();
+          rooms_.remove(index);
           onChanged();
         } else {
-          roomInLobbyBuilder_.remove(index);
+          roomsBuilder_.remove(index);
         }
         return this;
       }
       /**
-       * <code>repeated .RoomInfo RoomInLobby = 1;</code>
+       * <code>repeated .RoomInfo Rooms = 1;</code>
        */
-      public idevgame.meteor.proto.MeteorMsgs.RoomInfo.Builder getRoomInLobbyBuilder(
+      public idevgame.meteor.proto.MeteorMsgs.RoomInfo.Builder getRoomsBuilder(
           int index) {
-        return getRoomInLobbyFieldBuilder().getBuilder(index);
+        return getRoomsFieldBuilder().getBuilder(index);
       }
       /**
-       * <code>repeated .RoomInfo RoomInLobby = 1;</code>
+       * <code>repeated .RoomInfo Rooms = 1;</code>
        */
-      public idevgame.meteor.proto.MeteorMsgs.RoomInfoOrBuilder getRoomInLobbyOrBuilder(
+      public idevgame.meteor.proto.MeteorMsgs.RoomInfoOrBuilder getRoomsOrBuilder(
           int index) {
-        if (roomInLobbyBuilder_ == null) {
-          return roomInLobby_.get(index);  } else {
-          return roomInLobbyBuilder_.getMessageOrBuilder(index);
+        if (roomsBuilder_ == null) {
+          return rooms_.get(index);  } else {
+          return roomsBuilder_.getMessageOrBuilder(index);
         }
       }
       /**
-       * <code>repeated .RoomInfo RoomInLobby = 1;</code>
+       * <code>repeated .RoomInfo Rooms = 1;</code>
        */
       public java.util.List<? extends idevgame.meteor.proto.MeteorMsgs.RoomInfoOrBuilder> 
-           getRoomInLobbyOrBuilderList() {
-        if (roomInLobbyBuilder_ != null) {
-          return roomInLobbyBuilder_.getMessageOrBuilderList();
+           getRoomsOrBuilderList() {
+        if (roomsBuilder_ != null) {
+          return roomsBuilder_.getMessageOrBuilderList();
         } else {
-          return java.util.Collections.unmodifiableList(roomInLobby_);
+          return java.util.Collections.unmodifiableList(rooms_);
         }
       }
       /**
-       * <code>repeated .RoomInfo RoomInLobby = 1;</code>
+       * <code>repeated .RoomInfo Rooms = 1;</code>
        */
-      public idevgame.meteor.proto.MeteorMsgs.RoomInfo.Builder addRoomInLobbyBuilder() {
-        return getRoomInLobbyFieldBuilder().addBuilder(
+      public idevgame.meteor.proto.MeteorMsgs.RoomInfo.Builder addRoomsBuilder() {
+        return getRoomsFieldBuilder().addBuilder(
             idevgame.meteor.proto.MeteorMsgs.RoomInfo.getDefaultInstance());
       }
       /**
-       * <code>repeated .RoomInfo RoomInLobby = 1;</code>
+       * <code>repeated .RoomInfo Rooms = 1;</code>
        */
-      public idevgame.meteor.proto.MeteorMsgs.RoomInfo.Builder addRoomInLobbyBuilder(
+      public idevgame.meteor.proto.MeteorMsgs.RoomInfo.Builder addRoomsBuilder(
           int index) {
-        return getRoomInLobbyFieldBuilder().addBuilder(
+        return getRoomsFieldBuilder().addBuilder(
             index, idevgame.meteor.proto.MeteorMsgs.RoomInfo.getDefaultInstance());
       }
       /**
-       * <code>repeated .RoomInfo RoomInLobby = 1;</code>
+       * <code>repeated .RoomInfo Rooms = 1;</code>
        */
       public java.util.List<idevgame.meteor.proto.MeteorMsgs.RoomInfo.Builder> 
-           getRoomInLobbyBuilderList() {
-        return getRoomInLobbyFieldBuilder().getBuilderList();
+           getRoomsBuilderList() {
+        return getRoomsFieldBuilder().getBuilderList();
       }
       private com.google.protobuf.RepeatedFieldBuilderV3<
           idevgame.meteor.proto.MeteorMsgs.RoomInfo, idevgame.meteor.proto.MeteorMsgs.RoomInfo.Builder, idevgame.meteor.proto.MeteorMsgs.RoomInfoOrBuilder> 
-          getRoomInLobbyFieldBuilder() {
-        if (roomInLobbyBuilder_ == null) {
-          roomInLobbyBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
+          getRoomsFieldBuilder() {
+        if (roomsBuilder_ == null) {
+          roomsBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
               idevgame.meteor.proto.MeteorMsgs.RoomInfo, idevgame.meteor.proto.MeteorMsgs.RoomInfo.Builder, idevgame.meteor.proto.MeteorMsgs.RoomInfoOrBuilder>(
-                  roomInLobby_,
+                  rooms_,
                   ((bitField0_ & 0x00000001) == 0x00000001),
                   getParentForChildren(),
                   isClean());
-          roomInLobby_ = null;
+          rooms_ = null;
         }
-        return roomInLobbyBuilder_;
+        return roomsBuilder_;
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
@@ -20247,11 +11650,24 @@ public final class MeteorMsgs {
     idevgame.meteor.proto.MeteorMsgs.RoomInfo.MeteorVersion getVersion();
 
     /**
+     * <code>repeated uint32 models = 9;</code>
+     */
+    java.util.List<java.lang.Integer> getModelsList();
+    /**
+     * <code>repeated uint32 models = 9;</code>
+     */
+    int getModelsCount();
+    /**
+     * <code>repeated uint32 models = 9;</code>
+     */
+    int getModels(int index);
+
+    /**
      * <pre>
      *密码
      * </pre>
      *
-     * <code>optional string secret = 9;</code>
+     * <code>optional string secret = 10;</code>
      */
     boolean hasSecret();
     /**
@@ -20259,7 +11675,7 @@ public final class MeteorMsgs {
      *密码
      * </pre>
      *
-     * <code>optional string secret = 9;</code>
+     * <code>optional string secret = 10;</code>
      */
     java.lang.String getSecret();
     /**
@@ -20267,7 +11683,7 @@ public final class MeteorMsgs {
      *密码
      * </pre>
      *
-     * <code>optional string secret = 9;</code>
+     * <code>optional string secret = 10;</code>
      */
     com.google.protobuf.ByteString
         getSecretBytes();
@@ -20277,7 +11693,7 @@ public final class MeteorMsgs {
      *重播数据-即录像数据.
      * </pre>
      *
-     * <code>optional bytes replay_data = 10;</code>
+     * <code>optional bytes replay_data = 11;</code>
      */
     boolean hasReplayData();
     /**
@@ -20285,59 +11701,9 @@ public final class MeteorMsgs {
      *重播数据-即录像数据.
      * </pre>
      *
-     * <code>optional bytes replay_data = 10;</code>
+     * <code>optional bytes replay_data = 11;</code>
      */
     com.google.protobuf.ByteString getReplayData();
-
-    /**
-     * <pre>
-     *允许选择的角色模型
-     * </pre>
-     *
-     * <code>repeated uint32 models = 11;</code>
-     */
-    java.util.List<java.lang.Integer> getModelsList();
-    /**
-     * <pre>
-     *允许选择的角色模型
-     * </pre>
-     *
-     * <code>repeated uint32 models = 11;</code>
-     */
-    int getModelsCount();
-    /**
-     * <pre>
-     *允许选择的角色模型
-     * </pre>
-     *
-     * <code>repeated uint32 models = 11;</code>
-     */
-    int getModels(int index);
-
-    /**
-     * <pre>
-     *允许选择的武器模型
-     * </pre>
-     *
-     * <code>repeated uint32 weapons = 12;</code>
-     */
-    java.util.List<java.lang.Integer> getWeaponsList();
-    /**
-     * <pre>
-     *允许选择的武器模型
-     * </pre>
-     *
-     * <code>repeated uint32 weapons = 12;</code>
-     */
-    int getWeaponsCount();
-    /**
-     * <pre>
-     *允许选择的武器模型
-     * </pre>
-     *
-     * <code>repeated uint32 weapons = 12;</code>
-     */
-    int getWeapons(int index);
   }
   /**
    * Protobuf type {@code CreateRoomReq}
@@ -20360,10 +11726,9 @@ public final class MeteorMsgs {
       hpMax_ = 0;
       roundTime_ = 0;
       version_ = 1;
+      models_ = java.util.Collections.emptyList();
       secret_ = "";
       replayData_ = com.google.protobuf.ByteString.EMPTY;
-      models_ = java.util.Collections.emptyList();
-      weapons_ = java.util.Collections.emptyList();
     }
 
     @java.lang.Override
@@ -20456,31 +11821,20 @@ public final class MeteorMsgs {
               }
               break;
             }
-            case 74: {
-              com.google.protobuf.ByteString bs = input.readBytes();
-              bitField0_ |= 0x00000100;
-              secret_ = bs;
-              break;
-            }
-            case 82: {
-              bitField0_ |= 0x00000200;
-              replayData_ = input.readBytes();
-              break;
-            }
-            case 88: {
-              if (!((mutable_bitField0_ & 0x00000400) == 0x00000400)) {
+            case 72: {
+              if (!((mutable_bitField0_ & 0x00000100) == 0x00000100)) {
                 models_ = new java.util.ArrayList<java.lang.Integer>();
-                mutable_bitField0_ |= 0x00000400;
+                mutable_bitField0_ |= 0x00000100;
               }
               models_.add(input.readUInt32());
               break;
             }
-            case 90: {
+            case 74: {
               int length = input.readRawVarint32();
               int limit = input.pushLimit(length);
-              if (!((mutable_bitField0_ & 0x00000400) == 0x00000400) && input.getBytesUntilLimit() > 0) {
+              if (!((mutable_bitField0_ & 0x00000100) == 0x00000100) && input.getBytesUntilLimit() > 0) {
                 models_ = new java.util.ArrayList<java.lang.Integer>();
-                mutable_bitField0_ |= 0x00000400;
+                mutable_bitField0_ |= 0x00000100;
               }
               while (input.getBytesUntilLimit() > 0) {
                 models_.add(input.readUInt32());
@@ -20488,25 +11842,15 @@ public final class MeteorMsgs {
               input.popLimit(limit);
               break;
             }
-            case 96: {
-              if (!((mutable_bitField0_ & 0x00000800) == 0x00000800)) {
-                weapons_ = new java.util.ArrayList<java.lang.Integer>();
-                mutable_bitField0_ |= 0x00000800;
-              }
-              weapons_.add(input.readUInt32());
+            case 82: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000100;
+              secret_ = bs;
               break;
             }
-            case 98: {
-              int length = input.readRawVarint32();
-              int limit = input.pushLimit(length);
-              if (!((mutable_bitField0_ & 0x00000800) == 0x00000800) && input.getBytesUntilLimit() > 0) {
-                weapons_ = new java.util.ArrayList<java.lang.Integer>();
-                mutable_bitField0_ |= 0x00000800;
-              }
-              while (input.getBytesUntilLimit() > 0) {
-                weapons_.add(input.readUInt32());
-              }
-              input.popLimit(limit);
+            case 90: {
+              bitField0_ |= 0x00000200;
+              replayData_ = input.readBytes();
               break;
             }
           }
@@ -20517,11 +11861,8 @@ public final class MeteorMsgs {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
-        if (((mutable_bitField0_ & 0x00000400) == 0x00000400)) {
+        if (((mutable_bitField0_ & 0x00000100) == 0x00000100)) {
           models_ = java.util.Collections.unmodifiableList(models_);
-        }
-        if (((mutable_bitField0_ & 0x00000800) == 0x00000800)) {
-          weapons_ = java.util.Collections.unmodifiableList(weapons_);
         }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
@@ -20734,14 +12075,36 @@ public final class MeteorMsgs {
       return result == null ? idevgame.meteor.proto.MeteorMsgs.RoomInfo.MeteorVersion.V107 : result;
     }
 
-    public static final int SECRET_FIELD_NUMBER = 9;
+    public static final int MODELS_FIELD_NUMBER = 9;
+    private java.util.List<java.lang.Integer> models_;
+    /**
+     * <code>repeated uint32 models = 9;</code>
+     */
+    public java.util.List<java.lang.Integer>
+        getModelsList() {
+      return models_;
+    }
+    /**
+     * <code>repeated uint32 models = 9;</code>
+     */
+    public int getModelsCount() {
+      return models_.size();
+    }
+    /**
+     * <code>repeated uint32 models = 9;</code>
+     */
+    public int getModels(int index) {
+      return models_.get(index);
+    }
+
+    public static final int SECRET_FIELD_NUMBER = 10;
     private volatile java.lang.Object secret_;
     /**
      * <pre>
      *密码
      * </pre>
      *
-     * <code>optional string secret = 9;</code>
+     * <code>optional string secret = 10;</code>
      */
     public boolean hasSecret() {
       return ((bitField0_ & 0x00000100) == 0x00000100);
@@ -20751,7 +12114,7 @@ public final class MeteorMsgs {
      *密码
      * </pre>
      *
-     * <code>optional string secret = 9;</code>
+     * <code>optional string secret = 10;</code>
      */
     public java.lang.String getSecret() {
       java.lang.Object ref = secret_;
@@ -20772,7 +12135,7 @@ public final class MeteorMsgs {
      *密码
      * </pre>
      *
-     * <code>optional string secret = 9;</code>
+     * <code>optional string secret = 10;</code>
      */
     public com.google.protobuf.ByteString
         getSecretBytes() {
@@ -20788,14 +12151,14 @@ public final class MeteorMsgs {
       }
     }
 
-    public static final int REPLAY_DATA_FIELD_NUMBER = 10;
+    public static final int REPLAY_DATA_FIELD_NUMBER = 11;
     private com.google.protobuf.ByteString replayData_;
     /**
      * <pre>
      *重播数据-即录像数据.
      * </pre>
      *
-     * <code>optional bytes replay_data = 10;</code>
+     * <code>optional bytes replay_data = 11;</code>
      */
     public boolean hasReplayData() {
       return ((bitField0_ & 0x00000200) == 0x00000200);
@@ -20805,78 +12168,10 @@ public final class MeteorMsgs {
      *重播数据-即录像数据.
      * </pre>
      *
-     * <code>optional bytes replay_data = 10;</code>
+     * <code>optional bytes replay_data = 11;</code>
      */
     public com.google.protobuf.ByteString getReplayData() {
       return replayData_;
-    }
-
-    public static final int MODELS_FIELD_NUMBER = 11;
-    private java.util.List<java.lang.Integer> models_;
-    /**
-     * <pre>
-     *允许选择的角色模型
-     * </pre>
-     *
-     * <code>repeated uint32 models = 11;</code>
-     */
-    public java.util.List<java.lang.Integer>
-        getModelsList() {
-      return models_;
-    }
-    /**
-     * <pre>
-     *允许选择的角色模型
-     * </pre>
-     *
-     * <code>repeated uint32 models = 11;</code>
-     */
-    public int getModelsCount() {
-      return models_.size();
-    }
-    /**
-     * <pre>
-     *允许选择的角色模型
-     * </pre>
-     *
-     * <code>repeated uint32 models = 11;</code>
-     */
-    public int getModels(int index) {
-      return models_.get(index);
-    }
-
-    public static final int WEAPONS_FIELD_NUMBER = 12;
-    private java.util.List<java.lang.Integer> weapons_;
-    /**
-     * <pre>
-     *允许选择的武器模型
-     * </pre>
-     *
-     * <code>repeated uint32 weapons = 12;</code>
-     */
-    public java.util.List<java.lang.Integer>
-        getWeaponsList() {
-      return weapons_;
-    }
-    /**
-     * <pre>
-     *允许选择的武器模型
-     * </pre>
-     *
-     * <code>repeated uint32 weapons = 12;</code>
-     */
-    public int getWeaponsCount() {
-      return weapons_.size();
-    }
-    /**
-     * <pre>
-     *允许选择的武器模型
-     * </pre>
-     *
-     * <code>repeated uint32 weapons = 12;</code>
-     */
-    public int getWeapons(int index) {
-      return weapons_.get(index);
     }
 
     private byte memoizedIsInitialized = -1;
@@ -20947,17 +12242,14 @@ public final class MeteorMsgs {
       if (((bitField0_ & 0x00000080) == 0x00000080)) {
         output.writeEnum(8, version_);
       }
+      for (int i = 0; i < models_.size(); i++) {
+        output.writeUInt32(9, models_.get(i));
+      }
       if (((bitField0_ & 0x00000100) == 0x00000100)) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 9, secret_);
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 10, secret_);
       }
       if (((bitField0_ & 0x00000200) == 0x00000200)) {
-        output.writeBytes(10, replayData_);
-      }
-      for (int i = 0; i < models_.size(); i++) {
-        output.writeUInt32(11, models_.get(i));
-      }
-      for (int i = 0; i < weapons_.size(); i++) {
-        output.writeUInt32(12, weapons_.get(i));
+        output.writeBytes(11, replayData_);
       }
       unknownFields.writeTo(output);
     }
@@ -20998,13 +12290,6 @@ public final class MeteorMsgs {
         size += com.google.protobuf.CodedOutputStream
           .computeEnumSize(8, version_);
       }
-      if (((bitField0_ & 0x00000100) == 0x00000100)) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(9, secret_);
-      }
-      if (((bitField0_ & 0x00000200) == 0x00000200)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(10, replayData_);
-      }
       {
         int dataSize = 0;
         for (int i = 0; i < models_.size(); i++) {
@@ -21014,14 +12299,12 @@ public final class MeteorMsgs {
         size += dataSize;
         size += 1 * getModelsList().size();
       }
-      {
-        int dataSize = 0;
-        for (int i = 0; i < weapons_.size(); i++) {
-          dataSize += com.google.protobuf.CodedOutputStream
-            .computeUInt32SizeNoTag(weapons_.get(i));
-        }
-        size += dataSize;
-        size += 1 * getWeaponsList().size();
+      if (((bitField0_ & 0x00000100) == 0x00000100)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(10, secret_);
+      }
+      if (((bitField0_ & 0x00000200) == 0x00000200)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(11, replayData_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -21076,6 +12359,8 @@ public final class MeteorMsgs {
       if (hasVersion()) {
         result = result && version_ == other.version_;
       }
+      result = result && getModelsList()
+          .equals(other.getModelsList());
       result = result && (hasSecret() == other.hasSecret());
       if (hasSecret()) {
         result = result && getSecret()
@@ -21086,10 +12371,6 @@ public final class MeteorMsgs {
         result = result && getReplayData()
             .equals(other.getReplayData());
       }
-      result = result && getModelsList()
-          .equals(other.getModelsList());
-      result = result && getWeaponsList()
-          .equals(other.getWeaponsList());
       result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
@@ -21133,6 +12414,10 @@ public final class MeteorMsgs {
         hash = (37 * hash) + VERSION_FIELD_NUMBER;
         hash = (53 * hash) + version_;
       }
+      if (getModelsCount() > 0) {
+        hash = (37 * hash) + MODELS_FIELD_NUMBER;
+        hash = (53 * hash) + getModelsList().hashCode();
+      }
       if (hasSecret()) {
         hash = (37 * hash) + SECRET_FIELD_NUMBER;
         hash = (53 * hash) + getSecret().hashCode();
@@ -21140,14 +12425,6 @@ public final class MeteorMsgs {
       if (hasReplayData()) {
         hash = (37 * hash) + REPLAY_DATA_FIELD_NUMBER;
         hash = (53 * hash) + getReplayData().hashCode();
-      }
-      if (getModelsCount() > 0) {
-        hash = (37 * hash) + MODELS_FIELD_NUMBER;
-        hash = (53 * hash) + getModelsList().hashCode();
-      }
-      if (getWeaponsCount() > 0) {
-        hash = (37 * hash) + WEAPONS_FIELD_NUMBER;
-        hash = (53 * hash) + getWeaponsList().hashCode();
       }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
@@ -21294,14 +12571,12 @@ public final class MeteorMsgs {
         bitField0_ = (bitField0_ & ~0x00000040);
         version_ = 1;
         bitField0_ = (bitField0_ & ~0x00000080);
-        secret_ = "";
-        bitField0_ = (bitField0_ & ~0x00000100);
-        replayData_ = com.google.protobuf.ByteString.EMPTY;
-        bitField0_ = (bitField0_ & ~0x00000200);
         models_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000100);
+        secret_ = "";
+        bitField0_ = (bitField0_ & ~0x00000200);
+        replayData_ = com.google.protobuf.ByteString.EMPTY;
         bitField0_ = (bitField0_ & ~0x00000400);
-        weapons_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00000800);
         return this;
       }
 
@@ -21358,24 +12633,19 @@ public final class MeteorMsgs {
           to_bitField0_ |= 0x00000080;
         }
         result.version_ = version_;
-        if (((from_bitField0_ & 0x00000100) == 0x00000100)) {
+        if (((bitField0_ & 0x00000100) == 0x00000100)) {
+          models_ = java.util.Collections.unmodifiableList(models_);
+          bitField0_ = (bitField0_ & ~0x00000100);
+        }
+        result.models_ = models_;
+        if (((from_bitField0_ & 0x00000200) == 0x00000200)) {
           to_bitField0_ |= 0x00000100;
         }
         result.secret_ = secret_;
-        if (((from_bitField0_ & 0x00000200) == 0x00000200)) {
+        if (((from_bitField0_ & 0x00000400) == 0x00000400)) {
           to_bitField0_ |= 0x00000200;
         }
         result.replayData_ = replayData_;
-        if (((bitField0_ & 0x00000400) == 0x00000400)) {
-          models_ = java.util.Collections.unmodifiableList(models_);
-          bitField0_ = (bitField0_ & ~0x00000400);
-        }
-        result.models_ = models_;
-        if (((bitField0_ & 0x00000800) == 0x00000800)) {
-          weapons_ = java.util.Collections.unmodifiableList(weapons_);
-          bitField0_ = (bitField0_ & ~0x00000800);
-        }
-        result.weapons_ = weapons_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -21444,33 +12714,23 @@ public final class MeteorMsgs {
         if (other.hasVersion()) {
           setVersion(other.getVersion());
         }
-        if (other.hasSecret()) {
-          bitField0_ |= 0x00000100;
-          secret_ = other.secret_;
-          onChanged();
-        }
-        if (other.hasReplayData()) {
-          setReplayData(other.getReplayData());
-        }
         if (!other.models_.isEmpty()) {
           if (models_.isEmpty()) {
             models_ = other.models_;
-            bitField0_ = (bitField0_ & ~0x00000400);
+            bitField0_ = (bitField0_ & ~0x00000100);
           } else {
             ensureModelsIsMutable();
             models_.addAll(other.models_);
           }
           onChanged();
         }
-        if (!other.weapons_.isEmpty()) {
-          if (weapons_.isEmpty()) {
-            weapons_ = other.weapons_;
-            bitField0_ = (bitField0_ & ~0x00000800);
-          } else {
-            ensureWeaponsIsMutable();
-            weapons_.addAll(other.weapons_);
-          }
+        if (other.hasSecret()) {
+          bitField0_ |= 0x00000200;
+          secret_ = other.secret_;
           onChanged();
+        }
+        if (other.hasReplayData()) {
+          setReplayData(other.getReplayData());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -21924,23 +13184,89 @@ public final class MeteorMsgs {
         return this;
       }
 
+      private java.util.List<java.lang.Integer> models_ = java.util.Collections.emptyList();
+      private void ensureModelsIsMutable() {
+        if (!((bitField0_ & 0x00000100) == 0x00000100)) {
+          models_ = new java.util.ArrayList<java.lang.Integer>(models_);
+          bitField0_ |= 0x00000100;
+         }
+      }
+      /**
+       * <code>repeated uint32 models = 9;</code>
+       */
+      public java.util.List<java.lang.Integer>
+          getModelsList() {
+        return java.util.Collections.unmodifiableList(models_);
+      }
+      /**
+       * <code>repeated uint32 models = 9;</code>
+       */
+      public int getModelsCount() {
+        return models_.size();
+      }
+      /**
+       * <code>repeated uint32 models = 9;</code>
+       */
+      public int getModels(int index) {
+        return models_.get(index);
+      }
+      /**
+       * <code>repeated uint32 models = 9;</code>
+       */
+      public Builder setModels(
+          int index, int value) {
+        ensureModelsIsMutable();
+        models_.set(index, value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated uint32 models = 9;</code>
+       */
+      public Builder addModels(int value) {
+        ensureModelsIsMutable();
+        models_.add(value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated uint32 models = 9;</code>
+       */
+      public Builder addAllModels(
+          java.lang.Iterable<? extends java.lang.Integer> values) {
+        ensureModelsIsMutable();
+        com.google.protobuf.AbstractMessageLite.Builder.addAll(
+            values, models_);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated uint32 models = 9;</code>
+       */
+      public Builder clearModels() {
+        models_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000100);
+        onChanged();
+        return this;
+      }
+
       private java.lang.Object secret_ = "";
       /**
        * <pre>
        *密码
        * </pre>
        *
-       * <code>optional string secret = 9;</code>
+       * <code>optional string secret = 10;</code>
        */
       public boolean hasSecret() {
-        return ((bitField0_ & 0x00000100) == 0x00000100);
+        return ((bitField0_ & 0x00000200) == 0x00000200);
       }
       /**
        * <pre>
        *密码
        * </pre>
        *
-       * <code>optional string secret = 9;</code>
+       * <code>optional string secret = 10;</code>
        */
       public java.lang.String getSecret() {
         java.lang.Object ref = secret_;
@@ -21961,7 +13287,7 @@ public final class MeteorMsgs {
        *密码
        * </pre>
        *
-       * <code>optional string secret = 9;</code>
+       * <code>optional string secret = 10;</code>
        */
       public com.google.protobuf.ByteString
           getSecretBytes() {
@@ -21981,14 +13307,14 @@ public final class MeteorMsgs {
        *密码
        * </pre>
        *
-       * <code>optional string secret = 9;</code>
+       * <code>optional string secret = 10;</code>
        */
       public Builder setSecret(
           java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000100;
+  bitField0_ |= 0x00000200;
         secret_ = value;
         onChanged();
         return this;
@@ -21998,10 +13324,10 @@ public final class MeteorMsgs {
        *密码
        * </pre>
        *
-       * <code>optional string secret = 9;</code>
+       * <code>optional string secret = 10;</code>
        */
       public Builder clearSecret() {
-        bitField0_ = (bitField0_ & ~0x00000100);
+        bitField0_ = (bitField0_ & ~0x00000200);
         secret_ = getDefaultInstance().getSecret();
         onChanged();
         return this;
@@ -22011,14 +13337,14 @@ public final class MeteorMsgs {
        *密码
        * </pre>
        *
-       * <code>optional string secret = 9;</code>
+       * <code>optional string secret = 10;</code>
        */
       public Builder setSecretBytes(
           com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000100;
+  bitField0_ |= 0x00000200;
         secret_ = value;
         onChanged();
         return this;
@@ -22030,17 +13356,17 @@ public final class MeteorMsgs {
        *重播数据-即录像数据.
        * </pre>
        *
-       * <code>optional bytes replay_data = 10;</code>
+       * <code>optional bytes replay_data = 11;</code>
        */
       public boolean hasReplayData() {
-        return ((bitField0_ & 0x00000200) == 0x00000200);
+        return ((bitField0_ & 0x00000400) == 0x00000400);
       }
       /**
        * <pre>
        *重播数据-即录像数据.
        * </pre>
        *
-       * <code>optional bytes replay_data = 10;</code>
+       * <code>optional bytes replay_data = 11;</code>
        */
       public com.google.protobuf.ByteString getReplayData() {
         return replayData_;
@@ -22050,13 +13376,13 @@ public final class MeteorMsgs {
        *重播数据-即录像数据.
        * </pre>
        *
-       * <code>optional bytes replay_data = 10;</code>
+       * <code>optional bytes replay_data = 11;</code>
        */
       public Builder setReplayData(com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000200;
+  bitField0_ |= 0x00000400;
         replayData_ = value;
         onChanged();
         return this;
@@ -22066,199 +13392,11 @@ public final class MeteorMsgs {
        *重播数据-即录像数据.
        * </pre>
        *
-       * <code>optional bytes replay_data = 10;</code>
+       * <code>optional bytes replay_data = 11;</code>
        */
       public Builder clearReplayData() {
-        bitField0_ = (bitField0_ & ~0x00000200);
-        replayData_ = getDefaultInstance().getReplayData();
-        onChanged();
-        return this;
-      }
-
-      private java.util.List<java.lang.Integer> models_ = java.util.Collections.emptyList();
-      private void ensureModelsIsMutable() {
-        if (!((bitField0_ & 0x00000400) == 0x00000400)) {
-          models_ = new java.util.ArrayList<java.lang.Integer>(models_);
-          bitField0_ |= 0x00000400;
-         }
-      }
-      /**
-       * <pre>
-       *允许选择的角色模型
-       * </pre>
-       *
-       * <code>repeated uint32 models = 11;</code>
-       */
-      public java.util.List<java.lang.Integer>
-          getModelsList() {
-        return java.util.Collections.unmodifiableList(models_);
-      }
-      /**
-       * <pre>
-       *允许选择的角色模型
-       * </pre>
-       *
-       * <code>repeated uint32 models = 11;</code>
-       */
-      public int getModelsCount() {
-        return models_.size();
-      }
-      /**
-       * <pre>
-       *允许选择的角色模型
-       * </pre>
-       *
-       * <code>repeated uint32 models = 11;</code>
-       */
-      public int getModels(int index) {
-        return models_.get(index);
-      }
-      /**
-       * <pre>
-       *允许选择的角色模型
-       * </pre>
-       *
-       * <code>repeated uint32 models = 11;</code>
-       */
-      public Builder setModels(
-          int index, int value) {
-        ensureModelsIsMutable();
-        models_.set(index, value);
-        onChanged();
-        return this;
-      }
-      /**
-       * <pre>
-       *允许选择的角色模型
-       * </pre>
-       *
-       * <code>repeated uint32 models = 11;</code>
-       */
-      public Builder addModels(int value) {
-        ensureModelsIsMutable();
-        models_.add(value);
-        onChanged();
-        return this;
-      }
-      /**
-       * <pre>
-       *允许选择的角色模型
-       * </pre>
-       *
-       * <code>repeated uint32 models = 11;</code>
-       */
-      public Builder addAllModels(
-          java.lang.Iterable<? extends java.lang.Integer> values) {
-        ensureModelsIsMutable();
-        com.google.protobuf.AbstractMessageLite.Builder.addAll(
-            values, models_);
-        onChanged();
-        return this;
-      }
-      /**
-       * <pre>
-       *允许选择的角色模型
-       * </pre>
-       *
-       * <code>repeated uint32 models = 11;</code>
-       */
-      public Builder clearModels() {
-        models_ = java.util.Collections.emptyList();
         bitField0_ = (bitField0_ & ~0x00000400);
-        onChanged();
-        return this;
-      }
-
-      private java.util.List<java.lang.Integer> weapons_ = java.util.Collections.emptyList();
-      private void ensureWeaponsIsMutable() {
-        if (!((bitField0_ & 0x00000800) == 0x00000800)) {
-          weapons_ = new java.util.ArrayList<java.lang.Integer>(weapons_);
-          bitField0_ |= 0x00000800;
-         }
-      }
-      /**
-       * <pre>
-       *允许选择的武器模型
-       * </pre>
-       *
-       * <code>repeated uint32 weapons = 12;</code>
-       */
-      public java.util.List<java.lang.Integer>
-          getWeaponsList() {
-        return java.util.Collections.unmodifiableList(weapons_);
-      }
-      /**
-       * <pre>
-       *允许选择的武器模型
-       * </pre>
-       *
-       * <code>repeated uint32 weapons = 12;</code>
-       */
-      public int getWeaponsCount() {
-        return weapons_.size();
-      }
-      /**
-       * <pre>
-       *允许选择的武器模型
-       * </pre>
-       *
-       * <code>repeated uint32 weapons = 12;</code>
-       */
-      public int getWeapons(int index) {
-        return weapons_.get(index);
-      }
-      /**
-       * <pre>
-       *允许选择的武器模型
-       * </pre>
-       *
-       * <code>repeated uint32 weapons = 12;</code>
-       */
-      public Builder setWeapons(
-          int index, int value) {
-        ensureWeaponsIsMutable();
-        weapons_.set(index, value);
-        onChanged();
-        return this;
-      }
-      /**
-       * <pre>
-       *允许选择的武器模型
-       * </pre>
-       *
-       * <code>repeated uint32 weapons = 12;</code>
-       */
-      public Builder addWeapons(int value) {
-        ensureWeaponsIsMutable();
-        weapons_.add(value);
-        onChanged();
-        return this;
-      }
-      /**
-       * <pre>
-       *允许选择的武器模型
-       * </pre>
-       *
-       * <code>repeated uint32 weapons = 12;</code>
-       */
-      public Builder addAllWeapons(
-          java.lang.Iterable<? extends java.lang.Integer> values) {
-        ensureWeaponsIsMutable();
-        com.google.protobuf.AbstractMessageLite.Builder.addAll(
-            values, weapons_);
-        onChanged();
-        return this;
-      }
-      /**
-       * <pre>
-       *允许选择的武器模型
-       * </pre>
-       *
-       * <code>repeated uint32 weapons = 12;</code>
-       */
-      public Builder clearWeapons() {
-        weapons_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00000800);
+        replayData_ = getDefaultInstance().getReplayData();
         onChanged();
         return this;
       }
@@ -23349,7 +14487,7 @@ public final class MeteorMsgs {
 
     /**
      * <pre>
-     *本地版本
+     *本地流星版本
      * </pre>
      *
      * <code>required .RoomInfo.MeteorVersion version = 2;</code>
@@ -23357,7 +14495,7 @@ public final class MeteorMsgs {
     boolean hasVersion();
     /**
      * <pre>
-     *本地版本
+     *本地流星版本
      * </pre>
      *
      * <code>required .RoomInfo.MeteorVersion version = 2;</code>
@@ -23365,11 +14503,25 @@ public final class MeteorMsgs {
     idevgame.meteor.proto.MeteorMsgs.RoomInfo.MeteorVersion getVersion();
 
     /**
+     * <code>required string nick = 3;</code>
+     */
+    boolean hasNick();
+    /**
+     * <code>required string nick = 3;</code>
+     */
+    java.lang.String getNick();
+    /**
+     * <code>required string nick = 3;</code>
+     */
+    com.google.protobuf.ByteString
+        getNickBytes();
+
+    /**
      * <pre>
      *密码
      * </pre>
      *
-     * <code>optional string password = 3;</code>
+     * <code>optional string password = 4;</code>
      */
     boolean hasPassword();
     /**
@@ -23377,7 +14529,7 @@ public final class MeteorMsgs {
      *密码
      * </pre>
      *
-     * <code>optional string password = 3;</code>
+     * <code>optional string password = 4;</code>
      */
     java.lang.String getPassword();
     /**
@@ -23385,10 +14537,35 @@ public final class MeteorMsgs {
      *密码
      * </pre>
      *
-     * <code>optional string password = 3;</code>
+     * <code>optional string password = 4;</code>
      */
     com.google.protobuf.ByteString
         getPasswordBytes();
+
+    /**
+     * <pre>
+     *客户端检查通过，发给服务器，本机已安装好的模组列表
+     * </pre>
+     *
+     * <code>repeated uint32 models = 5;</code>
+     */
+    java.util.List<java.lang.Integer> getModelsList();
+    /**
+     * <pre>
+     *客户端检查通过，发给服务器，本机已安装好的模组列表
+     * </pre>
+     *
+     * <code>repeated uint32 models = 5;</code>
+     */
+    int getModelsCount();
+    /**
+     * <pre>
+     *客户端检查通过，发给服务器，本机已安装好的模组列表
+     * </pre>
+     *
+     * <code>repeated uint32 models = 5;</code>
+     */
+    int getModels(int index);
   }
   /**
    * Protobuf type {@code JoinRoomReq}
@@ -23405,7 +14582,9 @@ public final class MeteorMsgs {
     private JoinRoomReq() {
       roomId_ = 0;
       version_ = 1;
+      nick_ = "";
       password_ = "";
+      models_ = java.util.Collections.emptyList();
     }
 
     @java.lang.Override
@@ -23458,7 +14637,34 @@ public final class MeteorMsgs {
             case 26: {
               com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000004;
+              nick_ = bs;
+              break;
+            }
+            case 34: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000008;
               password_ = bs;
+              break;
+            }
+            case 40: {
+              if (!((mutable_bitField0_ & 0x00000010) == 0x00000010)) {
+                models_ = new java.util.ArrayList<java.lang.Integer>();
+                mutable_bitField0_ |= 0x00000010;
+              }
+              models_.add(input.readUInt32());
+              break;
+            }
+            case 42: {
+              int length = input.readRawVarint32();
+              int limit = input.pushLimit(length);
+              if (!((mutable_bitField0_ & 0x00000010) == 0x00000010) && input.getBytesUntilLimit() > 0) {
+                models_ = new java.util.ArrayList<java.lang.Integer>();
+                mutable_bitField0_ |= 0x00000010;
+              }
+              while (input.getBytesUntilLimit() > 0) {
+                models_.add(input.readUInt32());
+              }
+              input.popLimit(limit);
               break;
             }
           }
@@ -23469,6 +14675,9 @@ public final class MeteorMsgs {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
+        if (((mutable_bitField0_ & 0x00000010) == 0x00000010)) {
+          models_ = java.util.Collections.unmodifiableList(models_);
+        }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
@@ -23505,7 +14714,7 @@ public final class MeteorMsgs {
     private int version_;
     /**
      * <pre>
-     *本地版本
+     *本地流星版本
      * </pre>
      *
      * <code>required .RoomInfo.MeteorVersion version = 2;</code>
@@ -23515,7 +14724,7 @@ public final class MeteorMsgs {
     }
     /**
      * <pre>
-     *本地版本
+     *本地流星版本
      * </pre>
      *
      * <code>required .RoomInfo.MeteorVersion version = 2;</code>
@@ -23525,24 +14734,66 @@ public final class MeteorMsgs {
       return result == null ? idevgame.meteor.proto.MeteorMsgs.RoomInfo.MeteorVersion.V107 : result;
     }
 
-    public static final int PASSWORD_FIELD_NUMBER = 3;
+    public static final int NICK_FIELD_NUMBER = 3;
+    private volatile java.lang.Object nick_;
+    /**
+     * <code>required string nick = 3;</code>
+     */
+    public boolean hasNick() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>required string nick = 3;</code>
+     */
+    public java.lang.String getNick() {
+      java.lang.Object ref = nick_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          nick_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>required string nick = 3;</code>
+     */
+    public com.google.protobuf.ByteString
+        getNickBytes() {
+      java.lang.Object ref = nick_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        nick_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int PASSWORD_FIELD_NUMBER = 4;
     private volatile java.lang.Object password_;
     /**
      * <pre>
      *密码
      * </pre>
      *
-     * <code>optional string password = 3;</code>
+     * <code>optional string password = 4;</code>
      */
     public boolean hasPassword() {
-      return ((bitField0_ & 0x00000004) == 0x00000004);
+      return ((bitField0_ & 0x00000008) == 0x00000008);
     }
     /**
      * <pre>
      *密码
      * </pre>
      *
-     * <code>optional string password = 3;</code>
+     * <code>optional string password = 4;</code>
      */
     public java.lang.String getPassword() {
       java.lang.Object ref = password_;
@@ -23563,7 +14814,7 @@ public final class MeteorMsgs {
      *密码
      * </pre>
      *
-     * <code>optional string password = 3;</code>
+     * <code>optional string password = 4;</code>
      */
     public com.google.protobuf.ByteString
         getPasswordBytes() {
@@ -23577,6 +14828,40 @@ public final class MeteorMsgs {
       } else {
         return (com.google.protobuf.ByteString) ref;
       }
+    }
+
+    public static final int MODELS_FIELD_NUMBER = 5;
+    private java.util.List<java.lang.Integer> models_;
+    /**
+     * <pre>
+     *客户端检查通过，发给服务器，本机已安装好的模组列表
+     * </pre>
+     *
+     * <code>repeated uint32 models = 5;</code>
+     */
+    public java.util.List<java.lang.Integer>
+        getModelsList() {
+      return models_;
+    }
+    /**
+     * <pre>
+     *客户端检查通过，发给服务器，本机已安装好的模组列表
+     * </pre>
+     *
+     * <code>repeated uint32 models = 5;</code>
+     */
+    public int getModelsCount() {
+      return models_.size();
+    }
+    /**
+     * <pre>
+     *客户端检查通过，发给服务器，本机已安装好的模组列表
+     * </pre>
+     *
+     * <code>repeated uint32 models = 5;</code>
+     */
+    public int getModels(int index) {
+      return models_.get(index);
     }
 
     private byte memoizedIsInitialized = -1;
@@ -23593,6 +14878,10 @@ public final class MeteorMsgs {
         memoizedIsInitialized = 0;
         return false;
       }
+      if (!hasNick()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
       memoizedIsInitialized = 1;
       return true;
     }
@@ -23606,7 +14895,13 @@ public final class MeteorMsgs {
         output.writeEnum(2, version_);
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 3, password_);
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 3, nick_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 4, password_);
+      }
+      for (int i = 0; i < models_.size(); i++) {
+        output.writeUInt32(5, models_.get(i));
       }
       unknownFields.writeTo(output);
     }
@@ -23625,7 +14920,19 @@ public final class MeteorMsgs {
           .computeEnumSize(2, version_);
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, password_);
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, nick_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(4, password_);
+      }
+      {
+        int dataSize = 0;
+        for (int i = 0; i < models_.size(); i++) {
+          dataSize += com.google.protobuf.CodedOutputStream
+            .computeUInt32SizeNoTag(models_.get(i));
+        }
+        size += dataSize;
+        size += 1 * getModelsList().size();
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -23652,11 +14959,18 @@ public final class MeteorMsgs {
       if (hasVersion()) {
         result = result && version_ == other.version_;
       }
+      result = result && (hasNick() == other.hasNick());
+      if (hasNick()) {
+        result = result && getNick()
+            .equals(other.getNick());
+      }
       result = result && (hasPassword() == other.hasPassword());
       if (hasPassword()) {
         result = result && getPassword()
             .equals(other.getPassword());
       }
+      result = result && getModelsList()
+          .equals(other.getModelsList());
       result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
@@ -23676,9 +14990,17 @@ public final class MeteorMsgs {
         hash = (37 * hash) + VERSION_FIELD_NUMBER;
         hash = (53 * hash) + version_;
       }
+      if (hasNick()) {
+        hash = (37 * hash) + NICK_FIELD_NUMBER;
+        hash = (53 * hash) + getNick().hashCode();
+      }
       if (hasPassword()) {
         hash = (37 * hash) + PASSWORD_FIELD_NUMBER;
         hash = (53 * hash) + getPassword().hashCode();
+      }
+      if (getModelsCount() > 0) {
+        hash = (37 * hash) + MODELS_FIELD_NUMBER;
+        hash = (53 * hash) + getModelsList().hashCode();
       }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
@@ -23813,8 +15135,12 @@ public final class MeteorMsgs {
         bitField0_ = (bitField0_ & ~0x00000001);
         version_ = 1;
         bitField0_ = (bitField0_ & ~0x00000002);
-        password_ = "";
+        nick_ = "";
         bitField0_ = (bitField0_ & ~0x00000004);
+        password_ = "";
+        bitField0_ = (bitField0_ & ~0x00000008);
+        models_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000010);
         return this;
       }
 
@@ -23850,7 +15176,16 @@ public final class MeteorMsgs {
         if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
           to_bitField0_ |= 0x00000004;
         }
+        result.nick_ = nick_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
         result.password_ = password_;
+        if (((bitField0_ & 0x00000010) == 0x00000010)) {
+          models_ = java.util.Collections.unmodifiableList(models_);
+          bitField0_ = (bitField0_ & ~0x00000010);
+        }
+        result.models_ = models_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -23899,9 +15234,24 @@ public final class MeteorMsgs {
         if (other.hasVersion()) {
           setVersion(other.getVersion());
         }
-        if (other.hasPassword()) {
+        if (other.hasNick()) {
           bitField0_ |= 0x00000004;
+          nick_ = other.nick_;
+          onChanged();
+        }
+        if (other.hasPassword()) {
+          bitField0_ |= 0x00000008;
           password_ = other.password_;
+          onChanged();
+        }
+        if (!other.models_.isEmpty()) {
+          if (models_.isEmpty()) {
+            models_ = other.models_;
+            bitField0_ = (bitField0_ & ~0x00000010);
+          } else {
+            ensureModelsIsMutable();
+            models_.addAll(other.models_);
+          }
           onChanged();
         }
         this.mergeUnknownFields(other.unknownFields);
@@ -23914,6 +15264,9 @@ public final class MeteorMsgs {
           return false;
         }
         if (!hasVersion()) {
+          return false;
+        }
+        if (!hasNick()) {
           return false;
         }
         return true;
@@ -23973,7 +15326,7 @@ public final class MeteorMsgs {
       private int version_ = 1;
       /**
        * <pre>
-       *本地版本
+       *本地流星版本
        * </pre>
        *
        * <code>required .RoomInfo.MeteorVersion version = 2;</code>
@@ -23983,7 +15336,7 @@ public final class MeteorMsgs {
       }
       /**
        * <pre>
-       *本地版本
+       *本地流星版本
        * </pre>
        *
        * <code>required .RoomInfo.MeteorVersion version = 2;</code>
@@ -23994,7 +15347,7 @@ public final class MeteorMsgs {
       }
       /**
        * <pre>
-       *本地版本
+       *本地流星版本
        * </pre>
        *
        * <code>required .RoomInfo.MeteorVersion version = 2;</code>
@@ -24010,7 +15363,7 @@ public final class MeteorMsgs {
       }
       /**
        * <pre>
-       *本地版本
+       *本地流星版本
        * </pre>
        *
        * <code>required .RoomInfo.MeteorVersion version = 2;</code>
@@ -24022,23 +15375,99 @@ public final class MeteorMsgs {
         return this;
       }
 
+      private java.lang.Object nick_ = "";
+      /**
+       * <code>required string nick = 3;</code>
+       */
+      public boolean hasNick() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>required string nick = 3;</code>
+       */
+      public java.lang.String getNick() {
+        java.lang.Object ref = nick_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            nick_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>required string nick = 3;</code>
+       */
+      public com.google.protobuf.ByteString
+          getNickBytes() {
+        java.lang.Object ref = nick_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          nick_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>required string nick = 3;</code>
+       */
+      public Builder setNick(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000004;
+        nick_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required string nick = 3;</code>
+       */
+      public Builder clearNick() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        nick_ = getDefaultInstance().getNick();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required string nick = 3;</code>
+       */
+      public Builder setNickBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000004;
+        nick_ = value;
+        onChanged();
+        return this;
+      }
+
       private java.lang.Object password_ = "";
       /**
        * <pre>
        *密码
        * </pre>
        *
-       * <code>optional string password = 3;</code>
+       * <code>optional string password = 4;</code>
        */
       public boolean hasPassword() {
-        return ((bitField0_ & 0x00000004) == 0x00000004);
+        return ((bitField0_ & 0x00000008) == 0x00000008);
       }
       /**
        * <pre>
        *密码
        * </pre>
        *
-       * <code>optional string password = 3;</code>
+       * <code>optional string password = 4;</code>
        */
       public java.lang.String getPassword() {
         java.lang.Object ref = password_;
@@ -24059,7 +15488,7 @@ public final class MeteorMsgs {
        *密码
        * </pre>
        *
-       * <code>optional string password = 3;</code>
+       * <code>optional string password = 4;</code>
        */
       public com.google.protobuf.ByteString
           getPasswordBytes() {
@@ -24079,14 +15508,14 @@ public final class MeteorMsgs {
        *密码
        * </pre>
        *
-       * <code>optional string password = 3;</code>
+       * <code>optional string password = 4;</code>
        */
       public Builder setPassword(
           java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000004;
+  bitField0_ |= 0x00000008;
         password_ = value;
         onChanged();
         return this;
@@ -24096,10 +15525,10 @@ public final class MeteorMsgs {
        *密码
        * </pre>
        *
-       * <code>optional string password = 3;</code>
+       * <code>optional string password = 4;</code>
        */
       public Builder clearPassword() {
-        bitField0_ = (bitField0_ & ~0x00000004);
+        bitField0_ = (bitField0_ & ~0x00000008);
         password_ = getDefaultInstance().getPassword();
         onChanged();
         return this;
@@ -24109,15 +15538,109 @@ public final class MeteorMsgs {
        *密码
        * </pre>
        *
-       * <code>optional string password = 3;</code>
+       * <code>optional string password = 4;</code>
        */
       public Builder setPasswordBytes(
           com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000004;
+  bitField0_ |= 0x00000008;
         password_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.util.List<java.lang.Integer> models_ = java.util.Collections.emptyList();
+      private void ensureModelsIsMutable() {
+        if (!((bitField0_ & 0x00000010) == 0x00000010)) {
+          models_ = new java.util.ArrayList<java.lang.Integer>(models_);
+          bitField0_ |= 0x00000010;
+         }
+      }
+      /**
+       * <pre>
+       *客户端检查通过，发给服务器，本机已安装好的模组列表
+       * </pre>
+       *
+       * <code>repeated uint32 models = 5;</code>
+       */
+      public java.util.List<java.lang.Integer>
+          getModelsList() {
+        return java.util.Collections.unmodifiableList(models_);
+      }
+      /**
+       * <pre>
+       *客户端检查通过，发给服务器，本机已安装好的模组列表
+       * </pre>
+       *
+       * <code>repeated uint32 models = 5;</code>
+       */
+      public int getModelsCount() {
+        return models_.size();
+      }
+      /**
+       * <pre>
+       *客户端检查通过，发给服务器，本机已安装好的模组列表
+       * </pre>
+       *
+       * <code>repeated uint32 models = 5;</code>
+       */
+      public int getModels(int index) {
+        return models_.get(index);
+      }
+      /**
+       * <pre>
+       *客户端检查通过，发给服务器，本机已安装好的模组列表
+       * </pre>
+       *
+       * <code>repeated uint32 models = 5;</code>
+       */
+      public Builder setModels(
+          int index, int value) {
+        ensureModelsIsMutable();
+        models_.set(index, value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *客户端检查通过，发给服务器，本机已安装好的模组列表
+       * </pre>
+       *
+       * <code>repeated uint32 models = 5;</code>
+       */
+      public Builder addModels(int value) {
+        ensureModelsIsMutable();
+        models_.add(value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *客户端检查通过，发给服务器，本机已安装好的模组列表
+       * </pre>
+       *
+       * <code>repeated uint32 models = 5;</code>
+       */
+      public Builder addAllModels(
+          java.lang.Iterable<? extends java.lang.Integer> values) {
+        ensureModelsIsMutable();
+        com.google.protobuf.AbstractMessageLite.Builder.addAll(
+            values, models_);
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *客户端检查通过，发给服务器，本机已安装好的模组列表
+       * </pre>
+       *
+       * <code>repeated uint32 models = 5;</code>
+       */
+      public Builder clearModels() {
+        models_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000010);
         onChanged();
         return this;
       }
@@ -24193,7 +15716,7 @@ public final class MeteorMsgs {
 
     /**
      * <pre>
-     *失败为原因编号:1人数达到最大数量 2 没找到 3 在其他房间内 4 版本不匹配 5 需要密码 6资源缺少-
+     *失败为原因编号:1人数达到最大数量 2 没找到 3 在其他房间内 4 版本不匹配 5 需要密码 6资源缺少-模组等
      * </pre>
      *
      * <code>required uint32 reason = 2;</code>
@@ -24201,7 +15724,7 @@ public final class MeteorMsgs {
     boolean hasReason();
     /**
      * <pre>
-     *失败为原因编号:1人数达到最大数量 2 没找到 3 在其他房间内 4 版本不匹配 5 需要密码 6资源缺少-
+     *失败为原因编号:1人数达到最大数量 2 没找到 3 在其他房间内 4 版本不匹配 5 需要密码 6资源缺少-模组等
      * </pre>
      *
      * <code>required uint32 reason = 2;</code>
@@ -24244,27 +15767,10 @@ public final class MeteorMsgs {
 
     /**
      * <pre>
-     *你的角色在服务器的编号.
-     * </pre>
-     *
-     * <code>required uint32 playerId = 5;</code>
-     */
-    boolean hasPlayerId();
-    /**
-     * <pre>
-     *你的角色在服务器的编号.
-     * </pre>
-     *
-     * <code>required uint32 playerId = 5;</code>
-     */
-    int getPlayerId();
-
-    /**
-     * <pre>
      *kcp端口号
      * </pre>
      *
-     * <code>required uint32 port = 6;</code>
+     * <code>required uint32 port = 5;</code>
      */
     boolean hasPort();
     /**
@@ -24272,59 +15778,9 @@ public final class MeteorMsgs {
      *kcp端口号
      * </pre>
      *
-     * <code>required uint32 port = 6;</code>
+     * <code>required uint32 port = 5;</code>
      */
     int getPort();
-
-    /**
-     * <pre>
-     *允许选择的模型
-     * </pre>
-     *
-     * <code>repeated uint32 models = 7;</code>
-     */
-    java.util.List<java.lang.Integer> getModelsList();
-    /**
-     * <pre>
-     *允许选择的模型
-     * </pre>
-     *
-     * <code>repeated uint32 models = 7;</code>
-     */
-    int getModelsCount();
-    /**
-     * <pre>
-     *允许选择的模型
-     * </pre>
-     *
-     * <code>repeated uint32 models = 7;</code>
-     */
-    int getModels(int index);
-
-    /**
-     * <pre>
-     *允许选择的武器模型
-     * </pre>
-     *
-     * <code>repeated uint32 weapons = 8;</code>
-     */
-    java.util.List<java.lang.Integer> getWeaponsList();
-    /**
-     * <pre>
-     *允许选择的武器模型
-     * </pre>
-     *
-     * <code>repeated uint32 weapons = 8;</code>
-     */
-    int getWeaponsCount();
-    /**
-     * <pre>
-     *允许选择的武器模型
-     * </pre>
-     *
-     * <code>repeated uint32 weapons = 8;</code>
-     */
-    int getWeapons(int index);
   }
   /**
    * Protobuf type {@code JoinRoomRsp}
@@ -24343,10 +15799,7 @@ public final class MeteorMsgs {
       reason_ = 0;
       levelIdx_ = 0;
       roomId_ = 0;
-      playerId_ = 0;
       port_ = 0;
-      models_ = java.util.Collections.emptyList();
-      weapons_ = java.util.Collections.emptyList();
     }
 
     @java.lang.Override
@@ -24402,54 +15855,7 @@ public final class MeteorMsgs {
             }
             case 40: {
               bitField0_ |= 0x00000010;
-              playerId_ = input.readUInt32();
-              break;
-            }
-            case 48: {
-              bitField0_ |= 0x00000020;
               port_ = input.readUInt32();
-              break;
-            }
-            case 56: {
-              if (!((mutable_bitField0_ & 0x00000040) == 0x00000040)) {
-                models_ = new java.util.ArrayList<java.lang.Integer>();
-                mutable_bitField0_ |= 0x00000040;
-              }
-              models_.add(input.readUInt32());
-              break;
-            }
-            case 58: {
-              int length = input.readRawVarint32();
-              int limit = input.pushLimit(length);
-              if (!((mutable_bitField0_ & 0x00000040) == 0x00000040) && input.getBytesUntilLimit() > 0) {
-                models_ = new java.util.ArrayList<java.lang.Integer>();
-                mutable_bitField0_ |= 0x00000040;
-              }
-              while (input.getBytesUntilLimit() > 0) {
-                models_.add(input.readUInt32());
-              }
-              input.popLimit(limit);
-              break;
-            }
-            case 64: {
-              if (!((mutable_bitField0_ & 0x00000080) == 0x00000080)) {
-                weapons_ = new java.util.ArrayList<java.lang.Integer>();
-                mutable_bitField0_ |= 0x00000080;
-              }
-              weapons_.add(input.readUInt32());
-              break;
-            }
-            case 66: {
-              int length = input.readRawVarint32();
-              int limit = input.pushLimit(length);
-              if (!((mutable_bitField0_ & 0x00000080) == 0x00000080) && input.getBytesUntilLimit() > 0) {
-                weapons_ = new java.util.ArrayList<java.lang.Integer>();
-                mutable_bitField0_ |= 0x00000080;
-              }
-              while (input.getBytesUntilLimit() > 0) {
-                weapons_.add(input.readUInt32());
-              }
-              input.popLimit(limit);
               break;
             }
           }
@@ -24460,12 +15866,6 @@ public final class MeteorMsgs {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
-        if (((mutable_bitField0_ & 0x00000040) == 0x00000040)) {
-          models_ = java.util.Collections.unmodifiableList(models_);
-        }
-        if (((mutable_bitField0_ & 0x00000080) == 0x00000080)) {
-          weapons_ = java.util.Collections.unmodifiableList(weapons_);
-        }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
@@ -24510,7 +15910,7 @@ public final class MeteorMsgs {
     private int reason_;
     /**
      * <pre>
-     *失败为原因编号:1人数达到最大数量 2 没找到 3 在其他房间内 4 版本不匹配 5 需要密码 6资源缺少-
+     *失败为原因编号:1人数达到最大数量 2 没找到 3 在其他房间内 4 版本不匹配 5 需要密码 6资源缺少-模组等
      * </pre>
      *
      * <code>required uint32 reason = 2;</code>
@@ -24520,7 +15920,7 @@ public final class MeteorMsgs {
     }
     /**
      * <pre>
-     *失败为原因编号:1人数达到最大数量 2 没找到 3 在其他房间内 4 版本不匹配 5 需要密码 6资源缺少-
+     *失败为原因编号:1人数达到最大数量 2 没找到 3 在其他房间内 4 版本不匹配 5 需要密码 6资源缺少-模组等
      * </pre>
      *
      * <code>required uint32 reason = 2;</code>
@@ -24575,118 +15975,27 @@ public final class MeteorMsgs {
       return roomId_;
     }
 
-    public static final int PLAYERID_FIELD_NUMBER = 5;
-    private int playerId_;
-    /**
-     * <pre>
-     *你的角色在服务器的编号.
-     * </pre>
-     *
-     * <code>required uint32 playerId = 5;</code>
-     */
-    public boolean hasPlayerId() {
-      return ((bitField0_ & 0x00000010) == 0x00000010);
-    }
-    /**
-     * <pre>
-     *你的角色在服务器的编号.
-     * </pre>
-     *
-     * <code>required uint32 playerId = 5;</code>
-     */
-    public int getPlayerId() {
-      return playerId_;
-    }
-
-    public static final int PORT_FIELD_NUMBER = 6;
+    public static final int PORT_FIELD_NUMBER = 5;
     private int port_;
     /**
      * <pre>
      *kcp端口号
      * </pre>
      *
-     * <code>required uint32 port = 6;</code>
+     * <code>required uint32 port = 5;</code>
      */
     public boolean hasPort() {
-      return ((bitField0_ & 0x00000020) == 0x00000020);
+      return ((bitField0_ & 0x00000010) == 0x00000010);
     }
     /**
      * <pre>
      *kcp端口号
      * </pre>
      *
-     * <code>required uint32 port = 6;</code>
+     * <code>required uint32 port = 5;</code>
      */
     public int getPort() {
       return port_;
-    }
-
-    public static final int MODELS_FIELD_NUMBER = 7;
-    private java.util.List<java.lang.Integer> models_;
-    /**
-     * <pre>
-     *允许选择的模型
-     * </pre>
-     *
-     * <code>repeated uint32 models = 7;</code>
-     */
-    public java.util.List<java.lang.Integer>
-        getModelsList() {
-      return models_;
-    }
-    /**
-     * <pre>
-     *允许选择的模型
-     * </pre>
-     *
-     * <code>repeated uint32 models = 7;</code>
-     */
-    public int getModelsCount() {
-      return models_.size();
-    }
-    /**
-     * <pre>
-     *允许选择的模型
-     * </pre>
-     *
-     * <code>repeated uint32 models = 7;</code>
-     */
-    public int getModels(int index) {
-      return models_.get(index);
-    }
-
-    public static final int WEAPONS_FIELD_NUMBER = 8;
-    private java.util.List<java.lang.Integer> weapons_;
-    /**
-     * <pre>
-     *允许选择的武器模型
-     * </pre>
-     *
-     * <code>repeated uint32 weapons = 8;</code>
-     */
-    public java.util.List<java.lang.Integer>
-        getWeaponsList() {
-      return weapons_;
-    }
-    /**
-     * <pre>
-     *允许选择的武器模型
-     * </pre>
-     *
-     * <code>repeated uint32 weapons = 8;</code>
-     */
-    public int getWeaponsCount() {
-      return weapons_.size();
-    }
-    /**
-     * <pre>
-     *允许选择的武器模型
-     * </pre>
-     *
-     * <code>repeated uint32 weapons = 8;</code>
-     */
-    public int getWeapons(int index) {
-      return weapons_.get(index);
     }
 
     private byte memoizedIsInitialized = -1;
@@ -24708,10 +16017,6 @@ public final class MeteorMsgs {
         return false;
       }
       if (!hasRoomId()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
-      if (!hasPlayerId()) {
         memoizedIsInitialized = 0;
         return false;
       }
@@ -24738,16 +16043,7 @@ public final class MeteorMsgs {
         output.writeUInt32(4, roomId_);
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
-        output.writeUInt32(5, playerId_);
-      }
-      if (((bitField0_ & 0x00000020) == 0x00000020)) {
-        output.writeUInt32(6, port_);
-      }
-      for (int i = 0; i < models_.size(); i++) {
-        output.writeUInt32(7, models_.get(i));
-      }
-      for (int i = 0; i < weapons_.size(); i++) {
-        output.writeUInt32(8, weapons_.get(i));
+        output.writeUInt32(5, port_);
       }
       unknownFields.writeTo(output);
     }
@@ -24775,29 +16071,7 @@ public final class MeteorMsgs {
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeUInt32Size(5, playerId_);
-      }
-      if (((bitField0_ & 0x00000020) == 0x00000020)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeUInt32Size(6, port_);
-      }
-      {
-        int dataSize = 0;
-        for (int i = 0; i < models_.size(); i++) {
-          dataSize += com.google.protobuf.CodedOutputStream
-            .computeUInt32SizeNoTag(models_.get(i));
-        }
-        size += dataSize;
-        size += 1 * getModelsList().size();
-      }
-      {
-        int dataSize = 0;
-        for (int i = 0; i < weapons_.size(); i++) {
-          dataSize += com.google.protobuf.CodedOutputStream
-            .computeUInt32SizeNoTag(weapons_.get(i));
-        }
-        size += dataSize;
-        size += 1 * getWeaponsList().size();
+          .computeUInt32Size(5, port_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -24835,20 +16109,11 @@ public final class MeteorMsgs {
         result = result && (getRoomId()
             == other.getRoomId());
       }
-      result = result && (hasPlayerId() == other.hasPlayerId());
-      if (hasPlayerId()) {
-        result = result && (getPlayerId()
-            == other.getPlayerId());
-      }
       result = result && (hasPort() == other.hasPort());
       if (hasPort()) {
         result = result && (getPort()
             == other.getPort());
       }
-      result = result && getModelsList()
-          .equals(other.getModelsList());
-      result = result && getWeaponsList()
-          .equals(other.getWeaponsList());
       result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
@@ -24876,21 +16141,9 @@ public final class MeteorMsgs {
         hash = (37 * hash) + ROOMID_FIELD_NUMBER;
         hash = (53 * hash) + getRoomId();
       }
-      if (hasPlayerId()) {
-        hash = (37 * hash) + PLAYERID_FIELD_NUMBER;
-        hash = (53 * hash) + getPlayerId();
-      }
       if (hasPort()) {
         hash = (37 * hash) + PORT_FIELD_NUMBER;
         hash = (53 * hash) + getPort();
-      }
-      if (getModelsCount() > 0) {
-        hash = (37 * hash) + MODELS_FIELD_NUMBER;
-        hash = (53 * hash) + getModelsList().hashCode();
-      }
-      if (getWeaponsCount() > 0) {
-        hash = (37 * hash) + WEAPONS_FIELD_NUMBER;
-        hash = (53 * hash) + getWeaponsList().hashCode();
       }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
@@ -25029,14 +16282,8 @@ public final class MeteorMsgs {
         bitField0_ = (bitField0_ & ~0x00000004);
         roomId_ = 0;
         bitField0_ = (bitField0_ & ~0x00000008);
-        playerId_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000010);
         port_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000020);
-        models_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00000040);
-        weapons_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00000080);
+        bitField0_ = (bitField0_ & ~0x00000010);
         return this;
       }
 
@@ -25080,21 +16327,7 @@ public final class MeteorMsgs {
         if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
           to_bitField0_ |= 0x00000010;
         }
-        result.playerId_ = playerId_;
-        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
-          to_bitField0_ |= 0x00000020;
-        }
         result.port_ = port_;
-        if (((bitField0_ & 0x00000040) == 0x00000040)) {
-          models_ = java.util.Collections.unmodifiableList(models_);
-          bitField0_ = (bitField0_ & ~0x00000040);
-        }
-        result.models_ = models_;
-        if (((bitField0_ & 0x00000080) == 0x00000080)) {
-          weapons_ = java.util.Collections.unmodifiableList(weapons_);
-          bitField0_ = (bitField0_ & ~0x00000080);
-        }
-        result.weapons_ = weapons_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -25149,31 +16382,8 @@ public final class MeteorMsgs {
         if (other.hasRoomId()) {
           setRoomId(other.getRoomId());
         }
-        if (other.hasPlayerId()) {
-          setPlayerId(other.getPlayerId());
-        }
         if (other.hasPort()) {
           setPort(other.getPort());
-        }
-        if (!other.models_.isEmpty()) {
-          if (models_.isEmpty()) {
-            models_ = other.models_;
-            bitField0_ = (bitField0_ & ~0x00000040);
-          } else {
-            ensureModelsIsMutable();
-            models_.addAll(other.models_);
-          }
-          onChanged();
-        }
-        if (!other.weapons_.isEmpty()) {
-          if (weapons_.isEmpty()) {
-            weapons_ = other.weapons_;
-            bitField0_ = (bitField0_ & ~0x00000080);
-          } else {
-            ensureWeaponsIsMutable();
-            weapons_.addAll(other.weapons_);
-          }
-          onChanged();
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -25191,9 +16401,6 @@ public final class MeteorMsgs {
           return false;
         }
         if (!hasRoomId()) {
-          return false;
-        }
-        if (!hasPlayerId()) {
           return false;
         }
         if (!hasPort()) {
@@ -25272,7 +16479,7 @@ public final class MeteorMsgs {
       private int reason_ ;
       /**
        * <pre>
-       *失败为原因编号:1人数达到最大数量 2 没找到 3 在其他房间内 4 版本不匹配 5 需要密码 6资源缺少-
+       *失败为原因编号:1人数达到最大数量 2 没找到 3 在其他房间内 4 版本不匹配 5 需要密码 6资源缺少-模组等
        * </pre>
        *
        * <code>required uint32 reason = 2;</code>
@@ -25282,7 +16489,7 @@ public final class MeteorMsgs {
       }
       /**
        * <pre>
-       *失败为原因编号:1人数达到最大数量 2 没找到 3 在其他房间内 4 版本不匹配 5 需要密码 6资源缺少-
+       *失败为原因编号:1人数达到最大数量 2 没找到 3 在其他房间内 4 版本不匹配 5 需要密码 6资源缺少-模组等
        * </pre>
        *
        * <code>required uint32 reason = 2;</code>
@@ -25292,7 +16499,7 @@ public final class MeteorMsgs {
       }
       /**
        * <pre>
-       *失败为原因编号:1人数达到最大数量 2 没找到 3 在其他房间内 4 版本不匹配 5 需要密码 6资源缺少-
+       *失败为原因编号:1人数达到最大数量 2 没找到 3 在其他房间内 4 版本不匹配 5 需要密码 6资源缺少-模组等
        * </pre>
        *
        * <code>required uint32 reason = 2;</code>
@@ -25305,7 +16512,7 @@ public final class MeteorMsgs {
       }
       /**
        * <pre>
-       *失败为原因编号:1人数达到最大数量 2 没找到 3 在其他房间内 4 版本不匹配 5 需要密码 6资源缺少-
+       *失败为原因编号:1人数达到最大数量 2 没找到 3 在其他房间内 4 版本不匹配 5 需要密码 6资源缺少-模组等
        * </pre>
        *
        * <code>required uint32 reason = 2;</code>
@@ -25413,71 +16620,23 @@ public final class MeteorMsgs {
         return this;
       }
 
-      private int playerId_ ;
-      /**
-       * <pre>
-       *你的角色在服务器的编号.
-       * </pre>
-       *
-       * <code>required uint32 playerId = 5;</code>
-       */
-      public boolean hasPlayerId() {
-        return ((bitField0_ & 0x00000010) == 0x00000010);
-      }
-      /**
-       * <pre>
-       *你的角色在服务器的编号.
-       * </pre>
-       *
-       * <code>required uint32 playerId = 5;</code>
-       */
-      public int getPlayerId() {
-        return playerId_;
-      }
-      /**
-       * <pre>
-       *你的角色在服务器的编号.
-       * </pre>
-       *
-       * <code>required uint32 playerId = 5;</code>
-       */
-      public Builder setPlayerId(int value) {
-        bitField0_ |= 0x00000010;
-        playerId_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <pre>
-       *你的角色在服务器的编号.
-       * </pre>
-       *
-       * <code>required uint32 playerId = 5;</code>
-       */
-      public Builder clearPlayerId() {
-        bitField0_ = (bitField0_ & ~0x00000010);
-        playerId_ = 0;
-        onChanged();
-        return this;
-      }
-
       private int port_ ;
       /**
        * <pre>
        *kcp端口号
        * </pre>
        *
-       * <code>required uint32 port = 6;</code>
+       * <code>required uint32 port = 5;</code>
        */
       public boolean hasPort() {
-        return ((bitField0_ & 0x00000020) == 0x00000020);
+        return ((bitField0_ & 0x00000010) == 0x00000010);
       }
       /**
        * <pre>
        *kcp端口号
        * </pre>
        *
-       * <code>required uint32 port = 6;</code>
+       * <code>required uint32 port = 5;</code>
        */
       public int getPort() {
         return port_;
@@ -25487,10 +16646,10 @@ public final class MeteorMsgs {
        *kcp端口号
        * </pre>
        *
-       * <code>required uint32 port = 6;</code>
+       * <code>required uint32 port = 5;</code>
        */
       public Builder setPort(int value) {
-        bitField0_ |= 0x00000020;
+        bitField0_ |= 0x00000010;
         port_ = value;
         onChanged();
         return this;
@@ -25500,199 +16659,11 @@ public final class MeteorMsgs {
        *kcp端口号
        * </pre>
        *
-       * <code>required uint32 port = 6;</code>
+       * <code>required uint32 port = 5;</code>
        */
       public Builder clearPort() {
-        bitField0_ = (bitField0_ & ~0x00000020);
+        bitField0_ = (bitField0_ & ~0x00000010);
         port_ = 0;
-        onChanged();
-        return this;
-      }
-
-      private java.util.List<java.lang.Integer> models_ = java.util.Collections.emptyList();
-      private void ensureModelsIsMutable() {
-        if (!((bitField0_ & 0x00000040) == 0x00000040)) {
-          models_ = new java.util.ArrayList<java.lang.Integer>(models_);
-          bitField0_ |= 0x00000040;
-         }
-      }
-      /**
-       * <pre>
-       *允许选择的模型
-       * </pre>
-       *
-       * <code>repeated uint32 models = 7;</code>
-       */
-      public java.util.List<java.lang.Integer>
-          getModelsList() {
-        return java.util.Collections.unmodifiableList(models_);
-      }
-      /**
-       * <pre>
-       *允许选择的模型
-       * </pre>
-       *
-       * <code>repeated uint32 models = 7;</code>
-       */
-      public int getModelsCount() {
-        return models_.size();
-      }
-      /**
-       * <pre>
-       *允许选择的模型
-       * </pre>
-       *
-       * <code>repeated uint32 models = 7;</code>
-       */
-      public int getModels(int index) {
-        return models_.get(index);
-      }
-      /**
-       * <pre>
-       *允许选择的模型
-       * </pre>
-       *
-       * <code>repeated uint32 models = 7;</code>
-       */
-      public Builder setModels(
-          int index, int value) {
-        ensureModelsIsMutable();
-        models_.set(index, value);
-        onChanged();
-        return this;
-      }
-      /**
-       * <pre>
-       *允许选择的模型
-       * </pre>
-       *
-       * <code>repeated uint32 models = 7;</code>
-       */
-      public Builder addModels(int value) {
-        ensureModelsIsMutable();
-        models_.add(value);
-        onChanged();
-        return this;
-      }
-      /**
-       * <pre>
-       *允许选择的模型
-       * </pre>
-       *
-       * <code>repeated uint32 models = 7;</code>
-       */
-      public Builder addAllModels(
-          java.lang.Iterable<? extends java.lang.Integer> values) {
-        ensureModelsIsMutable();
-        com.google.protobuf.AbstractMessageLite.Builder.addAll(
-            values, models_);
-        onChanged();
-        return this;
-      }
-      /**
-       * <pre>
-       *允许选择的模型
-       * </pre>
-       *
-       * <code>repeated uint32 models = 7;</code>
-       */
-      public Builder clearModels() {
-        models_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00000040);
-        onChanged();
-        return this;
-      }
-
-      private java.util.List<java.lang.Integer> weapons_ = java.util.Collections.emptyList();
-      private void ensureWeaponsIsMutable() {
-        if (!((bitField0_ & 0x00000080) == 0x00000080)) {
-          weapons_ = new java.util.ArrayList<java.lang.Integer>(weapons_);
-          bitField0_ |= 0x00000080;
-         }
-      }
-      /**
-       * <pre>
-       *允许选择的武器模型
-       * </pre>
-       *
-       * <code>repeated uint32 weapons = 8;</code>
-       */
-      public java.util.List<java.lang.Integer>
-          getWeaponsList() {
-        return java.util.Collections.unmodifiableList(weapons_);
-      }
-      /**
-       * <pre>
-       *允许选择的武器模型
-       * </pre>
-       *
-       * <code>repeated uint32 weapons = 8;</code>
-       */
-      public int getWeaponsCount() {
-        return weapons_.size();
-      }
-      /**
-       * <pre>
-       *允许选择的武器模型
-       * </pre>
-       *
-       * <code>repeated uint32 weapons = 8;</code>
-       */
-      public int getWeapons(int index) {
-        return weapons_.get(index);
-      }
-      /**
-       * <pre>
-       *允许选择的武器模型
-       * </pre>
-       *
-       * <code>repeated uint32 weapons = 8;</code>
-       */
-      public Builder setWeapons(
-          int index, int value) {
-        ensureWeaponsIsMutable();
-        weapons_.set(index, value);
-        onChanged();
-        return this;
-      }
-      /**
-       * <pre>
-       *允许选择的武器模型
-       * </pre>
-       *
-       * <code>repeated uint32 weapons = 8;</code>
-       */
-      public Builder addWeapons(int value) {
-        ensureWeaponsIsMutable();
-        weapons_.add(value);
-        onChanged();
-        return this;
-      }
-      /**
-       * <pre>
-       *允许选择的武器模型
-       * </pre>
-       *
-       * <code>repeated uint32 weapons = 8;</code>
-       */
-      public Builder addAllWeapons(
-          java.lang.Iterable<? extends java.lang.Integer> values) {
-        ensureWeaponsIsMutable();
-        com.google.protobuf.AbstractMessageLite.Builder.addAll(
-            values, weapons_);
-        onChanged();
-        return this;
-      }
-      /**
-       * <pre>
-       *允许选择的武器模型
-       * </pre>
-       *
-       * <code>repeated uint32 weapons = 8;</code>
-       */
-      public Builder clearWeapons() {
-        weapons_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00000080);
         onChanged();
         return this;
       }
@@ -25745,47 +16716,48 @@ public final class MeteorMsgs {
 
   }
 
-  public interface Vector2_OrBuilder extends
-      // @@protoc_insertion_point(interface_extends:Vector2_)
+  public interface OnPlayerJoinRoomOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:OnPlayerJoinRoom)
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>required int32 x = 1;</code>
+     * <code>required uint32 player = 1;</code>
      */
-    boolean hasX();
+    boolean hasPlayer();
     /**
-     * <code>required int32 x = 1;</code>
+     * <code>required uint32 player = 1;</code>
      */
-    int getX();
+    int getPlayer();
 
     /**
-     * <code>required int32 y = 2;</code>
+     * <code>required string nick = 2;</code>
      */
-    boolean hasY();
+    boolean hasNick();
     /**
-     * <code>required int32 y = 2;</code>
+     * <code>required string nick = 2;</code>
      */
-    int getY();
+    java.lang.String getNick();
+    /**
+     * <code>required string nick = 2;</code>
+     */
+    com.google.protobuf.ByteString
+        getNickBytes();
   }
   /**
-   * <pre>
-   *定点数，JoyStickMove
-   * </pre>
-   *
-   * Protobuf type {@code Vector2_}
+   * Protobuf type {@code OnPlayerJoinRoom}
    */
-  public  static final class Vector2_ extends
+  public  static final class OnPlayerJoinRoom extends
       com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:Vector2_)
-      Vector2_OrBuilder {
+      // @@protoc_insertion_point(message_implements:OnPlayerJoinRoom)
+      OnPlayerJoinRoomOrBuilder {
   private static final long serialVersionUID = 0L;
-    // Use Vector2_.newBuilder() to construct.
-    private Vector2_(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+    // Use OnPlayerJoinRoom.newBuilder() to construct.
+    private OnPlayerJoinRoom(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
     }
-    private Vector2_() {
-      x_ = 0;
-      y_ = 0;
+    private OnPlayerJoinRoom() {
+      player_ = 0;
+      nick_ = "";
     }
 
     @java.lang.Override
@@ -25793,7 +16765,7 @@ public final class MeteorMsgs {
     getUnknownFields() {
       return this.unknownFields;
     }
-    private Vector2_(
+    private OnPlayerJoinRoom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -25821,12 +16793,13 @@ public final class MeteorMsgs {
             }
             case 8: {
               bitField0_ |= 0x00000001;
-              x_ = input.readInt32();
+              player_ = input.readUInt32();
               break;
             }
-            case 16: {
+            case 18: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000002;
-              y_ = input.readInt32();
+              nick_ = bs;
               break;
             }
           }
@@ -25843,45 +16816,72 @@ public final class MeteorMsgs {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return idevgame.meteor.proto.MeteorMsgs.internal_static_Vector2__descriptor;
+      return idevgame.meteor.proto.MeteorMsgs.internal_static_OnPlayerJoinRoom_descriptor;
     }
 
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return idevgame.meteor.proto.MeteorMsgs.internal_static_Vector2__fieldAccessorTable
+      return idevgame.meteor.proto.MeteorMsgs.internal_static_OnPlayerJoinRoom_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              idevgame.meteor.proto.MeteorMsgs.Vector2_.class, idevgame.meteor.proto.MeteorMsgs.Vector2_.Builder.class);
+              idevgame.meteor.proto.MeteorMsgs.OnPlayerJoinRoom.class, idevgame.meteor.proto.MeteorMsgs.OnPlayerJoinRoom.Builder.class);
     }
 
     private int bitField0_;
-    public static final int X_FIELD_NUMBER = 1;
-    private int x_;
+    public static final int PLAYER_FIELD_NUMBER = 1;
+    private int player_;
     /**
-     * <code>required int32 x = 1;</code>
+     * <code>required uint32 player = 1;</code>
      */
-    public boolean hasX() {
+    public boolean hasPlayer() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
     /**
-     * <code>required int32 x = 1;</code>
+     * <code>required uint32 player = 1;</code>
      */
-    public int getX() {
-      return x_;
+    public int getPlayer() {
+      return player_;
     }
 
-    public static final int Y_FIELD_NUMBER = 2;
-    private int y_;
+    public static final int NICK_FIELD_NUMBER = 2;
+    private volatile java.lang.Object nick_;
     /**
-     * <code>required int32 y = 2;</code>
+     * <code>required string nick = 2;</code>
      */
-    public boolean hasY() {
+    public boolean hasNick() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>required int32 y = 2;</code>
+     * <code>required string nick = 2;</code>
      */
-    public int getY() {
-      return y_;
+    public java.lang.String getNick() {
+      java.lang.Object ref = nick_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          nick_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>required string nick = 2;</code>
+     */
+    public com.google.protobuf.ByteString
+        getNickBytes() {
+      java.lang.Object ref = nick_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        nick_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
     }
 
     private byte memoizedIsInitialized = -1;
@@ -25890,11 +16890,11 @@ public final class MeteorMsgs {
       if (isInitialized == 1) return true;
       if (isInitialized == 0) return false;
 
-      if (!hasX()) {
+      if (!hasPlayer()) {
         memoizedIsInitialized = 0;
         return false;
       }
-      if (!hasY()) {
+      if (!hasNick()) {
         memoizedIsInitialized = 0;
         return false;
       }
@@ -25905,10 +16905,10 @@ public final class MeteorMsgs {
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeInt32(1, x_);
+        output.writeUInt32(1, player_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeInt32(2, y_);
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, nick_);
       }
       unknownFields.writeTo(output);
     }
@@ -25920,11 +16920,10 @@ public final class MeteorMsgs {
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(1, x_);
+          .computeUInt32Size(1, player_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(2, y_);
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, nick_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -25936,21 +16935,21 @@ public final class MeteorMsgs {
       if (obj == this) {
        return true;
       }
-      if (!(obj instanceof idevgame.meteor.proto.MeteorMsgs.Vector2_)) {
+      if (!(obj instanceof idevgame.meteor.proto.MeteorMsgs.OnPlayerJoinRoom)) {
         return super.equals(obj);
       }
-      idevgame.meteor.proto.MeteorMsgs.Vector2_ other = (idevgame.meteor.proto.MeteorMsgs.Vector2_) obj;
+      idevgame.meteor.proto.MeteorMsgs.OnPlayerJoinRoom other = (idevgame.meteor.proto.MeteorMsgs.OnPlayerJoinRoom) obj;
 
       boolean result = true;
-      result = result && (hasX() == other.hasX());
-      if (hasX()) {
-        result = result && (getX()
-            == other.getX());
+      result = result && (hasPlayer() == other.hasPlayer());
+      if (hasPlayer()) {
+        result = result && (getPlayer()
+            == other.getPlayer());
       }
-      result = result && (hasY() == other.hasY());
-      if (hasY()) {
-        result = result && (getY()
-            == other.getY());
+      result = result && (hasNick() == other.hasNick());
+      if (hasNick()) {
+        result = result && getNick()
+            .equals(other.getNick());
       }
       result = result && unknownFields.equals(other.unknownFields);
       return result;
@@ -25963,82 +16962,82 @@ public final class MeteorMsgs {
       }
       int hash = 41;
       hash = (19 * hash) + getDescriptor().hashCode();
-      if (hasX()) {
-        hash = (37 * hash) + X_FIELD_NUMBER;
-        hash = (53 * hash) + getX();
+      if (hasPlayer()) {
+        hash = (37 * hash) + PLAYER_FIELD_NUMBER;
+        hash = (53 * hash) + getPlayer();
       }
-      if (hasY()) {
-        hash = (37 * hash) + Y_FIELD_NUMBER;
-        hash = (53 * hash) + getY();
+      if (hasNick()) {
+        hash = (37 * hash) + NICK_FIELD_NUMBER;
+        hash = (53 * hash) + getNick().hashCode();
       }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
     }
 
-    public static idevgame.meteor.proto.MeteorMsgs.Vector2_ parseFrom(
+    public static idevgame.meteor.proto.MeteorMsgs.OnPlayerJoinRoom parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static idevgame.meteor.proto.MeteorMsgs.Vector2_ parseFrom(
+    public static idevgame.meteor.proto.MeteorMsgs.OnPlayerJoinRoom parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static idevgame.meteor.proto.MeteorMsgs.Vector2_ parseFrom(
+    public static idevgame.meteor.proto.MeteorMsgs.OnPlayerJoinRoom parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static idevgame.meteor.proto.MeteorMsgs.Vector2_ parseFrom(
+    public static idevgame.meteor.proto.MeteorMsgs.OnPlayerJoinRoom parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static idevgame.meteor.proto.MeteorMsgs.Vector2_ parseFrom(byte[] data)
+    public static idevgame.meteor.proto.MeteorMsgs.OnPlayerJoinRoom parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static idevgame.meteor.proto.MeteorMsgs.Vector2_ parseFrom(
+    public static idevgame.meteor.proto.MeteorMsgs.OnPlayerJoinRoom parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static idevgame.meteor.proto.MeteorMsgs.Vector2_ parseFrom(java.io.InputStream input)
+    public static idevgame.meteor.proto.MeteorMsgs.OnPlayerJoinRoom parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static idevgame.meteor.proto.MeteorMsgs.Vector2_ parseFrom(
+    public static idevgame.meteor.proto.MeteorMsgs.OnPlayerJoinRoom parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
-    public static idevgame.meteor.proto.MeteorMsgs.Vector2_ parseDelimitedFrom(java.io.InputStream input)
+    public static idevgame.meteor.proto.MeteorMsgs.OnPlayerJoinRoom parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input);
     }
-    public static idevgame.meteor.proto.MeteorMsgs.Vector2_ parseDelimitedFrom(
+    public static idevgame.meteor.proto.MeteorMsgs.OnPlayerJoinRoom parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static idevgame.meteor.proto.MeteorMsgs.Vector2_ parseFrom(
+    public static idevgame.meteor.proto.MeteorMsgs.OnPlayerJoinRoom parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static idevgame.meteor.proto.MeteorMsgs.Vector2_ parseFrom(
+    public static idevgame.meteor.proto.MeteorMsgs.OnPlayerJoinRoom parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -26050,7 +17049,7 @@ public final class MeteorMsgs {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(idevgame.meteor.proto.MeteorMsgs.Vector2_ prototype) {
+    public static Builder newBuilder(idevgame.meteor.proto.MeteorMsgs.OnPlayerJoinRoom prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() {
@@ -26065,29 +17064,25 @@ public final class MeteorMsgs {
       return builder;
     }
     /**
-     * <pre>
-     *定点数，JoyStickMove
-     * </pre>
-     *
-     * Protobuf type {@code Vector2_}
+     * Protobuf type {@code OnPlayerJoinRoom}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:Vector2_)
-        idevgame.meteor.proto.MeteorMsgs.Vector2_OrBuilder {
+        // @@protoc_insertion_point(builder_implements:OnPlayerJoinRoom)
+        idevgame.meteor.proto.MeteorMsgs.OnPlayerJoinRoomOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return idevgame.meteor.proto.MeteorMsgs.internal_static_Vector2__descriptor;
+        return idevgame.meteor.proto.MeteorMsgs.internal_static_OnPlayerJoinRoom_descriptor;
       }
 
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return idevgame.meteor.proto.MeteorMsgs.internal_static_Vector2__fieldAccessorTable
+        return idevgame.meteor.proto.MeteorMsgs.internal_static_OnPlayerJoinRoom_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                idevgame.meteor.proto.MeteorMsgs.Vector2_.class, idevgame.meteor.proto.MeteorMsgs.Vector2_.Builder.class);
+                idevgame.meteor.proto.MeteorMsgs.OnPlayerJoinRoom.class, idevgame.meteor.proto.MeteorMsgs.OnPlayerJoinRoom.Builder.class);
       }
 
-      // Construct using idevgame.meteor.proto.MeteorMsgs.Vector2_.newBuilder()
+      // Construct using idevgame.meteor.proto.MeteorMsgs.OnPlayerJoinRoom.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
@@ -26104,42 +17099,42 @@ public final class MeteorMsgs {
       }
       public Builder clear() {
         super.clear();
-        x_ = 0;
+        player_ = 0;
         bitField0_ = (bitField0_ & ~0x00000001);
-        y_ = 0;
+        nick_ = "";
         bitField0_ = (bitField0_ & ~0x00000002);
         return this;
       }
 
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return idevgame.meteor.proto.MeteorMsgs.internal_static_Vector2__descriptor;
+        return idevgame.meteor.proto.MeteorMsgs.internal_static_OnPlayerJoinRoom_descriptor;
       }
 
-      public idevgame.meteor.proto.MeteorMsgs.Vector2_ getDefaultInstanceForType() {
-        return idevgame.meteor.proto.MeteorMsgs.Vector2_.getDefaultInstance();
+      public idevgame.meteor.proto.MeteorMsgs.OnPlayerJoinRoom getDefaultInstanceForType() {
+        return idevgame.meteor.proto.MeteorMsgs.OnPlayerJoinRoom.getDefaultInstance();
       }
 
-      public idevgame.meteor.proto.MeteorMsgs.Vector2_ build() {
-        idevgame.meteor.proto.MeteorMsgs.Vector2_ result = buildPartial();
+      public idevgame.meteor.proto.MeteorMsgs.OnPlayerJoinRoom build() {
+        idevgame.meteor.proto.MeteorMsgs.OnPlayerJoinRoom result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      public idevgame.meteor.proto.MeteorMsgs.Vector2_ buildPartial() {
-        idevgame.meteor.proto.MeteorMsgs.Vector2_ result = new idevgame.meteor.proto.MeteorMsgs.Vector2_(this);
+      public idevgame.meteor.proto.MeteorMsgs.OnPlayerJoinRoom buildPartial() {
+        idevgame.meteor.proto.MeteorMsgs.OnPlayerJoinRoom result = new idevgame.meteor.proto.MeteorMsgs.OnPlayerJoinRoom(this);
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
           to_bitField0_ |= 0x00000001;
         }
-        result.x_ = x_;
+        result.player_ = player_;
         if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
           to_bitField0_ |= 0x00000002;
         }
-        result.y_ = y_;
+        result.nick_ = nick_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -26172,21 +17167,23 @@ public final class MeteorMsgs {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof idevgame.meteor.proto.MeteorMsgs.Vector2_) {
-          return mergeFrom((idevgame.meteor.proto.MeteorMsgs.Vector2_)other);
+        if (other instanceof idevgame.meteor.proto.MeteorMsgs.OnPlayerJoinRoom) {
+          return mergeFrom((idevgame.meteor.proto.MeteorMsgs.OnPlayerJoinRoom)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(idevgame.meteor.proto.MeteorMsgs.Vector2_ other) {
-        if (other == idevgame.meteor.proto.MeteorMsgs.Vector2_.getDefaultInstance()) return this;
-        if (other.hasX()) {
-          setX(other.getX());
+      public Builder mergeFrom(idevgame.meteor.proto.MeteorMsgs.OnPlayerJoinRoom other) {
+        if (other == idevgame.meteor.proto.MeteorMsgs.OnPlayerJoinRoom.getDefaultInstance()) return this;
+        if (other.hasPlayer()) {
+          setPlayer(other.getPlayer());
         }
-        if (other.hasY()) {
-          setY(other.getY());
+        if (other.hasNick()) {
+          bitField0_ |= 0x00000002;
+          nick_ = other.nick_;
+          onChanged();
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -26194,10 +17191,10 @@ public final class MeteorMsgs {
       }
 
       public final boolean isInitialized() {
-        if (!hasX()) {
+        if (!hasPlayer()) {
           return false;
         }
-        if (!hasY()) {
+        if (!hasNick()) {
           return false;
         }
         return true;
@@ -26207,11 +17204,11 @@ public final class MeteorMsgs {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        idevgame.meteor.proto.MeteorMsgs.Vector2_ parsedMessage = null;
+        idevgame.meteor.proto.MeteorMsgs.OnPlayerJoinRoom parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (idevgame.meteor.proto.MeteorMsgs.Vector2_) e.getUnfinishedMessage();
+          parsedMessage = (idevgame.meteor.proto.MeteorMsgs.OnPlayerJoinRoom) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
           if (parsedMessage != null) {
@@ -26222,66 +17219,110 @@ public final class MeteorMsgs {
       }
       private int bitField0_;
 
-      private int x_ ;
+      private int player_ ;
       /**
-       * <code>required int32 x = 1;</code>
+       * <code>required uint32 player = 1;</code>
        */
-      public boolean hasX() {
+      public boolean hasPlayer() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
       /**
-       * <code>required int32 x = 1;</code>
+       * <code>required uint32 player = 1;</code>
        */
-      public int getX() {
-        return x_;
+      public int getPlayer() {
+        return player_;
       }
       /**
-       * <code>required int32 x = 1;</code>
+       * <code>required uint32 player = 1;</code>
        */
-      public Builder setX(int value) {
+      public Builder setPlayer(int value) {
         bitField0_ |= 0x00000001;
-        x_ = value;
+        player_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>required int32 x = 1;</code>
+       * <code>required uint32 player = 1;</code>
        */
-      public Builder clearX() {
+      public Builder clearPlayer() {
         bitField0_ = (bitField0_ & ~0x00000001);
-        x_ = 0;
+        player_ = 0;
         onChanged();
         return this;
       }
 
-      private int y_ ;
+      private java.lang.Object nick_ = "";
       /**
-       * <code>required int32 y = 2;</code>
+       * <code>required string nick = 2;</code>
        */
-      public boolean hasY() {
+      public boolean hasNick() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>required int32 y = 2;</code>
+       * <code>required string nick = 2;</code>
        */
-      public int getY() {
-        return y_;
+      public java.lang.String getNick() {
+        java.lang.Object ref = nick_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            nick_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
       }
       /**
-       * <code>required int32 y = 2;</code>
+       * <code>required string nick = 2;</code>
        */
-      public Builder setY(int value) {
-        bitField0_ |= 0x00000002;
-        y_ = value;
+      public com.google.protobuf.ByteString
+          getNickBytes() {
+        java.lang.Object ref = nick_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          nick_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>required string nick = 2;</code>
+       */
+      public Builder setNick(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        nick_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>required int32 y = 2;</code>
+       * <code>required string nick = 2;</code>
        */
-      public Builder clearY() {
+      public Builder clearNick() {
         bitField0_ = (bitField0_ & ~0x00000002);
-        y_ = 0;
+        nick_ = getDefaultInstance().getNick();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required string nick = 2;</code>
+       */
+      public Builder setNickBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        nick_ = value;
         onChanged();
         return this;
       }
@@ -26296,39 +17337,1182 @@ public final class MeteorMsgs {
       }
 
 
-      // @@protoc_insertion_point(builder_scope:Vector2_)
+      // @@protoc_insertion_point(builder_scope:OnPlayerJoinRoom)
     }
 
-    // @@protoc_insertion_point(class_scope:Vector2_)
-    private static final idevgame.meteor.proto.MeteorMsgs.Vector2_ DEFAULT_INSTANCE;
+    // @@protoc_insertion_point(class_scope:OnPlayerJoinRoom)
+    private static final idevgame.meteor.proto.MeteorMsgs.OnPlayerJoinRoom DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new idevgame.meteor.proto.MeteorMsgs.Vector2_();
+      DEFAULT_INSTANCE = new idevgame.meteor.proto.MeteorMsgs.OnPlayerJoinRoom();
     }
 
-    public static idevgame.meteor.proto.MeteorMsgs.Vector2_ getDefaultInstance() {
+    public static idevgame.meteor.proto.MeteorMsgs.OnPlayerJoinRoom getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
-    @java.lang.Deprecated public static final com.google.protobuf.Parser<Vector2_>
-        PARSER = new com.google.protobuf.AbstractParser<Vector2_>() {
-      public Vector2_ parsePartialFrom(
+    @java.lang.Deprecated public static final com.google.protobuf.Parser<OnPlayerJoinRoom>
+        PARSER = new com.google.protobuf.AbstractParser<OnPlayerJoinRoom>() {
+      public OnPlayerJoinRoom parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return new Vector2_(input, extensionRegistry);
+        return new OnPlayerJoinRoom(input, extensionRegistry);
       }
     };
 
-    public static com.google.protobuf.Parser<Vector2_> parser() {
+    public static com.google.protobuf.Parser<OnPlayerJoinRoom> parser() {
       return PARSER;
     }
 
     @java.lang.Override
-    public com.google.protobuf.Parser<Vector2_> getParserForType() {
+    public com.google.protobuf.Parser<OnPlayerJoinRoom> getParserForType() {
       return PARSER;
     }
 
-    public idevgame.meteor.proto.MeteorMsgs.Vector2_ getDefaultInstanceForType() {
+    public idevgame.meteor.proto.MeteorMsgs.OnPlayerJoinRoom getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
+  public interface OnEnterLevelRspOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:OnEnterLevelRsp)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <pre>
+     *1成功，其他失败
+     * </pre>
+     *
+     * <code>required uint32 result = 1;</code>
+     */
+    boolean hasResult();
+    /**
+     * <pre>
+     *1成功，其他失败
+     * </pre>
+     *
+     * <code>required uint32 result = 1;</code>
+     */
+    int getResult();
+
+    /**
+     * <pre>
+     *失败为原因编号:1阵营人数已满
+     * </pre>
+     *
+     * <code>required uint32 reason = 2;</code>
+     */
+    boolean hasReason();
+    /**
+     * <pre>
+     *失败为原因编号:1阵营人数已满
+     * </pre>
+     *
+     * <code>required uint32 reason = 2;</code>
+     */
+    int getReason();
+
+    /**
+     * <pre>
+     *入场时拉取到场景所有角色的信息.
+     * </pre>
+     *
+     * <code>repeated .PlayerSync players = 3;</code>
+     */
+    java.util.List<idevgame.meteor.proto.MeteorMsgs.PlayerSync> 
+        getPlayersList();
+    /**
+     * <pre>
+     *入场时拉取到场景所有角色的信息.
+     * </pre>
+     *
+     * <code>repeated .PlayerSync players = 3;</code>
+     */
+    idevgame.meteor.proto.MeteorMsgs.PlayerSync getPlayers(int index);
+    /**
+     * <pre>
+     *入场时拉取到场景所有角色的信息.
+     * </pre>
+     *
+     * <code>repeated .PlayerSync players = 3;</code>
+     */
+    int getPlayersCount();
+    /**
+     * <pre>
+     *入场时拉取到场景所有角色的信息.
+     * </pre>
+     *
+     * <code>repeated .PlayerSync players = 3;</code>
+     */
+    java.util.List<? extends idevgame.meteor.proto.MeteorMsgs.PlayerSyncOrBuilder> 
+        getPlayersOrBuilderList();
+    /**
+     * <pre>
+     *入场时拉取到场景所有角色的信息.
+     * </pre>
+     *
+     * <code>repeated .PlayerSync players = 3;</code>
+     */
+    idevgame.meteor.proto.MeteorMsgs.PlayerSyncOrBuilder getPlayersOrBuilder(
+        int index);
+  }
+  /**
+   * <pre>
+   *选择阵营-角色-武器，进入场景
+   * </pre>
+   *
+   * Protobuf type {@code OnEnterLevelRsp}
+   */
+  public  static final class OnEnterLevelRsp extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:OnEnterLevelRsp)
+      OnEnterLevelRspOrBuilder {
+  private static final long serialVersionUID = 0L;
+    // Use OnEnterLevelRsp.newBuilder() to construct.
+    private OnEnterLevelRsp(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private OnEnterLevelRsp() {
+      result_ = 0;
+      reason_ = 0;
+      players_ = java.util.Collections.emptyList();
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private OnEnterLevelRsp(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 8: {
+              bitField0_ |= 0x00000001;
+              result_ = input.readUInt32();
+              break;
+            }
+            case 16: {
+              bitField0_ |= 0x00000002;
+              reason_ = input.readUInt32();
+              break;
+            }
+            case 26: {
+              if (!((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
+                players_ = new java.util.ArrayList<idevgame.meteor.proto.MeteorMsgs.PlayerSync>();
+                mutable_bitField0_ |= 0x00000004;
+              }
+              players_.add(
+                  input.readMessage(idevgame.meteor.proto.MeteorMsgs.PlayerSync.PARSER, extensionRegistry));
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        if (((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
+          players_ = java.util.Collections.unmodifiableList(players_);
+        }
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return idevgame.meteor.proto.MeteorMsgs.internal_static_OnEnterLevelRsp_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return idevgame.meteor.proto.MeteorMsgs.internal_static_OnEnterLevelRsp_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              idevgame.meteor.proto.MeteorMsgs.OnEnterLevelRsp.class, idevgame.meteor.proto.MeteorMsgs.OnEnterLevelRsp.Builder.class);
+    }
+
+    private int bitField0_;
+    public static final int RESULT_FIELD_NUMBER = 1;
+    private int result_;
+    /**
+     * <pre>
+     *1成功，其他失败
+     * </pre>
+     *
+     * <code>required uint32 result = 1;</code>
+     */
+    public boolean hasResult() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <pre>
+     *1成功，其他失败
+     * </pre>
+     *
+     * <code>required uint32 result = 1;</code>
+     */
+    public int getResult() {
+      return result_;
+    }
+
+    public static final int REASON_FIELD_NUMBER = 2;
+    private int reason_;
+    /**
+     * <pre>
+     *失败为原因编号:1阵营人数已满
+     * </pre>
+     *
+     * <code>required uint32 reason = 2;</code>
+     */
+    public boolean hasReason() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <pre>
+     *失败为原因编号:1阵营人数已满
+     * </pre>
+     *
+     * <code>required uint32 reason = 2;</code>
+     */
+    public int getReason() {
+      return reason_;
+    }
+
+    public static final int PLAYERS_FIELD_NUMBER = 3;
+    private java.util.List<idevgame.meteor.proto.MeteorMsgs.PlayerSync> players_;
+    /**
+     * <pre>
+     *入场时拉取到场景所有角色的信息.
+     * </pre>
+     *
+     * <code>repeated .PlayerSync players = 3;</code>
+     */
+    public java.util.List<idevgame.meteor.proto.MeteorMsgs.PlayerSync> getPlayersList() {
+      return players_;
+    }
+    /**
+     * <pre>
+     *入场时拉取到场景所有角色的信息.
+     * </pre>
+     *
+     * <code>repeated .PlayerSync players = 3;</code>
+     */
+    public java.util.List<? extends idevgame.meteor.proto.MeteorMsgs.PlayerSyncOrBuilder> 
+        getPlayersOrBuilderList() {
+      return players_;
+    }
+    /**
+     * <pre>
+     *入场时拉取到场景所有角色的信息.
+     * </pre>
+     *
+     * <code>repeated .PlayerSync players = 3;</code>
+     */
+    public int getPlayersCount() {
+      return players_.size();
+    }
+    /**
+     * <pre>
+     *入场时拉取到场景所有角色的信息.
+     * </pre>
+     *
+     * <code>repeated .PlayerSync players = 3;</code>
+     */
+    public idevgame.meteor.proto.MeteorMsgs.PlayerSync getPlayers(int index) {
+      return players_.get(index);
+    }
+    /**
+     * <pre>
+     *入场时拉取到场景所有角色的信息.
+     * </pre>
+     *
+     * <code>repeated .PlayerSync players = 3;</code>
+     */
+    public idevgame.meteor.proto.MeteorMsgs.PlayerSyncOrBuilder getPlayersOrBuilder(
+        int index) {
+      return players_.get(index);
+    }
+
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      if (!hasResult()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasReason()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      for (int i = 0; i < getPlayersCount(); i++) {
+        if (!getPlayers(i).isInitialized()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeUInt32(1, result_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeUInt32(2, reason_);
+      }
+      for (int i = 0; i < players_.size(); i++) {
+        output.writeMessage(3, players_.get(i));
+      }
+      unknownFields.writeTo(output);
+    }
+
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt32Size(1, result_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt32Size(2, reason_);
+      }
+      for (int i = 0; i < players_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(3, players_.get(i));
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof idevgame.meteor.proto.MeteorMsgs.OnEnterLevelRsp)) {
+        return super.equals(obj);
+      }
+      idevgame.meteor.proto.MeteorMsgs.OnEnterLevelRsp other = (idevgame.meteor.proto.MeteorMsgs.OnEnterLevelRsp) obj;
+
+      boolean result = true;
+      result = result && (hasResult() == other.hasResult());
+      if (hasResult()) {
+        result = result && (getResult()
+            == other.getResult());
+      }
+      result = result && (hasReason() == other.hasReason());
+      if (hasReason()) {
+        result = result && (getReason()
+            == other.getReason());
+      }
+      result = result && getPlayersList()
+          .equals(other.getPlayersList());
+      result = result && unknownFields.equals(other.unknownFields);
+      return result;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      if (hasResult()) {
+        hash = (37 * hash) + RESULT_FIELD_NUMBER;
+        hash = (53 * hash) + getResult();
+      }
+      if (hasReason()) {
+        hash = (37 * hash) + REASON_FIELD_NUMBER;
+        hash = (53 * hash) + getReason();
+      }
+      if (getPlayersCount() > 0) {
+        hash = (37 * hash) + PLAYERS_FIELD_NUMBER;
+        hash = (53 * hash) + getPlayersList().hashCode();
+      }
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static idevgame.meteor.proto.MeteorMsgs.OnEnterLevelRsp parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static idevgame.meteor.proto.MeteorMsgs.OnEnterLevelRsp parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static idevgame.meteor.proto.MeteorMsgs.OnEnterLevelRsp parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static idevgame.meteor.proto.MeteorMsgs.OnEnterLevelRsp parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static idevgame.meteor.proto.MeteorMsgs.OnEnterLevelRsp parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static idevgame.meteor.proto.MeteorMsgs.OnEnterLevelRsp parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static idevgame.meteor.proto.MeteorMsgs.OnEnterLevelRsp parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static idevgame.meteor.proto.MeteorMsgs.OnEnterLevelRsp parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static idevgame.meteor.proto.MeteorMsgs.OnEnterLevelRsp parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static idevgame.meteor.proto.MeteorMsgs.OnEnterLevelRsp parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static idevgame.meteor.proto.MeteorMsgs.OnEnterLevelRsp parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static idevgame.meteor.proto.MeteorMsgs.OnEnterLevelRsp parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(idevgame.meteor.proto.MeteorMsgs.OnEnterLevelRsp prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * <pre>
+     *选择阵营-角色-武器，进入场景
+     * </pre>
+     *
+     * Protobuf type {@code OnEnterLevelRsp}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:OnEnterLevelRsp)
+        idevgame.meteor.proto.MeteorMsgs.OnEnterLevelRspOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return idevgame.meteor.proto.MeteorMsgs.internal_static_OnEnterLevelRsp_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return idevgame.meteor.proto.MeteorMsgs.internal_static_OnEnterLevelRsp_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                idevgame.meteor.proto.MeteorMsgs.OnEnterLevelRsp.class, idevgame.meteor.proto.MeteorMsgs.OnEnterLevelRsp.Builder.class);
+      }
+
+      // Construct using idevgame.meteor.proto.MeteorMsgs.OnEnterLevelRsp.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+          getPlayersFieldBuilder();
+        }
+      }
+      public Builder clear() {
+        super.clear();
+        result_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        reason_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        if (playersBuilder_ == null) {
+          players_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000004);
+        } else {
+          playersBuilder_.clear();
+        }
+        return this;
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return idevgame.meteor.proto.MeteorMsgs.internal_static_OnEnterLevelRsp_descriptor;
+      }
+
+      public idevgame.meteor.proto.MeteorMsgs.OnEnterLevelRsp getDefaultInstanceForType() {
+        return idevgame.meteor.proto.MeteorMsgs.OnEnterLevelRsp.getDefaultInstance();
+      }
+
+      public idevgame.meteor.proto.MeteorMsgs.OnEnterLevelRsp build() {
+        idevgame.meteor.proto.MeteorMsgs.OnEnterLevelRsp result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public idevgame.meteor.proto.MeteorMsgs.OnEnterLevelRsp buildPartial() {
+        idevgame.meteor.proto.MeteorMsgs.OnEnterLevelRsp result = new idevgame.meteor.proto.MeteorMsgs.OnEnterLevelRsp(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.result_ = result_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.reason_ = reason_;
+        if (playersBuilder_ == null) {
+          if (((bitField0_ & 0x00000004) == 0x00000004)) {
+            players_ = java.util.Collections.unmodifiableList(players_);
+            bitField0_ = (bitField0_ & ~0x00000004);
+          }
+          result.players_ = players_;
+        } else {
+          result.players_ = playersBuilder_.build();
+        }
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof idevgame.meteor.proto.MeteorMsgs.OnEnterLevelRsp) {
+          return mergeFrom((idevgame.meteor.proto.MeteorMsgs.OnEnterLevelRsp)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(idevgame.meteor.proto.MeteorMsgs.OnEnterLevelRsp other) {
+        if (other == idevgame.meteor.proto.MeteorMsgs.OnEnterLevelRsp.getDefaultInstance()) return this;
+        if (other.hasResult()) {
+          setResult(other.getResult());
+        }
+        if (other.hasReason()) {
+          setReason(other.getReason());
+        }
+        if (playersBuilder_ == null) {
+          if (!other.players_.isEmpty()) {
+            if (players_.isEmpty()) {
+              players_ = other.players_;
+              bitField0_ = (bitField0_ & ~0x00000004);
+            } else {
+              ensurePlayersIsMutable();
+              players_.addAll(other.players_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.players_.isEmpty()) {
+            if (playersBuilder_.isEmpty()) {
+              playersBuilder_.dispose();
+              playersBuilder_ = null;
+              players_ = other.players_;
+              bitField0_ = (bitField0_ & ~0x00000004);
+              playersBuilder_ = 
+                com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
+                   getPlayersFieldBuilder() : null;
+            } else {
+              playersBuilder_.addAllMessages(other.players_);
+            }
+          }
+        }
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        if (!hasResult()) {
+          return false;
+        }
+        if (!hasReason()) {
+          return false;
+        }
+        for (int i = 0; i < getPlayersCount(); i++) {
+          if (!getPlayers(i).isInitialized()) {
+            return false;
+          }
+        }
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        idevgame.meteor.proto.MeteorMsgs.OnEnterLevelRsp parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (idevgame.meteor.proto.MeteorMsgs.OnEnterLevelRsp) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private int result_ ;
+      /**
+       * <pre>
+       *1成功，其他失败
+       * </pre>
+       *
+       * <code>required uint32 result = 1;</code>
+       */
+      public boolean hasResult() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <pre>
+       *1成功，其他失败
+       * </pre>
+       *
+       * <code>required uint32 result = 1;</code>
+       */
+      public int getResult() {
+        return result_;
+      }
+      /**
+       * <pre>
+       *1成功，其他失败
+       * </pre>
+       *
+       * <code>required uint32 result = 1;</code>
+       */
+      public Builder setResult(int value) {
+        bitField0_ |= 0x00000001;
+        result_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *1成功，其他失败
+       * </pre>
+       *
+       * <code>required uint32 result = 1;</code>
+       */
+      public Builder clearResult() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        result_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int reason_ ;
+      /**
+       * <pre>
+       *失败为原因编号:1阵营人数已满
+       * </pre>
+       *
+       * <code>required uint32 reason = 2;</code>
+       */
+      public boolean hasReason() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <pre>
+       *失败为原因编号:1阵营人数已满
+       * </pre>
+       *
+       * <code>required uint32 reason = 2;</code>
+       */
+      public int getReason() {
+        return reason_;
+      }
+      /**
+       * <pre>
+       *失败为原因编号:1阵营人数已满
+       * </pre>
+       *
+       * <code>required uint32 reason = 2;</code>
+       */
+      public Builder setReason(int value) {
+        bitField0_ |= 0x00000002;
+        reason_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *失败为原因编号:1阵营人数已满
+       * </pre>
+       *
+       * <code>required uint32 reason = 2;</code>
+       */
+      public Builder clearReason() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        reason_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private java.util.List<idevgame.meteor.proto.MeteorMsgs.PlayerSync> players_ =
+        java.util.Collections.emptyList();
+      private void ensurePlayersIsMutable() {
+        if (!((bitField0_ & 0x00000004) == 0x00000004)) {
+          players_ = new java.util.ArrayList<idevgame.meteor.proto.MeteorMsgs.PlayerSync>(players_);
+          bitField0_ |= 0x00000004;
+         }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilderV3<
+          idevgame.meteor.proto.MeteorMsgs.PlayerSync, idevgame.meteor.proto.MeteorMsgs.PlayerSync.Builder, idevgame.meteor.proto.MeteorMsgs.PlayerSyncOrBuilder> playersBuilder_;
+
+      /**
+       * <pre>
+       *入场时拉取到场景所有角色的信息.
+       * </pre>
+       *
+       * <code>repeated .PlayerSync players = 3;</code>
+       */
+      public java.util.List<idevgame.meteor.proto.MeteorMsgs.PlayerSync> getPlayersList() {
+        if (playersBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(players_);
+        } else {
+          return playersBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <pre>
+       *入场时拉取到场景所有角色的信息.
+       * </pre>
+       *
+       * <code>repeated .PlayerSync players = 3;</code>
+       */
+      public int getPlayersCount() {
+        if (playersBuilder_ == null) {
+          return players_.size();
+        } else {
+          return playersBuilder_.getCount();
+        }
+      }
+      /**
+       * <pre>
+       *入场时拉取到场景所有角色的信息.
+       * </pre>
+       *
+       * <code>repeated .PlayerSync players = 3;</code>
+       */
+      public idevgame.meteor.proto.MeteorMsgs.PlayerSync getPlayers(int index) {
+        if (playersBuilder_ == null) {
+          return players_.get(index);
+        } else {
+          return playersBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <pre>
+       *入场时拉取到场景所有角色的信息.
+       * </pre>
+       *
+       * <code>repeated .PlayerSync players = 3;</code>
+       */
+      public Builder setPlayers(
+          int index, idevgame.meteor.proto.MeteorMsgs.PlayerSync value) {
+        if (playersBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensurePlayersIsMutable();
+          players_.set(index, value);
+          onChanged();
+        } else {
+          playersBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <pre>
+       *入场时拉取到场景所有角色的信息.
+       * </pre>
+       *
+       * <code>repeated .PlayerSync players = 3;</code>
+       */
+      public Builder setPlayers(
+          int index, idevgame.meteor.proto.MeteorMsgs.PlayerSync.Builder builderForValue) {
+        if (playersBuilder_ == null) {
+          ensurePlayersIsMutable();
+          players_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          playersBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <pre>
+       *入场时拉取到场景所有角色的信息.
+       * </pre>
+       *
+       * <code>repeated .PlayerSync players = 3;</code>
+       */
+      public Builder addPlayers(idevgame.meteor.proto.MeteorMsgs.PlayerSync value) {
+        if (playersBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensurePlayersIsMutable();
+          players_.add(value);
+          onChanged();
+        } else {
+          playersBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <pre>
+       *入场时拉取到场景所有角色的信息.
+       * </pre>
+       *
+       * <code>repeated .PlayerSync players = 3;</code>
+       */
+      public Builder addPlayers(
+          int index, idevgame.meteor.proto.MeteorMsgs.PlayerSync value) {
+        if (playersBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensurePlayersIsMutable();
+          players_.add(index, value);
+          onChanged();
+        } else {
+          playersBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <pre>
+       *入场时拉取到场景所有角色的信息.
+       * </pre>
+       *
+       * <code>repeated .PlayerSync players = 3;</code>
+       */
+      public Builder addPlayers(
+          idevgame.meteor.proto.MeteorMsgs.PlayerSync.Builder builderForValue) {
+        if (playersBuilder_ == null) {
+          ensurePlayersIsMutable();
+          players_.add(builderForValue.build());
+          onChanged();
+        } else {
+          playersBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <pre>
+       *入场时拉取到场景所有角色的信息.
+       * </pre>
+       *
+       * <code>repeated .PlayerSync players = 3;</code>
+       */
+      public Builder addPlayers(
+          int index, idevgame.meteor.proto.MeteorMsgs.PlayerSync.Builder builderForValue) {
+        if (playersBuilder_ == null) {
+          ensurePlayersIsMutable();
+          players_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          playersBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <pre>
+       *入场时拉取到场景所有角色的信息.
+       * </pre>
+       *
+       * <code>repeated .PlayerSync players = 3;</code>
+       */
+      public Builder addAllPlayers(
+          java.lang.Iterable<? extends idevgame.meteor.proto.MeteorMsgs.PlayerSync> values) {
+        if (playersBuilder_ == null) {
+          ensurePlayersIsMutable();
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, players_);
+          onChanged();
+        } else {
+          playersBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <pre>
+       *入场时拉取到场景所有角色的信息.
+       * </pre>
+       *
+       * <code>repeated .PlayerSync players = 3;</code>
+       */
+      public Builder clearPlayers() {
+        if (playersBuilder_ == null) {
+          players_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000004);
+          onChanged();
+        } else {
+          playersBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <pre>
+       *入场时拉取到场景所有角色的信息.
+       * </pre>
+       *
+       * <code>repeated .PlayerSync players = 3;</code>
+       */
+      public Builder removePlayers(int index) {
+        if (playersBuilder_ == null) {
+          ensurePlayersIsMutable();
+          players_.remove(index);
+          onChanged();
+        } else {
+          playersBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <pre>
+       *入场时拉取到场景所有角色的信息.
+       * </pre>
+       *
+       * <code>repeated .PlayerSync players = 3;</code>
+       */
+      public idevgame.meteor.proto.MeteorMsgs.PlayerSync.Builder getPlayersBuilder(
+          int index) {
+        return getPlayersFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <pre>
+       *入场时拉取到场景所有角色的信息.
+       * </pre>
+       *
+       * <code>repeated .PlayerSync players = 3;</code>
+       */
+      public idevgame.meteor.proto.MeteorMsgs.PlayerSyncOrBuilder getPlayersOrBuilder(
+          int index) {
+        if (playersBuilder_ == null) {
+          return players_.get(index);  } else {
+          return playersBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <pre>
+       *入场时拉取到场景所有角色的信息.
+       * </pre>
+       *
+       * <code>repeated .PlayerSync players = 3;</code>
+       */
+      public java.util.List<? extends idevgame.meteor.proto.MeteorMsgs.PlayerSyncOrBuilder> 
+           getPlayersOrBuilderList() {
+        if (playersBuilder_ != null) {
+          return playersBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(players_);
+        }
+      }
+      /**
+       * <pre>
+       *入场时拉取到场景所有角色的信息.
+       * </pre>
+       *
+       * <code>repeated .PlayerSync players = 3;</code>
+       */
+      public idevgame.meteor.proto.MeteorMsgs.PlayerSync.Builder addPlayersBuilder() {
+        return getPlayersFieldBuilder().addBuilder(
+            idevgame.meteor.proto.MeteorMsgs.PlayerSync.getDefaultInstance());
+      }
+      /**
+       * <pre>
+       *入场时拉取到场景所有角色的信息.
+       * </pre>
+       *
+       * <code>repeated .PlayerSync players = 3;</code>
+       */
+      public idevgame.meteor.proto.MeteorMsgs.PlayerSync.Builder addPlayersBuilder(
+          int index) {
+        return getPlayersFieldBuilder().addBuilder(
+            index, idevgame.meteor.proto.MeteorMsgs.PlayerSync.getDefaultInstance());
+      }
+      /**
+       * <pre>
+       *入场时拉取到场景所有角色的信息.
+       * </pre>
+       *
+       * <code>repeated .PlayerSync players = 3;</code>
+       */
+      public java.util.List<idevgame.meteor.proto.MeteorMsgs.PlayerSync.Builder> 
+           getPlayersBuilderList() {
+        return getPlayersFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilderV3<
+          idevgame.meteor.proto.MeteorMsgs.PlayerSync, idevgame.meteor.proto.MeteorMsgs.PlayerSync.Builder, idevgame.meteor.proto.MeteorMsgs.PlayerSyncOrBuilder> 
+          getPlayersFieldBuilder() {
+        if (playersBuilder_ == null) {
+          playersBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
+              idevgame.meteor.proto.MeteorMsgs.PlayerSync, idevgame.meteor.proto.MeteorMsgs.PlayerSync.Builder, idevgame.meteor.proto.MeteorMsgs.PlayerSyncOrBuilder>(
+                  players_,
+                  ((bitField0_ & 0x00000004) == 0x00000004),
+                  getParentForChildren(),
+                  isClean());
+          players_ = null;
+        }
+        return playersBuilder_;
+      }
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFields(unknownFields);
+      }
+
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:OnEnterLevelRsp)
+    }
+
+    // @@protoc_insertion_point(class_scope:OnEnterLevelRsp)
+    private static final idevgame.meteor.proto.MeteorMsgs.OnEnterLevelRsp DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new idevgame.meteor.proto.MeteorMsgs.OnEnterLevelRsp();
+    }
+
+    public static idevgame.meteor.proto.MeteorMsgs.OnEnterLevelRsp getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    @java.lang.Deprecated public static final com.google.protobuf.Parser<OnEnterLevelRsp>
+        PARSER = new com.google.protobuf.AbstractParser<OnEnterLevelRsp>() {
+      public OnEnterLevelRsp parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new OnEnterLevelRsp(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<OnEnterLevelRsp> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<OnEnterLevelRsp> getParserForType() {
+      return PARSER;
+    }
+
+    public idevgame.meteor.proto.MeteorMsgs.OnEnterLevelRsp getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
@@ -26340,27 +18524,10 @@ public final class MeteorMsgs {
 
     /**
      * <pre>
-     *游戏逻辑帧编号.
-     * </pre>
-     *
-     * <code>required uint32 LogicFrame = 1;</code>
-     */
-    boolean hasLogicFrame();
-    /**
-     * <pre>
-     *游戏逻辑帧编号.
-     * </pre>
-     *
-     * <code>required uint32 LogicFrame = 1;</code>
-     */
-    int getLogicFrame();
-
-    /**
-     * <pre>
      *指定玩家编号的.
      * </pre>
      *
-     * <code>optional uint32 playerId = 2;</code>
+     * <code>optional uint32 playerId = 1;</code>
      */
     boolean hasPlayerId();
     /**
@@ -26368,7 +18535,7 @@ public final class MeteorMsgs {
      *指定玩家编号的.
      * </pre>
      *
-     * <code>optional uint32 playerId = 2;</code>
+     * <code>optional uint32 playerId = 1;</code>
      */
     int getPlayerId();
 
@@ -26377,7 +18544,7 @@ public final class MeteorMsgs {
      *帧指令ID-指明了协议包怎么解开
      * </pre>
      *
-     * <code>required .MeteorMsg.Command command = 3;</code>
+     * <code>required .MeteorMsg.Command command = 2;</code>
      */
     boolean hasCommand();
     /**
@@ -26385,30 +18552,30 @@ public final class MeteorMsgs {
      *帧指令ID-指明了协议包怎么解开
      * </pre>
      *
-     * <code>required .MeteorMsg.Command command = 3;</code>
+     * <code>required .MeteorMsg.Command command = 2;</code>
      */
     idevgame.meteor.proto.MeteorMsgs.MeteorMsg.Command getCommand();
 
     /**
      * <pre>
-     *协议包数据-用上一个指令对应的结构反序列化
+     *消息内容
      * </pre>
      *
-     * <code>required bytes data = 4;</code>
+     * <code>optional bytes Data = 3;</code>
      */
     boolean hasData();
     /**
      * <pre>
-     *协议包数据-用上一个指令对应的结构反序列化
+     *消息内容
      * </pre>
      *
-     * <code>required bytes data = 4;</code>
+     * <code>optional bytes Data = 3;</code>
      */
     com.google.protobuf.ByteString getData();
   }
   /**
    * <pre>
-   *帧事件.
+   *帧事件.每个单独的按键，鼠标移动，都视为一个帧事件，一个帧可能有多个帧事件
    * </pre>
    *
    * Protobuf type {@code FrameCommand}
@@ -26423,7 +18590,6 @@ public final class MeteorMsgs {
       super(builder);
     }
     private FrameCommand() {
-      logicFrame_ = 0;
       playerId_ = 0;
       command_ = 1;
       data_ = com.google.protobuf.ByteString.EMPTY;
@@ -26462,27 +18628,22 @@ public final class MeteorMsgs {
             }
             case 8: {
               bitField0_ |= 0x00000001;
-              logicFrame_ = input.readUInt32();
-              break;
-            }
-            case 16: {
-              bitField0_ |= 0x00000002;
               playerId_ = input.readUInt32();
               break;
             }
-            case 24: {
+            case 16: {
               int rawValue = input.readEnum();
               idevgame.meteor.proto.MeteorMsgs.MeteorMsg.Command value = idevgame.meteor.proto.MeteorMsgs.MeteorMsg.Command.valueOf(rawValue);
               if (value == null) {
-                unknownFields.mergeVarintField(3, rawValue);
+                unknownFields.mergeVarintField(2, rawValue);
               } else {
-                bitField0_ |= 0x00000004;
+                bitField0_ |= 0x00000002;
                 command_ = rawValue;
               }
               break;
             }
-            case 34: {
-              bitField0_ |= 0x00000008;
+            case 26: {
+              bitField0_ |= 0x00000004;
               data_ = input.readBytes();
               break;
             }
@@ -26511,94 +18672,71 @@ public final class MeteorMsgs {
     }
 
     private int bitField0_;
-    public static final int LOGICFRAME_FIELD_NUMBER = 1;
-    private int logicFrame_;
-    /**
-     * <pre>
-     *游戏逻辑帧编号.
-     * </pre>
-     *
-     * <code>required uint32 LogicFrame = 1;</code>
-     */
-    public boolean hasLogicFrame() {
-      return ((bitField0_ & 0x00000001) == 0x00000001);
-    }
-    /**
-     * <pre>
-     *游戏逻辑帧编号.
-     * </pre>
-     *
-     * <code>required uint32 LogicFrame = 1;</code>
-     */
-    public int getLogicFrame() {
-      return logicFrame_;
-    }
-
-    public static final int PLAYERID_FIELD_NUMBER = 2;
+    public static final int PLAYERID_FIELD_NUMBER = 1;
     private int playerId_;
     /**
      * <pre>
      *指定玩家编号的.
      * </pre>
      *
-     * <code>optional uint32 playerId = 2;</code>
+     * <code>optional uint32 playerId = 1;</code>
      */
     public boolean hasPlayerId() {
-      return ((bitField0_ & 0x00000002) == 0x00000002);
+      return ((bitField0_ & 0x00000001) == 0x00000001);
     }
     /**
      * <pre>
      *指定玩家编号的.
      * </pre>
      *
-     * <code>optional uint32 playerId = 2;</code>
+     * <code>optional uint32 playerId = 1;</code>
      */
     public int getPlayerId() {
       return playerId_;
     }
 
-    public static final int COMMAND_FIELD_NUMBER = 3;
+    public static final int COMMAND_FIELD_NUMBER = 2;
     private int command_;
     /**
      * <pre>
      *帧指令ID-指明了协议包怎么解开
      * </pre>
      *
-     * <code>required .MeteorMsg.Command command = 3;</code>
+     * <code>required .MeteorMsg.Command command = 2;</code>
      */
     public boolean hasCommand() {
-      return ((bitField0_ & 0x00000004) == 0x00000004);
+      return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
      * <pre>
      *帧指令ID-指明了协议包怎么解开
      * </pre>
      *
-     * <code>required .MeteorMsg.Command command = 3;</code>
+     * <code>required .MeteorMsg.Command command = 2;</code>
      */
     public idevgame.meteor.proto.MeteorMsgs.MeteorMsg.Command getCommand() {
       idevgame.meteor.proto.MeteorMsgs.MeteorMsg.Command result = idevgame.meteor.proto.MeteorMsgs.MeteorMsg.Command.valueOf(command_);
-      return result == null ? idevgame.meteor.proto.MeteorMsgs.MeteorMsg.Command.SyncRandomSeed : result;
+      return result == null ? idevgame.meteor.proto.MeteorMsgs.MeteorMsg.Command.ClientSync : result;
     }
 
-    public static final int DATA_FIELD_NUMBER = 4;
+    public static final int DATA_FIELD_NUMBER = 3;
     private com.google.protobuf.ByteString data_;
     /**
      * <pre>
-     *协议包数据-用上一个指令对应的结构反序列化
+     *消息内容
      * </pre>
      *
-     * <code>required bytes data = 4;</code>
+     * <code>optional bytes Data = 3;</code>
      */
     public boolean hasData() {
-      return ((bitField0_ & 0x00000008) == 0x00000008);
+      return ((bitField0_ & 0x00000004) == 0x00000004);
     }
     /**
      * <pre>
-     *协议包数据-用上一个指令对应的结构反序列化
+     *消息内容
      * </pre>
      *
-     * <code>required bytes data = 4;</code>
+     * <code>optional bytes Data = 3;</code>
      */
     public com.google.protobuf.ByteString getData() {
       return data_;
@@ -26610,15 +18748,7 @@ public final class MeteorMsgs {
       if (isInitialized == 1) return true;
       if (isInitialized == 0) return false;
 
-      if (!hasLogicFrame()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
       if (!hasCommand()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
-      if (!hasData()) {
         memoizedIsInitialized = 0;
         return false;
       }
@@ -26629,16 +18759,13 @@ public final class MeteorMsgs {
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeUInt32(1, logicFrame_);
+        output.writeUInt32(1, playerId_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeUInt32(2, playerId_);
+        output.writeEnum(2, command_);
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeEnum(3, command_);
-      }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        output.writeBytes(4, data_);
+        output.writeBytes(3, data_);
       }
       unknownFields.writeTo(output);
     }
@@ -26650,19 +18777,15 @@ public final class MeteorMsgs {
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeUInt32Size(1, logicFrame_);
+          .computeUInt32Size(1, playerId_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeUInt32Size(2, playerId_);
+          .computeEnumSize(2, command_);
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeEnumSize(3, command_);
-      }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(4, data_);
+          .computeBytesSize(3, data_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -26680,11 +18803,6 @@ public final class MeteorMsgs {
       idevgame.meteor.proto.MeteorMsgs.FrameCommand other = (idevgame.meteor.proto.MeteorMsgs.FrameCommand) obj;
 
       boolean result = true;
-      result = result && (hasLogicFrame() == other.hasLogicFrame());
-      if (hasLogicFrame()) {
-        result = result && (getLogicFrame()
-            == other.getLogicFrame());
-      }
       result = result && (hasPlayerId() == other.hasPlayerId());
       if (hasPlayerId()) {
         result = result && (getPlayerId()
@@ -26710,10 +18828,6 @@ public final class MeteorMsgs {
       }
       int hash = 41;
       hash = (19 * hash) + getDescriptor().hashCode();
-      if (hasLogicFrame()) {
-        hash = (37 * hash) + LOGICFRAME_FIELD_NUMBER;
-        hash = (53 * hash) + getLogicFrame();
-      }
       if (hasPlayerId()) {
         hash = (37 * hash) + PLAYERID_FIELD_NUMBER;
         hash = (53 * hash) + getPlayerId();
@@ -26821,7 +18935,7 @@ public final class MeteorMsgs {
     }
     /**
      * <pre>
-     *帧事件.
+     *帧事件.每个单独的按键，鼠标移动，都视为一个帧事件，一个帧可能有多个帧事件
      * </pre>
      *
      * Protobuf type {@code FrameCommand}
@@ -26859,14 +18973,12 @@ public final class MeteorMsgs {
       }
       public Builder clear() {
         super.clear();
-        logicFrame_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000001);
         playerId_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000002);
+        bitField0_ = (bitField0_ & ~0x00000001);
         command_ = 1;
-        bitField0_ = (bitField0_ & ~0x00000004);
+        bitField0_ = (bitField0_ & ~0x00000002);
         data_ = com.google.protobuf.ByteString.EMPTY;
-        bitField0_ = (bitField0_ & ~0x00000008);
+        bitField0_ = (bitField0_ & ~0x00000004);
         return this;
       }
 
@@ -26894,17 +19006,13 @@ public final class MeteorMsgs {
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
           to_bitField0_ |= 0x00000001;
         }
-        result.logicFrame_ = logicFrame_;
+        result.playerId_ = playerId_;
         if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
           to_bitField0_ |= 0x00000002;
         }
-        result.playerId_ = playerId_;
+        result.command_ = command_;
         if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
           to_bitField0_ |= 0x00000004;
-        }
-        result.command_ = command_;
-        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
-          to_bitField0_ |= 0x00000008;
         }
         result.data_ = data_;
         result.bitField0_ = to_bitField0_;
@@ -26949,9 +19057,6 @@ public final class MeteorMsgs {
 
       public Builder mergeFrom(idevgame.meteor.proto.MeteorMsgs.FrameCommand other) {
         if (other == idevgame.meteor.proto.MeteorMsgs.FrameCommand.getDefaultInstance()) return this;
-        if (other.hasLogicFrame()) {
-          setLogicFrame(other.getLogicFrame());
-        }
         if (other.hasPlayerId()) {
           setPlayerId(other.getPlayerId());
         }
@@ -26967,13 +19072,7 @@ public final class MeteorMsgs {
       }
 
       public final boolean isInitialized() {
-        if (!hasLogicFrame()) {
-          return false;
-        }
         if (!hasCommand()) {
-          return false;
-        }
-        if (!hasData()) {
           return false;
         }
         return true;
@@ -26998,71 +19097,23 @@ public final class MeteorMsgs {
       }
       private int bitField0_;
 
-      private int logicFrame_ ;
-      /**
-       * <pre>
-       *游戏逻辑帧编号.
-       * </pre>
-       *
-       * <code>required uint32 LogicFrame = 1;</code>
-       */
-      public boolean hasLogicFrame() {
-        return ((bitField0_ & 0x00000001) == 0x00000001);
-      }
-      /**
-       * <pre>
-       *游戏逻辑帧编号.
-       * </pre>
-       *
-       * <code>required uint32 LogicFrame = 1;</code>
-       */
-      public int getLogicFrame() {
-        return logicFrame_;
-      }
-      /**
-       * <pre>
-       *游戏逻辑帧编号.
-       * </pre>
-       *
-       * <code>required uint32 LogicFrame = 1;</code>
-       */
-      public Builder setLogicFrame(int value) {
-        bitField0_ |= 0x00000001;
-        logicFrame_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <pre>
-       *游戏逻辑帧编号.
-       * </pre>
-       *
-       * <code>required uint32 LogicFrame = 1;</code>
-       */
-      public Builder clearLogicFrame() {
-        bitField0_ = (bitField0_ & ~0x00000001);
-        logicFrame_ = 0;
-        onChanged();
-        return this;
-      }
-
       private int playerId_ ;
       /**
        * <pre>
        *指定玩家编号的.
        * </pre>
        *
-       * <code>optional uint32 playerId = 2;</code>
+       * <code>optional uint32 playerId = 1;</code>
        */
       public boolean hasPlayerId() {
-        return ((bitField0_ & 0x00000002) == 0x00000002);
+        return ((bitField0_ & 0x00000001) == 0x00000001);
       }
       /**
        * <pre>
        *指定玩家编号的.
        * </pre>
        *
-       * <code>optional uint32 playerId = 2;</code>
+       * <code>optional uint32 playerId = 1;</code>
        */
       public int getPlayerId() {
         return playerId_;
@@ -27072,10 +19123,10 @@ public final class MeteorMsgs {
        *指定玩家编号的.
        * </pre>
        *
-       * <code>optional uint32 playerId = 2;</code>
+       * <code>optional uint32 playerId = 1;</code>
        */
       public Builder setPlayerId(int value) {
-        bitField0_ |= 0x00000002;
+        bitField0_ |= 0x00000001;
         playerId_ = value;
         onChanged();
         return this;
@@ -27085,10 +19136,10 @@ public final class MeteorMsgs {
        *指定玩家编号的.
        * </pre>
        *
-       * <code>optional uint32 playerId = 2;</code>
+       * <code>optional uint32 playerId = 1;</code>
        */
       public Builder clearPlayerId() {
-        bitField0_ = (bitField0_ & ~0x00000002);
+        bitField0_ = (bitField0_ & ~0x00000001);
         playerId_ = 0;
         onChanged();
         return this;
@@ -27100,34 +19151,34 @@ public final class MeteorMsgs {
        *帧指令ID-指明了协议包怎么解开
        * </pre>
        *
-       * <code>required .MeteorMsg.Command command = 3;</code>
+       * <code>required .MeteorMsg.Command command = 2;</code>
        */
       public boolean hasCommand() {
-        return ((bitField0_ & 0x00000004) == 0x00000004);
+        return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
        * <pre>
        *帧指令ID-指明了协议包怎么解开
        * </pre>
        *
-       * <code>required .MeteorMsg.Command command = 3;</code>
+       * <code>required .MeteorMsg.Command command = 2;</code>
        */
       public idevgame.meteor.proto.MeteorMsgs.MeteorMsg.Command getCommand() {
         idevgame.meteor.proto.MeteorMsgs.MeteorMsg.Command result = idevgame.meteor.proto.MeteorMsgs.MeteorMsg.Command.valueOf(command_);
-        return result == null ? idevgame.meteor.proto.MeteorMsgs.MeteorMsg.Command.SyncRandomSeed : result;
+        return result == null ? idevgame.meteor.proto.MeteorMsgs.MeteorMsg.Command.ClientSync : result;
       }
       /**
        * <pre>
        *帧指令ID-指明了协议包怎么解开
        * </pre>
        *
-       * <code>required .MeteorMsg.Command command = 3;</code>
+       * <code>required .MeteorMsg.Command command = 2;</code>
        */
       public Builder setCommand(idevgame.meteor.proto.MeteorMsgs.MeteorMsg.Command value) {
         if (value == null) {
           throw new NullPointerException();
         }
-        bitField0_ |= 0x00000004;
+        bitField0_ |= 0x00000002;
         command_ = value.getNumber();
         onChanged();
         return this;
@@ -27137,10 +19188,10 @@ public final class MeteorMsgs {
        *帧指令ID-指明了协议包怎么解开
        * </pre>
        *
-       * <code>required .MeteorMsg.Command command = 3;</code>
+       * <code>required .MeteorMsg.Command command = 2;</code>
        */
       public Builder clearCommand() {
-        bitField0_ = (bitField0_ & ~0x00000004);
+        bitField0_ = (bitField0_ & ~0x00000002);
         command_ = 1;
         onChanged();
         return this;
@@ -27149,49 +19200,49 @@ public final class MeteorMsgs {
       private com.google.protobuf.ByteString data_ = com.google.protobuf.ByteString.EMPTY;
       /**
        * <pre>
-       *协议包数据-用上一个指令对应的结构反序列化
+       *消息内容
        * </pre>
        *
-       * <code>required bytes data = 4;</code>
+       * <code>optional bytes Data = 3;</code>
        */
       public boolean hasData() {
-        return ((bitField0_ & 0x00000008) == 0x00000008);
+        return ((bitField0_ & 0x00000004) == 0x00000004);
       }
       /**
        * <pre>
-       *协议包数据-用上一个指令对应的结构反序列化
+       *消息内容
        * </pre>
        *
-       * <code>required bytes data = 4;</code>
+       * <code>optional bytes Data = 3;</code>
        */
       public com.google.protobuf.ByteString getData() {
         return data_;
       }
       /**
        * <pre>
-       *协议包数据-用上一个指令对应的结构反序列化
+       *消息内容
        * </pre>
        *
-       * <code>required bytes data = 4;</code>
+       * <code>optional bytes Data = 3;</code>
        */
       public Builder setData(com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000008;
+  bitField0_ |= 0x00000004;
         data_ = value;
         onChanged();
         return this;
       }
       /**
        * <pre>
-       *协议包数据-用上一个指令对应的结构反序列化
+       *消息内容
        * </pre>
        *
-       * <code>required bytes data = 4;</code>
+       * <code>optional bytes Data = 3;</code>
        */
       public Builder clearData() {
-        bitField0_ = (bitField0_ & ~0x00000008);
+        bitField0_ = (bitField0_ & ~0x00000004);
         data_ = getDefaultInstance().getData();
         onChanged();
         return this;
@@ -27245,51 +19296,89 @@ public final class MeteorMsgs {
 
   }
 
-  public interface GameFramesOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:GameFrames)
+  public interface GameFrameOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:GameFrame)
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>repeated .FrameCommand commands = 1;</code>
+     * <pre>
+     *此轮剩余时间，服务器端用来控制客户端下一轮-如果客户端提前到结束，就不能操作，需要等服务器广播消息后再返回到-选阵营
+     * </pre>
+     *
+     * <code>optional int32 time = 1;</code>
+     */
+    boolean hasTime();
+    /**
+     * <pre>
+     *此轮剩余时间，服务器端用来控制客户端下一轮-如果客户端提前到结束，就不能操作，需要等服务器广播消息后再返回到-选阵营
+     * </pre>
+     *
+     * <code>optional int32 time = 1;</code>
+     */
+    int getTime();
+
+    /**
+     * <pre>
+     *所有玩家的状态.或者事件
+     * </pre>
+     *
+     * <code>repeated .FrameCommand commands = 2;</code>
      */
     java.util.List<idevgame.meteor.proto.MeteorMsgs.FrameCommand> 
         getCommandsList();
     /**
-     * <code>repeated .FrameCommand commands = 1;</code>
+     * <pre>
+     *所有玩家的状态.或者事件
+     * </pre>
+     *
+     * <code>repeated .FrameCommand commands = 2;</code>
      */
     idevgame.meteor.proto.MeteorMsgs.FrameCommand getCommands(int index);
     /**
-     * <code>repeated .FrameCommand commands = 1;</code>
+     * <pre>
+     *所有玩家的状态.或者事件
+     * </pre>
+     *
+     * <code>repeated .FrameCommand commands = 2;</code>
      */
     int getCommandsCount();
     /**
-     * <code>repeated .FrameCommand commands = 1;</code>
+     * <pre>
+     *所有玩家的状态.或者事件
+     * </pre>
+     *
+     * <code>repeated .FrameCommand commands = 2;</code>
      */
     java.util.List<? extends idevgame.meteor.proto.MeteorMsgs.FrameCommandOrBuilder> 
         getCommandsOrBuilderList();
     /**
-     * <code>repeated .FrameCommand commands = 1;</code>
+     * <pre>
+     *所有玩家的状态.或者事件
+     * </pre>
+     *
+     * <code>repeated .FrameCommand commands = 2;</code>
      */
     idevgame.meteor.proto.MeteorMsgs.FrameCommandOrBuilder getCommandsOrBuilder(
         int index);
   }
   /**
    * <pre>
-   *服务器指令
+   *服务器指令.
    * </pre>
    *
-   * Protobuf type {@code GameFrames}
+   * Protobuf type {@code GameFrame}
    */
-  public  static final class GameFrames extends
+  public  static final class GameFrame extends
       com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:GameFrames)
-      GameFramesOrBuilder {
+      // @@protoc_insertion_point(message_implements:GameFrame)
+      GameFrameOrBuilder {
   private static final long serialVersionUID = 0L;
-    // Use GameFrames.newBuilder() to construct.
-    private GameFrames(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+    // Use GameFrame.newBuilder() to construct.
+    private GameFrame(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
     }
-    private GameFrames() {
+    private GameFrame() {
+      time_ = 0;
       commands_ = java.util.Collections.emptyList();
     }
 
@@ -27298,7 +19387,7 @@ public final class MeteorMsgs {
     getUnknownFields() {
       return this.unknownFields;
     }
-    private GameFrames(
+    private GameFrame(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -27324,10 +19413,15 @@ public final class MeteorMsgs {
               }
               break;
             }
-            case 10: {
-              if (!((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
+            case 8: {
+              bitField0_ |= 0x00000001;
+              time_ = input.readInt32();
+              break;
+            }
+            case 18: {
+              if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
                 commands_ = new java.util.ArrayList<idevgame.meteor.proto.MeteorMsgs.FrameCommand>();
-                mutable_bitField0_ |= 0x00000001;
+                mutable_bitField0_ |= 0x00000002;
               }
               commands_.add(
                   input.readMessage(idevgame.meteor.proto.MeteorMsgs.FrameCommand.PARSER, extensionRegistry));
@@ -27341,7 +19435,7 @@ public final class MeteorMsgs {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
-        if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
+        if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
           commands_ = java.util.Collections.unmodifiableList(commands_);
         }
         this.unknownFields = unknownFields.build();
@@ -27350,45 +19444,89 @@ public final class MeteorMsgs {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return idevgame.meteor.proto.MeteorMsgs.internal_static_GameFrames_descriptor;
+      return idevgame.meteor.proto.MeteorMsgs.internal_static_GameFrame_descriptor;
     }
 
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return idevgame.meteor.proto.MeteorMsgs.internal_static_GameFrames_fieldAccessorTable
+      return idevgame.meteor.proto.MeteorMsgs.internal_static_GameFrame_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              idevgame.meteor.proto.MeteorMsgs.GameFrames.class, idevgame.meteor.proto.MeteorMsgs.GameFrames.Builder.class);
+              idevgame.meteor.proto.MeteorMsgs.GameFrame.class, idevgame.meteor.proto.MeteorMsgs.GameFrame.Builder.class);
     }
 
-    public static final int COMMANDS_FIELD_NUMBER = 1;
+    private int bitField0_;
+    public static final int TIME_FIELD_NUMBER = 1;
+    private int time_;
+    /**
+     * <pre>
+     *此轮剩余时间，服务器端用来控制客户端下一轮-如果客户端提前到结束，就不能操作，需要等服务器广播消息后再返回到-选阵营
+     * </pre>
+     *
+     * <code>optional int32 time = 1;</code>
+     */
+    public boolean hasTime() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <pre>
+     *此轮剩余时间，服务器端用来控制客户端下一轮-如果客户端提前到结束，就不能操作，需要等服务器广播消息后再返回到-选阵营
+     * </pre>
+     *
+     * <code>optional int32 time = 1;</code>
+     */
+    public int getTime() {
+      return time_;
+    }
+
+    public static final int COMMANDS_FIELD_NUMBER = 2;
     private java.util.List<idevgame.meteor.proto.MeteorMsgs.FrameCommand> commands_;
     /**
-     * <code>repeated .FrameCommand commands = 1;</code>
+     * <pre>
+     *所有玩家的状态.或者事件
+     * </pre>
+     *
+     * <code>repeated .FrameCommand commands = 2;</code>
      */
     public java.util.List<idevgame.meteor.proto.MeteorMsgs.FrameCommand> getCommandsList() {
       return commands_;
     }
     /**
-     * <code>repeated .FrameCommand commands = 1;</code>
+     * <pre>
+     *所有玩家的状态.或者事件
+     * </pre>
+     *
+     * <code>repeated .FrameCommand commands = 2;</code>
      */
     public java.util.List<? extends idevgame.meteor.proto.MeteorMsgs.FrameCommandOrBuilder> 
         getCommandsOrBuilderList() {
       return commands_;
     }
     /**
-     * <code>repeated .FrameCommand commands = 1;</code>
+     * <pre>
+     *所有玩家的状态.或者事件
+     * </pre>
+     *
+     * <code>repeated .FrameCommand commands = 2;</code>
      */
     public int getCommandsCount() {
       return commands_.size();
     }
     /**
-     * <code>repeated .FrameCommand commands = 1;</code>
+     * <pre>
+     *所有玩家的状态.或者事件
+     * </pre>
+     *
+     * <code>repeated .FrameCommand commands = 2;</code>
      */
     public idevgame.meteor.proto.MeteorMsgs.FrameCommand getCommands(int index) {
       return commands_.get(index);
     }
     /**
-     * <code>repeated .FrameCommand commands = 1;</code>
+     * <pre>
+     *所有玩家的状态.或者事件
+     * </pre>
+     *
+     * <code>repeated .FrameCommand commands = 2;</code>
      */
     public idevgame.meteor.proto.MeteorMsgs.FrameCommandOrBuilder getCommandsOrBuilder(
         int index) {
@@ -27413,8 +19551,11 @@ public final class MeteorMsgs {
 
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeInt32(1, time_);
+      }
       for (int i = 0; i < commands_.size(); i++) {
-        output.writeMessage(1, commands_.get(i));
+        output.writeMessage(2, commands_.get(i));
       }
       unknownFields.writeTo(output);
     }
@@ -27424,9 +19565,13 @@ public final class MeteorMsgs {
       if (size != -1) return size;
 
       size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(1, time_);
+      }
       for (int i = 0; i < commands_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(1, commands_.get(i));
+          .computeMessageSize(2, commands_.get(i));
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -27438,12 +19583,17 @@ public final class MeteorMsgs {
       if (obj == this) {
        return true;
       }
-      if (!(obj instanceof idevgame.meteor.proto.MeteorMsgs.GameFrames)) {
+      if (!(obj instanceof idevgame.meteor.proto.MeteorMsgs.GameFrame)) {
         return super.equals(obj);
       }
-      idevgame.meteor.proto.MeteorMsgs.GameFrames other = (idevgame.meteor.proto.MeteorMsgs.GameFrames) obj;
+      idevgame.meteor.proto.MeteorMsgs.GameFrame other = (idevgame.meteor.proto.MeteorMsgs.GameFrame) obj;
 
       boolean result = true;
+      result = result && (hasTime() == other.hasTime());
+      if (hasTime()) {
+        result = result && (getTime()
+            == other.getTime());
+      }
       result = result && getCommandsList()
           .equals(other.getCommandsList());
       result = result && unknownFields.equals(other.unknownFields);
@@ -27457,6 +19607,10 @@ public final class MeteorMsgs {
       }
       int hash = 41;
       hash = (19 * hash) + getDescriptor().hashCode();
+      if (hasTime()) {
+        hash = (37 * hash) + TIME_FIELD_NUMBER;
+        hash = (53 * hash) + getTime();
+      }
       if (getCommandsCount() > 0) {
         hash = (37 * hash) + COMMANDS_FIELD_NUMBER;
         hash = (53 * hash) + getCommandsList().hashCode();
@@ -27466,69 +19620,69 @@ public final class MeteorMsgs {
       return hash;
     }
 
-    public static idevgame.meteor.proto.MeteorMsgs.GameFrames parseFrom(
+    public static idevgame.meteor.proto.MeteorMsgs.GameFrame parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static idevgame.meteor.proto.MeteorMsgs.GameFrames parseFrom(
+    public static idevgame.meteor.proto.MeteorMsgs.GameFrame parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static idevgame.meteor.proto.MeteorMsgs.GameFrames parseFrom(
+    public static idevgame.meteor.proto.MeteorMsgs.GameFrame parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static idevgame.meteor.proto.MeteorMsgs.GameFrames parseFrom(
+    public static idevgame.meteor.proto.MeteorMsgs.GameFrame parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static idevgame.meteor.proto.MeteorMsgs.GameFrames parseFrom(byte[] data)
+    public static idevgame.meteor.proto.MeteorMsgs.GameFrame parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static idevgame.meteor.proto.MeteorMsgs.GameFrames parseFrom(
+    public static idevgame.meteor.proto.MeteorMsgs.GameFrame parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static idevgame.meteor.proto.MeteorMsgs.GameFrames parseFrom(java.io.InputStream input)
+    public static idevgame.meteor.proto.MeteorMsgs.GameFrame parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static idevgame.meteor.proto.MeteorMsgs.GameFrames parseFrom(
+    public static idevgame.meteor.proto.MeteorMsgs.GameFrame parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
-    public static idevgame.meteor.proto.MeteorMsgs.GameFrames parseDelimitedFrom(java.io.InputStream input)
+    public static idevgame.meteor.proto.MeteorMsgs.GameFrame parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input);
     }
-    public static idevgame.meteor.proto.MeteorMsgs.GameFrames parseDelimitedFrom(
+    public static idevgame.meteor.proto.MeteorMsgs.GameFrame parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static idevgame.meteor.proto.MeteorMsgs.GameFrames parseFrom(
+    public static idevgame.meteor.proto.MeteorMsgs.GameFrame parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static idevgame.meteor.proto.MeteorMsgs.GameFrames parseFrom(
+    public static idevgame.meteor.proto.MeteorMsgs.GameFrame parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -27540,7 +19694,7 @@ public final class MeteorMsgs {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(idevgame.meteor.proto.MeteorMsgs.GameFrames prototype) {
+    public static Builder newBuilder(idevgame.meteor.proto.MeteorMsgs.GameFrame prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() {
@@ -27556,28 +19710,28 @@ public final class MeteorMsgs {
     }
     /**
      * <pre>
-     *服务器指令
+     *服务器指令.
      * </pre>
      *
-     * Protobuf type {@code GameFrames}
+     * Protobuf type {@code GameFrame}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:GameFrames)
-        idevgame.meteor.proto.MeteorMsgs.GameFramesOrBuilder {
+        // @@protoc_insertion_point(builder_implements:GameFrame)
+        idevgame.meteor.proto.MeteorMsgs.GameFrameOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return idevgame.meteor.proto.MeteorMsgs.internal_static_GameFrames_descriptor;
+        return idevgame.meteor.proto.MeteorMsgs.internal_static_GameFrame_descriptor;
       }
 
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return idevgame.meteor.proto.MeteorMsgs.internal_static_GameFrames_fieldAccessorTable
+        return idevgame.meteor.proto.MeteorMsgs.internal_static_GameFrame_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                idevgame.meteor.proto.MeteorMsgs.GameFrames.class, idevgame.meteor.proto.MeteorMsgs.GameFrames.Builder.class);
+                idevgame.meteor.proto.MeteorMsgs.GameFrame.class, idevgame.meteor.proto.MeteorMsgs.GameFrame.Builder.class);
       }
 
-      // Construct using idevgame.meteor.proto.MeteorMsgs.GameFrames.newBuilder()
+      // Construct using idevgame.meteor.proto.MeteorMsgs.GameFrame.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
@@ -27595,9 +19749,11 @@ public final class MeteorMsgs {
       }
       public Builder clear() {
         super.clear();
+        time_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000001);
         if (commandsBuilder_ == null) {
           commands_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000001);
+          bitField0_ = (bitField0_ & ~0x00000002);
         } else {
           commandsBuilder_.clear();
         }
@@ -27606,33 +19762,39 @@ public final class MeteorMsgs {
 
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return idevgame.meteor.proto.MeteorMsgs.internal_static_GameFrames_descriptor;
+        return idevgame.meteor.proto.MeteorMsgs.internal_static_GameFrame_descriptor;
       }
 
-      public idevgame.meteor.proto.MeteorMsgs.GameFrames getDefaultInstanceForType() {
-        return idevgame.meteor.proto.MeteorMsgs.GameFrames.getDefaultInstance();
+      public idevgame.meteor.proto.MeteorMsgs.GameFrame getDefaultInstanceForType() {
+        return idevgame.meteor.proto.MeteorMsgs.GameFrame.getDefaultInstance();
       }
 
-      public idevgame.meteor.proto.MeteorMsgs.GameFrames build() {
-        idevgame.meteor.proto.MeteorMsgs.GameFrames result = buildPartial();
+      public idevgame.meteor.proto.MeteorMsgs.GameFrame build() {
+        idevgame.meteor.proto.MeteorMsgs.GameFrame result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      public idevgame.meteor.proto.MeteorMsgs.GameFrames buildPartial() {
-        idevgame.meteor.proto.MeteorMsgs.GameFrames result = new idevgame.meteor.proto.MeteorMsgs.GameFrames(this);
+      public idevgame.meteor.proto.MeteorMsgs.GameFrame buildPartial() {
+        idevgame.meteor.proto.MeteorMsgs.GameFrame result = new idevgame.meteor.proto.MeteorMsgs.GameFrame(this);
         int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.time_ = time_;
         if (commandsBuilder_ == null) {
-          if (((bitField0_ & 0x00000001) == 0x00000001)) {
+          if (((bitField0_ & 0x00000002) == 0x00000002)) {
             commands_ = java.util.Collections.unmodifiableList(commands_);
-            bitField0_ = (bitField0_ & ~0x00000001);
+            bitField0_ = (bitField0_ & ~0x00000002);
           }
           result.commands_ = commands_;
         } else {
           result.commands_ = commandsBuilder_.build();
         }
+        result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
       }
@@ -27664,21 +19826,24 @@ public final class MeteorMsgs {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof idevgame.meteor.proto.MeteorMsgs.GameFrames) {
-          return mergeFrom((idevgame.meteor.proto.MeteorMsgs.GameFrames)other);
+        if (other instanceof idevgame.meteor.proto.MeteorMsgs.GameFrame) {
+          return mergeFrom((idevgame.meteor.proto.MeteorMsgs.GameFrame)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(idevgame.meteor.proto.MeteorMsgs.GameFrames other) {
-        if (other == idevgame.meteor.proto.MeteorMsgs.GameFrames.getDefaultInstance()) return this;
+      public Builder mergeFrom(idevgame.meteor.proto.MeteorMsgs.GameFrame other) {
+        if (other == idevgame.meteor.proto.MeteorMsgs.GameFrame.getDefaultInstance()) return this;
+        if (other.hasTime()) {
+          setTime(other.getTime());
+        }
         if (commandsBuilder_ == null) {
           if (!other.commands_.isEmpty()) {
             if (commands_.isEmpty()) {
               commands_ = other.commands_;
-              bitField0_ = (bitField0_ & ~0x00000001);
+              bitField0_ = (bitField0_ & ~0x00000002);
             } else {
               ensureCommandsIsMutable();
               commands_.addAll(other.commands_);
@@ -27691,7 +19856,7 @@ public final class MeteorMsgs {
               commandsBuilder_.dispose();
               commandsBuilder_ = null;
               commands_ = other.commands_;
-              bitField0_ = (bitField0_ & ~0x00000001);
+              bitField0_ = (bitField0_ & ~0x00000002);
               commandsBuilder_ = 
                 com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
                    getCommandsFieldBuilder() : null;
@@ -27718,11 +19883,11 @@ public final class MeteorMsgs {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        idevgame.meteor.proto.MeteorMsgs.GameFrames parsedMessage = null;
+        idevgame.meteor.proto.MeteorMsgs.GameFrame parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (idevgame.meteor.proto.MeteorMsgs.GameFrames) e.getUnfinishedMessage();
+          parsedMessage = (idevgame.meteor.proto.MeteorMsgs.GameFrame) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
           if (parsedMessage != null) {
@@ -27733,12 +19898,60 @@ public final class MeteorMsgs {
       }
       private int bitField0_;
 
+      private int time_ ;
+      /**
+       * <pre>
+       *此轮剩余时间，服务器端用来控制客户端下一轮-如果客户端提前到结束，就不能操作，需要等服务器广播消息后再返回到-选阵营
+       * </pre>
+       *
+       * <code>optional int32 time = 1;</code>
+       */
+      public boolean hasTime() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <pre>
+       *此轮剩余时间，服务器端用来控制客户端下一轮-如果客户端提前到结束，就不能操作，需要等服务器广播消息后再返回到-选阵营
+       * </pre>
+       *
+       * <code>optional int32 time = 1;</code>
+       */
+      public int getTime() {
+        return time_;
+      }
+      /**
+       * <pre>
+       *此轮剩余时间，服务器端用来控制客户端下一轮-如果客户端提前到结束，就不能操作，需要等服务器广播消息后再返回到-选阵营
+       * </pre>
+       *
+       * <code>optional int32 time = 1;</code>
+       */
+      public Builder setTime(int value) {
+        bitField0_ |= 0x00000001;
+        time_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *此轮剩余时间，服务器端用来控制客户端下一轮-如果客户端提前到结束，就不能操作，需要等服务器广播消息后再返回到-选阵营
+       * </pre>
+       *
+       * <code>optional int32 time = 1;</code>
+       */
+      public Builder clearTime() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        time_ = 0;
+        onChanged();
+        return this;
+      }
+
       private java.util.List<idevgame.meteor.proto.MeteorMsgs.FrameCommand> commands_ =
         java.util.Collections.emptyList();
       private void ensureCommandsIsMutable() {
-        if (!((bitField0_ & 0x00000001) == 0x00000001)) {
+        if (!((bitField0_ & 0x00000002) == 0x00000002)) {
           commands_ = new java.util.ArrayList<idevgame.meteor.proto.MeteorMsgs.FrameCommand>(commands_);
-          bitField0_ |= 0x00000001;
+          bitField0_ |= 0x00000002;
          }
       }
 
@@ -27746,7 +19959,11 @@ public final class MeteorMsgs {
           idevgame.meteor.proto.MeteorMsgs.FrameCommand, idevgame.meteor.proto.MeteorMsgs.FrameCommand.Builder, idevgame.meteor.proto.MeteorMsgs.FrameCommandOrBuilder> commandsBuilder_;
 
       /**
-       * <code>repeated .FrameCommand commands = 1;</code>
+       * <pre>
+       *所有玩家的状态.或者事件
+       * </pre>
+       *
+       * <code>repeated .FrameCommand commands = 2;</code>
        */
       public java.util.List<idevgame.meteor.proto.MeteorMsgs.FrameCommand> getCommandsList() {
         if (commandsBuilder_ == null) {
@@ -27756,7 +19973,11 @@ public final class MeteorMsgs {
         }
       }
       /**
-       * <code>repeated .FrameCommand commands = 1;</code>
+       * <pre>
+       *所有玩家的状态.或者事件
+       * </pre>
+       *
+       * <code>repeated .FrameCommand commands = 2;</code>
        */
       public int getCommandsCount() {
         if (commandsBuilder_ == null) {
@@ -27766,7 +19987,11 @@ public final class MeteorMsgs {
         }
       }
       /**
-       * <code>repeated .FrameCommand commands = 1;</code>
+       * <pre>
+       *所有玩家的状态.或者事件
+       * </pre>
+       *
+       * <code>repeated .FrameCommand commands = 2;</code>
        */
       public idevgame.meteor.proto.MeteorMsgs.FrameCommand getCommands(int index) {
         if (commandsBuilder_ == null) {
@@ -27776,7 +20001,11 @@ public final class MeteorMsgs {
         }
       }
       /**
-       * <code>repeated .FrameCommand commands = 1;</code>
+       * <pre>
+       *所有玩家的状态.或者事件
+       * </pre>
+       *
+       * <code>repeated .FrameCommand commands = 2;</code>
        */
       public Builder setCommands(
           int index, idevgame.meteor.proto.MeteorMsgs.FrameCommand value) {
@@ -27793,7 +20022,11 @@ public final class MeteorMsgs {
         return this;
       }
       /**
-       * <code>repeated .FrameCommand commands = 1;</code>
+       * <pre>
+       *所有玩家的状态.或者事件
+       * </pre>
+       *
+       * <code>repeated .FrameCommand commands = 2;</code>
        */
       public Builder setCommands(
           int index, idevgame.meteor.proto.MeteorMsgs.FrameCommand.Builder builderForValue) {
@@ -27807,7 +20040,11 @@ public final class MeteorMsgs {
         return this;
       }
       /**
-       * <code>repeated .FrameCommand commands = 1;</code>
+       * <pre>
+       *所有玩家的状态.或者事件
+       * </pre>
+       *
+       * <code>repeated .FrameCommand commands = 2;</code>
        */
       public Builder addCommands(idevgame.meteor.proto.MeteorMsgs.FrameCommand value) {
         if (commandsBuilder_ == null) {
@@ -27823,7 +20060,11 @@ public final class MeteorMsgs {
         return this;
       }
       /**
-       * <code>repeated .FrameCommand commands = 1;</code>
+       * <pre>
+       *所有玩家的状态.或者事件
+       * </pre>
+       *
+       * <code>repeated .FrameCommand commands = 2;</code>
        */
       public Builder addCommands(
           int index, idevgame.meteor.proto.MeteorMsgs.FrameCommand value) {
@@ -27840,7 +20081,11 @@ public final class MeteorMsgs {
         return this;
       }
       /**
-       * <code>repeated .FrameCommand commands = 1;</code>
+       * <pre>
+       *所有玩家的状态.或者事件
+       * </pre>
+       *
+       * <code>repeated .FrameCommand commands = 2;</code>
        */
       public Builder addCommands(
           idevgame.meteor.proto.MeteorMsgs.FrameCommand.Builder builderForValue) {
@@ -27854,7 +20099,11 @@ public final class MeteorMsgs {
         return this;
       }
       /**
-       * <code>repeated .FrameCommand commands = 1;</code>
+       * <pre>
+       *所有玩家的状态.或者事件
+       * </pre>
+       *
+       * <code>repeated .FrameCommand commands = 2;</code>
        */
       public Builder addCommands(
           int index, idevgame.meteor.proto.MeteorMsgs.FrameCommand.Builder builderForValue) {
@@ -27868,7 +20117,11 @@ public final class MeteorMsgs {
         return this;
       }
       /**
-       * <code>repeated .FrameCommand commands = 1;</code>
+       * <pre>
+       *所有玩家的状态.或者事件
+       * </pre>
+       *
+       * <code>repeated .FrameCommand commands = 2;</code>
        */
       public Builder addAllCommands(
           java.lang.Iterable<? extends idevgame.meteor.proto.MeteorMsgs.FrameCommand> values) {
@@ -27883,12 +20136,16 @@ public final class MeteorMsgs {
         return this;
       }
       /**
-       * <code>repeated .FrameCommand commands = 1;</code>
+       * <pre>
+       *所有玩家的状态.或者事件
+       * </pre>
+       *
+       * <code>repeated .FrameCommand commands = 2;</code>
        */
       public Builder clearCommands() {
         if (commandsBuilder_ == null) {
           commands_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000001);
+          bitField0_ = (bitField0_ & ~0x00000002);
           onChanged();
         } else {
           commandsBuilder_.clear();
@@ -27896,7 +20153,11 @@ public final class MeteorMsgs {
         return this;
       }
       /**
-       * <code>repeated .FrameCommand commands = 1;</code>
+       * <pre>
+       *所有玩家的状态.或者事件
+       * </pre>
+       *
+       * <code>repeated .FrameCommand commands = 2;</code>
        */
       public Builder removeCommands(int index) {
         if (commandsBuilder_ == null) {
@@ -27909,14 +20170,22 @@ public final class MeteorMsgs {
         return this;
       }
       /**
-       * <code>repeated .FrameCommand commands = 1;</code>
+       * <pre>
+       *所有玩家的状态.或者事件
+       * </pre>
+       *
+       * <code>repeated .FrameCommand commands = 2;</code>
        */
       public idevgame.meteor.proto.MeteorMsgs.FrameCommand.Builder getCommandsBuilder(
           int index) {
         return getCommandsFieldBuilder().getBuilder(index);
       }
       /**
-       * <code>repeated .FrameCommand commands = 1;</code>
+       * <pre>
+       *所有玩家的状态.或者事件
+       * </pre>
+       *
+       * <code>repeated .FrameCommand commands = 2;</code>
        */
       public idevgame.meteor.proto.MeteorMsgs.FrameCommandOrBuilder getCommandsOrBuilder(
           int index) {
@@ -27926,7 +20195,11 @@ public final class MeteorMsgs {
         }
       }
       /**
-       * <code>repeated .FrameCommand commands = 1;</code>
+       * <pre>
+       *所有玩家的状态.或者事件
+       * </pre>
+       *
+       * <code>repeated .FrameCommand commands = 2;</code>
        */
       public java.util.List<? extends idevgame.meteor.proto.MeteorMsgs.FrameCommandOrBuilder> 
            getCommandsOrBuilderList() {
@@ -27937,14 +20210,22 @@ public final class MeteorMsgs {
         }
       }
       /**
-       * <code>repeated .FrameCommand commands = 1;</code>
+       * <pre>
+       *所有玩家的状态.或者事件
+       * </pre>
+       *
+       * <code>repeated .FrameCommand commands = 2;</code>
        */
       public idevgame.meteor.proto.MeteorMsgs.FrameCommand.Builder addCommandsBuilder() {
         return getCommandsFieldBuilder().addBuilder(
             idevgame.meteor.proto.MeteorMsgs.FrameCommand.getDefaultInstance());
       }
       /**
-       * <code>repeated .FrameCommand commands = 1;</code>
+       * <pre>
+       *所有玩家的状态.或者事件
+       * </pre>
+       *
+       * <code>repeated .FrameCommand commands = 2;</code>
        */
       public idevgame.meteor.proto.MeteorMsgs.FrameCommand.Builder addCommandsBuilder(
           int index) {
@@ -27952,7 +20233,11 @@ public final class MeteorMsgs {
             index, idevgame.meteor.proto.MeteorMsgs.FrameCommand.getDefaultInstance());
       }
       /**
-       * <code>repeated .FrameCommand commands = 1;</code>
+       * <pre>
+       *所有玩家的状态.或者事件
+       * </pre>
+       *
+       * <code>repeated .FrameCommand commands = 2;</code>
        */
       public java.util.List<idevgame.meteor.proto.MeteorMsgs.FrameCommand.Builder> 
            getCommandsBuilderList() {
@@ -27965,7 +20250,7 @@ public final class MeteorMsgs {
           commandsBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
               idevgame.meteor.proto.MeteorMsgs.FrameCommand, idevgame.meteor.proto.MeteorMsgs.FrameCommand.Builder, idevgame.meteor.proto.MeteorMsgs.FrameCommandOrBuilder>(
                   commands_,
-                  ((bitField0_ & 0x00000001) == 0x00000001),
+                  ((bitField0_ & 0x00000002) == 0x00000002),
                   getParentForChildren(),
                   isClean());
           commands_ = null;
@@ -27983,39 +20268,39 @@ public final class MeteorMsgs {
       }
 
 
-      // @@protoc_insertion_point(builder_scope:GameFrames)
+      // @@protoc_insertion_point(builder_scope:GameFrame)
     }
 
-    // @@protoc_insertion_point(class_scope:GameFrames)
-    private static final idevgame.meteor.proto.MeteorMsgs.GameFrames DEFAULT_INSTANCE;
+    // @@protoc_insertion_point(class_scope:GameFrame)
+    private static final idevgame.meteor.proto.MeteorMsgs.GameFrame DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new idevgame.meteor.proto.MeteorMsgs.GameFrames();
+      DEFAULT_INSTANCE = new idevgame.meteor.proto.MeteorMsgs.GameFrame();
     }
 
-    public static idevgame.meteor.proto.MeteorMsgs.GameFrames getDefaultInstance() {
+    public static idevgame.meteor.proto.MeteorMsgs.GameFrame getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
-    @java.lang.Deprecated public static final com.google.protobuf.Parser<GameFrames>
-        PARSER = new com.google.protobuf.AbstractParser<GameFrames>() {
-      public GameFrames parsePartialFrom(
+    @java.lang.Deprecated public static final com.google.protobuf.Parser<GameFrame>
+        PARSER = new com.google.protobuf.AbstractParser<GameFrame>() {
+      public GameFrame parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return new GameFrames(input, extensionRegistry);
+        return new GameFrame(input, extensionRegistry);
       }
     };
 
-    public static com.google.protobuf.Parser<GameFrames> parser() {
+    public static com.google.protobuf.Parser<GameFrame> parser() {
       return PARSER;
     }
 
     @java.lang.Override
-    public com.google.protobuf.Parser<GameFrames> getParserForType() {
+    public com.google.protobuf.Parser<GameFrame> getParserForType() {
       return PARSER;
     }
 
-    public idevgame.meteor.proto.MeteorMsgs.GameFrames getDefaultInstanceForType() {
+    public idevgame.meteor.proto.MeteorMsgs.GameFrame getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
@@ -28044,27 +20329,10 @@ public final class MeteorMsgs {
 
     /**
      * <pre>
-     *频道类型 1-大厅 2-战场
-     * </pre>
-     *
-     * <code>required uint32 channelType = 2;</code>
-     */
-    boolean hasChannelType();
-    /**
-     * <pre>
-     *频道类型 1-大厅 2-战场
-     * </pre>
-     *
-     * <code>required uint32 channelType = 2;</code>
-     */
-    int getChannelType();
-
-    /**
-     * <pre>
      *max 256
      * </pre>
      *
-     * <code>required string chatMessage = 3;</code>
+     * <code>required string chatMessage = 2;</code>
      */
     boolean hasChatMessage();
     /**
@@ -28072,7 +20340,7 @@ public final class MeteorMsgs {
      *max 256
      * </pre>
      *
-     * <code>required string chatMessage = 3;</code>
+     * <code>required string chatMessage = 2;</code>
      */
     java.lang.String getChatMessage();
     /**
@@ -28080,7 +20348,7 @@ public final class MeteorMsgs {
      *max 256
      * </pre>
      *
-     * <code>required string chatMessage = 3;</code>
+     * <code>required string chatMessage = 2;</code>
      */
     com.google.protobuf.ByteString
         getChatMessageBytes();
@@ -28103,7 +20371,6 @@ public final class MeteorMsgs {
     }
     private ChatMsg() {
       playerId_ = 0;
-      channelType_ = 0;
       chatMessage_ = "";
     }
 
@@ -28143,14 +20410,9 @@ public final class MeteorMsgs {
               playerId_ = input.readUInt32();
               break;
             }
-            case 16: {
-              bitField0_ |= 0x00000002;
-              channelType_ = input.readUInt32();
-              break;
-            }
-            case 26: {
+            case 18: {
               com.google.protobuf.ByteString bs = input.readBytes();
-              bitField0_ |= 0x00000004;
+              bitField0_ |= 0x00000002;
               chatMessage_ = bs;
               break;
             }
@@ -28202,47 +20464,24 @@ public final class MeteorMsgs {
       return playerId_;
     }
 
-    public static final int CHANNELTYPE_FIELD_NUMBER = 2;
-    private int channelType_;
-    /**
-     * <pre>
-     *频道类型 1-大厅 2-战场
-     * </pre>
-     *
-     * <code>required uint32 channelType = 2;</code>
-     */
-    public boolean hasChannelType() {
-      return ((bitField0_ & 0x00000002) == 0x00000002);
-    }
-    /**
-     * <pre>
-     *频道类型 1-大厅 2-战场
-     * </pre>
-     *
-     * <code>required uint32 channelType = 2;</code>
-     */
-    public int getChannelType() {
-      return channelType_;
-    }
-
-    public static final int CHATMESSAGE_FIELD_NUMBER = 3;
+    public static final int CHATMESSAGE_FIELD_NUMBER = 2;
     private volatile java.lang.Object chatMessage_;
     /**
      * <pre>
      *max 256
      * </pre>
      *
-     * <code>required string chatMessage = 3;</code>
+     * <code>required string chatMessage = 2;</code>
      */
     public boolean hasChatMessage() {
-      return ((bitField0_ & 0x00000004) == 0x00000004);
+      return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
      * <pre>
      *max 256
      * </pre>
      *
-     * <code>required string chatMessage = 3;</code>
+     * <code>required string chatMessage = 2;</code>
      */
     public java.lang.String getChatMessage() {
       java.lang.Object ref = chatMessage_;
@@ -28263,7 +20502,7 @@ public final class MeteorMsgs {
      *max 256
      * </pre>
      *
-     * <code>required string chatMessage = 3;</code>
+     * <code>required string chatMessage = 2;</code>
      */
     public com.google.protobuf.ByteString
         getChatMessageBytes() {
@@ -28289,10 +20528,6 @@ public final class MeteorMsgs {
         memoizedIsInitialized = 0;
         return false;
       }
-      if (!hasChannelType()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
       if (!hasChatMessage()) {
         memoizedIsInitialized = 0;
         return false;
@@ -28307,10 +20542,7 @@ public final class MeteorMsgs {
         output.writeUInt32(1, playerId_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeUInt32(2, channelType_);
-      }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 3, chatMessage_);
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, chatMessage_);
       }
       unknownFields.writeTo(output);
     }
@@ -28325,11 +20557,7 @@ public final class MeteorMsgs {
           .computeUInt32Size(1, playerId_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeUInt32Size(2, channelType_);
-      }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, chatMessage_);
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, chatMessage_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -28352,11 +20580,6 @@ public final class MeteorMsgs {
         result = result && (getPlayerId()
             == other.getPlayerId());
       }
-      result = result && (hasChannelType() == other.hasChannelType());
-      if (hasChannelType()) {
-        result = result && (getChannelType()
-            == other.getChannelType());
-      }
       result = result && (hasChatMessage() == other.hasChatMessage());
       if (hasChatMessage()) {
         result = result && getChatMessage()
@@ -28376,10 +20599,6 @@ public final class MeteorMsgs {
       if (hasPlayerId()) {
         hash = (37 * hash) + PLAYERID_FIELD_NUMBER;
         hash = (53 * hash) + getPlayerId();
-      }
-      if (hasChannelType()) {
-        hash = (37 * hash) + CHANNELTYPE_FIELD_NUMBER;
-        hash = (53 * hash) + getChannelType();
       }
       if (hasChatMessage()) {
         hash = (37 * hash) + CHATMESSAGE_FIELD_NUMBER;
@@ -28520,10 +20739,8 @@ public final class MeteorMsgs {
         super.clear();
         playerId_ = 0;
         bitField0_ = (bitField0_ & ~0x00000001);
-        channelType_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000002);
         chatMessage_ = "";
-        bitField0_ = (bitField0_ & ~0x00000004);
+        bitField0_ = (bitField0_ & ~0x00000002);
         return this;
       }
 
@@ -28554,10 +20771,6 @@ public final class MeteorMsgs {
         result.playerId_ = playerId_;
         if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
           to_bitField0_ |= 0x00000002;
-        }
-        result.channelType_ = channelType_;
-        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
-          to_bitField0_ |= 0x00000004;
         }
         result.chatMessage_ = chatMessage_;
         result.bitField0_ = to_bitField0_;
@@ -28605,11 +20818,8 @@ public final class MeteorMsgs {
         if (other.hasPlayerId()) {
           setPlayerId(other.getPlayerId());
         }
-        if (other.hasChannelType()) {
-          setChannelType(other.getChannelType());
-        }
         if (other.hasChatMessage()) {
-          bitField0_ |= 0x00000004;
+          bitField0_ |= 0x00000002;
           chatMessage_ = other.chatMessage_;
           onChanged();
         }
@@ -28620,9 +20830,6 @@ public final class MeteorMsgs {
 
       public final boolean isInitialized() {
         if (!hasPlayerId()) {
-          return false;
-        }
-        if (!hasChannelType()) {
           return false;
         }
         if (!hasChatMessage()) {
@@ -28698,71 +20905,23 @@ public final class MeteorMsgs {
         return this;
       }
 
-      private int channelType_ ;
-      /**
-       * <pre>
-       *频道类型 1-大厅 2-战场
-       * </pre>
-       *
-       * <code>required uint32 channelType = 2;</code>
-       */
-      public boolean hasChannelType() {
-        return ((bitField0_ & 0x00000002) == 0x00000002);
-      }
-      /**
-       * <pre>
-       *频道类型 1-大厅 2-战场
-       * </pre>
-       *
-       * <code>required uint32 channelType = 2;</code>
-       */
-      public int getChannelType() {
-        return channelType_;
-      }
-      /**
-       * <pre>
-       *频道类型 1-大厅 2-战场
-       * </pre>
-       *
-       * <code>required uint32 channelType = 2;</code>
-       */
-      public Builder setChannelType(int value) {
-        bitField0_ |= 0x00000002;
-        channelType_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <pre>
-       *频道类型 1-大厅 2-战场
-       * </pre>
-       *
-       * <code>required uint32 channelType = 2;</code>
-       */
-      public Builder clearChannelType() {
-        bitField0_ = (bitField0_ & ~0x00000002);
-        channelType_ = 0;
-        onChanged();
-        return this;
-      }
-
       private java.lang.Object chatMessage_ = "";
       /**
        * <pre>
        *max 256
        * </pre>
        *
-       * <code>required string chatMessage = 3;</code>
+       * <code>required string chatMessage = 2;</code>
        */
       public boolean hasChatMessage() {
-        return ((bitField0_ & 0x00000004) == 0x00000004);
+        return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
        * <pre>
        *max 256
        * </pre>
        *
-       * <code>required string chatMessage = 3;</code>
+       * <code>required string chatMessage = 2;</code>
        */
       public java.lang.String getChatMessage() {
         java.lang.Object ref = chatMessage_;
@@ -28783,7 +20942,7 @@ public final class MeteorMsgs {
        *max 256
        * </pre>
        *
-       * <code>required string chatMessage = 3;</code>
+       * <code>required string chatMessage = 2;</code>
        */
       public com.google.protobuf.ByteString
           getChatMessageBytes() {
@@ -28803,14 +20962,14 @@ public final class MeteorMsgs {
        *max 256
        * </pre>
        *
-       * <code>required string chatMessage = 3;</code>
+       * <code>required string chatMessage = 2;</code>
        */
       public Builder setChatMessage(
           java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000004;
+  bitField0_ |= 0x00000002;
         chatMessage_ = value;
         onChanged();
         return this;
@@ -28820,10 +20979,10 @@ public final class MeteorMsgs {
        *max 256
        * </pre>
        *
-       * <code>required string chatMessage = 3;</code>
+       * <code>required string chatMessage = 2;</code>
        */
       public Builder clearChatMessage() {
-        bitField0_ = (bitField0_ & ~0x00000004);
+        bitField0_ = (bitField0_ & ~0x00000002);
         chatMessage_ = getDefaultInstance().getChatMessage();
         onChanged();
         return this;
@@ -28833,14 +20992,14 @@ public final class MeteorMsgs {
        *max 256
        * </pre>
        *
-       * <code>required string chatMessage = 3;</code>
+       * <code>required string chatMessage = 2;</code>
        */
       public Builder setChatMessageBytes(
           com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000004;
+  bitField0_ |= 0x00000002;
         chatMessage_ = value;
         onChanged();
         return this;
@@ -28950,6 +21109,10 @@ public final class MeteorMsgs {
     com.google.protobuf.ByteString getAudioData();
   }
   /**
+   * <pre>
+   *音频包
+   * </pre>
+   *
    * Protobuf type {@code AudioChatMsg}
    */
   public  static final class AudioChatMsg extends
@@ -29308,6 +21471,10 @@ public final class MeteorMsgs {
       return builder;
     }
     /**
+     * <pre>
+     *音频包
+     * </pre>
+     *
      * Protobuf type {@code AudioChatMsg}
      */
     public static final class Builder extends
@@ -29668,96 +21835,1999 @@ public final class MeteorMsgs {
 
   }
 
+  public interface _Vector3OrBuilder extends
+      // @@protoc_insertion_point(interface_extends:_Vector3)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>required int32 x = 1;</code>
+     */
+    boolean hasX();
+    /**
+     * <code>required int32 x = 1;</code>
+     */
+    int getX();
+
+    /**
+     * <code>required int32 y = 2;</code>
+     */
+    boolean hasY();
+    /**
+     * <code>required int32 y = 2;</code>
+     */
+    int getY();
+
+    /**
+     * <code>required int32 z = 3;</code>
+     */
+    boolean hasZ();
+    /**
+     * <code>required int32 z = 3;</code>
+     */
+    int getZ();
+  }
+  /**
+   * Protobuf type {@code _Vector3}
+   */
+  public  static final class _Vector3 extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:_Vector3)
+      _Vector3OrBuilder {
+  private static final long serialVersionUID = 0L;
+    // Use _Vector3.newBuilder() to construct.
+    private _Vector3(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private _Vector3() {
+      x_ = 0;
+      y_ = 0;
+      z_ = 0;
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private _Vector3(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 8: {
+              bitField0_ |= 0x00000001;
+              x_ = input.readInt32();
+              break;
+            }
+            case 16: {
+              bitField0_ |= 0x00000002;
+              y_ = input.readInt32();
+              break;
+            }
+            case 24: {
+              bitField0_ |= 0x00000004;
+              z_ = input.readInt32();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return idevgame.meteor.proto.MeteorMsgs.internal_static__Vector3_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return idevgame.meteor.proto.MeteorMsgs.internal_static__Vector3_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              idevgame.meteor.proto.MeteorMsgs._Vector3.class, idevgame.meteor.proto.MeteorMsgs._Vector3.Builder.class);
+    }
+
+    private int bitField0_;
+    public static final int X_FIELD_NUMBER = 1;
+    private int x_;
+    /**
+     * <code>required int32 x = 1;</code>
+     */
+    public boolean hasX() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>required int32 x = 1;</code>
+     */
+    public int getX() {
+      return x_;
+    }
+
+    public static final int Y_FIELD_NUMBER = 2;
+    private int y_;
+    /**
+     * <code>required int32 y = 2;</code>
+     */
+    public boolean hasY() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>required int32 y = 2;</code>
+     */
+    public int getY() {
+      return y_;
+    }
+
+    public static final int Z_FIELD_NUMBER = 3;
+    private int z_;
+    /**
+     * <code>required int32 z = 3;</code>
+     */
+    public boolean hasZ() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>required int32 z = 3;</code>
+     */
+    public int getZ() {
+      return z_;
+    }
+
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      if (!hasX()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasY()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasZ()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeInt32(1, x_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeInt32(2, y_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeInt32(3, z_);
+      }
+      unknownFields.writeTo(output);
+    }
+
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(1, x_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(2, y_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(3, z_);
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof idevgame.meteor.proto.MeteorMsgs._Vector3)) {
+        return super.equals(obj);
+      }
+      idevgame.meteor.proto.MeteorMsgs._Vector3 other = (idevgame.meteor.proto.MeteorMsgs._Vector3) obj;
+
+      boolean result = true;
+      result = result && (hasX() == other.hasX());
+      if (hasX()) {
+        result = result && (getX()
+            == other.getX());
+      }
+      result = result && (hasY() == other.hasY());
+      if (hasY()) {
+        result = result && (getY()
+            == other.getY());
+      }
+      result = result && (hasZ() == other.hasZ());
+      if (hasZ()) {
+        result = result && (getZ()
+            == other.getZ());
+      }
+      result = result && unknownFields.equals(other.unknownFields);
+      return result;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      if (hasX()) {
+        hash = (37 * hash) + X_FIELD_NUMBER;
+        hash = (53 * hash) + getX();
+      }
+      if (hasY()) {
+        hash = (37 * hash) + Y_FIELD_NUMBER;
+        hash = (53 * hash) + getY();
+      }
+      if (hasZ()) {
+        hash = (37 * hash) + Z_FIELD_NUMBER;
+        hash = (53 * hash) + getZ();
+      }
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static idevgame.meteor.proto.MeteorMsgs._Vector3 parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static idevgame.meteor.proto.MeteorMsgs._Vector3 parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static idevgame.meteor.proto.MeteorMsgs._Vector3 parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static idevgame.meteor.proto.MeteorMsgs._Vector3 parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static idevgame.meteor.proto.MeteorMsgs._Vector3 parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static idevgame.meteor.proto.MeteorMsgs._Vector3 parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static idevgame.meteor.proto.MeteorMsgs._Vector3 parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static idevgame.meteor.proto.MeteorMsgs._Vector3 parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static idevgame.meteor.proto.MeteorMsgs._Vector3 parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static idevgame.meteor.proto.MeteorMsgs._Vector3 parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static idevgame.meteor.proto.MeteorMsgs._Vector3 parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static idevgame.meteor.proto.MeteorMsgs._Vector3 parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(idevgame.meteor.proto.MeteorMsgs._Vector3 prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code _Vector3}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:_Vector3)
+        idevgame.meteor.proto.MeteorMsgs._Vector3OrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return idevgame.meteor.proto.MeteorMsgs.internal_static__Vector3_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return idevgame.meteor.proto.MeteorMsgs.internal_static__Vector3_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                idevgame.meteor.proto.MeteorMsgs._Vector3.class, idevgame.meteor.proto.MeteorMsgs._Vector3.Builder.class);
+      }
+
+      // Construct using idevgame.meteor.proto.MeteorMsgs._Vector3.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      public Builder clear() {
+        super.clear();
+        x_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        y_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        z_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        return this;
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return idevgame.meteor.proto.MeteorMsgs.internal_static__Vector3_descriptor;
+      }
+
+      public idevgame.meteor.proto.MeteorMsgs._Vector3 getDefaultInstanceForType() {
+        return idevgame.meteor.proto.MeteorMsgs._Vector3.getDefaultInstance();
+      }
+
+      public idevgame.meteor.proto.MeteorMsgs._Vector3 build() {
+        idevgame.meteor.proto.MeteorMsgs._Vector3 result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public idevgame.meteor.proto.MeteorMsgs._Vector3 buildPartial() {
+        idevgame.meteor.proto.MeteorMsgs._Vector3 result = new idevgame.meteor.proto.MeteorMsgs._Vector3(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.x_ = x_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.y_ = y_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.z_ = z_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof idevgame.meteor.proto.MeteorMsgs._Vector3) {
+          return mergeFrom((idevgame.meteor.proto.MeteorMsgs._Vector3)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(idevgame.meteor.proto.MeteorMsgs._Vector3 other) {
+        if (other == idevgame.meteor.proto.MeteorMsgs._Vector3.getDefaultInstance()) return this;
+        if (other.hasX()) {
+          setX(other.getX());
+        }
+        if (other.hasY()) {
+          setY(other.getY());
+        }
+        if (other.hasZ()) {
+          setZ(other.getZ());
+        }
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        if (!hasX()) {
+          return false;
+        }
+        if (!hasY()) {
+          return false;
+        }
+        if (!hasZ()) {
+          return false;
+        }
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        idevgame.meteor.proto.MeteorMsgs._Vector3 parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (idevgame.meteor.proto.MeteorMsgs._Vector3) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private int x_ ;
+      /**
+       * <code>required int32 x = 1;</code>
+       */
+      public boolean hasX() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>required int32 x = 1;</code>
+       */
+      public int getX() {
+        return x_;
+      }
+      /**
+       * <code>required int32 x = 1;</code>
+       */
+      public Builder setX(int value) {
+        bitField0_ |= 0x00000001;
+        x_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required int32 x = 1;</code>
+       */
+      public Builder clearX() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        x_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int y_ ;
+      /**
+       * <code>required int32 y = 2;</code>
+       */
+      public boolean hasY() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>required int32 y = 2;</code>
+       */
+      public int getY() {
+        return y_;
+      }
+      /**
+       * <code>required int32 y = 2;</code>
+       */
+      public Builder setY(int value) {
+        bitField0_ |= 0x00000002;
+        y_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required int32 y = 2;</code>
+       */
+      public Builder clearY() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        y_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int z_ ;
+      /**
+       * <code>required int32 z = 3;</code>
+       */
+      public boolean hasZ() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>required int32 z = 3;</code>
+       */
+      public int getZ() {
+        return z_;
+      }
+      /**
+       * <code>required int32 z = 3;</code>
+       */
+      public Builder setZ(int value) {
+        bitField0_ |= 0x00000004;
+        z_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required int32 z = 3;</code>
+       */
+      public Builder clearZ() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        z_ = 0;
+        onChanged();
+        return this;
+      }
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFields(unknownFields);
+      }
+
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:_Vector3)
+    }
+
+    // @@protoc_insertion_point(class_scope:_Vector3)
+    private static final idevgame.meteor.proto.MeteorMsgs._Vector3 DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new idevgame.meteor.proto.MeteorMsgs._Vector3();
+    }
+
+    public static idevgame.meteor.proto.MeteorMsgs._Vector3 getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    @java.lang.Deprecated public static final com.google.protobuf.Parser<_Vector3>
+        PARSER = new com.google.protobuf.AbstractParser<_Vector3>() {
+      public _Vector3 parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new _Vector3(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<_Vector3> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<_Vector3> getParserForType() {
+      return PARSER;
+    }
+
+    public idevgame.meteor.proto.MeteorMsgs._Vector3 getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
+  public interface _QuaternionOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:_Quaternion)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>required int32 x = 1;</code>
+     */
+    boolean hasX();
+    /**
+     * <code>required int32 x = 1;</code>
+     */
+    int getX();
+
+    /**
+     * <code>required int32 y = 2;</code>
+     */
+    boolean hasY();
+    /**
+     * <code>required int32 y = 2;</code>
+     */
+    int getY();
+
+    /**
+     * <code>required int32 z = 3;</code>
+     */
+    boolean hasZ();
+    /**
+     * <code>required int32 z = 3;</code>
+     */
+    int getZ();
+
+    /**
+     * <code>required int32 w = 4;</code>
+     */
+    boolean hasW();
+    /**
+     * <code>required int32 w = 4;</code>
+     */
+    int getW();
+  }
+  /**
+   * Protobuf type {@code _Quaternion}
+   */
+  public  static final class _Quaternion extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:_Quaternion)
+      _QuaternionOrBuilder {
+  private static final long serialVersionUID = 0L;
+    // Use _Quaternion.newBuilder() to construct.
+    private _Quaternion(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private _Quaternion() {
+      x_ = 0;
+      y_ = 0;
+      z_ = 0;
+      w_ = 0;
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private _Quaternion(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 8: {
+              bitField0_ |= 0x00000001;
+              x_ = input.readInt32();
+              break;
+            }
+            case 16: {
+              bitField0_ |= 0x00000002;
+              y_ = input.readInt32();
+              break;
+            }
+            case 24: {
+              bitField0_ |= 0x00000004;
+              z_ = input.readInt32();
+              break;
+            }
+            case 32: {
+              bitField0_ |= 0x00000008;
+              w_ = input.readInt32();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return idevgame.meteor.proto.MeteorMsgs.internal_static__Quaternion_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return idevgame.meteor.proto.MeteorMsgs.internal_static__Quaternion_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              idevgame.meteor.proto.MeteorMsgs._Quaternion.class, idevgame.meteor.proto.MeteorMsgs._Quaternion.Builder.class);
+    }
+
+    private int bitField0_;
+    public static final int X_FIELD_NUMBER = 1;
+    private int x_;
+    /**
+     * <code>required int32 x = 1;</code>
+     */
+    public boolean hasX() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>required int32 x = 1;</code>
+     */
+    public int getX() {
+      return x_;
+    }
+
+    public static final int Y_FIELD_NUMBER = 2;
+    private int y_;
+    /**
+     * <code>required int32 y = 2;</code>
+     */
+    public boolean hasY() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>required int32 y = 2;</code>
+     */
+    public int getY() {
+      return y_;
+    }
+
+    public static final int Z_FIELD_NUMBER = 3;
+    private int z_;
+    /**
+     * <code>required int32 z = 3;</code>
+     */
+    public boolean hasZ() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>required int32 z = 3;</code>
+     */
+    public int getZ() {
+      return z_;
+    }
+
+    public static final int W_FIELD_NUMBER = 4;
+    private int w_;
+    /**
+     * <code>required int32 w = 4;</code>
+     */
+    public boolean hasW() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>required int32 w = 4;</code>
+     */
+    public int getW() {
+      return w_;
+    }
+
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      if (!hasX()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasY()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasZ()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasW()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeInt32(1, x_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeInt32(2, y_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeInt32(3, z_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeInt32(4, w_);
+      }
+      unknownFields.writeTo(output);
+    }
+
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(1, x_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(2, y_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(3, z_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(4, w_);
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof idevgame.meteor.proto.MeteorMsgs._Quaternion)) {
+        return super.equals(obj);
+      }
+      idevgame.meteor.proto.MeteorMsgs._Quaternion other = (idevgame.meteor.proto.MeteorMsgs._Quaternion) obj;
+
+      boolean result = true;
+      result = result && (hasX() == other.hasX());
+      if (hasX()) {
+        result = result && (getX()
+            == other.getX());
+      }
+      result = result && (hasY() == other.hasY());
+      if (hasY()) {
+        result = result && (getY()
+            == other.getY());
+      }
+      result = result && (hasZ() == other.hasZ());
+      if (hasZ()) {
+        result = result && (getZ()
+            == other.getZ());
+      }
+      result = result && (hasW() == other.hasW());
+      if (hasW()) {
+        result = result && (getW()
+            == other.getW());
+      }
+      result = result && unknownFields.equals(other.unknownFields);
+      return result;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      if (hasX()) {
+        hash = (37 * hash) + X_FIELD_NUMBER;
+        hash = (53 * hash) + getX();
+      }
+      if (hasY()) {
+        hash = (37 * hash) + Y_FIELD_NUMBER;
+        hash = (53 * hash) + getY();
+      }
+      if (hasZ()) {
+        hash = (37 * hash) + Z_FIELD_NUMBER;
+        hash = (53 * hash) + getZ();
+      }
+      if (hasW()) {
+        hash = (37 * hash) + W_FIELD_NUMBER;
+        hash = (53 * hash) + getW();
+      }
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static idevgame.meteor.proto.MeteorMsgs._Quaternion parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static idevgame.meteor.proto.MeteorMsgs._Quaternion parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static idevgame.meteor.proto.MeteorMsgs._Quaternion parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static idevgame.meteor.proto.MeteorMsgs._Quaternion parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static idevgame.meteor.proto.MeteorMsgs._Quaternion parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static idevgame.meteor.proto.MeteorMsgs._Quaternion parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static idevgame.meteor.proto.MeteorMsgs._Quaternion parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static idevgame.meteor.proto.MeteorMsgs._Quaternion parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static idevgame.meteor.proto.MeteorMsgs._Quaternion parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static idevgame.meteor.proto.MeteorMsgs._Quaternion parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static idevgame.meteor.proto.MeteorMsgs._Quaternion parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static idevgame.meteor.proto.MeteorMsgs._Quaternion parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(idevgame.meteor.proto.MeteorMsgs._Quaternion prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code _Quaternion}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:_Quaternion)
+        idevgame.meteor.proto.MeteorMsgs._QuaternionOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return idevgame.meteor.proto.MeteorMsgs.internal_static__Quaternion_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return idevgame.meteor.proto.MeteorMsgs.internal_static__Quaternion_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                idevgame.meteor.proto.MeteorMsgs._Quaternion.class, idevgame.meteor.proto.MeteorMsgs._Quaternion.Builder.class);
+      }
+
+      // Construct using idevgame.meteor.proto.MeteorMsgs._Quaternion.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      public Builder clear() {
+        super.clear();
+        x_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        y_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        z_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        w_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000008);
+        return this;
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return idevgame.meteor.proto.MeteorMsgs.internal_static__Quaternion_descriptor;
+      }
+
+      public idevgame.meteor.proto.MeteorMsgs._Quaternion getDefaultInstanceForType() {
+        return idevgame.meteor.proto.MeteorMsgs._Quaternion.getDefaultInstance();
+      }
+
+      public idevgame.meteor.proto.MeteorMsgs._Quaternion build() {
+        idevgame.meteor.proto.MeteorMsgs._Quaternion result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public idevgame.meteor.proto.MeteorMsgs._Quaternion buildPartial() {
+        idevgame.meteor.proto.MeteorMsgs._Quaternion result = new idevgame.meteor.proto.MeteorMsgs._Quaternion(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.x_ = x_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.y_ = y_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.z_ = z_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.w_ = w_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof idevgame.meteor.proto.MeteorMsgs._Quaternion) {
+          return mergeFrom((idevgame.meteor.proto.MeteorMsgs._Quaternion)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(idevgame.meteor.proto.MeteorMsgs._Quaternion other) {
+        if (other == idevgame.meteor.proto.MeteorMsgs._Quaternion.getDefaultInstance()) return this;
+        if (other.hasX()) {
+          setX(other.getX());
+        }
+        if (other.hasY()) {
+          setY(other.getY());
+        }
+        if (other.hasZ()) {
+          setZ(other.getZ());
+        }
+        if (other.hasW()) {
+          setW(other.getW());
+        }
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        if (!hasX()) {
+          return false;
+        }
+        if (!hasY()) {
+          return false;
+        }
+        if (!hasZ()) {
+          return false;
+        }
+        if (!hasW()) {
+          return false;
+        }
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        idevgame.meteor.proto.MeteorMsgs._Quaternion parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (idevgame.meteor.proto.MeteorMsgs._Quaternion) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private int x_ ;
+      /**
+       * <code>required int32 x = 1;</code>
+       */
+      public boolean hasX() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>required int32 x = 1;</code>
+       */
+      public int getX() {
+        return x_;
+      }
+      /**
+       * <code>required int32 x = 1;</code>
+       */
+      public Builder setX(int value) {
+        bitField0_ |= 0x00000001;
+        x_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required int32 x = 1;</code>
+       */
+      public Builder clearX() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        x_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int y_ ;
+      /**
+       * <code>required int32 y = 2;</code>
+       */
+      public boolean hasY() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>required int32 y = 2;</code>
+       */
+      public int getY() {
+        return y_;
+      }
+      /**
+       * <code>required int32 y = 2;</code>
+       */
+      public Builder setY(int value) {
+        bitField0_ |= 0x00000002;
+        y_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required int32 y = 2;</code>
+       */
+      public Builder clearY() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        y_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int z_ ;
+      /**
+       * <code>required int32 z = 3;</code>
+       */
+      public boolean hasZ() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>required int32 z = 3;</code>
+       */
+      public int getZ() {
+        return z_;
+      }
+      /**
+       * <code>required int32 z = 3;</code>
+       */
+      public Builder setZ(int value) {
+        bitField0_ |= 0x00000004;
+        z_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required int32 z = 3;</code>
+       */
+      public Builder clearZ() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        z_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int w_ ;
+      /**
+       * <code>required int32 w = 4;</code>
+       */
+      public boolean hasW() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>required int32 w = 4;</code>
+       */
+      public int getW() {
+        return w_;
+      }
+      /**
+       * <code>required int32 w = 4;</code>
+       */
+      public Builder setW(int value) {
+        bitField0_ |= 0x00000008;
+        w_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required int32 w = 4;</code>
+       */
+      public Builder clearW() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        w_ = 0;
+        onChanged();
+        return this;
+      }
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFields(unknownFields);
+      }
+
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:_Quaternion)
+    }
+
+    // @@protoc_insertion_point(class_scope:_Quaternion)
+    private static final idevgame.meteor.proto.MeteorMsgs._Quaternion DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new idevgame.meteor.proto.MeteorMsgs._Quaternion();
+    }
+
+    public static idevgame.meteor.proto.MeteorMsgs._Quaternion getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    @java.lang.Deprecated public static final com.google.protobuf.Parser<_Quaternion>
+        PARSER = new com.google.protobuf.AbstractParser<_Quaternion>() {
+      public _Quaternion parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new _Quaternion(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<_Quaternion> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<_Quaternion> getParserForType() {
+      return PARSER;
+    }
+
+    public idevgame.meteor.proto.MeteorMsgs._Quaternion getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
+  public interface SyncMsgOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:SyncMsg)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <pre>
+     *传输率调整
+     * </pre>
+     *
+     * <code>required int32 syncrate = 1;</code>
+     */
+    boolean hasSyncrate();
+    /**
+     * <pre>
+     *传输率调整
+     * </pre>
+     *
+     * <code>required int32 syncrate = 1;</code>
+     */
+    int getSyncrate();
+  }
+  /**
+   * Protobuf type {@code SyncMsg}
+   */
+  public  static final class SyncMsg extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:SyncMsg)
+      SyncMsgOrBuilder {
+  private static final long serialVersionUID = 0L;
+    // Use SyncMsg.newBuilder() to construct.
+    private SyncMsg(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private SyncMsg() {
+      syncrate_ = 0;
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private SyncMsg(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 8: {
+              bitField0_ |= 0x00000001;
+              syncrate_ = input.readInt32();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return idevgame.meteor.proto.MeteorMsgs.internal_static_SyncMsg_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return idevgame.meteor.proto.MeteorMsgs.internal_static_SyncMsg_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              idevgame.meteor.proto.MeteorMsgs.SyncMsg.class, idevgame.meteor.proto.MeteorMsgs.SyncMsg.Builder.class);
+    }
+
+    private int bitField0_;
+    public static final int SYNCRATE_FIELD_NUMBER = 1;
+    private int syncrate_;
+    /**
+     * <pre>
+     *传输率调整
+     * </pre>
+     *
+     * <code>required int32 syncrate = 1;</code>
+     */
+    public boolean hasSyncrate() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <pre>
+     *传输率调整
+     * </pre>
+     *
+     * <code>required int32 syncrate = 1;</code>
+     */
+    public int getSyncrate() {
+      return syncrate_;
+    }
+
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      if (!hasSyncrate()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeInt32(1, syncrate_);
+      }
+      unknownFields.writeTo(output);
+    }
+
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(1, syncrate_);
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof idevgame.meteor.proto.MeteorMsgs.SyncMsg)) {
+        return super.equals(obj);
+      }
+      idevgame.meteor.proto.MeteorMsgs.SyncMsg other = (idevgame.meteor.proto.MeteorMsgs.SyncMsg) obj;
+
+      boolean result = true;
+      result = result && (hasSyncrate() == other.hasSyncrate());
+      if (hasSyncrate()) {
+        result = result && (getSyncrate()
+            == other.getSyncrate());
+      }
+      result = result && unknownFields.equals(other.unknownFields);
+      return result;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      if (hasSyncrate()) {
+        hash = (37 * hash) + SYNCRATE_FIELD_NUMBER;
+        hash = (53 * hash) + getSyncrate();
+      }
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static idevgame.meteor.proto.MeteorMsgs.SyncMsg parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static idevgame.meteor.proto.MeteorMsgs.SyncMsg parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static idevgame.meteor.proto.MeteorMsgs.SyncMsg parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static idevgame.meteor.proto.MeteorMsgs.SyncMsg parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static idevgame.meteor.proto.MeteorMsgs.SyncMsg parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static idevgame.meteor.proto.MeteorMsgs.SyncMsg parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static idevgame.meteor.proto.MeteorMsgs.SyncMsg parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static idevgame.meteor.proto.MeteorMsgs.SyncMsg parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static idevgame.meteor.proto.MeteorMsgs.SyncMsg parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static idevgame.meteor.proto.MeteorMsgs.SyncMsg parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static idevgame.meteor.proto.MeteorMsgs.SyncMsg parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static idevgame.meteor.proto.MeteorMsgs.SyncMsg parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(idevgame.meteor.proto.MeteorMsgs.SyncMsg prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code SyncMsg}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:SyncMsg)
+        idevgame.meteor.proto.MeteorMsgs.SyncMsgOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return idevgame.meteor.proto.MeteorMsgs.internal_static_SyncMsg_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return idevgame.meteor.proto.MeteorMsgs.internal_static_SyncMsg_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                idevgame.meteor.proto.MeteorMsgs.SyncMsg.class, idevgame.meteor.proto.MeteorMsgs.SyncMsg.Builder.class);
+      }
+
+      // Construct using idevgame.meteor.proto.MeteorMsgs.SyncMsg.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      public Builder clear() {
+        super.clear();
+        syncrate_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        return this;
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return idevgame.meteor.proto.MeteorMsgs.internal_static_SyncMsg_descriptor;
+      }
+
+      public idevgame.meteor.proto.MeteorMsgs.SyncMsg getDefaultInstanceForType() {
+        return idevgame.meteor.proto.MeteorMsgs.SyncMsg.getDefaultInstance();
+      }
+
+      public idevgame.meteor.proto.MeteorMsgs.SyncMsg build() {
+        idevgame.meteor.proto.MeteorMsgs.SyncMsg result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public idevgame.meteor.proto.MeteorMsgs.SyncMsg buildPartial() {
+        idevgame.meteor.proto.MeteorMsgs.SyncMsg result = new idevgame.meteor.proto.MeteorMsgs.SyncMsg(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.syncrate_ = syncrate_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof idevgame.meteor.proto.MeteorMsgs.SyncMsg) {
+          return mergeFrom((idevgame.meteor.proto.MeteorMsgs.SyncMsg)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(idevgame.meteor.proto.MeteorMsgs.SyncMsg other) {
+        if (other == idevgame.meteor.proto.MeteorMsgs.SyncMsg.getDefaultInstance()) return this;
+        if (other.hasSyncrate()) {
+          setSyncrate(other.getSyncrate());
+        }
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        if (!hasSyncrate()) {
+          return false;
+        }
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        idevgame.meteor.proto.MeteorMsgs.SyncMsg parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (idevgame.meteor.proto.MeteorMsgs.SyncMsg) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private int syncrate_ ;
+      /**
+       * <pre>
+       *传输率调整
+       * </pre>
+       *
+       * <code>required int32 syncrate = 1;</code>
+       */
+      public boolean hasSyncrate() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <pre>
+       *传输率调整
+       * </pre>
+       *
+       * <code>required int32 syncrate = 1;</code>
+       */
+      public int getSyncrate() {
+        return syncrate_;
+      }
+      /**
+       * <pre>
+       *传输率调整
+       * </pre>
+       *
+       * <code>required int32 syncrate = 1;</code>
+       */
+      public Builder setSyncrate(int value) {
+        bitField0_ |= 0x00000001;
+        syncrate_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *传输率调整
+       * </pre>
+       *
+       * <code>required int32 syncrate = 1;</code>
+       */
+      public Builder clearSyncrate() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        syncrate_ = 0;
+        onChanged();
+        return this;
+      }
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFields(unknownFields);
+      }
+
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:SyncMsg)
+    }
+
+    // @@protoc_insertion_point(class_scope:SyncMsg)
+    private static final idevgame.meteor.proto.MeteorMsgs.SyncMsg DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new idevgame.meteor.proto.MeteorMsgs.SyncMsg();
+    }
+
+    public static idevgame.meteor.proto.MeteorMsgs.SyncMsg getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    @java.lang.Deprecated public static final com.google.protobuf.Parser<SyncMsg>
+        PARSER = new com.google.protobuf.AbstractParser<SyncMsg>() {
+      public SyncMsg parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new SyncMsg(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<SyncMsg> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<SyncMsg> getParserForType() {
+      return PARSER;
+    }
+
+    public idevgame.meteor.proto.MeteorMsgs.SyncMsg getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_MeteorMsg_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_MeteorMsg_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_RegisterSvrReq_descriptor;
+    internal_static_PlayerEvent_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_RegisterSvrReq_fieldAccessorTable;
+      internal_static_PlayerEvent_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_RegisterSvrRsp_descriptor;
+    internal_static_OperateMsg_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_RegisterSvrRsp_fieldAccessorTable;
+      internal_static_OperateMsg_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_SvrList_descriptor;
+    internal_static_DropMsg_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_SvrList_fieldAccessorTable;
+      internal_static_DropMsg_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_SvrInfo_descriptor;
+    internal_static_GetItemMsg_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_SvrInfo_fieldAccessorTable;
+      internal_static_GetItemMsg_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_SyncSvrState_descriptor;
+    internal_static_PlayerSync_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_SyncSvrState_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_SyncInitData_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_SyncInitData_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_PlayerEventData_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_PlayerEventData_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_EnterQueueRsp_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_EnterQueueRsp_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_OnBattleBegin_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_OnBattleBegin_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_UserSelectRole_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_UserSelectRole_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_UserSelectSkill_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_UserSelectSkill_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_UserSelectSkin_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_UserSelectSkin_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_OnBattleCanceled_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_OnBattleCanceled_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_OnBattleLoading_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_OnBattleLoading_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_OnBattleResult_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_OnBattleResult_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_PlayerSellItem_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_PlayerSellItem_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_PlayerBuyItem_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_PlayerBuyItem_fieldAccessorTable;
+      internal_static_PlayerSync_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_ProtocolVerifyReq_descriptor;
   private static final 
@@ -29799,20 +23869,25 @@ public final class MeteorMsgs {
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_JoinRoomRsp_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_Vector2__descriptor;
+    internal_static_OnPlayerJoinRoom_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_Vector2__fieldAccessorTable;
+      internal_static_OnPlayerJoinRoom_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_OnEnterLevelRsp_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_OnEnterLevelRsp_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_FrameCommand_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_FrameCommand_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_GameFrames_descriptor;
+    internal_static_GameFrame_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_GameFrames_fieldAccessorTable;
+      internal_static_GameFrame_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_ChatMsg_descriptor;
   private static final 
@@ -29823,6 +23898,21 @@ public final class MeteorMsgs {
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_AudioChatMsg_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static__Vector3_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static__Vector3_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static__Quaternion_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static__Quaternion_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_SyncMsg_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_SyncMsg_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -29832,107 +23922,82 @@ public final class MeteorMsgs {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\016protocol.proto\"\236\t\n\tMeteorMsg\022\037\n\003cmd\030\001 " +
-      "\002(\0162\022.MeteorMsg.MsgType\"\251\007\n\007MsgType\022\022\n\016R" +
-      "egisterSvrReq\020\003\022\022\n\016RegisterSvrRsp\020\004\022\021\n\rU" +
-      "nRegisterSvr\020\005\022\020\n\014SyncSvrState\020\006\022\r\n\tGetS" +
-      "vrReq\020\007\022\r\n\tGetSvrRsp\020\010\022\025\n\021ProtocolVerify" +
-      "Req\020\t\022\025\n\021ProtocolVerifyRsp\020\n\022\016\n\nGetRoomR" +
-      "eq\020d\022\016\n\nGetRoomRsp\020e\022\021\n\rCreateRoomReq\020f\022" +
-      "\021\n\rCreateRoomRsp\020g\022\017\n\013JoinRoomReq\020h\022\017\n\013J" +
-      "oinRoomRsp\020i\022\021\n\rChatInRoomReq\020x\022\021\n\rChatI" +
-      "nRoomRsp\020y\022\022\n\016ChatInLobbyReq\020z\022\022\n\016ChatIn" +
-      "LobbyRsp\020{\022\021\n\rEnterQueueReq\020|\022\021\n\rEnterQu" +
-      "eueRsp\020}\022\020\n\014ExitQueueReq\020~\022\020\n\014ExitQueueR" +
-      "sp\020\177\022\026\n\021QueueMsgWaitReady\020\200\001\022\025\n\020QueueMsg" +
-      "Canceled\020\201\001\022\025\n\020QueueMsgReadyReq\020\202\001\022\022\n\rOn" +
-      "BattleBegin\020\203\001\022\023\n\016OnBattleCancel\020\204\001\022\023\n\016U" +
-      "serSelectRole\020\205\001\022\025\n\020OnUserSelectRole\020\206\001\022" +
-      "\024\n\017UserSelectSkill\020\207\001\022\026\n\021OnUserSelectSki" +
-      "ll\020\210\001\022\023\n\016UserSelectSkin\020\211\001\022\025\n\020OnUserSele" +
-      "ctSkin\020\212\001\022\r\n\010UserQuit\020\213\001\022\027\n\022OnBattleEnte" +
-      "rLevel\020\214\001\022\024\n\017OnBattleLoading\020\215\001\022\022\n\rOnBat" +
-      "tleStart\020\216\001\022\023\n\016OnBattleResult\020\217\001\022\031\n\024OnBa" +
-      "ttleResultDetail\020\220\001\022\021\n\014OnPlayerQuit\020\222\001\022\024" +
-      "\n\017OnPlayerReStart\020\223\001\022\027\n\022OnPlayerFetchInp" +
-      "ut\020\224\001\022\026\n\021OnPlayerReConnect\020\225\001\022\016\n\tAudioCh" +
-      "at\020\226\001\022\022\n\rSystemMessage\020\240\001\022\020\n\013SyncCommand" +
-      "\020\370\006\"\303\001\n\007Command\022\022\n\016SyncRandomSeed\020\001\022\013\n\007K" +
-      "eyDown\020\002\022\t\n\005KeyUp\020\003\022\013\n\007KeyLast\020\004\022\017\n\013Spaw" +
-      "nPlayer\020\005\022\021\n\rDestroyPlayer\020\006\022\020\n\014JoyStick" +
-      "Move\020\007\022\r\n\tMouseMove\020\010\022\017\n\013EquipWeapon\020\t\022\016" +
-      "\n\nDropWeapon\020\n\022\014\n\010SellItem\020\013\022\013\n\007BuyItem\020" +
-      "\014\">\n\016RegisterSvrReq\022\022\n\nserverName\030\001 \002(\t\022" +
-      "\n\n\002ip\030\002 \002(\t\022\014\n\004port\030\003 \002(\r\"V\n\016RegisterSvr" +
-      "Rsp\022\022\n\nserverName\030\001 \001(\t\022\020\n\010serverId\030\002 \002(" +
-      "\r\022\016\n\006result\030\003 \002(\r\022\016\n\006reason\030\004 \001(\r\"(\n\007Svr" +
-      "List\022\035\n\013gameSvrList\030\001 \003(\0132\010.SvrInfo\"^\n\007S" +
-      "vrInfo\022\013\n\003Idx\030\001 \002(\r\022\014\n\004Name\030\002 \002(\t\022\n\n\002Ip\030" +
-      "\003 \002(\t\022\014\n\004Port\030\004 \002(\r\022\036\n\013RoomInLobby\030\005 \003(\013" +
-      "2\t.RoomInfo\".\n\014SyncSvrState\022\036\n\013RoomInLob" +
-      "by\030\001 \003(\0132\t.RoomInfo\"\"\n\014SyncInitData\022\022\n\nr" +
-      "andomSeed\030\001 \002(\r\"^\n\017PlayerEventData\022\020\n\010pl" +
-      "ayerId\030\001 \002(\r\022\014\n\004camp\030\002 \002(\r\022\r\n\005model\030\003 \002(" +
-      "\r\022\016\n\006weapon\030\004 \002(\r\022\014\n\004name\030\005 \002(\t\"H\n\rEnter" +
-      "QueueRsp\022\016\n\006result\030\001 \002(\r\022\020\n\010playerId\030\002 \002" +
-      "(\r\022\025\n\rplayerInQueue\030\003 \002(\r\"g\n\rOnBattleBeg" +
-      "in\022\025\n\rTeamMemberAId\030\001 \003(\r\022\025\n\rTeamMemberB" +
-      "Id\030\002 \003(\r\022\023\n\013TeamMemberA\030\003 \003(\t\022\023\n\013TeamMem" +
-      "berB\030\004 \003(\t\"2\n\016UserSelectRole\022\020\n\010playerId" +
-      "\030\001 \002(\r\022\016\n\006HeroId\030\002 \002(\r\"4\n\017UserSelectSkil" +
-      "l\022\020\n\010playerId\030\001 \002(\r\022\017\n\007SkillId\030\002 \002(\r\"0\n\016" +
-      "UserSelectSkin\022\020\n\010playerId\030\001 \002(\r\022\014\n\004Skin" +
-      "\030\002 \002(\r\"\"\n\020OnBattleCanceled\022\016\n\006reason\030\001 \002" +
-      "(\r\"4\n\017OnBattleLoading\022\020\n\010playerId\030\001 \003(\r\022" +
-      "\017\n\007percent\030\002 \003(\r\" \n\016OnBattleResult\022\016\n\006re" +
-      "sult\030\001 \002(\r\"2\n\016PlayerSellItem\022\020\n\010playerId" +
-      "\030\001 \002(\r\022\016\n\006itemId\030\002 \002(\r\"1\n\rPlayerBuyItem\022" +
-      "\020\n\010playerId\030\001 \002(\r\022\016\n\006itemId\030\002 \002(\r\"3\n\021Pro" +
-      "tocolVerifyReq\022\020\n\010protocol\030\001 \002(\r\022\014\n\004data" +
-      "\030\002 \002(\t\"E\n\021ProtocolVerifyRsp\022\016\n\006result\030\001 " +
-      "\002(\r\022\017\n\007message\030\002 \002(\t\022\017\n\007clientV\030\003 \002(\t\"\362\004" +
-      "\n\010RoomInfo\022\016\n\006roomId\030\001 \002(\r\022\020\n\010roomName\030\002" +
-      " \002(\t\022 \n\004rule\030\003 \002(\0162\022.RoomInfo.RoomRule\022&" +
-      "\n\007pattern\030\004 \002(\0162\025.RoomInfo.RoomPattern\022\020" +
-      "\n\010levelIdx\030\005 \002(\r\022\r\n\005hpMax\030\006 \002(\r\022\020\n\010passw" +
-      "ord\030\007 \002(\r\022(\n\007version\030\010 \002(\0162\027.RoomInfo.Me" +
-      "teorVersion\022\016\n\006Group1\030\t \002(\r\022\016\n\006Group2\030\n " +
-      "\002(\r\022\023\n\013playerCount\030\013 \002(\r\022\021\n\tmaxPlayer\030\014 " +
-      "\002(\r\022\017\n\007kcpPort\030\r \002(\r\"f\n\010RoomRule\022\006\n\002MZ\020\001" +
-      "\022\007\n\003ROB\020\002\022\013\n\007Defence\020\003\022\016\n\nKillTarget\020\004\022\013" +
-      "\n\007Endless\020\005\022\n\n\006Normal\020\006\022\t\n\005Story\020\007\022\010\n\004Mo" +
-      "ba\020\010\"4\n\013RoomPattern\022\013\n\007_Normal\020\001\022\013\n\007_Rec" +
-      "ord\020\002\022\013\n\007_Replay\020\003\"#\n\rMeteorVersion\022\010\n\004V" +
-      "107\020\001\022\010\n\004V907\020\002\"\200\001\n\tErrorCode\022\020\n\014RoomNot" +
-      "Exist\020\001\022\022\n\016RoomPlayerFull\020\002\022\024\n\020RoomNeedP" +
-      "assword\020\003\022\022\n\016RoomVersionErr\020\004\022\025\n\021UserInA" +
-      "notherRoom\020\005\022\014\n\010RoomFull\020\006\",\n\nGetRoomRsp" +
-      "\022\036\n\013RoomInLobby\030\001 \003(\0132\t.RoomInfo\"\242\002\n\rCre" +
-      "ateRoomReq\022&\n\007pattern\030\001 \002(\0162\025.RoomInfo.R" +
-      "oomPattern\022\021\n\tmaxPlayer\030\002 \002(\r\022\020\n\010levelId" +
-      "x\030\003 \002(\r\022 \n\004rule\030\004 \002(\0162\022.RoomInfo.RoomRul" +
-      "e\022\020\n\010roomName\030\005 \002(\t\022\r\n\005hpMax\030\006 \002(\r\022\021\n\tro" +
-      "undTime\030\007 \002(\r\022(\n\007version\030\010 \002(\0162\027.RoomInf" +
-      "o.MeteorVersion\022\016\n\006secret\030\t \001(\t\022\023\n\013repla" +
-      "y_data\030\n \001(\014\022\016\n\006models\030\013 \003(\r\022\017\n\007weapons\030" +
-      "\014 \003(\r\"`\n\rCreateRoomRsp\022\016\n\006result\030\001 \002(\r\022\016" +
-      "\n\006roomId\030\002 \002(\r\022\017\n\007levelId\030\003 \002(\r\022\020\n\010playe" +
-      "rId\030\004 \002(\r\022\014\n\004port\030\005 \002(\r\"Y\n\013JoinRoomReq\022\016" +
-      "\n\006roomId\030\001 \002(\r\022(\n\007version\030\002 \002(\0162\027.RoomIn" +
-      "fo.MeteorVersion\022\020\n\010password\030\003 \001(\t\"\220\001\n\013J" +
-      "oinRoomRsp\022\016\n\006result\030\001 \002(\r\022\016\n\006reason\030\002 \002" +
-      "(\r\022\020\n\010levelIdx\030\003 \002(\r\022\016\n\006roomId\030\004 \002(\r\022\020\n\010" +
-      "playerId\030\005 \002(\r\022\014\n\004port\030\006 \002(\r\022\016\n\006models\030\007" +
-      " \003(\r\022\017\n\007weapons\030\010 \003(\r\" \n\010Vector2_\022\t\n\001x\030\001" +
-      " \002(\005\022\t\n\001y\030\002 \002(\005\"g\n\014FrameCommand\022\022\n\nLogic" +
-      "Frame\030\001 \002(\r\022\020\n\010playerId\030\002 \001(\r\022#\n\007command" +
-      "\030\003 \002(\0162\022.MeteorMsg.Command\022\014\n\004data\030\004 \002(\014" +
-      "\"-\n\nGameFrames\022\037\n\010commands\030\001 \003(\0132\r.Frame" +
-      "Command\"E\n\007ChatMsg\022\020\n\010playerId\030\001 \002(\r\022\023\n\013" +
-      "channelType\030\002 \002(\r\022\023\n\013chatMessage\030\003 \002(\t\"B" +
-      "\n\014AudioChatMsg\022\020\n\010playerId\030\001 \002(\r\022\014\n\004type" +
-      "\030\002 \002(\r\022\022\n\naudio_data\030\003 \002(\014B#\n\025idevgame.m" +
-      "eteor.protoB\nMeteorMsgs"
+      "\n\016protocol.proto\"\207\005\n\tMeteorMsg\022\037\n\003cmd\030\001 " +
+      "\002(\0162\022.MeteorMsg.MsgType\"\330\002\n\007MsgType\022\022\n\016P" +
+      "rotocolVerify\020\n\022\017\n\013AliveUpdate\020\013\022\016\n\nGetR" +
+      "oomReq\020d\022\016\n\nGetRoomRsp\020e\022\021\n\rCreateRoomRe" +
+      "q\020f\022\021\n\rCreateRoomRsp\020g\022\017\n\013JoinRoomReq\020h\022" +
+      "\017\n\013JoinRoomRsp\020i\022\024\n\020OnPlayerJoinRoom\020j\022\021" +
+      "\n\rChatInRoomReq\020k\022\021\n\rChatInRoomRsp\020l\022\021\n\r" +
+      "EnterLevelReq\020m\022\026\n\022OnPlayerEnterLevel\020n\022" +
+      "\021\n\rEnterLevelRsp\020o\022\021\n\rLeaveLevelReq\020p\022\026\n" +
+      "\022OnPlayerLeaveLevel\020q\022\r\n\tAudioChat\020r\022\014\n\010" +
+      "SyncRate\020s\"\375\001\n\007Command\022\016\n\nClientSync\020\001\022\016" +
+      "\n\nServerSync\020\002\022\013\n\007NewTurn\020\003\022\010\n\004Drop\020\004\022\007\n" +
+      "\003Use\020\005\022\n\n\006Weapon\020\006\022\014\n\010UIWeapon\020\007\022\010\n\004Kill" +
+      "\020\010\022\t\n\005Pause\020\t\022\013\n\007UIModel\020\n\022\014\n\010UIAddNpc\020\013" +
+      "\022\n\n\006AddNpc\020\014\022\r\n\tStartSnow\020\r\022\014\n\010StopSnow\020" +
+      "\016\022\021\n\rResetPosition\020\017\022\n\n\006MoveTo\020\020\022\013\n\007GetI" +
+      "tem\020\021\022\010\n\004Kick\020\022\022\t\n\005Skick\020\023\"n\n\013PlayerEven" +
+      "t\022\020\n\010playerId\030\001 \002(\r\022\014\n\004camp\030\002 \002(\r\022\r\n\005mod" +
+      "el\030\003 \002(\r\022\016\n\006weapon\030\004 \002(\r\022\014\n\004name\030\005 \002(\t\022\022" +
+      "\n\nspawnIndex\030\006 \001(\r\"1\n\nOperateMsg\022\022\n\nKill" +
+      "Target\030\001 \002(\r\022\017\n\007Operate\030\002 \002(\r\"P\n\007DropMsg" +
+      "\022\014\n\004item\030\001 \002(\r\022\033\n\010position\030\002 \002(\0132\t._Vect" +
+      "or3\022\032\n\007forward\030\003 \002(\0132\t._Vector3\">\n\nGetIt" +
+      "emMsg\022\020\n\010playerId\030\001 \002(\r\022\020\n\010instance\030\002 \002(" +
+      "\r\022\014\n\004type\030\003 \002(\r\"\362\001\n\nPlayerSync\022\020\n\010player" +
+      "Id\030\001 \002(\r\022\014\n\004name\030\002 \001(\t\022\r\n\005model\030\003 \002(\r\022\016\n" +
+      "\006weapon\030\004 \002(\r\022\017\n\007weapon1\030\005 \002(\r\022\014\n\004camp\030\006" +
+      " \002(\r\022\n\n\002hp\030\007 \002(\r\022\013\n\003ang\030\010 \002(\r\022\022\n\nspwanIn" +
+      "dex\030\t \001(\r\022\033\n\010position\030\n \001(\0132\t._Vector3\022\036" +
+      "\n\010rotation\030\013 \001(\0132\014._Quaternion\022\016\n\006action" +
+      "\030\014 \001(\005\022\014\n\004buff\030\r \003(\r\"$\n\021ProtocolVerifyRe" +
+      "q\022\017\n\007version\030\001 \002(\r\"D\n\021ProtocolVerifyRsp\022" +
+      "\016\n\006result\030\001 \002(\r\022\017\n\007message\030\002 \002(\t\022\016\n\006play" +
+      "er\030\003 \002(\r\"\360\003\n\010RoomInfo\022\016\n\006roomId\030\001 \002(\r\022\020\n" +
+      "\010roomName\030\002 \002(\t\022 \n\004rule\030\003 \002(\0162\022.RoomInfo" +
+      ".RoomRule\022&\n\007pattern\030\004 \002(\0162\025.RoomInfo.Ro" +
+      "omPattern\022\020\n\010levelIdx\030\005 \002(\r\022\r\n\005hpMax\030\006 \002" +
+      "(\r\022\020\n\010password\030\007 \002(\r\022(\n\007version\030\010 \002(\0162\027." +
+      "RoomInfo.MeteorVersion\022\016\n\006Group1\030\t \002(\r\022\016" +
+      "\n\006Group2\030\n \002(\r\022\023\n\013playerCount\030\013 \002(\r\022\021\n\tm" +
+      "axPlayer\030\014 \002(\r\022\r\n\005owner\030\r \002(\r\022\016\n\006models\030" +
+      "\016 \003(\r\"f\n\010RoomRule\022\006\n\002MZ\020\001\022\007\n\003ROB\020\002\022\013\n\007De" +
+      "fence\020\003\022\016\n\nKillTarget\020\004\022\013\n\007Endless\020\005\022\n\n\006" +
+      "Normal\020\006\022\t\n\005Story\020\007\022\010\n\004Moba\020\010\"\'\n\013RoomPat" +
+      "tern\022\013\n\007_Normal\020\001\022\013\n\007_Replay\020\002\"#\n\rMeteor" +
+      "Version\022\010\n\004V107\020\001\022\010\n\004V907\020\002\"&\n\nGetRoomRs" +
+      "p\022\030\n\005Rooms\030\001 \003(\0132\t.RoomInfo\"\221\002\n\rCreateRo" +
+      "omReq\022&\n\007pattern\030\001 \002(\0162\025.RoomInfo.RoomPa" +
+      "ttern\022\021\n\tmaxPlayer\030\002 \002(\r\022\020\n\010levelIdx\030\003 \002" +
+      "(\r\022 \n\004rule\030\004 \002(\0162\022.RoomInfo.RoomRule\022\020\n\010" +
+      "roomName\030\005 \002(\t\022\r\n\005hpMax\030\006 \002(\r\022\021\n\troundTi" +
+      "me\030\007 \002(\r\022(\n\007version\030\010 \002(\0162\027.RoomInfo.Met" +
+      "eorVersion\022\016\n\006models\030\t \003(\r\022\016\n\006secret\030\n \001" +
+      "(\t\022\023\n\013replay_data\030\013 \001(\014\"`\n\rCreateRoomRsp" +
+      "\022\016\n\006result\030\001 \002(\r\022\016\n\006roomId\030\002 \002(\r\022\017\n\007leve" +
+      "lId\030\003 \002(\r\022\020\n\010playerId\030\004 \002(\r\022\014\n\004port\030\005 \002(" +
+      "\r\"w\n\013JoinRoomReq\022\016\n\006roomId\030\001 \002(\r\022(\n\007vers" +
+      "ion\030\002 \002(\0162\027.RoomInfo.MeteorVersion\022\014\n\004ni" +
+      "ck\030\003 \002(\t\022\020\n\010password\030\004 \001(\t\022\016\n\006models\030\005 \003" +
+      "(\r\"]\n\013JoinRoomRsp\022\016\n\006result\030\001 \002(\r\022\016\n\006rea" +
+      "son\030\002 \002(\r\022\020\n\010levelIdx\030\003 \002(\r\022\016\n\006roomId\030\004 " +
+      "\002(\r\022\014\n\004port\030\005 \002(\r\"0\n\020OnPlayerJoinRoom\022\016\n" +
+      "\006player\030\001 \002(\r\022\014\n\004nick\030\002 \002(\t\"O\n\017OnEnterLe" +
+      "velRsp\022\016\n\006result\030\001 \002(\r\022\016\n\006reason\030\002 \002(\r\022\034" +
+      "\n\007players\030\003 \003(\0132\013.PlayerSync\"S\n\014FrameCom" +
+      "mand\022\020\n\010playerId\030\001 \001(\r\022#\n\007command\030\002 \002(\0162" +
+      "\022.MeteorMsg.Command\022\014\n\004Data\030\003 \001(\014\":\n\tGam" +
+      "eFrame\022\014\n\004time\030\001 \001(\005\022\037\n\010commands\030\002 \003(\0132\r" +
+      ".FrameCommand\"0\n\007ChatMsg\022\020\n\010playerId\030\001 \002" +
+      "(\r\022\023\n\013chatMessage\030\002 \002(\t\"B\n\014AudioChatMsg\022" +
+      "\020\n\010playerId\030\001 \002(\r\022\014\n\004type\030\002 \002(\r\022\022\n\naudio" +
+      "_data\030\003 \002(\014\"+\n\010_Vector3\022\t\n\001x\030\001 \002(\005\022\t\n\001y\030" +
+      "\002 \002(\005\022\t\n\001z\030\003 \002(\005\"9\n\013_Quaternion\022\t\n\001x\030\001 \002" +
+      "(\005\022\t\n\001y\030\002 \002(\005\022\t\n\001z\030\003 \002(\005\022\t\n\001w\030\004 \002(\005\"\033\n\007S" +
+      "yncMsg\022\020\n\010syncrate\030\001 \002(\005B#\n\025idevgame.met" +
+      "eor.protoB\nMeteorMsgs"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -29952,186 +24017,138 @@ public final class MeteorMsgs {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_MeteorMsg_descriptor,
         new java.lang.String[] { "Cmd", });
-    internal_static_RegisterSvrReq_descriptor =
+    internal_static_PlayerEvent_descriptor =
       getDescriptor().getMessageTypes().get(1);
-    internal_static_RegisterSvrReq_fieldAccessorTable = new
+    internal_static_PlayerEvent_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_RegisterSvrReq_descriptor,
-        new java.lang.String[] { "ServerName", "Ip", "Port", });
-    internal_static_RegisterSvrRsp_descriptor =
+        internal_static_PlayerEvent_descriptor,
+        new java.lang.String[] { "PlayerId", "Camp", "Model", "Weapon", "Name", "SpawnIndex", });
+    internal_static_OperateMsg_descriptor =
       getDescriptor().getMessageTypes().get(2);
-    internal_static_RegisterSvrRsp_fieldAccessorTable = new
+    internal_static_OperateMsg_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_RegisterSvrRsp_descriptor,
-        new java.lang.String[] { "ServerName", "ServerId", "Result", "Reason", });
-    internal_static_SvrList_descriptor =
+        internal_static_OperateMsg_descriptor,
+        new java.lang.String[] { "KillTarget", "Operate", });
+    internal_static_DropMsg_descriptor =
       getDescriptor().getMessageTypes().get(3);
-    internal_static_SvrList_fieldAccessorTable = new
+    internal_static_DropMsg_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_SvrList_descriptor,
-        new java.lang.String[] { "GameSvrList", });
-    internal_static_SvrInfo_descriptor =
+        internal_static_DropMsg_descriptor,
+        new java.lang.String[] { "Item", "Position", "Forward", });
+    internal_static_GetItemMsg_descriptor =
       getDescriptor().getMessageTypes().get(4);
-    internal_static_SvrInfo_fieldAccessorTable = new
+    internal_static_GetItemMsg_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_SvrInfo_descriptor,
-        new java.lang.String[] { "Idx", "Name", "Ip", "Port", "RoomInLobby", });
-    internal_static_SyncSvrState_descriptor =
+        internal_static_GetItemMsg_descriptor,
+        new java.lang.String[] { "PlayerId", "Instance", "Type", });
+    internal_static_PlayerSync_descriptor =
       getDescriptor().getMessageTypes().get(5);
-    internal_static_SyncSvrState_fieldAccessorTable = new
+    internal_static_PlayerSync_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_SyncSvrState_descriptor,
-        new java.lang.String[] { "RoomInLobby", });
-    internal_static_SyncInitData_descriptor =
-      getDescriptor().getMessageTypes().get(6);
-    internal_static_SyncInitData_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_SyncInitData_descriptor,
-        new java.lang.String[] { "RandomSeed", });
-    internal_static_PlayerEventData_descriptor =
-      getDescriptor().getMessageTypes().get(7);
-    internal_static_PlayerEventData_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_PlayerEventData_descriptor,
-        new java.lang.String[] { "PlayerId", "Camp", "Model", "Weapon", "Name", });
-    internal_static_EnterQueueRsp_descriptor =
-      getDescriptor().getMessageTypes().get(8);
-    internal_static_EnterQueueRsp_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_EnterQueueRsp_descriptor,
-        new java.lang.String[] { "Result", "PlayerId", "PlayerInQueue", });
-    internal_static_OnBattleBegin_descriptor =
-      getDescriptor().getMessageTypes().get(9);
-    internal_static_OnBattleBegin_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_OnBattleBegin_descriptor,
-        new java.lang.String[] { "TeamMemberAId", "TeamMemberBId", "TeamMemberA", "TeamMemberB", });
-    internal_static_UserSelectRole_descriptor =
-      getDescriptor().getMessageTypes().get(10);
-    internal_static_UserSelectRole_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_UserSelectRole_descriptor,
-        new java.lang.String[] { "PlayerId", "HeroId", });
-    internal_static_UserSelectSkill_descriptor =
-      getDescriptor().getMessageTypes().get(11);
-    internal_static_UserSelectSkill_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_UserSelectSkill_descriptor,
-        new java.lang.String[] { "PlayerId", "SkillId", });
-    internal_static_UserSelectSkin_descriptor =
-      getDescriptor().getMessageTypes().get(12);
-    internal_static_UserSelectSkin_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_UserSelectSkin_descriptor,
-        new java.lang.String[] { "PlayerId", "Skin", });
-    internal_static_OnBattleCanceled_descriptor =
-      getDescriptor().getMessageTypes().get(13);
-    internal_static_OnBattleCanceled_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_OnBattleCanceled_descriptor,
-        new java.lang.String[] { "Reason", });
-    internal_static_OnBattleLoading_descriptor =
-      getDescriptor().getMessageTypes().get(14);
-    internal_static_OnBattleLoading_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_OnBattleLoading_descriptor,
-        new java.lang.String[] { "PlayerId", "Percent", });
-    internal_static_OnBattleResult_descriptor =
-      getDescriptor().getMessageTypes().get(15);
-    internal_static_OnBattleResult_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_OnBattleResult_descriptor,
-        new java.lang.String[] { "Result", });
-    internal_static_PlayerSellItem_descriptor =
-      getDescriptor().getMessageTypes().get(16);
-    internal_static_PlayerSellItem_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_PlayerSellItem_descriptor,
-        new java.lang.String[] { "PlayerId", "ItemId", });
-    internal_static_PlayerBuyItem_descriptor =
-      getDescriptor().getMessageTypes().get(17);
-    internal_static_PlayerBuyItem_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_PlayerBuyItem_descriptor,
-        new java.lang.String[] { "PlayerId", "ItemId", });
+        internal_static_PlayerSync_descriptor,
+        new java.lang.String[] { "PlayerId", "Name", "Model", "Weapon", "Weapon1", "Camp", "Hp", "Ang", "SpwanIndex", "Position", "Rotation", "Action", "Buff", });
     internal_static_ProtocolVerifyReq_descriptor =
-      getDescriptor().getMessageTypes().get(18);
+      getDescriptor().getMessageTypes().get(6);
     internal_static_ProtocolVerifyReq_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_ProtocolVerifyReq_descriptor,
-        new java.lang.String[] { "Protocol", "Data", });
+        new java.lang.String[] { "Version", });
     internal_static_ProtocolVerifyRsp_descriptor =
-      getDescriptor().getMessageTypes().get(19);
+      getDescriptor().getMessageTypes().get(7);
     internal_static_ProtocolVerifyRsp_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_ProtocolVerifyRsp_descriptor,
-        new java.lang.String[] { "Result", "Message", "ClientV", });
+        new java.lang.String[] { "Result", "Message", "Player", });
     internal_static_RoomInfo_descriptor =
-      getDescriptor().getMessageTypes().get(20);
+      getDescriptor().getMessageTypes().get(8);
     internal_static_RoomInfo_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_RoomInfo_descriptor,
-        new java.lang.String[] { "RoomId", "RoomName", "Rule", "Pattern", "LevelIdx", "HpMax", "Password", "Version", "Group1", "Group2", "PlayerCount", "MaxPlayer", "KcpPort", });
+        new java.lang.String[] { "RoomId", "RoomName", "Rule", "Pattern", "LevelIdx", "HpMax", "Password", "Version", "Group1", "Group2", "PlayerCount", "MaxPlayer", "Owner", "Models", });
     internal_static_GetRoomRsp_descriptor =
-      getDescriptor().getMessageTypes().get(21);
+      getDescriptor().getMessageTypes().get(9);
     internal_static_GetRoomRsp_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_GetRoomRsp_descriptor,
-        new java.lang.String[] { "RoomInLobby", });
+        new java.lang.String[] { "Rooms", });
     internal_static_CreateRoomReq_descriptor =
-      getDescriptor().getMessageTypes().get(22);
+      getDescriptor().getMessageTypes().get(10);
     internal_static_CreateRoomReq_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_CreateRoomReq_descriptor,
-        new java.lang.String[] { "Pattern", "MaxPlayer", "LevelIdx", "Rule", "RoomName", "HpMax", "RoundTime", "Version", "Secret", "ReplayData", "Models", "Weapons", });
+        new java.lang.String[] { "Pattern", "MaxPlayer", "LevelIdx", "Rule", "RoomName", "HpMax", "RoundTime", "Version", "Models", "Secret", "ReplayData", });
     internal_static_CreateRoomRsp_descriptor =
-      getDescriptor().getMessageTypes().get(23);
+      getDescriptor().getMessageTypes().get(11);
     internal_static_CreateRoomRsp_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_CreateRoomRsp_descriptor,
         new java.lang.String[] { "Result", "RoomId", "LevelId", "PlayerId", "Port", });
     internal_static_JoinRoomReq_descriptor =
-      getDescriptor().getMessageTypes().get(24);
+      getDescriptor().getMessageTypes().get(12);
     internal_static_JoinRoomReq_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_JoinRoomReq_descriptor,
-        new java.lang.String[] { "RoomId", "Version", "Password", });
+        new java.lang.String[] { "RoomId", "Version", "Nick", "Password", "Models", });
     internal_static_JoinRoomRsp_descriptor =
-      getDescriptor().getMessageTypes().get(25);
+      getDescriptor().getMessageTypes().get(13);
     internal_static_JoinRoomRsp_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_JoinRoomRsp_descriptor,
-        new java.lang.String[] { "Result", "Reason", "LevelIdx", "RoomId", "PlayerId", "Port", "Models", "Weapons", });
-    internal_static_Vector2__descriptor =
-      getDescriptor().getMessageTypes().get(26);
-    internal_static_Vector2__fieldAccessorTable = new
+        new java.lang.String[] { "Result", "Reason", "LevelIdx", "RoomId", "Port", });
+    internal_static_OnPlayerJoinRoom_descriptor =
+      getDescriptor().getMessageTypes().get(14);
+    internal_static_OnPlayerJoinRoom_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_Vector2__descriptor,
-        new java.lang.String[] { "X", "Y", });
+        internal_static_OnPlayerJoinRoom_descriptor,
+        new java.lang.String[] { "Player", "Nick", });
+    internal_static_OnEnterLevelRsp_descriptor =
+      getDescriptor().getMessageTypes().get(15);
+    internal_static_OnEnterLevelRsp_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_OnEnterLevelRsp_descriptor,
+        new java.lang.String[] { "Result", "Reason", "Players", });
     internal_static_FrameCommand_descriptor =
-      getDescriptor().getMessageTypes().get(27);
+      getDescriptor().getMessageTypes().get(16);
     internal_static_FrameCommand_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_FrameCommand_descriptor,
-        new java.lang.String[] { "LogicFrame", "PlayerId", "Command", "Data", });
-    internal_static_GameFrames_descriptor =
-      getDescriptor().getMessageTypes().get(28);
-    internal_static_GameFrames_fieldAccessorTable = new
+        new java.lang.String[] { "PlayerId", "Command", "Data", });
+    internal_static_GameFrame_descriptor =
+      getDescriptor().getMessageTypes().get(17);
+    internal_static_GameFrame_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_GameFrames_descriptor,
-        new java.lang.String[] { "Commands", });
+        internal_static_GameFrame_descriptor,
+        new java.lang.String[] { "Time", "Commands", });
     internal_static_ChatMsg_descriptor =
-      getDescriptor().getMessageTypes().get(29);
+      getDescriptor().getMessageTypes().get(18);
     internal_static_ChatMsg_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_ChatMsg_descriptor,
-        new java.lang.String[] { "PlayerId", "ChannelType", "ChatMessage", });
+        new java.lang.String[] { "PlayerId", "ChatMessage", });
     internal_static_AudioChatMsg_descriptor =
-      getDescriptor().getMessageTypes().get(30);
+      getDescriptor().getMessageTypes().get(19);
     internal_static_AudioChatMsg_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_AudioChatMsg_descriptor,
         new java.lang.String[] { "PlayerId", "Type", "AudioData", });
+    internal_static__Vector3_descriptor =
+      getDescriptor().getMessageTypes().get(20);
+    internal_static__Vector3_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static__Vector3_descriptor,
+        new java.lang.String[] { "X", "Y", "Z", });
+    internal_static__Quaternion_descriptor =
+      getDescriptor().getMessageTypes().get(21);
+    internal_static__Quaternion_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static__Quaternion_descriptor,
+        new java.lang.String[] { "X", "Y", "Z", "W", });
+    internal_static_SyncMsg_descriptor =
+      getDescriptor().getMessageTypes().get(22);
+    internal_static_SyncMsg_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_SyncMsg_descriptor,
+        new java.lang.String[] { "Syncrate", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

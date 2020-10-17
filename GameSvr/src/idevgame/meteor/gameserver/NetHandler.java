@@ -43,7 +43,7 @@ public class NetHandler implements IHandlerNetty4 {
 
 	@Override
 	public void onClose(ChannelHandlerContext ctx) {
-		System.out.println("game svr disconnect gamecenter");
+//		System.out.println("game svr disconnect gamecenter");
 	}
 
 	@Override

@@ -18,4 +18,10 @@ public class Netty4Utils {
 
 		return address.getAddress().getHostAddress();
 	}
+	
+	public static int getPort(ChannelHandlerContext ctx){
+		InetSocketAddress addr = (InetSocketAddress)ctx.channel().remoteAddress();
+		int port = addr.getPort();
+		return port;
+	}
 }

@@ -45,7 +45,7 @@ public abstract class KcpClient implements Output, KcpListerner, Runnable {
     }
 
     /**
-     * 瀹㈡埛绔�
+     * 鐎广垺鍩涚粩锟�
      *
      * @param port
      */
@@ -158,7 +158,7 @@ public abstract class KcpClient implements Output, KcpListerner, Runnable {
     }
 
     /**
-     * 鍥哄畾杩炴帴鍒颁竴涓湇鍔″櫒鍦板潃,鍙細澶勭悊姝ゅ湴鍧�鐨勬秷鎭�
+     * 閸ュ搫鐣炬潻鐐村复閸掗绔存稉顏呮箛閸斺�虫珤閸︽澘娼�,閸欘亙绱版径鍕倞濮濄倕婀撮崸锟介惃鍕Х閹拷
      *
      * @param addr
      */
@@ -174,12 +174,12 @@ public abstract class KcpClient implements Output, KcpListerner, Runnable {
     }
 
     @Override
-    public void handleClose(KcpOnUdp kcp) {
+    public void handleClose(KcpOnUdp kcp, int errorCode) {
         this.close();
     }
 
     /**
-     * 鏀跺埌鏈嶅姟鍣ㄦ秷鎭�
+     * 閺�璺哄煂閺堝秴濮熼崳銊︾Х閹拷
      *
      * @param dp
      */
@@ -195,7 +195,7 @@ public abstract class KcpClient implements Output, KcpListerner, Runnable {
     }
 
     /**
-     * 鍏虫帀
+     * 閸忚櫕甯�
      */
     public void close() {
         if (this.running) {
@@ -204,7 +204,7 @@ public abstract class KcpClient implements Output, KcpListerner, Runnable {
     }
 
     /**
-     * 鍙戦�佹秷鎭�
+     * 閸欐垿锟戒焦绉烽幁锟�
      *
      * @param bb
      */
@@ -218,7 +218,7 @@ public abstract class KcpClient implements Output, KcpListerner, Runnable {
     }
 
     /**
-     * 寮�鍚嚎绋嬪鐞唊cp鐘舵��
+     * 瀵拷閸氼垳鍤庣粙瀣槱閻炲攰cp閻樿埖锟斤拷
      */
     public void start() {
         if (!this.running) {
@@ -263,7 +263,7 @@ public abstract class KcpClient implements Output, KcpListerner, Runnable {
     }
 
     /**
-     * 閲婃斁鍐呭瓨
+     * 闁插﹥鏂侀崘鍛摠
      */
     private void release() {
         this.kcp.release();

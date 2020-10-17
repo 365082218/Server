@@ -49,8 +49,8 @@ public final class Netty4SocketClient {
 				cp.addLast(new LengthFieldPrepender(ByteOrder.BIG_ENDIAN,4,0,true));
 				cp.addLast(new Netty4Encoder());
 				cp.addLast("handler", new Netty4SocketHandler(handler));
-				cp.addLast("idleTimeoutHandler", new IdleStateHandler(0, 0, 60, TimeUnit.SECONDS));
-				cp.addLast("heartbeatHandler", new NettyHeartbeat());
+//				cp.addLast("idleTimeoutHandler", new IdleStateHandler(0, 0, 60, TimeUnit.SECONDS));
+//				cp.addLast("heartbeatHandler", new NettyHeartbeat());
 			}
 		});
 		
